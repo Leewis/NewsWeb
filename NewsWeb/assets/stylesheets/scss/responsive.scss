@@ -1,0 +1,372 @@
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) { 
+    
+}
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { 
+    .header-wrapper {
+        .search-box input {width: 100%;}
+        .top-header {
+            .top-right {
+                margin: 10px 0;
+                justify-content: flex-start;
+             }
+             .top-left {
+                .top-logo-time {
+                    width: calc(100% - 50px);
+                    text-align: center;
+                }
+             }
+        }
+        .header-menu{ 
+            .navbar-list{ 
+                .nav-item {
+                    &:last-child {
+                        display: none;
+                    }
+                }
+            }
+         }
+    } 
+    .wrapper-content{
+        
+        .articles-list {
+            .home-categories-list {
+               border-left: 0;
+               padding-left: 0 !important;
+               .category-box-item:first-child{
+                   @include borderTop;
+                   margin-top: 15px;
+               }
+               .category-box-item{
+                   .others-news-cate {
+                       border-left: 0;
+                       padding-left: 0;
+                       margin-left: 0;
+                   }
+               }
+            } 
+        }
+      
+        .category-box-item {
+            .cate-content-box {
+                flex-direction: column;
+                .others-news-cate {
+                    @include borderTop;
+                }
+            }
+        }
+
+        .vertical-catgories-list {
+            [class*="col-"]:not(:last-child) {
+                .vertical-cate-item{
+                    @include borderBottom;
+                }
+            }
+           
+        }
+     
+        .categories-box-list {
+            .cate-box-left {
+                border-right: 0;
+                padding-right: 0;
+            }
+            .cate-box-right {
+                flex-direction: column;
+               
+                .first-cate-box {
+                    display: flex;
+                    flex:1 auto;
+                    .category-box-item:first-child{
+                        margin-right: 10px;
+                    }
+                }
+                .second-cate-box {
+                    border:0;
+                    padding: 0;
+                    margin-left: 0;
+                    margin-bottom: 15px;
+                    .article-item {
+                        .d-flex {
+                            // flex-direction: column;
+                            .img-thumb {
+                                // width: 100%;
+                                img {
+                                    // width: 50%;
+                                }
+                            }
+                            .article-desc {
+                                // width: 100%;
+                                order: 2;
+                            }
+                        }
+                       
+                    }
+
+                }
+            }
+        }
+
+        .product-news {
+            .news-item {
+                flex-direction: column;
+                .col-img {
+                    a{
+                        display: block;
+                    }
+                    margin-right: 0 !important;
+                }
+                .col-desc {
+                    width: 100%;
+                    margin: 0;
+                    padding: 15px;
+    
+                }
+            }
+            .child-news{
+                .d-flex {
+                    flex-direction: column;
+                    li {
+                        margin-right: 0;
+                        @include borderBottom;
+                        &:last-child{
+                            border:0;
+                        }
+                        &:first-child {
+                            @include borderTop;
+                        }
+                    }
+                }
+                &.horizontal {
+                    ul {
+                        li:not(:last-child) {
+                            border-right:0;
+                            padding-right: 0;
+                            margin-right: 0;
+                        }
+                    }
+                }
+            } 
+        }
+
+        .categories-box-list{
+            .cate-box-right{     
+                @include borderTop;
+                margin-top:15px;            
+                .first-cate-box {
+                    @include borderBottom;
+                    .category-box-item:not(:last-child){
+                        border-bottom: 0;
+                        padding-bottom: 0;
+                        margin-bottom: 0;
+                    }
+            
+                }
+            }
+        }
+        .other-cate-news-list {
+            margin-bottom: 15px;
+            border-right:0;
+            padding-right: 0;
+            margin-right:0;
+            .other-cate-news-item {
+                .two-items {
+                   .category-box-item:first-child {
+                       margin-bottom: 15px;
+                   }
+                }
+            }
+        }
+        .ad-bottom-content {
+            .watch-lots-list {
+                @include borderBottom;
+                height: auto;
+            }
+        }
+
+        .topic-list{
+            .topic-item{
+                border-left: none;
+                margin-bottom: 10px;
+            }
+        }
+        .category-header {
+            .top-right {
+                .search-box input{
+                    min-width: 200px;
+                }
+            }
+        }
+        .page-detail,.category-page{
+            .box-shop-sell-vertical {
+                .article-list-sell{
+                    max-height: 100%;
+                    overflow-y: hidden;
+                    .article-item{
+                        margin-bottom: 10px;
+                    }
+                    
+                    .img-thumb{
+                        width: 20%;
+                    }
+                }
+            }
+        }
+        .categories-list{
+            .col-line{
+                border-right: none;
+            }
+        }
+        .box-slide-topic {
+           + .bt-solid {
+                display: none;
+            }
+        }
+    } 
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { 
+    .wrapper-content{
+       
+        .cate-options {
+            white-space: nowrap;
+            width: 100%;
+            overflow-y: scroll;
+        }
+        .other-cate-news-list {            
+            .other-cate-news-item {
+                flex-direction: column;
+                .category-box-item.full-box {
+                    margin-right: 0;
+                    flex:1 auto;
+                    margin-bottom: 15px;
+                }
+                .thumb-cate {
+                    margin-right: 0 !important;
+                }
+                .two-items {
+                    width: 100%;
+                }
+            }
+        }
+        .category-box-item-table {
+            flex-direction: column;
+            margin:0;
+            table:first-child {
+                margin-bottom: 15px;
+            }
+        }
+        .categories-box-list {
+            .cate-box-right {
+                .first-cate-box {
+                    flex-direction: column;
+                    .category-box-item:first-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+        .page-detail{
+            .footer-content{
+                display: inline-block;
+                .social-icons{
+                    float: left;
+                    padding-top: 20px;
+                }
+            }
+        }
+        .topic-item{
+            text-align: center;
+            .img-thumb {
+                img {
+                    width: 50%;
+                    margin: 0 auto;
+                    display: block;
+                }
+            }
+        }
+        .category-header {
+            .top-right {
+                justify-content: left;
+            }
+        }
+        .category-menu{
+            .navbar-list{
+                margin-left: 0;
+            }
+        }
+
+        .box-slide-topic {
+             &.d-flex {
+                flex-direction: column;
+                .col-box-topic-1 {
+                    width: 100%;
+                }
+                .col-box-topic-2 {
+                    width: 100%;
+                    .box-shop-sell-vertical {
+                        @include borderTop;
+                        .sell-top-box {
+                            top:-40px;
+                        }
+                        .article-list-sell{
+                            flex-direction: column;
+                        }
+                    }
+                }
+
+             }
+         }
+
+    }
+    .footer-wrapper .footer-item {
+        border: 0;
+        padding: 0;
+    }
+    
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { 
+    .header-wrapper {
+        .top-header {
+            .top-left{
+                .top-logo-time {
+                    a{
+                        margin-right: 6px;
+                        img {
+                            width: 125px;
+                           
+                        }
+                    }
+                    .time-now {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+    .category-header {
+        .top-right {
+            .search-box {
+                &.form-inline{
+                    flex-flow: unset;
+                }
+                input{
+                    min-width: 200px;
+                }
+                &::before{
+                    display: none;
+                }
+            }
+            &.d-inline-flex{
+                display: unset !important;
+            }
+        }
+        
+    }
+}
+
+

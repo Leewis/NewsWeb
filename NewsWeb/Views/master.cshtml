@@ -1,0 +1,717 @@
+﻿@using Umbraco.Core.PropertyEditors
+@inherits UmbracoViewPage
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+ <!--<![endif]-->
+@*<html lang="en">*@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Trang chủ</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- libraries -->
+    <link rel="stylesheet" href="assets/stylesheets/normalize.css">
+    <link rel="stylesheet" href="assets/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/fontawesome-all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <!-- aiostyles -->
+    <link rel="stylesheet" href="assets/stylesheets/main.min.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an outdated browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <header>
+        <div class="header-wrapper white-bg">
+            <div class="top-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="top-left d-flex">
+                                <a class="d-lg-none view-mb-menu"><i class="fas fa-bars"></i></a>
+                                <div class="top-logo-time d-flex">
+                                    <a class="logo" href="/home.html"><img src="assets/images/logo/logo.png" alt="logo" class="img-fluid d-block"></a>
+                                    <p class="time-now">Thứ tư, 17/6/2020</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-8 d-none d-lg-block">
+                            <div class="top-right d-inline-flex w-100">
+                                <a href="#" class="tag-link">Mới nhất</a>
+                                <a href="#" class="tag-link">International</a>
+                                <form class="form-inline search-box">
+                                    <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                                    <button class="" type="submit"><i class="fas fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- mobile-header -->
+            <div class="mobile-header pt-3 pb-3" id="mySidenav">
+                <div class="container">
+                    <div class="mb-top-menu clearfix">
+                        <div class="float-left">
+                            <span class="btn-mb-close">&#10005;</span>
+                        </div>
+                        <div class="float-right">
+                            <a href="/home.html"><img src="assets/images/logo/logo.png" alt="logo" class="img-fluid d-block"></a>
+                        </div>
+                    </div>
+                    <div class="bt-solid mt-3 mb-3"></div>
+
+                    <form class="form-inline search-box">
+                        <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                        <button class="" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                    <div class="bt-solid mt-3 mb-3"></div>
+
+                    <div class="row">
+                        <div class="col">
+                            <ul class="mb-menu-list">
+                                <li><a href="">Trang nhất</a></li>
+                                <li><a href="/category.html">Thời sự</a></li>
+                                <li><a href="">Thế giới</a></li>
+                                <li><a href="">Kinh doanh</a></li>
+                                <li><a href="">Thể thao</a></li>
+                                <li><a href="">VM 2020</a></li>
+                                <li><a href="">V-Race</a></li>
+                                <li><a href="">F1</a></li>
+                                <li><a href="">Khoa học</a></li>
+                                <li><a href="">Số hóa</a></li>
+                                <li><a href="">Ý kiến</a></li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="mb-menu-list">
+                                <li><a href="">Góc nhìn</a></li>
+                                <li><a href="">Video</a></li>
+                                <li><a href="">Giải trí</a></li>
+                                <li><a href="">Pháp luật</a></li>
+                                <li><a href="">Giáo dục</a></li>
+                                <li><a href="">Sức khỏe</a></li>
+                                <li><a href="">Đời sống</a></li>
+                                <li><a href="">Du lịch</a></li>
+                                <li><a href="">Xe</a></li>
+                                <li><a href="">Tâm sự</a></li>
+                                <li><a href="">Cười</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bt-solid mt-3 mb-3"></div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="mb-menu-list">
+                                <li><a href="">Ảnh</a></li>
+                                <li><a href="">Interactives</a></li>
+                                <li><a href="">Mới nhất</a></li>
+                                <li><a href="">Tin nóng</a></li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="mb-menu-list">
+                                <li><a href="">Infographics</a></li>
+                                <li><a href="">24h qua</a></li>
+                                <li><a href="">Xem nhiều</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bt-solid mt-3 mb-3"></div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="mb-menu-list">
+                                <li><a href="">Shop</a></li>
+                                <li><a href="">Startup Việt</a></li>
+                                <li><a href="">Mã giảm giá</a></li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="mb-menu-list">
+                                <li><a href="">Shop</a></li>
+                                <li><a href="">Startup Việt</a></li>
+                                <li><a href="">Mã giảm giá</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="close-side-overlay"></div>
+            <!-- mobile-header -->
+            <div class="header-menu white-bg d-none d-lg-block" id="myHeader">
+                <ul class="navbar-list">
+                    <li class="nav-item">
+                        <a class="item-link" href="/category.html">Thời sự</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Giao thông</a></li>
+                            <li><a href="">Mêkong</a></li>
+                            <li><a href="">Nông nghiệp sạch</a></li>
+                            <li><a href="">Tuyến đầu chống dịch</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Góc nhìn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Thế giới</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Tư liệu</a></li>
+                            <li><a href="">Phân tích</a></li>
+                            <li><a href="">Cuộc sống đó đây</a></li>
+                            <li><a href="">Quân sự</a></li>
+                            <li><a href="">Người Việt 5 châu</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Video</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Thời sự</a></li>
+                            <li><a href="">Nhịp sống</a></li>
+                            <li><a href="">Food</a></li>
+                            <li><a href="">Cuộc sống 4.0</a></li>
+                            <li><a href="">Tôi kể</a></li>
+                            <li><a href="">The changers</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Du lịch</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Kinh doanh</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Thời sự</a></li>
+                            <li><a href="">Nhịp sống</a></li>
+                            <li><a href="">Food</a></li>
+                            <li><a href="">Cuộc sống 4.0</a></li>
+                            <li><a href="">Tôi kể</a></li>
+                            <li><a href="">The changers</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Du lịch</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Giải trí</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Du lịch</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Thể thao</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Thời sự</a></li>
+                            <li><a href="">Nhịp sống</a></li>
+                            <li><a href="">Food</a></li>
+                            <li><a href="">Cuộc sống 4.0</a></li>
+                            <li><a href="">Tôi kể</a></li>
+                            <li><a href="">The changers</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Du lịch</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Pháp luật</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Tư liệu</a></li>
+                            <li><a href="">Phân tích</a></li>
+                            <li><a href="">Cuộc sống đó đây</a></li>
+                            <li><a href="">Quân sự</a></li>
+                            <li><a href="">Người Việt 5 châu</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Giáo dục</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Tư liệu</a></li>
+                            <li><a href="">Phân tích</a></li>
+                            <li><a href="">Cuộc sống đó đây</a></li>
+                            <li><a href="">Quân sự</a></li>
+                            <li><a href="">Người Việt 5 châu</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Sức khỏe</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Tư liệu</a></li>
+                            <li><a href="">Phân tích</a></li>
+                            <li><a href="">Cuộc sống đó đây</a></li>
+                            <li><a href="">Quân sự</a></li>
+                            <li><a href="">Người Việt 5 châu</a></li>
+                            <li><a href="">Tư liệu</a></li>
+                            <li><a href="">Phân tích</a></li>
+                            <li><a href="">Cuộc sống đó đây</a></li>
+                            <li><a href="">Quân sự</a></li>
+                            <li><a href="">Người Việt 5 châu</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Đời sống</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Tư liệu</a></li>
+                            <li><a href="">Phân tích</a></li>
+                            <li><a href="">Cuộc sống đó đây</a></li>
+                            <li><a href="">Quân sự</a></li>
+                            <li><a href="">Người Việt 5 châu</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Du lịch</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Tư liệu</a></li>
+                            <li><a href="">Phân tích</a></li>
+                            <li><a href="">Cuộc sống đó đây</a></li>
+                            <li><a href="">Quân sự</a></li>
+                            <li><a href="">Người Việt 5 châu</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Khoa học</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Du lịch</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Số hóa</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Du lịch</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Xe</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Giao thông</a></li>
+                            <li><a href="">Giao thông</a></li>
+                            <li><a href="">Giao thông</a></li>
+                            <li><a href="">Giao thông</a></li>
+                            <li><a href="">Giao thông</a></li>
+                            <li><a href="">Giao thông</a></li>
+                            <li><a href="">Giao thông</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Ý kiến</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Thời sự</a></li>
+                            <li><a href="">Nhịp sống</a></li>
+                            <li><a href="">Food</a></li>
+                            <li><a href="">Cuộc sống 4.0</a></li>
+                            <li><a href="">Tôi kể</a></li>
+                            <li><a href="">The changers</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Du lịch</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Tâm sự</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Thời sự</a></li>
+                            <li><a href="">Nhịp sống</a></li>
+                            <li><a href="">Food</a></li>
+                            <li><a href="">Cuộc sống 4.0</a></li>
+                            <li><a href="">Tôi kể</a></li>
+                            <li><a href="">The changers</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Du lịch</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link" href="#">Cười</a>
+                        <ul class="nav-sub">
+                            <li><a href="">Thời sự</a></li>
+                            <li><a href="">Nhịp sống</a></li>
+                            <li><a href="">Food</a></li>
+                            <li><a href="">Cuộc sống 4.0</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Giải trí</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="item-link all-link" href="javascript:void(0)">Tất cả <i class="fas fa-bars"></i></a>
+                    </li>
+                </ul>
+                <div class="wrap-all-menu clearfix" id="tat-ca">
+                    <div class="container">
+                        <div class="header-menu">
+                            <span class="name-header">Tất cả chuyên mục</span>
+                            <a href="javascript:void(0);" class="close-menu" title="Đóng">Đóng &#10005;</a>
+                        </div>
+                        <div class="content-left">
+                            <ul class="cate-menu">
+                                <li><a href="">Video</a></li>
+                                <li><a href="">Thời sự</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Food</a></li>
+                                <li><a href="">Cuộc sống 4.0</a></li>
+                                <li class="d-none"><a href="">Tôi kể</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Thời sự</a></li>
+                                <li><a href="">Giao thông</a></li>
+                                <li><a href="">Mekong</a></li>
+                                <li><a href="">Nông nghiệp sạch</a></li>
+                                <li><a href="">Tuyến đầu chống dịch</a></li>
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Góc nhìn</a></li>
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Thế giới</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li class="d-none"><a href="">Tôi kể</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Kinh doanh</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li class="d-none"><a href="">Tôi kể</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Giải trí</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li class="d-none"><a href="">Người viêt 5 châu</a></li>
+                                <li class="d-none"><a href="">Tôi kể</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Thể thao</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li><a href="">Tôi kể</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Pháp luật</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li><a href="">Tôi kể</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Giáo dục</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li><a href="">Tôi kể</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Sức khỏe</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li><a href="">Tôi kể</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Đời sống</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li><a href="">Tôi kể</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Du lịch</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li><a href="">Tôi kể</a></li>
+                                <li><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="d-none"><a href="">Thế giới pháp luật</a></li>
+                                <li class="d-none"><a href="">The Changers</a></li>
+                                <li class="d-none"><a href="">Giải trí</a></li>
+                                <li class="d-none"><a href="">Du lịch</a></li>
+                                <li class="d-none"><a href="">Thể thao</a></li>
+                                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Khoa học</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Số hóa</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Xe</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Ý kiến</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Tâm sự</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li><a href="">Tôi kể</a></li>
+
+                            </ul>
+                            <ul class="cate-menu">
+                                <li><a href="">Cười</a></li>
+                                <li><a href="">Tư liệu</a></li>
+                                <li><a href="">Nhịp sống</a></li>
+                                <li><a href="">Phân tích</a></li>
+                                <li><a href="">Người viêt 5 châu</a></li>
+                                <li><a href="">Tôi kể</a></li>
+                                <li><a href="">The Changers</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="content-right">
+                            <ul class="news-type">
+                                <li><a href="">Ảnh</a></li>
+                                <li><a href="">Infographics</a></li>
+                            </ul>
+
+                            <ul class="news-type">
+                                <li><a href="">Mới nhất</a></li>
+                                <li><a href="">Xem nhiều</a></li>
+                                <li><a href="">Tin nóng</a></li>
+                            </ul>
+
+                            <ul class="ad-types">
+                                <li><a href="">FSell</a></li>
+                                <li><a href="">Shop</a></li>
+                                <li><a href="">Quà tặng</a></li>
+                                <li><a href="">Kid-lab</a></li>
+                            </ul>
+
+                            <ul class="ad-types pb-3">
+                                <li><a href="">Liên hệ</a></li>
+                                <li><a href="">Tòa soạn</a></li>
+                                <li><a href="">Quảng cáo</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="wrapper-content">
+            <div class="container white-bg">
+                @RenderBody()                
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-wrapper pt-5 pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                        <div class="footer-item">
+                            <a href="/home.html" class="d-inline-block footer-logo"><img src="assets/images/logo/logo.png" class="img-fluid" /></a>
+                            <p>Giấy phép số 58/GP-TTĐT do Sở Thông tin và Truyền thông Hà Nội cấp ngày 06/01/2017.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4">
+                        <ul class="footer-item">
+                            <li>Đơn vị chủ quản: Công ty cổ phần công nghệ di động Nam Long</li>
+                            <li>Chịu trách nhiệm:  Ông Nguyễn Tất Huy</li>
+                            <li>Email: <a href="">tinmoi24.vn@gmail.com</a></li>
+                            <li>Địa chỉ: Tầng 12, tòa nhà Geleximco, 36 Hoàng Cầu, phường Ô Chợ Dừa, Đống Đa, Thành phố Hà Nội <a href=""></a></li>
+                            <li>Điện thoại:  0869 655 263</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="footer-item">
+                            <p>Trang tin điện tử Tin Mới 24h</p>
+                            <p>Cập nhật tin tức từng giây</p>
+                            <p>Nội dung thông tin được tổng hợp từ các báo điện tử uy tín hàng đầu Việt Nam</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </footer>
+    <script src="assets/scripts/jquery-3.5.1.min.js"></script>
+    <script src="assets/scripts/bootstrap.min.js"></script>
+    <script src="assets/scripts/flatpickr.js"></script>
+    <script src="assets/scripts/main.js"></script>
+
+</body>
+</html>
+
+@*@using ContentModels = Umbraco.Web.PublishedModels;
+    @{
+    Layout = null;
+    }*@
