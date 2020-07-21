@@ -16,3 +16,6 @@ p a {
 h1 {
   color: blue;
 }
+.category-box-item {
+	border-bottom: 1px solid #e5e5e5;
+}

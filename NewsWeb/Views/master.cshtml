@@ -1,5 +1,13 @@
 ﻿@using Umbraco.Core.PropertyEditors
 @inherits UmbracoViewPage
+@{
+    var now = DateTime.Now;
+    var site = Model.Root();
+    var home = site.Children.Where(x => x.Id == 1089);
+    var category = home.SelectMany(c => c.Children);
+    var selection = category.Where(c => c.IsVisible());
+    var ff = "ss";
+}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -15,12 +23,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- libraries -->
-    <link rel="stylesheet" href="assets/stylesheets/normalize.css">
-    <link rel="stylesheet" href="assets/stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/stylesheets/fontawesome-all.min.css">
+    <link rel="stylesheet" href="@Url.Content("~/assets/stylesheets/normalize.css")">
+    <link rel="stylesheet" href="@Url.Content("~/assets/stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/assets/stylesheets/fontawesome-all.min.css")">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
     <!-- aiostyles -->
-    <link rel="stylesheet" href="assets/stylesheets/main.min.css">
+    <link rel="stylesheet" href="@Url.Content("~/assets/stylesheets/main.min.css")">
 </head>
 
 <body>
@@ -36,8 +44,8 @@
                             <div class="top-left d-flex">
                                 <a class="d-lg-none view-mb-menu"><i class="fas fa-bars"></i></a>
                                 <div class="top-logo-time d-flex">
-                                    <a class="logo" href="/home.html"><img src="assets/images/logo/logo.png" alt="logo" class="img-fluid d-block"></a>
-                                    <p class="time-now">Thứ tư, 17/6/2020</p>
+                                    <a class="logo" href="/home.html"><img src="@Url.Content("~/assets/images/logo/logo.png")" alt="logo" class="img-fluid d-block"></a>
+                                    <p class="time-now"><time datetime="@now.ToString("o")" pubdate>@now.ToLongDateString()</time></p>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +70,7 @@
                             <span class="btn-mb-close">&#10005;</span>
                         </div>
                         <div class="float-right">
-                            <a href="/home.html"><img src="assets/images/logo/logo.png" alt="logo" class="img-fluid d-block"></a>
+                            <a href="/home.html"><img src="@Url.Content("~/assets/images/logo/logo.png")" alt="logo" class="img-fluid d-block"></a>
                         </div>
                     </div>
                     <div class="bt-solid mt-3 mb-3"></div>
@@ -676,7 +684,7 @@
                 <div class="row">
                     <div class="col-md-4 col-lg-4">
                         <div class="footer-item">
-                            <a href="/home.html" class="d-inline-block footer-logo"><img src="assets/images/logo/logo.png" class="img-fluid" /></a>
+                            <a href="/home.html" class="d-inline-block footer-logo"><img src="@Url.Content("~/assets/images/logo/logo.png")" class="img-fluid" /></a>
                             <p>Giấy phép số 58/GP-TTĐT do Sở Thông tin và Truyền thông Hà Nội cấp ngày 06/01/2017.</p>
                         </div>
                     </div>
@@ -703,10 +711,10 @@
         </div>
 
     </footer>
-    <script src="assets/scripts/jquery-3.5.1.min.js"></script>
-    <script src="assets/scripts/bootstrap.min.js"></script>
-    <script src="assets/scripts/flatpickr.js"></script>
-    <script src="assets/scripts/main.js"></script>
+    <script src="@Url.Content("~/assets/scripts/jquery-3.5.1.min.js")"></script>
+    <script src="@Url.Content("~/assets/scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/assets/scripts/flatpickr.js")"></script>
+    <script src="@Url.Content("~/assets/scripts/main.js")"></script>
 
 </body>
 </html>
