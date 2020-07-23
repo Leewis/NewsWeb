@@ -1,0 +1,555 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "master.cshtml";
+}
+
+<section class="section section">
+    @*@Html.GetGridHtml(Model, "bodyText", "bootstrap3-fluid")*@
+
+    @Html.GetGridHtml(Model, "mainLayout", "bootstrap3-fluid")
+</section>
+<!-- product-news -->
+<!-- articles-list -->
+<!-- articles-list -->
+
+<!-- categories-box-list -->
+<div class="categories-box-list">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="cate-options d-flex">
+                <h5 class="cate-title merri-title"><a href="#">Du lịch</a></h5>
+                <ul>
+                    <li><a href="#">Cẩm nang</a></li>
+                    <li><a href="#">Dấu chân</a></li>
+                    <li><a href="#">Tư vấn</a></li>
+                    <li><a href="#">Safe Go</a></li>
+                    <li><a href="#">Điểm đến</a></li>
+                    <li><a href="#">Ảnh</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="cate-box-left">
+                <div class="category-box-item">
+                    <div class="cate-content-box d-flex">
+                        <article class="thumb-cate">
+                            <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/articles/6.jpg")" class="img-fluid" alt=""></a>
+                            <div class="cate-thumb-desc mt-3">
+                                <h4 class="merri-title">
+                                    <a href="#">
+                                        Các điểm vui chơi ở Nghệ An
+                                    </a>
+                                </h4>
+                                <div class="child-news-desc">
+                                    <a href="#">
+                                        <span>
+                                            Làng Sen quê Bác, đồi chè Thanh Chương hay cánh đồng hoa hướng dương... là những gợi ý dành cho bạn khi du lịch xứ Nghệ.
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="cate-box-right d-flex">
+                <div class="first-cate-box">
+                    <div class="category-box-item">
+                        <div class="cate-content-box d-flex">
+                            <article class="thumb-cate">
+                                <a href="#" class="d-inline-block img-thumb">
+                                    <img src="@Url.Content("~/assets/images/articles/7.jpg")" class="img-fluid" alt="">
+                                </a>
+                                <div class="cate-thumb-desc mt-3">
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Nơi Covid-19 như chưa từng xuất hiện
+                                        </a>
+                                    </h6>
+
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="category-box-item">
+                        <div class="cate-content-box d-flex">
+                            <article class="thumb-cate">
+                                <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/articles/8.jpg")" class="img-fluid" alt=""></a>
+                                <div class="cate-thumb-desc mt-3">
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            'Vòng xoáy tử thần' của du lịch Trung Quốc
+                                        </a>
+                                    </h6>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="second-cate-box">
+                    <article class="article-item">
+                        <div class="d-flex">
+                            <div class="article-desc">
+                                <h6 class="merri-title">
+                                    <a href="#">
+                                        Quán phở bán 400 tô một ngày
+                                    </a>
+                                    <span class="comments-count">
+                                        <i class="far fa-comment"></i>
+                                        <a href="#">85</a>
+                                    </span>
+                                </h6>
+                            </div>
+                            <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/thumb/1.png")" class="img-fluid" alt=""></a>
+                        </div>
+                    </article>
+                    <article class="article-item has-no-image">
+                        <div class="article-desc">
+                            <h6 class="merri-title">
+                                <a href="#">
+                                    Ăn gì ở phố cổ Hội An?
+                                </a>
+                            </h6>
+                            <div class="article-desc">
+                                <a href="#">
+                                    <span class="location-name">QUẢNG NAM -</span><span>Ngoài bánh mì Phượng và cơm gà, tôi không biết thêm bất kỳ món ngon nào khác. </span>
+                                </a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">85</a>
+                                </span>
+                            </div>
+                        </div>
+
+                    </article>
+                    <article class="article-item">
+                        <div class="d-flex">
+                            <div class="article-desc">
+                                <h6 class="merri-title">
+                                    <a href="#">
+                                        3 trải nghiệm từ bình dân đến sang chảnh ở Phú Quốc
+                                    </a>
+                                    <span class="comments-count">
+                                        <i class="far fa-comment"></i>
+                                        <a href="#">85</a>
+                                    </span>
+                                </h6>
+
+                            </div>
+                            <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/thumb/2.jpg")" class="img-fluid" alt=""></a>
+                        </div>
+                    </article>
+                    <article class="article-item">
+                        <div class="d-flex">
+                            <div class="article-desc">
+                                <h6 class="merri-title">
+                                    <a href="#">
+                                        Khách Việt băng sa mạc Thar trên lưng lạc đà
+                                    </a>
+                                    <span class="comments-count">
+                                        <i class="far fa-comment"></i>
+                                        <a href="#">85</a>
+                                    </span>
+                                </h6>
+
+                            </div>
+                            <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/thumb/1.jpg")" class="img-fluid" alt=""></a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="bt-solid mt-3 mb-3"></div>
+</div>
+<div class="categories-box-list">
+    <div class=row>
+        <div class="col-lg-8">
+            <div class="other-cate-news-list">
+                <div class="cate-options d-flex">
+                    <h5 class="cate-title merri-title"><a href="#">Tâm sự</a></h5>
+                    <ul>
+                        <li><a href="#">Chuyên gia gỡ rối</a></li>
+                        <li><a href="#">Hẹn hò</a></li>
+                    </ul>
+                </div>
+                <div class="other-cate-news-item d-flex">
+                    <div class="category-box-item full-box">
+                        <div class="cate-content-box d-flex">
+                            <article class="thumb-cate mr-3">
+                                <!-- <a href="#" class="d-inline-block img-thumb"><img src="assets/images/articles/6.jpg" class="img-fluid" alt=""></a> -->
+                                <div class="cate-thumb-desc mt-3">
+                                    <h5 class="merri-title">
+                                        <a href="#">
+                                            Bất lực khi dạy dỗ con 3 tuổi
+                                        </a>
+                                    </h5>
+                                    <p class="child-news-desc">
+                                        <a href="#">
+                                            <span>
+                                                Tôi là ông bố trẻ, có hai con trai 5 tuổi và hơn 3 tuổi. Cách dạy con của tôi thường áp dụng là vừa yêu thương vừa có kỷ luật.
+                                                Nhóc đầu rất ngoan, đáng yêu, sống tình cảm, quan tâm đến cảm xúc của bố mẹ; nhóc sau nhiều lúc khiến tôi phiền lòng. Không biết có phải cháu sinh vào mồng 1 âm lịch không mà tính có phần ương bướng và cá tính. Hàng ngày cháu ít chơi với các bạn, nếu có thì thích...
+
+                                            </span>
+                                        </a>
+                                        <span class="comments-count">
+                                            <i class="far fa-comment"></i>
+                                            <a href="#">85</a>
+                                        </span>
+
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="two-items">
+                        <div class="category-box-item">
+                            <div class="cate-content-box d-flex">
+                                <article class="thumb-cate mr-3">
+                                    <!-- <a href="#" class="d-inline-block img-thumb"><img src="assets/images/articles/6.jpg" class="img-fluid" alt=""></a> -->
+                                    <div class="cate-thumb-desc mt-3">
+                                        <h5 class="merri-title">
+                                            <a href="#">
+                                                Mệt mỏi vì tối nào cũng phải massage cho chồng
+                                            </a>
+                                        </h5>
+                                        <div class="child-news-desc">
+                                            <a href="#">
+                                                <span>
+                                                    Tôi 30 tuổi, chồng 40 tuổi, có một bé gái 5 tuổi. Lúc mới lấy nhau, anh có một thói quen xấu là ngủ ngáy rất lớn, thở mạnh.
+
+                                                </span>
+                                            </a>
+                                            <span class="comments-count">
+                                                <i class="far fa-comment"></i>
+                                                <a href="#">85</a>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="category-box-item">
+                            <div class="cate-content-box d-flex">
+                                <article class="thumb-cate mr-3">
+                                    <!-- <a href="#" class="d-inline-block img-thumb"><img src="assets/images/articles/6.jpg" class="img-fluid" alt=""></a> -->
+                                    <div class="cate-thumb-desc mt-3">
+                                        <h5 class="merri-title">
+                                            <a href="#">
+                                                Hoàn cảnh sống quê chồng kém nên tôi không muốn về ở
+                                            </a>
+                                        </h5>
+                                        <div class="child-news-desc">
+                                            <a href="#">
+                                                <span>
+                                                    Tôi lấy chồng được 2 năm rưỡi, có con trai 18 tháng. Từ khi cưới, chúng tôi sống ở xa nhà chồng.
+                                                </span>
+                                            </a>
+                                            <span class="comments-count">
+                                                <i class="far fa-comment"></i>
+                                                <a href="#">85</a>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="box-shop-sell-vertical p-3">
+                <div class="clearfix sell-top-box">
+                    <h5 class="merri-title heading-line float-left"><a href="">Fsell</a></h5>
+                    <div class="float-right btn-control-carousel">
+                        <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                            &#10094;
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                            &#10095;
+                        </a>
+                    </div>
+                </div>
+
+                <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="article-list-sell">
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                            <p class="fsell-price">3.600.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                            <p class="fsell-price">1.800.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                            <p class="fsell-price">5.400.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="article-list-sell">
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                            <p class="fsell-price">3.600.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/4.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                            <p class="fsell-price">1.800.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell//5.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                            <p class="fsell-price">5.400.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- carousel slide -->
+            </div>
+        </div>
+    </div>
+    <div class="bt-solid mt-3 mb-3"></div>
+</div>
+<div class="ad-bottom-content pb-3">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="watch-lots-list">
+                <div class="heading-title">
+                    <h5 class="merri-title title-border">
+                        <a title="Xem nhiều" href="/tin-xem-nhieu" class="inner-title">Xem nhiều</a>
+                    </h5>
+                </div>
+                <div class="list-top-view d-flex mt-4">
+                    <article class="item-news d-flex">
+                        <h1 class="merri-title number-top-view">1</h1>
+                        <div class="view-desc">
+                            <p>
+                                <a href="#">Kế hoạch triệu đô vào Mỹ của bà Đặng Thị Hoàng Yến giờ ra sao?</a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">14</a>
+                                </span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="item-news d-flex">
+                        <h1 class="merri-title number-top-view">2</h1>
+                        <div class="view-desc">
+                            <p>
+                                <a href="#">Bi kịch của người Mỹ từng chiến đấu cho hải quân Trung Quốc</a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">14</a>
+                                </span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="item-news d-flex">
+                        <h1 class="merri-title number-top-view">3</h1>
+                        <div class="view-desc">
+                            <p>
+                                <a href="#">Website phim lậu lớn nhất Việt Nam bị chặn</a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">132</a>
+                                </span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="item-news d-flex">
+                        <h1 class="merri-title number-top-view">4</h1>
+                        <div class="view-desc">
+                            <p>
+                                <a href="#">Ông thợ hồ 64 tuổi có thân hình như lực sĩ</a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">132</a>
+                                </span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="item-news d-flex">
+                        <h1 class="merri-title number-top-view">5</h1>
+                        <div class="view-desc">
+                            <p>
+                                <a href="#">Website phim lậu lớn nhất Việt Nam bị chặn</a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">132</a>
+                                </span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="item-news d-flex">
+                        <h1 class="merri-title number-top-view">6</h1>
+                        <div class="view-desc">
+                            <p>
+                                <a href="#">Ông thợ hồ 64 tuổi có thân hình như lực sĩ</a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">132</a>
+                                </span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="item-news d-flex">
+                        <h1 class="merri-title number-top-view">7</h1>
+                        <div class="view-desc">
+                            <p>
+                                <a href="#">Website phim lậu lớn nhất Việt Nam bị chặn</a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">132</a>
+                                </span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="item-news d-flex">
+                        <h1 class="merri-title number-top-view">8</h1>
+                        <div class="view-desc">
+                            <p>
+                                <a href="#">Ông thợ hồ 64 tuổi có thân hình như lực sĩ</a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">132</a>
+                                </span>
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="box-shop-sell-vertical p-3">
+                <div class="clearfix sell-top-box">
+                    <h5 class="merri-title heading-line float-left"><a href="">VNShop</a></h5>
+                    <div class="float-right btn-control-carousel">
+                        <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
+                            ❮
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
+                            ❯
+                        </a>
+                    </div>
+                </div>
+
+                <div id="carouselExampleInterval1" class="carousel slide pointer-event" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item carousel-item-next carousel-item-left">
+                            <div class="article-list-sell">
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                            <p class="fsell-price">3.600.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                            <p class="fsell-price">1.800.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                            <p class="fsell-price">5.400.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="carousel-item active carousel-item-left">
+                            <div class="article-list-sell">
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                            <p class="fsell-price">3.600.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/4.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                            <p class="fsell-price">1.800.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell//5.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                            <p class="fsell-price">5.400.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- carousel slide -->
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
