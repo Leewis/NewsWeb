@@ -3,9 +3,7 @@
 @{
     var root = Model.Root();
     var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
-
     var logoSetting = setting.Value<IPublishedContent>("siteLogoUrl");
-
     var contentLeft = setting.Value<HtmlString>("ContentLeft");
     var contentCenter = setting.Value<HtmlString>("ContentCenter");
     var contentRight = setting.Value<HtmlString>("ContentRight");
@@ -33,5 +31,4 @@
 
         </div>
     </div>
-
 </footer>

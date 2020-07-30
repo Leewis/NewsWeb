@@ -3,11 +3,10 @@
 @{ 
     Layout = null;
     var now = DateTime.Now;
-    var site = Model.Root(); 
-    @*var home = site.Children.Where(x => x.Id == 1118);
-    var category = home.SelectMany(c => c.Children);
-    var selection = category.Where(c => c.IsVisible());
-    var ff = "ss";*@ }
+    var site = Model.Root();
+    var setting = site.Children.FirstOrDefault(x => x.Id == 1118);
+    var logoSetting = setting.Value<IPublishedContent>("siteLogoUrl");
+}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -22,6 +21,7 @@
     <title>Trang chủ</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="@logoSetting.Url" type="image/x-icon">
     <!-- libraries -->
     <link rel="stylesheet" href="@Url.Content("~/assets/stylesheets/normalize.css")">
     <link rel="stylesheet" href="@Url.Content("~/assets/stylesheets/bootstrap.min.css")">
@@ -55,7 +55,3 @@
 </body>
 </html>
 
-@*@using ContentModels = Umbraco.Web.PublishedModels;
-    @{
-    Layout = null;
-    }*@

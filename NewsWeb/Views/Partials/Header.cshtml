@@ -3,7 +3,6 @@
 @{
     var root = Model.Root();
     var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
-
     var logoSetting = setting.Value<IPublishedContent>("siteLogoUrl");
     var currentDate = DateTime.Now.ToString("dddd, dd/MM/yyyy",new System.Globalization.CultureInfo("Vi-VI"));
 }
