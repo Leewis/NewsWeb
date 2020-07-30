@@ -1,0 +1,97 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web;
+@{
+    var site = Model.Root();
+    var home = site.Children.FirstOrDefault(x => x.Id == 1089);
+    var selection = home.Children.Where(x => x.IsVisible()).ToArray();
+    var now = DateTime.Now;
+}
+<!-- comment out the following line if you want to remove the root node name from the top navigation -->
+@*<a class="nav-link @Html.Raw(Model.Id == home.Id ? " navi-link--active" : "" )" href="@home.Url">@home.Name</a>
+    @foreach (var item in selection)
+    {
+        bool isChildren = item.Children.Any(x => x.IsVisible());
+        <div class="@(isChildren ? "dropdown" : null )">
+            <a class="nav-link @(item.IsAncestorOrSelf(Model) ? " nav-link--active" : null) @(isChildren ? " dropbtn" : null )" href="@item.Url">@item.Name</a>
+
+            @if (item.Children.Any(x => x.IsVisible()))
+            {
+                <div class="dropdown-content">
+                    @foreach (var subMenu in item.Children.Where(x => x.IsVisible()))
+                    {
+                        if (subMenu.ContentType.Alias.ToLower() == "category")
+                        {
+                            <a href="@subMenu.Url">
+                                @subMenu.Name
+                            </a>
+                        }
+                    }
+                </div>
+            }
+        </div>
+    }*@
+<div class="close-side-overlay"></div>
+<div class="header-wrapper white-bg">
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-4">
+                    <div class="top-left d-flex">
+                        <a class="d-lg-none view-mb-menu"><i class="fas fa-bars"></i></a>
+                        <div class="top-logo-time d-flex">
+                            <a class="logo" href="/home.html"><img src="@Url.Content("~/assets/images/logo/logo.png")" alt="logo" class="img-fluid d-block"></a>
+                            <p class="time-now"><time datetime="@now.ToString("o")" pubdate>@now.ToLongDateString()</time></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-8 d-none d-lg-block">
+                    <div class="top-right d-inline-flex w-100">
+                        <a href="#" class="tag-link">Mới nhất</a>
+                        <a href="#" class="tag-link">International</a>
+                        <form class="form-inline search-box">
+                            <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                            <button class="" type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-menu white-bg d-none d-lg-block" id="myHeader">
+        <ul class="navbar-list">
+            <li class="nav-item">
+                <a class="item-link" href="@home.Url">@home.Name</a>
+            </li>
+            @foreach (var item in selection)
+            {
+                <li>
+                    <a class="item-link" href="@item.Url">@item.Name</a>
+                    @if (item.Children.Any(x => x.IsVisible()))
+                    {
+                        <ul class="nav-sub">
+                            @foreach (var subMenu in item.Children.Where(x => x.IsVisible()))
+                            {
+                                if (subMenu.ContentType.Alias.ToLower() == "category")
+                                {
+                                    <li><a href="@subMenu.Url">@subMenu.Name</a></li>
+                                }
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        </ul>
+        <div class="wrap-all-menu clearfix" id="tat-ca">
+            <div class="container">
+                <div class="header-menu">
+                    <span class="name-header">Tất cả chuyên mục</span>
+                    <a href="javascript:void(0);" class="close-menu" title="Đóng">Đóng &#10005;</a>
+                </div>
+                <div class="content-left">
+                </div>
+                <div class="content-right">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

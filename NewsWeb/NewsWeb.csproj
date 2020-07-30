@@ -346,6 +346,17 @@
     <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
     <Content Include="Views\HomePage.cshtml" />
     <Content Include="Views\master.cshtml" />
+    <Content Include="Views\Partials\Navigation\TopNavigation.cshtml" />
+    <Content Include="Views\Partials\Navigation\Subnavigation.cshtml" />
+    <Content Include="Views\News.cshtml" />
+    <Content Include="Views\MacroPartials\BoxSell.cshtml" />
+    <Content Include="Views\MacroPartials\CategoriesBoxList.cshtml" />
+    <Content Include="Views\MacroPartials\CategoryFeatureNews.cshtml" />
+    <Content Include="Views\MacroPartials\CommomNews.cshtml" />
+    <Content Include="Views\MacroPartials\LastestNews.cshtml" />
+    <Content Include="Views\MacroPartials\MostViews.cshtml" />
+    <Content Include="Views\MacroPartials\NewsByCategory.cshtml" />
+    <Content Include="Views\MacroPartials\testPicker.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

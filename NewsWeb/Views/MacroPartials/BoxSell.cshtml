@@ -1,0 +1,179 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var category = Model.MacroParameters["itemSell"].ToString();
+    switch (category) {
+        case "fsell":
+            <div class="box-shop-sell-vertical p-3">
+                <div class="clearfix sell-top-box">
+                    <h5 class="merri-title heading-line float-left"><a href="">Fsell</a></h5>
+                    <div class="float-right btn-control-carousel">
+                        <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                            &#10094;
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                            &#10095;
+                        </a>
+                    </div>
+                </div>
+
+                <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="article-list-sell">
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                            <p class="fsell-price">3.600.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                            <p class="fsell-price">1.800.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                            <p class="fsell-price">5.400.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="article-list-sell">
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                            <p class="fsell-price">3.600.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/4.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                            <p class="fsell-price">1.800.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell//5.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                            <p class="fsell-price">5.400.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- carousel slide -->
+            </div>
+            break;
+        
+        case "vnshop":
+            
+            <div class="box-shop-sell-vertical p-3">
+                <div class="clearfix sell-top-box">
+                    <h5 class="merri-title heading-line float-left"><a href="">VNShop</a></h5>
+                    <div class="float-right btn-control-carousel">
+                        <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
+                            ❮
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
+                            ❯
+                        </a>
+                    </div>
+                </div>
+
+                <div id="carouselExampleInterval1" class="carousel slide pointer-event" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item carousel-item-next carousel-item-left">
+                            <div class="article-list-sell">
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                            <p class="fsell-price">3.600.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                            <p class="fsell-price">1.800.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                            <p class="fsell-price">5.400.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="carousel-item active carousel-item-left">
+                            <div class="article-list-sell">
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                            <p class="fsell-price">3.600.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/4.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                            <p class="fsell-price">1.800.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell//5.jpg")" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                            <p class="fsell-price">5.400.000.000 đ</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- carousel slide -->
+            </div>
+            break;
+            
+        default:
+            break;
+    }
+}

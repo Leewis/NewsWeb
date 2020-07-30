@@ -6,7 +6,7 @@ using  Umbraco.Core.Models;
 using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder.Embedded;
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "2f924de9a2a15905")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "891ae972ebe01d91")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -407,6 +407,13 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
+
+		///<summary>
+		/// Author
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("author")]
+		public string Author => this.Value<string>("author");
 
 		///<summary>
 		/// Category
