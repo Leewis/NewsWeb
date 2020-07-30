@@ -14,12 +14,12 @@
         {
         <ul class="cate-menu">
             <li>
-                <a href="">@item.Name</a>
+                <a href="">@item.GetProperty("Title").Value()</a>
             </li>
             @foreach (var child in item.Children().Where(c => c.IsVisible()))
             {
                 <li>
-                    <a href="">@child.Name</a>
+                    <a href="">@child.GetProperty("Title").Value()</a>
                 </li>
             }
             <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>

@@ -1,11 +1,11 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @using Umbraco.Web;
 @{
-    var backgroundUrl = String.Empty;
     var root = Model.Root();
     var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
 
-    var bgImg = setting.Value<IPublishedContent>("siteLogoUrl");   
+    var logoSetting = setting.Value<IPublishedContent>("siteLogoUrl");
+    var currentDate = DateTime.Now.ToString("dddd, dd/MM/yyyy",new System.Globalization.CultureInfo("Vi-VI"));
 }
 <header>
     <div class="header-wrapper white-bg">
@@ -16,8 +16,8 @@
                         <div class="top-left d-flex">
                             <a class="d-lg-none view-mb-menu"><i class="fas fa-bars"></i></a>
                             <div class="top-logo-time d-flex">
-                                <a class="logo" href="/home.html"><img src="@bgImg.Url" alt="logo" class="img-fluid d-block"></a>
-                                <p class="time-now">@Model.Value("CurrentDate")</p>
+                                <a class="logo" href="/home"><img src="@logoSetting.Url" alt="logo" class="img-fluid d-block"></a>
+                                <p class="time-now">@currentDate</p>
                             </div>
                         </div>
                     </div>

@@ -9,12 +9,14 @@
         {
             <li class="nav-item">
                 <a href="@item.Url" class="item-link">@item.GetProperty("Title").Value()</a>
-                <ul class="nav-sub">
-                    @foreach (var child in item.Children().Where(c => c.IsVisible()))
-                    {
-                        <li><a href="@child.Url">@child.GetProperty("Title").Value()</a></li>
-                    }
-                </ul>
+                @if (item.Children.Count() > 0) {
+                    <ul class="nav-sub">
+                        @foreach (var child in item.Children().Where(c => c.IsVisible()))
+                        {
+                            <li><a href="@child.Url">@child.GetProperty("Title").Value()</a></li>
+                        }
+                    </ul>
+                }
             </li>
         }
         <li class="nav-item">

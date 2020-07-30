@@ -1,22 +1,33 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @using Umbraco.Web;
+@{
+    var root = Model.Root();
+    var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
 
+    var logoSetting = setting.Value<IPublishedContent>("siteLogoUrl");
+
+    var contentLeft = setting.Value<HtmlString>("ContentLeft");
+    var contentCenter = setting.Value<HtmlString>("ContentCenter");
+    var contentRight = setting.Value<HtmlString>("ContentRight");
+}
 <footer>
     <div class="footer-wrapper pt-5 pb-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-lg-4">
                     <div class="footer-item">
-                        <a href="/home.html" class="d-inline-block footer-logo"><img src="@Model.Value("Logo")" class="img-fluid" /></a>
-                        @Model.Value("ContentLeft")
+                        <a href="/home" class="d-inline-block footer-logo">
+                            <img src="@logoSetting.Url" class="img-fluid" />
+                        </a>                   
+                        @contentLeft
                     </div>
                 </div>
 
                 <div class="col-md-4 col-lg-4">
-                    @Model.Value("ContentCenter")
+                    @contentCenter
                 </div>
                 <div class="col-md-4 col-lg-4">
-                    @Model.Value("ContentRight")
+                    @contentRight
                 </div>
             </div>
 
