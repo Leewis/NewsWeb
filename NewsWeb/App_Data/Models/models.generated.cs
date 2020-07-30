@@ -17,7 +17,7 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.ModelsBuilder.Embedded;
 
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "2f924de9a2a15905")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "bbc4c5a9bdf214a3")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedModels
@@ -46,6 +46,34 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
+
+		///<summary>
+		/// Content Center
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentCenter")]
+		public global::System.Web.IHtmlString ContentCenter => this.Value<global::System.Web.IHtmlString>("contentCenter");
+
+		///<summary>
+		/// Content Left
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentLeft")]
+		public global::System.Web.IHtmlString ContentLeft => this.Value<global::System.Web.IHtmlString>("contentLeft");
+
+		///<summary>
+		/// Content Right
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentRight")]
+		public global::System.Web.IHtmlString ContentRight => this.Value<global::System.Web.IHtmlString>("contentRight");
+
+		///<summary>
+		/// Current Day
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("currentDay")]
+		public global::System.DateTime CurrentDay => this.Value<global::System.DateTime>("currentDay");
 
 		///<summary>
 		/// Description Suffix
@@ -259,6 +287,41 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
+
+		///<summary>
+		/// ContentCenter
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentCenter")]
+		public global::System.Web.IHtmlString ContentCenter => this.Value<global::System.Web.IHtmlString>("contentCenter");
+
+		///<summary>
+		/// ContentLeft
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentLeft")]
+		public global::System.Web.IHtmlString ContentLeft => this.Value<global::System.Web.IHtmlString>("contentLeft");
+
+		///<summary>
+		/// ContentRight
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentRight")]
+		public global::System.Web.IHtmlString ContentRight => this.Value<global::System.Web.IHtmlString>("contentRight");
+
+		///<summary>
+		/// CurrentDate
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("currentDate")]
+		public global::System.DateTime CurrentDate => this.Value<global::System.DateTime>("currentDate");
+
+		///<summary>
+		/// Logo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("logo")]
+		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent Logo => this.Value<global::Umbraco.Core.Models.PublishedContent.IPublishedContent>("logo");
 
 		///<summary>
 		/// Main Layout

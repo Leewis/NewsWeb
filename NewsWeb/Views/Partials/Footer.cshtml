@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web;
+
+<footer>
+    <div class="footer-wrapper pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4">
+                    <div class="footer-item">
+                        <a href="/home.html" class="d-inline-block footer-logo"><img src="@Model.Value("Logo")" class="img-fluid" /></a>
+                        @Model.Value("ContentLeft")
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-4">
+                    @Model.Value("ContentCenter")
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    @Model.Value("ContentRight")
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</footer>
