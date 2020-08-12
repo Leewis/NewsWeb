@@ -3,6 +3,7 @@
 @{
     Layout = null;
     var root = Model.Root();
+    var homepage = root.Children.FirstOrDefault(x => x.Id == 1089);
     var setting =root.Children.FirstOrDefault(x => x.Id == 1118);
     var facebook = setting.GetProperty("facebookUrl").GetValue();
     var twitter = setting.GetProperty("twitterUrl").GetValue();
@@ -33,14 +34,14 @@
                             <div class="col-lg-8">
                                 <div class="header-detail">
                                     @{
-                                        var selection = Model.Ancestors().Where(c => c != root);
+                                        var selection = Model.Ancestors().Where(c => c != root && c != homepage);
                                         if (selection.Any())
                                         {
                                             var currentPageTitle = Model.Title;
                                             <ul class="breadcrumb-detail">
                                                 @foreach (var item in selection.OrderBy(a => a.Level).ToList())
                                                 {
-                                                    var pageTitle = item.Name;
+                                                    var pageTitle = item.GetProperty("Title").Value();
                                                     <li>
                                                         <a href="@item.Url" title="@pageTitle">
                                                             @pageTitle

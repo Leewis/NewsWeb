@@ -1,38 +1,76 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Category>
-    @using ContentModels = Umbraco.Web.PublishedModels;
-    @{
+@using ContentModels = Umbraco.Web.PublishedModels;
+@using Umbraco.Core.Services;
+@{
     Layout = "master.cshtml";
+    IContentService contentService = Services.ContentService;
+    var parent = Model.Parent;
+    var childen = Model.Descendants().ToArray();
+    bool isMainCategory = false;
+    foreach (var item in childen)
+    {
+        var typeContent = contentService.GetById(item.Id).ContentType.Alias;
+        if (typeContent != "news")
+        {
+            isMainCategory = true;
+            break;
+        }
     }
+    var title = isMainCategory ? Model.Value("Title") : parent.Value("Title");
+    var url = isMainCategory ? Model.Url() : parent.Url();
+    var udi = new GuidUdi("document", isMainCategory ? Model.Key : parent.Key);
+}
 
-    <section class="section top-header top-header-folder">
-        <div class="container" data-campaign="Header">
-            <div class="row">
-                <div class="col-md-12 col-lg-4">
-                    <div class="top-left d-flex title-folder">
-                        <h1>
-                            <a title="@Model.Value("Title")" data-medium="Menu-ThoiSu" href="@Model.Url()" data-itm-source="" data-itm-added="1">@Model.Value("Title")</a>
-                        </h1>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-8 d-none d-lg-block">
-                    <div class="top-right d-inline-flex w-100">
-                        <form class="form-inline search-box">
-                            <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                            <button class="" type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                    </div>
+<section class="section top-header top-header-folder">
+    <div class="container" data-campaign="Header">
+        <div class="row">
+            <div class="col-md-12 col-lg-4">
+                <div class="top-left d-flex title-folder">
+                    <h1>
+                        <a title="@title" data-medium="Menu-ThoiSu" href="@url" data-itm-source="" data-itm-added="1">@title</a>
+                    </h1>
                 </div>
             </div>
-            <nav class="width_common nav-folder">
-                <ul class="ul-nav-folder">
-                    <li><a title="Tuyến đầu chống dịch" data-medium="Menu-ChongDich" href="/tuyen-dau-chong-dich" data-itm-source="#vn_source=Folder&amp;vn_campaign=Header&amp;vn_medium=Menu-ChongDich&amp;vn_term=Desktop" data-itm-added="1">Tuyến đầu chống dịch</a></li>
-                    <li>
-                        <a title="Giao thông" data-medium="Menu-GiaoThong" href="/thoi-su/giao-thong" data-itm-source="#vn_source=Folder&amp;vn_campaign=Header&amp;vn_medium=Menu-GiaoThong&amp;vn_term=Desktop" data-itm-added="1">Giao thông</a>
-                    </li>
-                    <li>
-                        <a title="Mekong" data-medium="Menu-Mekong" href="/thoi-su/mekong" data-itm-source="#vn_source=Folder&amp;vn_campaign=Header&amp;vn_medium=Menu-Mekong&amp;vn_term=Desktop" data-itm-added="1">Mekong</a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="col-md-12 col-lg-8 d-none d-lg-block">
+                <div class="top-right d-inline-flex w-100">
+                    <form class="form-inline search-box">
+                        <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                        <button class="" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </section>
+        <nav class="width_common nav-folder">
+            <div class="cate-options d-flex">
+                <ul class="ul-nav-folder row">
+                    @if (isMainCategory)
+                    {
+                        foreach (var item in childen)
+                        {
+                            var typeContent = contentService.GetById(item.Id).ContentType.Alias;
+                            if (typeContent != "news")
+                            {
+                                <li><a href="@item.Url()">@item.GetProperty("Title").Value()</a></li>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in parent.Descendants().ToArray())
+                        {
+                            var typeContent = contentService.GetById(item.Id).ContentType.Alias;
+                            if (typeContent != "news")
+                            {
+                                <li><a href="@item.Url()">@item.GetProperty("Title").Value()</a></li>
+                            }
+                        }
+                    }
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+</section>
+<section>
+    @Umbraco.RenderMacro("CategoryFeatureNews", new { category = udi });
+</section>
