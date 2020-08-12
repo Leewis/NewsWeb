@@ -2,7 +2,7 @@
 @using ContentModels = Umbraco.Web.PublishedModels;
 @inherits UmbracoViewPage
 @{
-    var now = DateTime.Now;
+    var now = DateTime.Now.ToString("dddd, dd MMMM yyyy", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"));
     var site = Model.Root();
     var home = site.Children.FirstOrDefault(x => x.Id == 1089);
     var setting = site.Children.FirstOrDefault(x => x.Id == 1118);
@@ -19,7 +19,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Trang chủ</title>
+    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- libraries -->
@@ -44,8 +44,8 @@
                             <div class="top-left d-flex">
                                 <a class="d-lg-none view-mb-menu"><i class="fas fa-bars"></i></a>
                                 <div class="top-logo-time d-flex">
-                                    <a class="logo" href="/home.html"><img src="@Url.Content("~/assets/images/logo/logo.png")" alt="logo" class="img-fluid d-block"></a>
-                                    <p class="time-now"><time datetime="@now.ToString("o")" pubdate>@now.ToLongDateString()</time></p>
+                                    <a class="logo" href="/home"><img src="@Url.Content("~/assets/images/logo/logo.png")" alt="logo" class="img-fluid d-block"></a>
+                                    <p class="time-now">@now</p>
                                 </div>
                             </div>
                         </div>

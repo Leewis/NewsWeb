@@ -4,4 +4,35 @@
     Layout = "master.cshtml";
     }
 
-    Test Category - Template
+    <section class="section top-header top-header-folder">
+        <div class="container" data-campaign="Header">
+            <div class="row">
+                <div class="col-md-12 col-lg-4">
+                    <div class="top-left d-flex title-folder">
+                        <h1>
+                            <a title="@Model.Value("Title")" data-medium="Menu-ThoiSu" href="@Model.Url()" data-itm-source="" data-itm-added="1">@Model.Value("Title")</a>
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-8 d-none d-lg-block">
+                    <div class="top-right d-inline-flex w-100">
+                        <form class="form-inline search-box">
+                            <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                            <button class="" type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <nav class="width_common nav-folder">
+                <ul class="ul-nav-folder">
+                    <li><a title="Tuyến đầu chống dịch" data-medium="Menu-ChongDich" href="/tuyen-dau-chong-dich" data-itm-source="#vn_source=Folder&amp;vn_campaign=Header&amp;vn_medium=Menu-ChongDich&amp;vn_term=Desktop" data-itm-added="1">Tuyến đầu chống dịch</a></li>
+                    <li>
+                        <a title="Giao thông" data-medium="Menu-GiaoThong" href="/thoi-su/giao-thong" data-itm-source="#vn_source=Folder&amp;vn_campaign=Header&amp;vn_medium=Menu-GiaoThong&amp;vn_term=Desktop" data-itm-added="1">Giao thông</a>
+                    </li>
+                    <li>
+                        <a title="Mekong" data-medium="Menu-Mekong" href="/thoi-su/mekong" data-itm-source="#vn_source=Folder&amp;vn_campaign=Header&amp;vn_medium=Menu-Mekong&amp;vn_term=Desktop" data-itm-added="1">Mekong</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>

@@ -6,6 +6,7 @@
     var setting =root.Children.FirstOrDefault(x => x.Id == 1118);
     var facebook = setting.GetProperty("facebookUrl").GetValue();
     var twitter = setting.GetProperty("twitterUrl").GetValue();
+    var parent = Model.Parent;
 }
     <!DOCTYPE html>
     <html>
@@ -52,7 +53,7 @@
                                             </ul>
                                         }
                                     }
-                                            <span class="date-detail">@Model.Value("postedDateTime")</span>
+                                    <span class="date-detail">@Model.Value("postedDateTime")</span>
                                 </div>
                                 <h2 class="title-detail">@Model.Value("title")</h2>
                                 <div class="description">
@@ -75,8 +76,8 @@
                                 </div>
                                 <p class="author"><strong>@Model.Value("author")</strong></p>
                                 <div class="footer-content">
-                                    <a class="btn btn-back">
-                                        <span>Trở về trang Kinh doanh</span>
+                                    <a class="btn btn-back" href="@parent.Url()">
+                                        <span>Trở về trang @parent.GetProperty("title").Value()</span>
                                     </a>
                                     <a class="btn btn-save">
                                         <i class="fa fa-bookmark"></i>
@@ -90,19 +91,14 @@
                                         <a href="#" class="fa fa-link"></a>
                                     </div>
                                 </div>
-                                <div class="tags-display">
-                                    <span>
-                                        Tags:
-                                    </span>
-                                    <ul class="tags">
-                                        <li><a href="#">Tỷ phú</a></li>
-                                        <li><a href="#">Ấn độ</a></li>
-                                        <li><a href="#">Mukesh Ambani</a></li>
-                                        <li><a href="#">Reliance Industries</a></li>
-                                        <li><a href="#">giàu nhất châu Á</a></li>
-                                    </ul>
-                                </div>
 
+                                <div class="source-news">
+                                    <span>
+                                        Nguồn:
+                                    </span>
+                                    <span>@Model.Value("source") / </span>
+                                    <a href="@Model.Value("sourceUrl")"> @Model.Value("sourceUrl")</a>
+                                </div>
                             </div>
                             <div class="col-lg-4 mt-3 d-none d-lg-block">
                                 <div class="box-shop-sell-vertical p-3">

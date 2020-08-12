@@ -18,7 +18,7 @@
                 TimeSpan difference = now.Subtract(postday);
                 if (difference.TotalSeconds < toNow)
                 {
-                    latestNews = item;
+                    latestNews = child;
                     toNow = difference.TotalSeconds;
                 }
             }

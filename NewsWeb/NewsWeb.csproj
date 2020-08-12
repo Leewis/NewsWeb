@@ -357,6 +357,9 @@
     <Content Include="Views\MacroPartials\MostViews.cshtml" />
     <Content Include="Views\MacroPartials\NewsByCategory.cshtml" />
     <Content Include="Views\MacroPartials\testPicker.cshtml" />
+    <Content Include="Views\Category.cshtml" />
+    <Content Include="Views\CategoryPage.cshtml" />
+    <Content Include="Views\NewsLandingPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
