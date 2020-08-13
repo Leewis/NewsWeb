@@ -1,0 +1,134 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web;
+@{
+    var root = Model.Root();
+    var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
+    var logoSetting = setting.Value<IPublishedContent>("siteLogoUrl");
+    var currentDate = DateTime.Now.ToString("dddd, dd/MM/yyyy",new System.Globalization.CultureInfo("Vi-VI"));
+}
+<header>
+    <div class="header-wrapper white-bg">
+        <div class="top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-4">
+                        <div class="top-left d-flex">
+                            <a class="d-lg-none view-mb-menu"><i class="fas fa-bars"></i></a>
+                            <div class="top-logo-time d-flex">
+                                <a class="logo" href="/home"><img src="@logoSetting.Url" alt="logo" class="img-fluid d-block"></a>
+                                <p class="time-now">@currentDate</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-8 d-none d-lg-block">
+                        <div class="top-right d-inline-flex w-100">
+                            <a href="#" class="tag-link">Mới nhất</a>
+                            <a href="#" class="tag-link">International</a>
+                            <form class="form-inline search-box">
+                                <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                                <button class="" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- mobile-header -->
+        <div class="mobile-header pt-3 pb-3" id="mySidenav">
+            <div class="container">
+                <div class="mb-top-menu clearfix">
+                    <div class="float-left">
+                        <span class="btn-mb-close">&#10005;</span>
+                    </div>
+                    <div class="float-right">
+                        <a href="/home.html"><img src="@Url.Content("~/assets/images/logo/logo.png")" alt="logo" class="img-fluid d-block"></a>
+                    </div>
+                </div>
+                <div class="bt-solid mt-3 mb-3"></div>
+
+                <form class="form-inline search-box">
+                    <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                    <button class="" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="bt-solid mt-3 mb-3"></div>
+
+                <div class="row">
+                    <div class="col">
+                        <ul class="mb-menu-list">
+                            <li><a href="">Trang nhất</a></li>
+                            <li><a href="/category.html">Thời sự</a></li>
+                            <li><a href="">Thế giới</a></li>
+                            <li><a href="">Kinh doanh</a></li>
+                            <li><a href="">Thể thao</a></li>
+                            <li><a href="">VM 2020</a></li>
+                            <li><a href="">V-Race</a></li>
+                            <li><a href="">F1</a></li>
+                            <li><a href="">Khoa học</a></li>
+                            <li><a href="">Số hóa</a></li>
+                            <li><a href="">Ý kiến</a></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="mb-menu-list">
+                            <li><a href="">Góc nhìn</a></li>
+                            <li><a href="">Video</a></li>
+                            <li><a href="">Giải trí</a></li>
+                            <li><a href="">Pháp luật</a></li>
+                            <li><a href="">Giáo dục</a></li>
+                            <li><a href="">Sức khỏe</a></li>
+                            <li><a href="">Đời sống</a></li>
+                            <li><a href="">Du lịch</a></li>
+                            <li><a href="">Xe</a></li>
+                            <li><a href="">Tâm sự</a></li>
+                            <li><a href="">Cười</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bt-solid mt-3 mb-3"></div>
+                <div class="row">
+                    <div class="col">
+                        <ul class="mb-menu-list">
+                            <li><a href="">Ảnh</a></li>
+                            <li><a href="">Interactives</a></li>
+                            <li><a href="">Mới nhất</a></li>
+                            <li><a href="">Tin nóng</a></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="mb-menu-list">
+                            <li><a href="">Infographics</a></li>
+                            <li><a href="">24h qua</a></li>
+                            <li><a href="">Xem nhiều</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bt-solid mt-3 mb-3"></div>
+                <div class="row">
+                    <div class="col">
+                        <ul class="mb-menu-list">
+                            <li><a href="">Shop</a></li>
+                            <li><a href="">Startup Việt</a></li>
+                            <li><a href="">Mã giảm giá</a></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="mb-menu-list">
+                            <li><a href="">Shop</a></li>
+                            <li><a href="">Startup Việt</a></li>
+                            <li><a href="">Mã giảm giá</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="close-side-overlay"></div>
+        <!-- destop-header -->
+        <div class="header-menu white-bg d-none d-lg-block" id="myHeader">
+            @Html.Partial("Navigation/TopNavigation")
+            <div class="wrap-all-menu clearfix" id="tat-ca">
+                @Html.Partial("Navigation/ShowAllMenu")
+            </div>
+
+        </div>
+    </div>
+</header>
