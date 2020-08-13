@@ -360,6 +360,11 @@
     <Content Include="Views\Category.cshtml" />
     <Content Include="Views\CategoryPage.cshtml" />
     <Content Include="Views\NewsLandingPage.cshtml" />
+    <Content Include="Views\Partials\Navigation\CategoryHeader.cshtml" />
+    <Content Include="Views\Partials\Navigation\CategoryMenu.cshtml" />
+    <Content Include="Views\Partials\Navigation\ShowAllMenu.cshtml" />
+    <Content Include="Views\Partials\Footer.cshtml" />
+    <Content Include="Views\Partials\Header.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
