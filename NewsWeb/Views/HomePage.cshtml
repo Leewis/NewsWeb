@@ -6,15 +6,10 @@
     var home = site.Children.ToList()[0];
     var selection = home.Children.Where(x => x.IsVisible()).ToList();
 }
+    <div class="container white-bg">
+        <section class="section section">
+            @Html.GetGridHtml(Model, "mainLayout", "bootstrap3-fluid")
+        </section>
+    </div>
+        
 
-<section class="section section">
-    @*@Html.GetGridHtml(Model, "bodyText", "bootstrap3-fluid")*@
-
-
-    @Html.GetGridHtml(Model, "mainLayout", "bootstrap3-fluid")
-</section>
-<!-- product-news -->
-<!-- articles-list -->
-<!-- articles-list -->
-
-<!-- categories-box-list -->

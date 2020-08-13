@@ -17,8 +17,8 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.ModelsBuilder.Embedded;
 
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "891ae972ebe01d91")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.3")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "6e70d52c65814ac")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedModels
 {
@@ -46,6 +46,27 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
+
+		///<summary>
+		/// ContentCenter
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentCenter")]
+		public global::System.Web.IHtmlString ContentCenter => this.Value<global::System.Web.IHtmlString>("contentCenter");
+
+		///<summary>
+		/// ContentLeft
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentLeft")]
+		public global::System.Web.IHtmlString ContentLeft => this.Value<global::System.Web.IHtmlString>("contentLeft");
+
+		///<summary>
+		/// ContentRight
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("contentRight")]
+		public global::System.Web.IHtmlString ContentRight => this.Value<global::System.Web.IHtmlString>("contentRight");
 
 		///<summary>
 		/// Description Suffix

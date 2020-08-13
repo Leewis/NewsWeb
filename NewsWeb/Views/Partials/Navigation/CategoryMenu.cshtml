@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using ContentModels = Umbraco.Web.PublishedModels;
+@using Umbraco.Web;
+@{
+    var pageTitle = Model.Value("title");
+    var site = Model.AncestorOrSelf(3);
+    var selection = site.Children.Where(x => x.IsVisible());
+}
+
+<div class="category-menu">
+    <ul class="navbar-list">
+        @foreach (var item in selection)
+        {
+            if (item.HasProperty("parentCategoryId"))
+            {
+                <li class="nav-item">
+                    <a class="item-link" href="@item.Url">@item.GetProperty("Title").Value()</a>
+                </li>
+            }
+        }
+    </ul>
+</div>

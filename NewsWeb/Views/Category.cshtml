@@ -35,7 +35,7 @@
                         </a>
                     </div>
                     <div class="col-lg-4">
-                        <a href="@arrayNews[i].Url()"><img src="@arrayNews[i].GetProperty("Picture").Value()" style='height: 100%; width: 100%; object-fit: contain' /></a>
+                        <a href="@arrayNews[i].Url()"><img src="@Url.Content("~/@arrayNews[i].GetProperty("Picture").Value()" style='height: 100%; width: 100%; object-fit: contain' /></a>
                     </div>
                 </div>
             }
@@ -44,853 +44,743 @@
         <div class="col-lg-3"></div>
     </div>
 </section>*@
+    <div class="container white-bg pt-2 pb-2">
+        <div class="category-page">
+            @Html.Partial("Navigation/CategoryHeader")
+            @Html.Partial("Navigation/CategoryMenu")
+            <!-- product-news -->
+            <div class="product-news">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <article class="news-item d-flex">
+                            <div class="col-img mr-3">
+                                <a href="@arrayNews[0].Url()"><img src="@arrayNews[0].GetProperty("Picture").Value()" style='height: 100%; width: 100%; object-fit: contain' /></a>
+                            </div>
+                            <div class="col-desc">
+                                <h5 class="heading-title-news merri-title">
+                                    <a href="@arrayNews[0].Url()">@arrayNews[0].GetProperty("title").Value()</a>
+                                </h5>
+                                <p>
 
-<div class="category-page">
-    <div class="category-header">
-        <div class="container">
-            <div class="row mt-3">
-                <div class="col-md-4 col-lg-4">
-                    <h1 class="category-title"><a href="@url">@title</a></h1>
-                </div>
-                <div class="col-md-8 col-lg-8">
-                    <div class="top-right d-inline-flex w-100">
-                        <form class="view-date">
-                            <i class="far fa-calendar-alt"></i>
-                            <input type="text" class="calendar flatpickr-input" placeholder="Xem theo ngày" data-input="" readonly="readonly">
-                        </form>
-                        <form class="form-inline search-box">
-                            <input class="form-control" type="search" placeholder="Tìm kiếm trong chuyên mục" aria-label="Search">
-                            <button class="" type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="category-menu">
-        <ul class="navbar-list">
-            @if (isMainCategory)
-            {
-                foreach (var item in subCategory)
-                {
-                    <li class="nav-item">
-                        <a class="item-link" href="@item.Url()">@item.GetProperty("Title").Value()</a>
-                    </li>
-                }
-            }
-            else
-            {
-                foreach (var item in parent.Descendants().Where(c => c.ContentType.Alias == "category").ToArray())
-                {
-                    <li class="nav-item"><a class="item-link" href="@item.Url()">@item.GetProperty("Title").Value()</a></li>
-                }
-            }
-        </ul>
-    </div>
-    <!-- product-news -->
-    <div class="product-news">
-        <div class="row">
-            <div class="col-lg-9">
-                <article class="news-item d-flex">
-                    <div class="col-img mr-3">
-                        <a href="@arrayNews[0].Url()"><img src="@arrayNews[0].GetProperty("Picture").Value()" style='height: 100%; width: 100%; object-fit: contain' /></a>
-                    </div>
-                    <div class="col-desc">
-                        <h5 class="heading-title-news merri-title">
-                            <a href="@arrayNews[0].Url()">@arrayNews[0].GetProperty("title").Value()</a>
-                        </h5>
-                        <p>
-                            
-                            <a href="@arrayNews[0].Url()">
-                                @arrayNews[0].GetProperty("shortDescription").Value()
-                            </a>
-                            <br>
-                            <span class="comments-count">
-                                <i class="far fa-comment"></i>
-                                <a href="#">32</a>
-                            </span>
-                        </p>
-                    </div>
-                </article>
-                <div class="bt-solid mt-3 mb-3 d-none d-lg-block"></div>
-                <div class="child-news horizontal">
-                    <ul class="d-flex">
-                        <li>
-                            <h6 class="merri-title">
-                                <a href="#">
-                                    Ông Hồ Hùng Anh: 'Techcombank chọn khách hàng'
-                                </a>
-                            </h6>
-                            <div class="child-news-desc">
-                                <a href="#">
-                                    <span>
-                                        Chủ tịch Techcombank Hồ Hùng Anh nói,
-                                        mô hình lợi nhuận cao, rủi ro thấp nhờ chọn lọc khách hàng
-                                        và không tham gia phân khúc không hiểu rõ.
-                                    </span>
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <h6 class="merri-title">
-                                <a href="#">
-                                    Hơn 3 triệu khách hàng bị tăng vọt tiền điện
-                                </a>
-                            </h6>
-                            <div class="child-news-desc">
-                                <a href="#">
-                                    <span>
-                                        Ngành điện cho biết 3,1 triệu khách hàng có lượng tiêu thụ
-                                        điện tháng 6 tăng 30-300% "do nắng nóng kéo dài phải dùng các thiết bị làm mát".
-                                    </span>
-                                </a>
-                                <br>
-                                <span class="comments-count">
-                                    <i class="far fa-comment"></i>
-                                    <a href="#">32</a>
-                                </span>
-                            </div>
-                        </li>
-                        <li>
-                            <h6 class="merri-title">
-                                <a href="#">
-                                    Giới siêu giàu chuộng vàng mùa dịch
-                                </a>
-                            </h6>
-                            <div class="child-news-desc">
-                                <a href="#">
-                                    <span>
-                                        Rủi ro lạm phát, lãi suất toàn cầu thấp và lo ngại Covid-19 khiến
-                                        giới siêu giàu ngày càng quan tâm đến vàng trong năm nay.
-                                    </span>
-                                </a><br>
-                                <span>
-                                    <span class="update-time">
-                                        <a href="#">Vĩ mô</a>
-                                    </span>
+                                    <a href="@arrayNews[0].Url()">
+                                        @arrayNews[0].GetProperty("shortDescription").Value()
+                                    </a>
+                                    <br>
                                     <span class="comments-count">
                                         <i class="far fa-comment"></i>
                                         <a href="#">32</a>
                                     </span>
-                                </span>
-
+                                </p>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="bt-solid mt-3 mb-3"></div>
-                <!-- box-slide-topic  -->
-                <div class="box-slide-topic d-flex">
+                        </article>
+                        <div class="bt-solid mt-3 mb-3 d-none d-lg-block"></div>
+                        <div class="child-news horizontal">
+                            <ul class="d-flex">
+                                <li>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Ông Hồ Hùng Anh: 'Techcombank chọn khách hàng'
+                                        </a>
+                                    </h6>
+                                    <div class="child-news-desc">
+                                        <a href="#">
+                                            <span>
+                                                Chủ tịch Techcombank Hồ Hùng Anh nói,
+                                                mô hình lợi nhuận cao, rủi ro thấp nhờ chọn lọc khách hàng
+                                                và không tham gia phân khúc không hiểu rõ.
+                                            </span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Hơn 3 triệu khách hàng bị tăng vọt tiền điện
+                                        </a>
+                                    </h6>
+                                    <div class="child-news-desc">
+                                        <a href="#">
+                                            <span>
+                                                Ngành điện cho biết 3,1 triệu khách hàng có lượng tiêu thụ
+                                                điện tháng 6 tăng 30-300% "do nắng nóng kéo dài phải dùng các thiết bị làm mát".
+                                            </span>
+                                        </a>
+                                        <br>
+                                        <span class="comments-count">
+                                            <i class="far fa-comment"></i>
+                                            <a href="#">32</a>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Giới siêu giàu chuộng vàng mùa dịch
+                                        </a>
+                                    </h6>
+                                    <div class="child-news-desc">
+                                        <a href="#">
+                                            <span>
+                                                Rủi ro lạm phát, lãi suất toàn cầu thấp và lo ngại Covid-19 khiến
+                                                giới siêu giàu ngày càng quan tâm đến vàng trong năm nay.
+                                            </span>
+                                        </a><br>
+                                        <span>
+                                            <span class="update-time">
+                                                <a href="#">Vĩ mô</a>
+                                            </span>
+                                            <span class="comments-count">
+                                                <i class="far fa-comment"></i>
+                                                <a href="#">32</a>
+                                            </span>
+                                        </span>
 
-                    <div class="col-box-topic-1">
-                        <div><strong>Chủ đề</strong></div>
-                    </div>
-                    <div class="col-box-topic-2">
-                        <div class="box-shop-sell-vertical d-flex">
-                            <div class="sell-top-box">
-                                <div class=" btn-control-carousel">
-                                    <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
-                                        ❮
-                                    </a>
-                                    <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
-                                        ❯
-                                    </a>
-                                </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bt-solid mt-3 mb-3"></div>
+                        <!-- box-slide-topic  -->
+                        <div class="box-slide-topic d-flex">
+
+                            <div class="col-box-topic-1">
+                                <div><strong>Chủ đề</strong></div>
                             </div>
-
-                            <div id="carouselExampleInterval1" class="slide pointer-event" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item carousel-item-next carousel-item-left">
-                                        <div class="article-list-sell d-flex">
-                                            <article class="article-item">
-                                                <div>Kinh tế sau đại dịch</div>
-                                            </article>
-                                            <article class="article-item">
-                                                <div>Mâu thuẫn cổ đông Coteccons</div>
-                                            </article>
-                                            <article class="article-item">
-                                                <div>Làn sóng dịch chuyển đầu tư</div>
-                                            </article>
+                            <div class="col-box-topic-2">
+                                <div class="box-shop-sell-vertical d-flex">
+                                    <div class="sell-top-box">
+                                        <div class=" btn-control-carousel">
+                                            <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
+                                                ❮
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
+                                                ❯
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="carousel-item active carousel-item-left">
-                                        <div class="article-list-sell d-flex">
-                                            <article class="article-item">
-                                                <div>Kinh tế sau đại dịch 2</div>
-                                            </article>
-                                            <article class="article-item">
-                                                <div>Mâu thuẫn cổ đông Coteccons 2</div>
-                                            </article>
-                                            <article class="article-item">
-                                                <div>Làn sóng dịch chuyển đầu tư 2</div>
-                                            </article>
+
+                                    <div id="carouselExampleInterval1" class="slide pointer-event" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item carousel-item-next carousel-item-left">
+                                                <div class="article-list-sell d-flex">
+                                                    <article class="article-item">
+                                                        <div>Kinh tế sau đại dịch</div>
+                                                    </article>
+                                                    <article class="article-item">
+                                                        <div>Mâu thuẫn cổ đông Coteccons</div>
+                                                    </article>
+                                                    <article class="article-item">
+                                                        <div>Làn sóng dịch chuyển đầu tư</div>
+                                                    </article>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item active carousel-item-left">
+                                                <div class="article-list-sell d-flex">
+                                                    <article class="article-item">
+                                                        <div>Kinh tế sau đại dịch 2</div>
+                                                    </article>
+                                                    <article class="article-item">
+                                                        <div>Mâu thuẫn cổ đông Coteccons 2</div>
+                                                    </article>
+                                                    <article class="article-item">
+                                                        <div>Làn sóng dịch chuyển đầu tư 2</div>
+                                                    </article>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
+                        <!-- box-slide-topic  -->
+                        <div class="bt-solid mt-3 mb-3"></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="child-news">
+                            <ul class="d-flex flex-column">
+                                <li>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Hơn 3 triệu khách hàng bị tăng vọt tiền điện
+                                        </a>
+                                    </h6>
+                                    <div class="child-news-desc">
+                                        <a href="#">
+                                            <span>
+                                                Ngành điện cho biết 3,1 triệu khách hàng có lượng tiêu thụ
+                                                điện tháng 6 tăng 30-300% "do nắng nóng kéo dài phải dùng các thiết bị làm mát".
+                                            </span>
+                                        </a>
+                                        <br>
+                                        <span class="comments-count">
+                                            <i class="far fa-comment"></i>
+                                            <a href="#">32</a>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Ngã xe thang máy bay tử vong
+                                        </a>
+                                    </h6>
+                                    <div class="child-news-desc">
+                                        <a href="#">
+                                            <span>TP HCM</span>
+                                            <span>Đi chuyến bay VN1379 từ Huế đến TP HCM, nữ hành khách 50 tuổi trượt chân ngã từ xe thang máy bay xuống đất, tử vong.</span>
+                                        </a>
+                                        <span class="comments-count">
+                                            <i class="far fa-comment"></i>
+                                            <a href="#">85</a>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Lai Châu tiếp tục xảy ra động đất
+                                        </a>
+                                    </h6>
+                                    <div class="child-news-desc">
+                                        <a href="#">
+                                            <span class="location-name">Điện Biên -</span>
+                                            <span>Lần thứ ba trong ba ngày, huyện Mường Tè, tỉnh Lai Châu, ghi nhận rung chấn với độ lớn 2,5, độ sâu chấn tiêu khoảng 12,8 km. </span>
+                                        </a>
+                                        <span class="comments-count">
+                                            <i class="far fa-comment"></i>
+                                            <a href="#">85</a>
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
 
+                        </div>
                     </div>
                 </div>
-                <!-- box-slide-topic  -->
-                <div class="bt-solid mt-3 mb-3"></div>
-            </div>
-            <div class="col-lg-3">
-                <div class="child-news">
-                    <ul class="d-flex flex-column">
-                        <li>
+                <div class="topic-list">
+                    <div class="row">
+                        <div class="col-lg col-md-4 topic-item">
+                            <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-1.jpg")" alt="news-kinh-doanh-1" class="img-fluid"></a>
                             <h6 class="merri-title">
                                 <a href="#">
-                                    Hơn 3 triệu khách hàng bị tăng vọt tiền điện
+                                    Người giàu nhất châu Á vào top 10 giàu nhất thế giới
                                 </a>
                             </h6>
-                            <div class="child-news-desc">
+                            <p><span class="update-time"><a href="#">Quốc tế</a></span></p>
+                        </div>
+                        <div class="col-lg col-md-4 topic-item">
+                            <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-2.jpg")" alt="news-kinh-doanh-2" class="img-fluid"></a>
+                            <h6 class="merri-title">
                                 <a href="#">
-                                    <span>
-                                        Ngành điện cho biết 3,1 triệu khách hàng có lượng tiêu thụ
-                                        điện tháng 6 tăng 30-300% "do nắng nóng kéo dài phải dùng các thiết bị làm mát".
-                                    </span>
+                                    Nhà giàu Hàn Quốc đổ xô sắm xe sang sau dịch
                                 </a>
-                                <br>
+                            </h6>
+                            <p>
+                                <span class="update-time">
+                                    <a href="#">Vĩ mô</a>
+                                </span>
                                 <span class="comments-count">
                                     <i class="far fa-comment"></i>
                                     <a href="#">32</a>
                                 </span>
-                            </div>
-                        </li>
-                        <li>
+                            </p>
+                        </div>
+                        <div class="col-lg col-md-4 topic-item">
+                            <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-3.jpg")" alt="news-kinh-doanh-3" class="img-fluid"></a>
                             <h6 class="merri-title">
                                 <a href="#">
-                                    Ngã xe thang máy bay tử vong
+                                    Lô vải thiều Bắc Giang đầu tiên xuất đi Nhật
                                 </a>
                             </h6>
-                            <div class="child-news-desc">
-                                <a href="#">
-                                    <span>TP HCM</span>
-                                    <span>Đi chuyến bay VN1379 từ Huế đến TP HCM, nữ hành khách 50 tuổi trượt chân ngã từ xe thang máy bay xuống đất, tử vong.</span>
-                                </a>
-                                <span class="comments-count">
-                                    <i class="far fa-comment"></i>
-                                    <a href="#">85</a>
+                            <p>
+                                <span class="update-time">
+                                    <a href="#">Hàng hóa</a>
                                 </span>
-                            </div>
-                        </li>
-                        <li>
+                            </p>
+                        </div>
+                        <div class="col-lg col-md-4 topic-item">
+                            <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-4.jpg")" alt="news-kinh-doanh-4" class="img-fluid"></a>
                             <h6 class="merri-title">
                                 <a href="#">
-                                    Lai Châu tiếp tục xảy ra động đất
+                                    Nghị định giảm 50% phí trước bạ đã trình Chính phủ
                                 </a>
                             </h6>
-                            <div class="child-news-desc">
-                                <a href="#">
-                                    <span class="location-name">Điện Biên -</span>
-                                    <span>Lần thứ ba trong ba ngày, huyện Mường Tè, tỉnh Lai Châu, ghi nhận rung chấn với độ lớn 2,5, độ sâu chấn tiêu khoảng 12,8 km. </span>
-                                </a>
-                                <span class="comments-count">
-                                    <i class="far fa-comment"></i>
-                                    <a href="#">85</a>
+                            <p>
+                                <span class="update-time">
+                                    <a href="#">Vĩ mô</a>
                                 </span>
-                            </div>
-                        </li>
-                    </ul>
 
-                </div>
-            </div>
-        </div>
-        <div class="topic-list">
-            <div class="row">
-                <div class="col-lg col-md-4 topic-item">
-                    <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-1.jpg" alt="news-kinh-doanh-1" class="img-fluid"></a>
-                    <h6 class="merri-title">
-                        <a href="#">
-                            Người giàu nhất châu Á vào top 10 giàu nhất thế giới
-                        </a>
-                    </h6>
-                    <p><span class="update-time"><a href="#">Quốc tế</a></span></p>
-                </div>
-                <div class="col-lg col-md-4 topic-item">
-                    <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-2.jpg" alt="news-kinh-doanh-2" class="img-fluid"></a>
-                    <h6 class="merri-title">
-                        <a href="#">
-                            Nhà giàu Hàn Quốc đổ xô sắm xe sang sau dịch
-                        </a>
-                    </h6>
-                    <p>
-                        <span class="update-time">
-                            <a href="#">Vĩ mô</a>
-                        </span>
-                        <span class="comments-count">
-                            <i class="far fa-comment"></i>
-                            <a href="#">32</a>
-                        </span>
-                    </p>
-                </div>
-                <div class="col-lg col-md-4 topic-item">
-                    <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-3.jpg" alt="news-kinh-doanh-3" class="img-fluid"></a>
-                    <h6 class="merri-title">
-                        <a href="#">
-                            Lô vải thiều Bắc Giang đầu tiên xuất đi Nhật
-                        </a>
-                    </h6>
-                    <p>
-                        <span class="update-time">
-                            <a href="#">Hàng hóa</a>
-                        </span>
-                    </p>
-                </div>
-                <div class="col-lg col-md-4 topic-item">
-                    <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-4.jpg" alt="news-kinh-doanh-4" class="img-fluid"></a>
-                    <h6 class="merri-title">
-                        <a href="#">
-                            Nghị định giảm 50% phí trước bạ đã trình Chính phủ
-                        </a>
-                    </h6>
-                    <p>
-                        <span class="update-time">
-                            <a href="#">Vĩ mô</a>
-                        </span>
-
-                    </p>
-                </div>
-                <div class="col-lg col-md-4 topic-item">
-                    <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-5.png" alt="news-kinh-doanh-5" class="img-fluid"></a>
-                    <h6 class="merri-title">
-                        <a href="#">
-                            VNG đặt mục tiêu doanh thu tăng 20%
-                        </a>
-                    </h6>
-                    <p>
-                        <span class="update-time">
-                            <a href="#">Vĩ mô</a>
-                        </span>
-
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="bt-solid mt-3 mb-3"></div>
-        <div class="bt-solid mt-3 mb-3"></div>
-        <div class="categories-list">
-            <div class="row">
-                <div class="col-lg-8 col-line">
-                    <!-- news-list -->
-                    <div class="post-list">
-                        <!-- article 1 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">10 trường hợp được miễn giấy phép xây dựng</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Từ 1/1/2021, nhà riêng lẻ ở nông thôn dưới 7 tầng, không
-                                        vướng quy hoạch được miễn giấy phép xây dựng theo Luật Xây dựng sửa đổi.
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 1 -->
-                        <!-- article 2 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Ngân hàng 'chuộng' thưởng cổ phiếu ưu đãi cho nhân viên</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Nhiều ngân hàng gần đây tăng phát hành cổ phiếu với giá thấp (ESOP)
-                                        để khích lệ nhân viên và nhằm tiết kiệm chi phí, tránh ăn mòn lợi nhuận.
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 2 -->
-                        <!-- article 3 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Phố Wall có thêm tuần tăng điểm</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Các chỉ số chứng khoán chính của Mỹ tuần này vẫn tăng 1 - 3%,
-                                        dù đi xuống phiên hôm qua do lo ngại diễn biến Covid-19.
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 3 -->
-                        <!-- article 4 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-3">
-                                <h5 class="merri-title">
-                                    <a href="#">VNG đặt mục tiêu doanh thu tăng 20%</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Năm 2020, VNG đặt mục tiêu doanh thu 6.714 tỷ đồng,
-                                        tiếp tục đầu tư phát triển 4 nhóm sản phẩm chính.
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="col-img mr-3">
-                                <a href="#" class="mr-3 img-thumb"><img src="assets/images/category/news-kinh-doanh-5.png" alt="" class="img-fluid"></a>
-                            </div>
-                        </article>
-                        <!-- article 4 -->
-                        <!-- article 5 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Mở 'nút thắt' cho điện mặt trời, điện gió</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Điện mặt trời, điện gió đang là xu hướng phát triển mới khi
-                                        các nguồn điện truyền thống đã tới hạn, nhưng loại hình năng lượng này cũng đi kèm không ít rủi ro.
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 5 -->
-                        <!-- article 6 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Châu Âu sẵn sàng đơn phương đánh thuế các đại gia công nghệ</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        EU khẳng định nếu toàn cầu không đạt thỏa thuận về thuế
-                                        kỹ thuật số với các hãng như Google hay Facebook năm nay, họ sẽ tự tiến hành việc này.
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 6 -->
-                        <!-- article 7 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Kinh tế Trung Quốc và Ấn Độ phụ thuộc nhau như thế nào</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Ấn Độ mua mọi thứ của Trung Quốc, từ máy móc đến dược phẩm, trong
-                                        khi Trung Quốc cần Ấn Độ để thống trị thị trường công nghệ toàn cầu.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">10</a>
-                                    </span>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 7-->
-                        <!-- article 8 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Hoá đơn điện lại 'nhảy vọt'</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Hoá đơn điện tháng 6 của nhiều hộ gia đình miền Bắc tăng
-                                        đột biến gấp đôi, thậm chí gấp 4 lần tháng trước, dù đã được "hỗ trợ vì Covid-19".
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">542</a>
-                                    </span>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 8-->
-                        <!-- article 9 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Phố Wall giao dịch thận trọng</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Chứng khoán Mỹ giằng co trong phiên 18/6 khi nhà đầu tư
-                                        lo ngại về số ca nhiễm Covid-19 đang tăng, cùng thông tin về tỷ lệ thất nghiệp không như kỳ vọng.
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 9 -->
-                        <!-- article 10 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">44 tấn vải thiều được bán qua MoMo</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Trong 9 ngày, Saigon Co.op đã bán 44 tấn vải thiều Lục Ngạn
-                                        qua ví điện tử MoMo với mức giá ngang chợ truyền thống.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">12</a>
-                                    </span>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 10 -->
-                        <!-- article 11 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Chứng khoán tăng thẳng đứng cuối phiên</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Dòng tiền chảy mạnh vào thị trường những phút cuối phiên giúp VN-Index
-                                        tăng thẳng đứng, có thêm 5 điểm trong ít phút và đóng cửa gại 868,56 điểm.
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 11 -->
-                        <!-- article 12 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-3">
-                                <h5 class="merri-title">
-                                    <a href="#">EVFTA sẽ có hiệu lực từ 1/8</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Với việc Việt Nam trao công hàm phê chuẩn, hiệu lực của EVFTA sẽ từ 1/8 còn EVIPA là sau khi Quốc hội các nước EU phê chuẩn.
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="col-img mr-3">
-                                <a href="#" class="mr-3 img-thumb"><img src="assets/images/category/news-kinh-doanh-10.jpg" alt="" class="img-fluid"></a>
-                            </div>
-                        </article>
-                        <!-- article 12 -->
-                        <!-- article 13 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Chứng khoán tăng thẳng đứng cuối phiên</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Dòng tiền chảy mạnh vào thị trường những phút cuối phiên giúp VN-Index
-                                        tăng thẳng đứng, có thêm 5 điểm trong ít phút và đóng cửa gại 868,56 điểm.
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 13 -->
-                        <!-- article 14 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Hai người chia nhau giải Jackpot 91 tỷ đồng</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Khách hàng tại TP HCM và Long An cùng trúng giải
-                                        Jackpot sản phẩm Mega 6/45 hơn 45 tỷ đồng mỗi người trong đợt mở thưởng tối 19/6.
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
-                        <!-- article 14 -->
-                        <!-- article 15 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Chứng khoán Tiên Phong sắp tăng vốn lên 1.000 tỷ đồng</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        TPS dự kiến chào bán riêng lẻ hơn 56 triệu cổ phiếu để
-                                        tăng vốn lên 1.000 tỷ đồng, đủ điều kiện kinh doanh chứng khoán phái sinh và chứng quyền.
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="col-img mr-3">
-                                <a href="#" class="mr-3 img-thumb"><img src="assets/images/category/news-kinh-doanh-11.jpg" alt="" class="img-fluid"></a>
-                            </div>
-                        </article>
-                        <!-- article 15 -->
-                        <!-- article 16 -->
-                        <article class="post-item d-flex">
-                            <div class="col-desc mr-5">
-                                <h5 class="merri-title">
-                                    <a href="#">Vinamilk tự tin chinh phục thị trường Hàn Quốc bằng sữa hạt</a>
-                                </h5>
-                                <p>
-                                    <a href="#">
-                                        Vinamilk dành nhiều năm nghiên cứu, phát triển bộ ba sữa đậu nành hạt đậm vị, giàu dinh dưỡng,
-                                        hợp thị hiếu người tiêu dùng, tự tin chinh phục xứ sở kim chi.
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="col-img mr-3">
-                                <a href="#" class="mr-3 img-thumb"><img src="assets/images/category/news-kinh-doanh-12.jpg" alt="" class="img-fluid"></a>
-                            </div>
-                        </article>
-                        <!-- article 16 -->
-                    </div>
-                    <!-- news-list -->
-                </div>
-                <div class="col-lg-4 d-none d-lg-block">
-                    <div class="categories-widgets pl-3">
-                        <div class="widget-table">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td colspan="3"><strong>Giá vàng 9999 </strong><div class="float-right">tr.đ/lượng</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>Mua</td>
-                                        <td>Bán</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vàng miếng SJC</td>
-                                        <td>48,400</td>
-                                        <td>48,600</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vàng ép vỉ Hưng Thịnh Vượng</td>
-                                        <td>47,850</td>
-                                        <td>48,450</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td colspan="3"><strong>Lãi suất tiền gửi (%năm)</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Kỳ hạn (tháng)</td>
-                                        <td>Online</td>
-                                        <td>Tại quầy</td>
-                                    </tr>
-                                    <tr><td>01</td><td>4.20</td><td>4.10</td></tr>
-                                    <tr><td>06</td><td>6.90</td><td>6.80</td></tr>
-                                    <tr><td>09</td><td>7.00</td><td>6.90</td></tr>
-                                    <tr><td>12</td><td>7.10</td><td></td></tr>
-                                    <tr><td>18</td><td>7.20</td><td>7.10</td></tr>
-                                    <tr><td>24</td><td>7.50</td><td>7.30</td></tr>
-                                </tbody>
-                            </table>
+                            </p>
                         </div>
-                        <div class="widget-news-small widget-bg">
+                        <div class="col-lg col-md-4 topic-item">
+                            <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-5.png")" alt="news-kinh-doanh-5" class="img-fluid"></a>
                             <h6 class="merri-title">
                                 <a href="#">
-                                    Vận hành số
+                                    VNG đặt mục tiêu doanh thu tăng 20%
                                 </a>
                             </h6>
-                            <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-6.png" alt="news-kinh-doanh-6" class="img-fluid"></a>
-                            <div class="orthers-news-small">
-                                <h6 class="item-news">
-                                    <a href="#">
-                                        'Blockchain giúp doanh nghiệp giữ chân khách hàng'
-                                    </a>
-                                </h6>
-                                <h6 class="item-news">
-                                    <a href="#">
-                                        Doanh nghiệp cần biết gì về hóa đơn điện tử trước giờ G
-                                    </a>
-                                </h6>
-                                <h6 class="item-news">
-                                    <a href="#">
-                                        Doanh nghiệp ký hợp đồng từ xa tiết kiệm 90% chi phí
-                                    </a>
-                                </h6>
-                            </div>
-                        </div>
-                        <div class="widget-news-small widget-bg">
-                            <h6 class="merri-title header-full-line">
-                                <a href="#">
-                                    Bảo hiểm nhân thọ <br>
-                                    <span class="sub-header">Vững tài chính tương lai</span>
-                                </a>
-                            </h6>
-                            <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-7.jpg" alt="news-kinh-doanh-7" class="img-fluid"></a>
-                            <div class="orthers-news-small">
-                                <h6 class="item-news">
-                                    <a href="#">
-                                        Chặng đường 15 năm phát triển của Chubb Life
-                                    </a>
-                                </h6>
-                                <h6 class="item-news">
-                                    <a href="#">
-                                        Chubb Life Việt Nam tổ chức hiến máu nhân đạo
-                                    </a>
-                                </h6>
-                                <h6 class="item-news">
-                                    <a href="#">
-                                        Quyền lợi khi tham gia bảo hiểm nhân thọ
-                                    </a>
-                                </h6>
-                            </div>
-                        </div>
-                        <div class="widget-news-small widget-bg">
-                            <h6 class="merri-title header-full-line">
-                                <a href="#">
-                                    Kinh tế tương lai
-                                </a>
-                            </h6>
-                            <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-8.jpg" alt="news-kinh-doanh-8" class="img-fluid"></a>
-                            <div class="orthers-news-small">
-                                <h6 class="merri-title item-news">
-                                    <a href="#">
-                                        'Số hóa nông nghiệp cần đồng bộ từ quy mô nhỏ'
-                                    </a>
-                                </h6>
-                                <h6 class="merri-title item-news">
-                                    <a href="#">
-                                        Tọa đàm thúc đẩy chuyển đổi số trong nông nghiệp sau Covid-19
-                                    </a>
-                                </h6>
-                                <h6 class="merri-title item-news">
-                                    <a href="#">
-                                        Nông nghiệp chuyển đổi số thế nào sau khủng hoảng
-                                    </a>
-                                </h6>
-                            </div>
-                        </div>
-                        <div class="widget-news-small">
-                            <h6 class="merri-title">
-                                <a href="#">
-                                    Bất động sản
-                                </a>
-                            </h6>
-                            <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-9.png" alt="news-kinh-doanh-9" class="img-fluid"></a>
-                            <div class="orthers-news-small">
-                                <h6 class="merri-title item-news">
-                                    <a href="#">
-                                        Bốn lợi thế giúp Gem Sky World thu hút đầu tư
-                                    </a>
-                                </h6>
-                                <h6 class="merri-title item-news">
-                                    <a href="#">
-                                        Sân bay nâng tầm quốc tế 'mở lối' cho địa ốc Quảng Bình
-                                    </a>
-                                </h6>
-                                <h6 class="merri-title item-news">
-                                    <a href="#">
-                                        Những yếu tố nổi bật tại Picity High Park
-                                    </a>
-                                </h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bt-solid mt-3 mb-3"></div>
-        <div class="category-footer">
-            <form class="view-date">
-                <i class="far fa-calendar-alt"></i>
-                <a class="input-button" title="toggle" data-toggle="">
-                    <i class="far fa-calendar-alt"></i>
-                </a>
-                <input type="text" class="calendar flatpickr-input" placeholder="Xem theo ngày" data-input="" readonly="readonly">
-            </form>
-            <div class="pagination-center">
-                <div class="category-pagination">
-                    <span>Trang</span> &nbsp; &nbsp;
-                    <a href="#">❮</a>
-                    <a href="#">1</a>
-                    <a href="#">❯</a>
-                </div>
-            </div>
-        </div>
-        <div class="mt-3">
-            <div class="box-shop-sell-vertical p-3">
-                <div class="box-sponsor-noslide">
-                    <div class="clearfix sell-top-box">
-                        <h6 class="merri-title heading-line float-left"><a href="">Tin tài trợ</a></h6>
-                    </div>
-                    <div class="row article-list-sell">
-                        <div class="col-lg-3">
-                            <article class="article-item">
-                                <div class="d-flex">
-                                    <a href="#" class="mr-3 img-thumb">
-                                        <img src="assets/images/fsell/1.jpg" alt="fsell1" class="img-fluid d-block">
-                                        <span class="name-sponsor">St Moritz</span>
-                                    </a>
-                                    <div class="article-desc">
-                                        <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-lg-3">
-                            <article class="article-item">
-                                <div class="d-flex">
-                                    <a href="#" class="mr-3 img-thumb">
-                                        <img src="assets/images/fsell/1.jpg" alt="fsell2" class="img-fluid d-block">
-                                        <span class="name-sponsor">St Moritz</span>
-                                    </a>
-                                    <div class="article-desc">
-                                        <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-lg-3">
-                            <article class="article-item">
-                                <div class="d-flex">
-                                    <a href="#" class="mr-3 img-thumb">
-                                        <img src="assets/images/fsell/1.jpg" alt="fsell3" class="img-fluid d-block">
-                                        <span class="name-sponsor">St Moritz</span>
-                                    </a>
-                                    <div class="article-desc">
-                                        <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="col-lg-3">
-                            <article class="article-item">
-                                <div class="d-flex">
-                                    <a href="#" class="mr-3 img-thumb">
-                                        <img src="assets/images/fsell/1.jpg" alt="fsell4" class="img-fluid d-block">
-                                        <span class="name-sponsor">St Moritz</span>
-                                    </a>
-                                    <div class="article-desc">
-                                        <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                    </div>
-                                </div>
-                            </article>
+                            <p>
+                                <span class="update-time">
+                                    <a href="#">Vĩ mô</a>
+                                </span>
+
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="bt-solid mt-3 mb-3"></div>
-                <div class="clearfix sell-top-box">
-                    <h6 class="merri-title heading-line float-left"><a href="">Shop VnExpress</a></h6>
-                    <div class="float-right btn-control-carousel">
-                        <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
-                            ❮
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
-                            ❯
-                        </a>
+                <div class="bt-solid mt-3 mb-3"></div>
+                <div class="categories-list">
+                    <div class="row">
+                        <div class="col-lg-8 col-line">
+                            <!-- news-list -->
+                            <div class="post-list">
+                                <!-- article 1 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">10 trường hợp được miễn giấy phép xây dựng</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Từ 1/1/2021, nhà riêng lẻ ở nông thôn dưới 7 tầng, không
+                                                vướng quy hoạch được miễn giấy phép xây dựng theo Luật Xây dựng sửa đổi.
+                                            </a>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 1 -->
+                                <!-- article 2 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Ngân hàng 'chuộng' thưởng cổ phiếu ưu đãi cho nhân viên</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Nhiều ngân hàng gần đây tăng phát hành cổ phiếu với giá thấp (ESOP)
+                                                để khích lệ nhân viên và nhằm tiết kiệm chi phí, tránh ăn mòn lợi nhuận.
+                                            </a>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 2 -->
+                                <!-- article 3 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Phố Wall có thêm tuần tăng điểm</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Các chỉ số chứng khoán chính của Mỹ tuần này vẫn tăng 1 - 3%,
+                                                dù đi xuống phiên hôm qua do lo ngại diễn biến Covid-19.
+                                            </a>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 3 -->
+                                <!-- article 4 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-3">
+                                        <h5 class="merri-title">
+                                            <a href="#">VNG đặt mục tiêu doanh thu tăng 20%</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Năm 2020, VNG đặt mục tiêu doanh thu 6.714 tỷ đồng,
+                                                tiếp tục đầu tư phát triển 4 nhóm sản phẩm chính.
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="col-img mr-3">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-5.png")" alt="" class="img-fluid"></a>
+                                    </div>
+                                </article>
+                                <!-- article 4 -->
+                                <!-- article 5 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Mở 'nút thắt' cho điện mặt trời, điện gió</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Điện mặt trời, điện gió đang là xu hướng phát triển mới khi
+                                                các nguồn điện truyền thống đã tới hạn, nhưng loại hình năng lượng này cũng đi kèm không ít rủi ro.
+                                            </a>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 5 -->
+                                <!-- article 6 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Châu Âu sẵn sàng đơn phương đánh thuế các đại gia công nghệ</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                EU khẳng định nếu toàn cầu không đạt thỏa thuận về thuế
+                                                kỹ thuật số với các hãng như Google hay Facebook năm nay, họ sẽ tự tiến hành việc này.
+                                            </a>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 6 -->
+                                <!-- article 7 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Kinh tế Trung Quốc và Ấn Độ phụ thuộc nhau như thế nào</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Ấn Độ mua mọi thứ của Trung Quốc, từ máy móc đến dược phẩm, trong
+                                                khi Trung Quốc cần Ấn Độ để thống trị thị trường công nghệ toàn cầu.
+                                            </a>
+                                            <span class="comments-count">
+                                                <i class="far fa-comment"></i>
+                                                <a href="#">10</a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 7-->
+                                <!-- article 8 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Hoá đơn điện lại 'nhảy vọt'</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Hoá đơn điện tháng 6 của nhiều hộ gia đình miền Bắc tăng
+                                                đột biến gấp đôi, thậm chí gấp 4 lần tháng trước, dù đã được "hỗ trợ vì Covid-19".
+                                            </a>
+                                            <span class="comments-count">
+                                                <i class="far fa-comment"></i>
+                                                <a href="#">542</a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 8-->
+                                <!-- article 9 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Phố Wall giao dịch thận trọng</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Chứng khoán Mỹ giằng co trong phiên 18/6 khi nhà đầu tư
+                                                lo ngại về số ca nhiễm Covid-19 đang tăng, cùng thông tin về tỷ lệ thất nghiệp không như kỳ vọng.
+                                            </a>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 9 -->
+                                <!-- article 10 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">44 tấn vải thiều được bán qua MoMo</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Trong 9 ngày, Saigon Co.op đã bán 44 tấn vải thiều Lục Ngạn
+                                                qua ví điện tử MoMo với mức giá ngang chợ truyền thống.
+                                            </a>
+                                            <span class="comments-count">
+                                                <i class="far fa-comment"></i>
+                                                <a href="#">12</a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 10 -->
+                                <!-- article 11 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Chứng khoán tăng thẳng đứng cuối phiên</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Dòng tiền chảy mạnh vào thị trường những phút cuối phiên giúp VN-Index
+                                                tăng thẳng đứng, có thêm 5 điểm trong ít phút và đóng cửa gại 868,56 điểm.
+                                            </a>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 11 -->
+                                <!-- article 12 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-3">
+                                        <h5 class="merri-title">
+                                            <a href="#">EVFTA sẽ có hiệu lực từ 1/8</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Với việc Việt Nam trao công hàm phê chuẩn, hiệu lực của EVFTA sẽ từ 1/8 còn EVIPA là sau khi Quốc hội các nước EU phê chuẩn.
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="col-img mr-3">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-10.jpg")" alt="" class="img-fluid"></a>
+                                    </div>
+                                </article>
+                                <!-- article 12 -->
+                                <!-- article 13 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Chứng khoán tăng thẳng đứng cuối phiên</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Dòng tiền chảy mạnh vào thị trường những phút cuối phiên giúp VN-Index
+                                                tăng thẳng đứng, có thêm 5 điểm trong ít phút và đóng cửa gại 868,56 điểm.
+                                            </a>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 13 -->
+                                <!-- article 14 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Hai người chia nhau giải Jackpot 91 tỷ đồng</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Khách hàng tại TP HCM và Long An cùng trúng giải
+                                                Jackpot sản phẩm Mega 6/45 hơn 45 tỷ đồng mỗi người trong đợt mở thưởng tối 19/6.
+                                            </a>
+                                        </p>
+                                    </div>
+                                </article>
+                                <!-- article 14 -->
+                                <!-- article 15 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Chứng khoán Tiên Phong sắp tăng vốn lên 1.000 tỷ đồng</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                TPS dự kiến chào bán riêng lẻ hơn 56 triệu cổ phiếu để
+                                                tăng vốn lên 1.000 tỷ đồng, đủ điều kiện kinh doanh chứng khoán phái sinh và chứng quyền.
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="col-img mr-3">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-11.jpg")" alt="" class="img-fluid"></a>
+                                    </div>
+                                </article>
+                                <!-- article 15 -->
+                                <!-- article 16 -->
+                                <article class="post-item d-flex">
+                                    <div class="col-desc mr-5">
+                                        <h5 class="merri-title">
+                                            <a href="#">Vinamilk tự tin chinh phục thị trường Hàn Quốc bằng sữa hạt</a>
+                                        </h5>
+                                        <p>
+                                            <a href="#">
+                                                Vinamilk dành nhiều năm nghiên cứu, phát triển bộ ba sữa đậu nành hạt đậm vị, giàu dinh dưỡng,
+                                                hợp thị hiếu người tiêu dùng, tự tin chinh phục xứ sở kim chi.
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="col-img mr-3">
+                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-12.jpg")" alt="" class="img-fluid"></a>
+                                    </div>
+                                </article>
+                                <!-- article 16 -->
+                            </div>
+                            <!-- news-list -->
+                        </div>
+                        <div class="col-lg-4 d-none d-lg-block">
+                            <div class="categories-widgets pl-3">
+                                <div class="widget-table">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="3"><strong>Giá vàng 9999 </strong><div class="float-right">tr.đ/lượng</div></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>Mua</td>
+                                                <td>Bán</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vàng miếng SJC</td>
+                                                <td>48,400</td>
+                                                <td>48,600</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vàng ép vỉ Hưng Thịnh Vượng</td>
+                                                <td>47,850</td>
+                                                <td>48,450</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="3"><strong>Lãi suất tiền gửi (%năm)</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Kỳ hạn (tháng)</td>
+                                                <td>Online</td>
+                                                <td>Tại quầy</td>
+                                            </tr>
+                                            <tr><td>01</td><td>4.20</td><td>4.10</td></tr>
+                                            <tr><td>06</td><td>6.90</td><td>6.80</td></tr>
+                                            <tr><td>09</td><td>7.00</td><td>6.90</td></tr>
+                                            <tr><td>12</td><td>7.10</td><td></td></tr>
+                                            <tr><td>18</td><td>7.20</td><td>7.10</td></tr>
+                                            <tr><td>24</td><td>7.50</td><td>7.30</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="widget-news-small widget-bg">
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Vận hành số
+                                        </a>
+                                    </h6>
+                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-6.png")" alt="news-kinh-doanh-6" class="img-fluid"></a>
+                                    <div class="orthers-news-small">
+                                        <h6 class="item-news">
+                                            <a href="#">
+                                                'Blockchain giúp doanh nghiệp giữ chân khách hàng'
+                                            </a>
+                                        </h6>
+                                        <h6 class="item-news">
+                                            <a href="#">
+                                                Doanh nghiệp cần biết gì về hóa đơn điện tử trước giờ G
+                                            </a>
+                                        </h6>
+                                        <h6 class="item-news">
+                                            <a href="#">
+                                                Doanh nghiệp ký hợp đồng từ xa tiết kiệm 90% chi phí
+                                            </a>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="widget-news-small widget-bg">
+                                    <h6 class="merri-title header-full-line">
+                                        <a href="#">
+                                            Bảo hiểm nhân thọ <br>
+                                            <span class="sub-header">Vững tài chính tương lai</span>
+                                        </a>
+                                    </h6>
+                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-7.jpg")" alt="news-kinh-doanh-7" class="img-fluid"></a>
+                                    <div class="orthers-news-small">
+                                        <h6 class="item-news">
+                                            <a href="#">
+                                                Chặng đường 15 năm phát triển của Chubb Life
+                                            </a>
+                                        </h6>
+                                        <h6 class="item-news">
+                                            <a href="#">
+                                                Chubb Life Việt Nam tổ chức hiến máu nhân đạo
+                                            </a>
+                                        </h6>
+                                        <h6 class="item-news">
+                                            <a href="#">
+                                                Quyền lợi khi tham gia bảo hiểm nhân thọ
+                                            </a>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="widget-news-small widget-bg">
+                                    <h6 class="merri-title header-full-line">
+                                        <a href="#">
+                                            Kinh tế tương lai
+                                        </a>
+                                    </h6>
+                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-8.jpg")" alt="news-kinh-doanh-8" class="img-fluid"></a>
+                                    <div class="orthers-news-small">
+                                        <h6 class="merri-title item-news">
+                                            <a href="#">
+                                                'Số hóa nông nghiệp cần đồng bộ từ quy mô nhỏ'
+                                            </a>
+                                        </h6>
+                                        <h6 class="merri-title item-news">
+                                            <a href="#">
+                                                Tọa đàm thúc đẩy chuyển đổi số trong nông nghiệp sau Covid-19
+                                            </a>
+                                        </h6>
+                                        <h6 class="merri-title item-news">
+                                            <a href="#">
+                                                Nông nghiệp chuyển đổi số thế nào sau khủng hoảng
+                                            </a>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="widget-news-small">
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Bất động sản
+                                        </a>
+                                    </h6>
+                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-9.png")" alt="news-kinh-doanh-9" class="img-fluid"></a>
+                                    <div class="orthers-news-small">
+                                        <h6 class="merri-title item-news">
+                                            <a href="#">
+                                                Bốn lợi thế giúp Gem Sky World thu hút đầu tư
+                                            </a>
+                                        </h6>
+                                        <h6 class="merri-title item-news">
+                                            <a href="#">
+                                                Sân bay nâng tầm quốc tế 'mở lối' cho địa ốc Quảng Bình
+                                            </a>
+                                        </h6>
+                                        <h6 class="merri-title item-news">
+                                            <a href="#">
+                                                Những yếu tố nổi bật tại Picity High Park
+                                            </a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div id="carouselExampleInterval1" class="carousel slide pointer-event" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item carousel-item-next carousel-item-left">
+                <div class="bt-solid mt-3 mb-3"></div>
+                <div class="category-footer">
+                    <form class="view-date">
+                        <i class="far fa-calendar-alt"></i>
+                        <a class="input-button" title="toggle" data-toggle="">
+                            <i class="far fa-calendar-alt"></i>
+                        </a>
+                        <input type="text" class="calendar flatpickr-input" placeholder="Xem theo ngày" data-input="" readonly="readonly">
+                    </form>
+                    <div class="pagination-center">
+                        <div class="category-pagination">
+                            <span>Trang</span> &nbsp; &nbsp;
+                            <a href="#">❮</a>
+                            <a href="#">1</a>
+                            <a href="#">❯</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="box-shop-sell-vertical p-3">
+                        <div class="box-sponsor-noslide">
+                            <div class="clearfix sell-top-box">
+                                <h6 class="merri-title heading-line float-left"><a href="">Tin tài trợ</a></h6>
+                            </div>
                             <div class="row article-list-sell">
                                 <div class="col-lg-3">
                                     <article class="article-item">
                                         <div class="d-flex">
                                             <a href="#" class="mr-3 img-thumb">
-                                                <img src="assets/images/fsell/1.jpg" alt="" class="img-fluid d-block">
+                                                <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell1" class="img-fluid d-block">
                                                 <span class="name-sponsor">St Moritz</span>
                                             </a>
                                             <div class="article-desc">
@@ -902,10 +792,12 @@
                                 <div class="col-lg-3">
                                     <article class="article-item">
                                         <div class="d-flex">
-                                            <a href="#" class="mr-3 img-thumb"><img src="assets/images/fsell/2.jpg" alt="" class="img-fluid d-block"></a>
+                                            <a href="#" class="mr-3 img-thumb">
+                                                <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell2" class="img-fluid d-block">
+                                                <span class="name-sponsor">St Moritz</span>
+                                            </a>
                                             <div class="article-desc">
-                                                <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                <p class="fsell-price">3.600.000.000 đ</p>
+                                                <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
                                             </div>
                                         </div>
                                     </article>
@@ -913,10 +805,12 @@
                                 <div class="col-lg-3">
                                     <article class="article-item">
                                         <div class="d-flex">
-                                            <a href="#" class="mr-3 img-thumb"><img src="assets/images/fsell/3.jpg" alt="" class="img-fluid d-block"></a>
+                                            <a href="#" class="mr-3 img-thumb">
+                                                <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell3" class="img-fluid d-block">
+                                                <span class="name-sponsor">St Moritz</span>
+                                            </a>
                                             <div class="article-desc">
-                                                <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                <p class="fsell-price">3.600.000.000 đ</p>
+                                                <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
                                             </div>
                                         </div>
                                     </article>
@@ -924,63 +818,132 @@
                                 <div class="col-lg-3">
                                     <article class="article-item">
                                         <div class="d-flex">
-                                            <a href="#" class="mr-3 img-thumb"><img src="assets/images/fsell/3.jpg" alt="" class="img-fluid d-block"></a>
+                                            <a href="#" class="mr-3 img-thumb">
+                                                <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell4" class="img-fluid d-block">
+                                                <span class="name-sponsor">St Moritz</span>
+                                            </a>
                                             <div class="article-desc">
-                                                <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                <p class="fsell-price">3.600.000.000 đ</p>
+                                                <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
                                             </div>
                                         </div>
                                     </article>
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-item active carousel-item-left">
-                            <div class="row article-list-sell">
-                                <div class="col-lg-3">
-                                    <article class="article-item">
-                                        <div class="d-flex">
-                                            <a href="#" class="mr-3 img-thumb">
-                                                <img src="assets/images/fsell/1.jpg" alt="" class="img-fluid d-block">
-                                                <span class="name-sponsor">St Moritz</span>
-                                            </a>
-                                            <div class="article-desc">
-                                                <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                            </div>
+                        <div class="bt-solid mt-3 mb-3"></div>
+                        <div class="clearfix sell-top-box">
+                            <h6 class="merri-title heading-line float-left"><a href="">Shop VnExpress</a></h6>
+                            <div class="float-right btn-control-carousel">
+                                <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
+                                    ❮
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
+                                    ❯
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="carouselExampleInterval1" class="carousel slide pointer-event" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item carousel-item-next carousel-item-left">
+                                    <div class="row article-list-sell">
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb">
+                                                        <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block">
+                                                        <span class="name-sponsor">St Moritz</span>
+                                                    </a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
+                                                    </div>
+                                                </div>
+                                            </article>
                                         </div>
-                                    </article>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-lg-3">
-                                    <article class="article-item">
-                                        <div class="d-flex">
-                                            <a href="#" class="mr-3 img-thumb"><img src="assets/images/fsell/2.jpg" alt="" class="img-fluid d-block"></a>
-                                            <div class="article-desc">
-                                                <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                <p class="fsell-price">3.600.000.000 đ</p>
-                                            </div>
+                                <div class="carousel-item active carousel-item-left">
+                                    <div class="row article-list-sell">
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb">
+                                                        <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block">
+                                                        <span class="name-sponsor">St Moritz</span>
+                                                    </a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
+                                                    </div>
+                                                </div>
+                                            </article>
                                         </div>
-                                    </article>
-                                </div>
-                                <div class="col-lg-3">
-                                    <article class="article-item">
-                                        <div class="d-flex">
-                                            <a href="#" class="mr-3 img-thumb"><img src="assets/images/fsell/3.jpg" alt="" class="img-fluid d-block"></a>
-                                            <div class="article-desc">
-                                                <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                <p class="fsell-price">3.600.000.000 đ</p>
-                                            </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
+                                                    </div>
+                                                </div>
+                                            </article>
                                         </div>
-                                    </article>
-                                </div>
-                                <div class="col-lg-3">
-                                    <article class="article-item">
-                                        <div class="d-flex">
-                                            <a href="#" class="mr-3 img-thumb"><img src="assets/images/fsell/4.jpg" alt="" class="img-fluid d-block"></a>
-                                            <div class="article-desc">
-                                                <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                <p class="fsell-price">3.600.000.000 đ</p>
-                                            </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
+                                                    </div>
+                                                </div>
+                                            </article>
                                         </div>
-                                    </article>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/4.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -988,5 +951,4 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        </div>
