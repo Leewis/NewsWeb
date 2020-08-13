@@ -4,41 +4,8 @@
     var numsofNews = Model.MacroParameters["numbersNews"];
     var root = Umbraco.ContentAtRoot().FirstOrDefault();
     var homepage = root.Children.FirstOrDefault(x => x.Id == 1089);
-    var categories = homepage.Children.Where(x => x.IsVisible()).ToArray();
-    IContentService contentService = Services.ContentService;
-    double toNow = 9999999999999999999;
-    var latestNews = categories[0];
-    foreach (var category in categories)
-    {
-        foreach(var subchild in category.Children.Where(x => x.IsVisible()))
-        {
-            var typeContent = contentService.GetById(subchild.Id).ContentType.Alias;
-            if (typeContent != "news")
-            {
-                foreach (var child in subchild.Children.Where(x => x.IsVisible()))
-                {
-                    DateTime postday = DateTime.Parse(child.GetProperty("PostedDateTime").Value().ToString());
-                    DateTime now = DateTime.UtcNow;
-                    TimeSpan difference = now.Subtract(postday);
-                    if (difference.TotalSeconds < toNow)
-                    {
-                        latestNews = child;
-                        toNow = difference.TotalSeconds;
-                    }
-                }
-            }
-            else
-            {
-                TimeSpan different = DateTime.UtcNow.Subtract(DateTime.Parse(subchild.GetProperty("PostedDateTime").Value().ToString()));
-                if (different.TotalSeconds < toNow)
-                {
-                    latestNews = subchild;
-                    toNow = different.TotalSeconds;
-                }
-            }
-        }
-
-    }
+    var arrayNews = homepage.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+    var latestNews = arrayNews[0];
 }
 
 <!-- product-news -->
@@ -47,7 +14,7 @@
         <div class="col-lg-9">
             <article class="news-item d-flex">
                 <div class="col-img mr-3">
-                    <a href="@latestNews.Url()"><img src="@latestNews.GetProperty("Picture").Value()" class="img-fluid" alt="" /></a>
+                    <a href="@latestNews.Url()"><img src="@latestNews.GetProperty("Picture").Value()" class="img-fluid"  alt="" /></a>
 
                 </div>
                 <div class="col-desc">
@@ -57,16 +24,18 @@
             </article>
             <div class="child-news horizontal">
                 <ul class="d-flex">
+                    @for(int i = 1; i < 4; i++)
+                    {
                     <li>
                         <h6 class="merri-title">
-                            <a href="#">
-                                6 án tử hình với nhóm sát hại thiếu nữ giao gà
+                            <a href="@arrayNews[i].Url()">
+                                @arrayNews[i].GetProperty("title").Value()
                             </a>
                         </h6>
                         <div class="child-news-desc">
                             <a href="#">
-                                <span class="location-name">Điện Biên </span>
-                                <span>Toà phúc thẩm xác định các bị cáo đã cùng sát hại, cưỡng bức thiếu nữ giao gà nên y án sơ thẩm, tuyên 6 án tử hình.</span>
+                                @*<span class="location-name"> </span>*@
+                                <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
                             </a>
                             <span class="comments-count">
                                 <i class="far fa-comment"></i>
@@ -74,40 +43,7 @@
                             </span>
                         </div>
                     </li>
-                    <li>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                Ngã xe thang máy bay tử vong
-                            </a>
-                        </h6>
-                        <div class="child-news-desc">
-                            <a href="#">
-                                <span class="location-name">TP HCM </span>
-                                <span>Đi chuyến bay VN1379 từ Huế đến TP HCM, nữ hành khách 50 tuổi trượt chân ngã từ xe thang máy bay xuống đất, tử vong.</span>
-                            </a>
-                            <span class="comments-count">
-                                <i class="far fa-comment"></i>
-                                <a href="#">85</a>
-                            </span>
-                        </div>
-                    </li>
-                    <li>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                Lai Châu tiếp tục xảy ra động đất
-                            </a>
-                        </h6>
-                        <div class="child-news-desc">
-                            <a href="#">
-                                <span class="location-name">Điện Biên -</span>
-                                <span>Lần thứ ba trong ba ngày, huyện Mường Tè, tỉnh Lai Châu, ghi nhận rung chấn với độ lớn 2,5, độ sâu chấn tiêu khoảng 12,8 km. </span>
-                            </a>
-                            <span class="comments-count">
-                                <i class="far fa-comment"></i>
-                                <a href="#">85</a>
-                            </span>
-                        </div>
-                    </li>
+                    }
                 </ul>
 
             </div>
@@ -115,57 +51,26 @@
         <div class="col-lg-3">
             <div class="child-news vertical">
                 <ul class="d-flex flex-column">
-                    <li>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                6 án tử hình với nhóm sát hại thiếu nữ giao gà
-                            </a>
-                        </h6>
-                        <div class="child-news-desc">
-                            <a href="#">
-                                <span class="location-name">Điện Biên -</span>
-                                <span>Toà phúc thẩm xác định các bị cáo đã cùng sát hại, cưỡng bức thiếu nữ giao gà nên y án sơ thẩm, tuyên 6 án tử hình.</span>
-                            </a>
-                            <span class="comments-count">
-                                <i class="far fa-comment"></i>
-                                <a href="#">85</a>
-                            </span>
-                        </div>
-                    </li>
-                    <li>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                Ngã xe thang máy bay tử vong
-                            </a>
-                        </h6>
-                        <div class="child-news-desc">
-                            <a href="#">
-                                <span>TP HCM</span>
-                                <span>Đi chuyến bay VN1379 từ Huế đến TP HCM, nữ hành khách 50 tuổi trượt chân ngã từ xe thang máy bay xuống đất, tử vong.</span>
-                            </a>
-                            <span class="comments-count">
-                                <i class="far fa-comment"></i>
-                                <a href="#">85</a>
-                            </span>
-                        </div>
-                    </li>
-                    <li>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                Lai Châu tiếp tục xảy ra động đất
-                            </a>
-                        </h6>
-                        <div class="child-news-desc">
-                            <a href="#">
-                                <span class="location-name">Điện Biên -</span>
-                                <span>Lần thứ ba trong ba ngày, huyện Mường Tè, tỉnh Lai Châu, ghi nhận rung chấn với độ lớn 2,5, độ sâu chấn tiêu khoảng 12,8 km. </span>
-                            </a>
-                            <span class="comments-count">
-                                <i class="far fa-comment"></i>
-                                <a href="#">85</a>
-                            </span>
-                        </div>
-                    </li>
+                    @for (int i = 4; i < 7 && i < arrayNews.Count(); i++)
+                    {
+                        <li>
+                            <h6 class="merri-title">
+                                <a href="@arrayNews[i].Url()">
+                                    @arrayNews[i].GetProperty("title").Value()
+                                </a>
+                            </h6>
+                            <div class="child-news-desc">
+                                <a href="#">
+                                    @*<span class="location-name"> </span>*@
+                                    <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
+                                </a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">85</a>
+                                </span>
+                            </div>
+                        </li>
+                    }
                 </ul>
 
             </div>
