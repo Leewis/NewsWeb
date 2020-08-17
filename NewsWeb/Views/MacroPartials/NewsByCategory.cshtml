@@ -1,254 +1,61 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @{
-    var category = Model.MacroParameters["category"].ToString();
-    switch (category) {
-        case "thoi-su":
-            <div class="vertical-cate-item">
-                <div class="category-box-item">
-                    <div class="cate-options d-flex">
-                        <h5 class="cate-title merri-title"><a href="#">Thời sự</a></h5>
-                        <ul>
-                            <li><a href="#">Giao thông</a></li>
-                            <li><a href="#">Tuyến đầu chống dịch</a></li>
-                        </ul>
-                    </div>
-                    <div class="cate-content-box">
-                        <article class="thumb-cate">
-                            <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/articles/5.jpg")" class="img-fluid" alt="" /></a>
-                            <div class="cate-thumb-desc mt-3">
-                                <h6 class="merri-title">
-                                    <a href="#">
-                                        Cảng Cái Mép - Thị Vải sẽ là 'cửa ngõ phía Nam'
-                                    </a>
-                                </h6>
-                                <div class="child-news-desc">
-                                    <a href="#">
-                                        <span class="location-name">BÀ RỊA - VŨNG TÀU - </span>
-                                        <span>
-                                            Chiếm 30% lượng hàng hóa xuất nhập khẩu bằng container cả nước, cảng Cái Mép - Thị Vải được kỳ vọng sẽ trở thành cửa ngõ giao thương phía Nam.
-                                        </span>
-                                    </a>
-                                    <div class="update-time">
-                                        <span>Giao thông</span>
-                                        <span class="comments-count">
-                                            <i class="far fa-comment"></i>
-                                            <a href="#"></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-
-                        <div class="others-news-cate">
-                            <article class="cate-item">
-                                <h6 class="merri-title"><a href="#">Võ sư Thái Cực lý giải căn nguyên nội công</a></h6>
-                                <div class="article-desc">
-                                    <a href="#">
-                                        Những người đã ở Việt Nam 14 ngày liên tiếp sẽ không phải cách ly tập trung khi nhập cảnh Singapore từ 23h59 ngày 17/6.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">85</a>
-                                    </span>
-                                </div>
-
-                            </article>
-                            <article class="cate-item">
-                                <h6 class="merri-title"><a href="#">Võ sư Thái Cực lý giải căn nguyên nội công</a></h6>
-                                <div class="article-desc">
-                                    <a href="#">
-                                        Những người đã ở Việt Nam 14 ngày liên tiếp sẽ không phải cách ly tập trung khi nhập cảnh Singapore từ 23h59 ngày 17/6.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">85</a>
-                                    </span>
-                                </div>
-
-                            </article>
-                            <article class="cate-item">
-                                <h6 class="merri-title"><a href="#">Võ sư Thái Cực lý giải căn nguyên nội công</a></h6>
-                                <div class="article-desc">
-                                    <a href="#">
-                                        Những người đã ở Việt Nam 14 ngày liên tiếp sẽ không phải cách ly tập trung khi nhập cảnh Singapore từ 23h59 ngày 17/6.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">85</a>
-                                    </span>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            break;
-        
-        case "thoi-su-1":
-            
-            <div class="vertical-cate-item">
-                <div class="category-box-item">
-                    <div class="cate-options d-flex">
-                        <h5 class="cate-title merri-title"><a href="#">Thời sự</a></h5>
-                        <ul>
-                            <li><a href="#">Giao thông</a></li>
-                            <li><a href="#">Tuyến đầu chống dịch</a></li>
-                        </ul>
-                    </div>
-                    <div class="cate-content-box">
-                        <article class="thumb-cate">
-                            <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/articles/5.jpg")" class="img-fluid" alt="" /></a>
-                            <div class="cate-thumb-desc mt-3">
-                                <h6 class="merri-title">
-                                    <a href="#">
-                                        Cảng Cái Mép - Thị Vải sẽ là 'cửa ngõ phía Nam'
-                                    </a>
-                                </h6>
-                                <div class="child-news-desc">
-                                    <a href="#">
-                                        <span class="location-name">BÀ RỊA - VŨNG TÀU - </span>
-                                        <span>
-                                            Chiếm 30% lượng hàng hóa xuất nhập khẩu bằng container cả nước, cảng Cái Mép - Thị Vải được kỳ vọng sẽ trở thành cửa ngõ giao thương phía Nam.
-                                        </span>
-                                    </a>
-                                    <div class="update-time">
-                                        <span>Giao thông</span>
-                                        <span class="comments-count">
-                                            <i class="far fa-comment"></i>
-                                            <a href="#"></a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-
-                        <div class="others-news-cate">
-                            <article class="cate-item">
-                                <h6 class="merri-title"><a href="#">Võ sư Thái Cực lý giải căn nguyên nội công</a></h6>
-                                <div class="article-desc">
-                                    <a href="#">
-                                        Những người đã ở Việt Nam 14 ngày liên tiếp sẽ không phải cách ly tập trung khi nhập cảnh Singapore từ 23h59 ngày 17/6.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">85</a>
-                                    </span>
-                                </div>
-
-                            </article>
-                            <article class="cate-item">
-                                <h6 class="merri-title"><a href="#">Võ sư Thái Cực lý giải căn nguyên nội công</a></h6>
-                                <div class="article-desc">
-                                    <a href="#">
-                                        Những người đã ở Việt Nam 14 ngày liên tiếp sẽ không phải cách ly tập trung khi nhập cảnh Singapore từ 23h59 ngày 17/6.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">85</a>
-                                    </span>
-                                </div>
-
-                            </article>
-                            <article class="cate-item">
-                                <h6 class="merri-title"><a href="#">Võ sư Thái Cực lý giải căn nguyên nội công</a></h6>
-                                <div class="article-desc">
-                                    <a href="#">
-                                        Những người đã ở Việt Nam 14 ngày liên tiếp sẽ không phải cách ly tập trung khi nhập cảnh Singapore từ 23h59 ngày 17/6.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">85</a>
-                                    </span>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            break;
-        case "thoi-su-2":
-            
-            <div class="vertical-cate-item">
-                <div class="category-box-item">
-                    <div class="cate-options d-flex">
-                        <h5 class="cate-title merri-title"><a href="#">Thời sự</a></h5>
-                        <ul>
-                            <li><a href="#">Giao thông</a></li>
-                            <li><a href="#">Tuyến đầu chống dịch</a></li>
-                        </ul>
-                    </div>
-                    <div class="cate-content-box">
-                        <article class="thumb-cate">
-                            <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/articles/5.jpg")" class="img-fluid" alt="" /></a>
-                            <div class="cate-thumb-desc mt-3">
-                                <h6 class="merri-title">
-                                    <a href="#">
-                                        Cảng Cái Mép - Thị Vải sẽ là 'cửa ngõ phía Nam'
-                                    </a>
-                                </h6>
-                                <div class="child-news-desc">
-                                    <a href="#">
-                                        <span class="location-name">BÀ RỊA - VŨNG TÀU - </span>
-                                        <span>
-                                            Chiếm 30% lượng hàng hóa xuất nhập khẩu bằng container cả nước, cảng Cái Mép - Thị Vải được kỳ vọng sẽ trở thành cửa ngõ giao thương phía Nam.
-                                        </span>
-                                    </a>
-                                    <div class="update-time">
-                                        <span class="comments-count">
-                                            <i class="far fa-comment"></i>
-                                            <a href="#">Giao thông</a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <div class="others-news-cate">
-                            <article class="cate-item">
-                                <h6 class="merri-title"><a href="#">Võ sư Thái Cực lý giải căn nguyên nội công</a></h6>
-                                <p class="article-desc">
-                                    <a href="#">
-                                        Những người đã ở Việt Nam 14 ngày liên tiếp sẽ không phải cách ly tập trung khi nhập cảnh Singapore từ 23h59 ngày 17/6.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">85</a>
-                                    </span>
-                                </p>
-                            </article>
-                            <article class="cate-item">
-                                <h6 class="merri-title"><a href="#">Võ sư Thái Cực lý giải căn nguyên nội công</a></h6>
-                                <div class="article-desc">
-                                    <a href="#">
-                                        Những người đã ở Việt Nam 14 ngày liên tiếp sẽ không phải cách ly tập trung khi nhập cảnh Singapore từ 23h59 ngày 17/6.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">85</a>
-                                    </span>
-                                </div>
-
-                            </article>
-                            <article class="cate-item">
-                                <h6 class="merri-title"><a href="#">Võ sư Thái Cực lý giải căn nguyên nội công</a></h6>
-                                <div class="article-desc">
-                                    <a href="#">
-                                        Những người đã ở Việt Nam 14 ngày liên tiếp sẽ không phải cách ly tập trung khi nhập cảnh Singapore từ 23h59 ngày 17/6.
-                                    </a>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">85</a>
-                                    </span>
-                                </div>
-
-                            </article>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            break;
-        default:
-            break;
-    }
+        var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+        var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+        var latestNews = arrayNews[0];
 }
+<div class="vertical-cate-item">
+    <div class="category-box-item">
+        <div class="cate-options d-flex">
+            <h5 class="cate-title merri-title"><a href="@category.Url()">@category.GetProperty("Title").Value()</a></h5>
+            <ul>
+                @foreach (var item in category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category"))
+                {
+                    <li><a href="@item.Url">@item.GetProperty("Title").Value()</a></li>
+                }
+            </ul>
+        </div>
+        <div class="cate-content-box">
+            <article class="thumb-cate">
+                <a href="@latestNews.Url" class="d-inline-block img-thumb"><img src="@latestNews.GetProperty("Picture").Value()" class="img-fluid" alt="" /></a>
+                <div class="cate-thumb-desc mt-3">
+                    <h6 class="merri-title">
+                        <a href="@latestNews.Url">
+                            @latestNews.GetProperty("Title").Value()
+                        </a>
+                    </h6>
+                    <div class="child-news-desc">
+                        <a href="@latestNews.Url">
+                            @latestNews.GetProperty("shortDescription").Value()
+                        </a>
+                        <div class="update-time">
+                            <span>Giao thông</span>
+                            <span class="comments-count">
+                                <i class="far fa-comment"></i>
+                                <a href="#"></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <div class="others-news-cate">
+                @for (int i = 1; i < 4 && i < arrayNews.Count(); i ++)
+                {
+                    <article class="cate-item">
+                        <h6 class="merri-title"><a href="@arrayNews[i].Url()"> @arrayNews[i].GetProperty("title").Value()</a></h6>
+                        <div class="article-desc">
+                            <a href="@arrayNews[i].Url()">
+                                @arrayNews[i].GetProperty("shortDescription").Value()
+                            </a>
+                            <span class="comments-count">
+                                <i class="far fa-comment"></i>
+                                <a href="#">85</a>
+                            </span>
+                        </div>
+                    </article>
+                }
+            </div>
+        </div>
+    </div>
+</div>
