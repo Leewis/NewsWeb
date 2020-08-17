@@ -365,6 +365,7 @@
     <Content Include="Views\Partials\Navigation\ShowAllMenu.cshtml" />
     <Content Include="Views\Partials\Footer.cshtml" />
     <Content Include="Views\Partials\Header.cshtml" />
+    <Content Include="Views\Partials\MetaTag.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
