@@ -1,18 +1,35 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @using Umbraco.Web;
+@using Umbraco.Core.Models.PublishedContent;
 @{
-    /**/
     var root = Model.Root();
     var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
 
     string title = Model.Name;
     string description = setting.Value("descriptionSuffix").ToString();
     var currentPage = this.ViewData.Model;
+    var robots = "<meta name=\"robots\" content=\"{0} \">";
+    string robot = "";
     if (currentPage != null)
     {
-        title = currentPage.Value("metaPageTitle").ToString();
-        description += currentPage.Value("metaDescription").ToString();
+        title = !string.IsNullOrEmpty(currentPage.Value("metaPageTitle") as string) ? currentPage.Value("metaPageTitle").ToString() : currentPage.Parent.Value("metaPageTitle").ToString();
+        description += !string.IsNullOrEmpty(currentPage.Value("metaDescription") as string) ? currentPage.Value("metaPageTitle").ToString() : currentPage.Parent.Value("metaDescription").ToString();
+
+        if (Model.HasValue("robots"))
+        {
+            var robotsTag = Model.Value("Robots") as string[];
+           
+            foreach (var item in robotsTag)
+            {
+                robot += item + ", ";
+            }
+        }
     }
 }
 <title>@title</title>
-<meta name="description" content="@description">
+<meta name="description" content="@Html.Raw(@description)">
+@if (!string.IsNullOrEmpty(robot))
+{
+    robots = string.Format(robots, robot.Substring(0, robot.Length - 2));
+    @Html.Raw(robots)
+}
