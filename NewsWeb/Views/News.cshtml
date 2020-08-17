@@ -1,451 +1,484 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.News>
 @using ContentModels = Umbraco.Web.PublishedModels;
+@using Umbraco.Web;
+@using Umbraco.Core.Models;
 @{
     Layout = "master.cshtml";
     var root = Model.Root();
     var homepage = root.Children.FirstOrDefault(x => x.Id == 1089);
-    var setting =root.Children.FirstOrDefault(x => x.Id == 1118);
+    var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
     var facebook = setting.GetProperty("facebookUrl").GetValue();
     var twitter = setting.GetProperty("twitterUrl").GetValue();
     var parent = Model.Parent;
+
+    var relatedNews = Model.RelatedNews;
 }
-  
-    <div class="container white-bg">
-        <div class="page-detail">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="header-detail">
-                        @{
-                            var selection = Model.Ancestors().Where(c => c != root && c != homepage);
-                            if (selection.Any())
-                            {
-                                var currentPageTitle = Model.Title;
-                                <ul class="breadcrumb-detail">
-                                    @foreach (var item in selection.OrderBy(a => a.Level).ToList())
-                                    {
-                                        var pageTitle = item.GetProperty("Title").Value();
-                                        <li>
-                                            <a href="@item.Url" title="@pageTitle">
-                                                @pageTitle
-                                            </a>
-                                        </li>
-                                    }
-                                    <li class="active">
-                                        @currentPageTitle
+
+<div class="container white-bg">
+    <div class="page-detail">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="header-detail">
+                    @{
+                        var selection = Model.Ancestors().Where(c => c != root && c != homepage);
+                        if (selection.Any())
+                        {
+                            var currentPageTitle = Model.Title;
+                            <ul class="breadcrumb-detail">
+                                @foreach (var item in selection.OrderBy(a => a.Level).ToList())
+                                {
+                                    var pageTitle = item.GetProperty("Title").Value();
+                                    <li>
+                                        <a href="@item.Url" title="@pageTitle">
+                                            @pageTitle
+                                        </a>
                                     </li>
-                                </ul>
-                            }
+                                }
+                                <li class="active">
+                                    @currentPageTitle
+                                </li>
+                            </ul>
                         }
-                        <span class="date-detail">@Model.Value("postedDateTime")</span>
-                    </div>
-                    <h2 class="title-detail">@Model.Value("title")</h2>
-                    <div class="description">
-                        @Model.Value("fullDescription")
-                    </div>
-                    <div class="articles-link-display">
-                        <ul>
-                            <li>
-                                <a href="#">Cánh tay phải của người giàu nhất châu Á</a>
-
-                            </li>
-                            <li>
-                                <a href="#">Cuộc đối đầu của 2 anh em gia tộc giàu nhất châu Á</a>
-                                <span class="comments-count">
-                                    <i class="far fa-comment"></i>
-                                    <a href="#">85</a>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                    <p class="author"><strong>@Model.Value("author")</strong></p>
-                    <div class="footer-content">
-                        <a class="btn btn-back" href="@parent.Url()">
-                            <span>Trở về trang @parent.GetProperty("title").Value()</span>
-                        </a>
-                        <a class="btn btn-save">
-                            <i class="fa fa-bookmark"></i>
-                            Lưu
-                        </a>
-                        <div class="social-icons">
-                            <span>Chia sẻ</span>
-                            <a href="@facebook" class="fab fa-facebook-f"></a>
-                            <a href="@twitter" class="fab fa-twitter"></a>
-                            <a href="#" class="fa fa-envelope"></a>
-                            <a href="#" class="fa fa-link"></a>
-                        </div>
-                    </div>
-
-                    <div class="source-news">
-                        <span>
-                            Nguồn:
-                        </span>
-                        <span>@Model.Value("source") / </span>
-                        <a href="@Model.Value("sourceUrl")"> @Model.Value("sourceUrl")</a>
-                    </div>
+                    }
+                    <span class="date-detail">@Model.Value("postedDateTime")</span>
                 </div>
-                <div class="col-lg-4 mt-3 d-none d-lg-block">
-                    <div class="box-shop-sell-vertical p-3">
-                        <div class="clearfix sell-top-box">
-                            <h5 class="merri-title heading-line float-left"><a href="">VNShop</a></h5>
-                            <div class="float-right btn-control-carousel">
-                                <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
-                                    ❮
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
-                                    ❯
-                                </a>
-                            </div>
-                        </div>
+                <h2 class="title-detail">@Model.Value("title")</h2>
+                <div class="description">
+                    @Model.Value("fullDescription")
+                </div>
+                @*<div class="articles-link-display">
+                    <ul>
+                        <li>
+                            <a href="#">Cánh tay phải của người giàu nhất châu Á</a>
 
-                        <div id="carouselExampleInterval1" class="carousel slide pointer-event" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item">
-                                    <div class="article-list-sell">
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block"></a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                    <p class="fsell-price">3.600.000.000 đ</p>
-                                                </div>
+                        </li>
+                        <li>
+                            <a href="#">Cuộc đối đầu của 2 anh em gia tộc giàu nhất châu Á</a>
+                            <span class="comments-count">
+                                <i class="far fa-comment"></i>
+                                <a href="#">85</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>*@
+                <p class="author"><strong>@Model.Value("author")</strong></p>
+                @*<div class="footer-content">
+                    <a class="btn btn-back" href="@parent.Url()">
+                        <span>Trở về trang @parent.GetProperty("title").Value()</span>
+                    </a>
+                    <a class="btn btn-save">
+                        <i class="fa fa-bookmark"></i>
+                        Lưu
+                    </a>
+                    <div class="social-icons">
+                        <span>Chia sẻ</span>
+                        <a href="@facebook" class="fab fa-facebook-f"></a>
+                        <a href="@twitter" class="fab fa-twitter"></a>
+                        <a href="#" class="fa fa-envelope"></a>
+                        <a href="#" class="fa fa-link"></a>
+                    </div>
+                </div>*@
+
+                <div class="source-news">
+                    <span>
+                        Nguồn:
+                    </span>
+                    @*<span>@Model.Value("source") / </span>*@
+                    <a href="@Model.Value("sourceUrl")"> @Model.Value("sourceUrl")</a>
+                </div>
+            </div>
+            <div class="col-lg-4 mt-3 d-none d-lg-block">
+                <div class="box-shop-sell-vertical p-3">
+                    <div class="clearfix sell-top-box">
+                        <h5 class="merri-title heading-line float-left"><a href="">VNShop</a></h5>
+                        <div class="float-right btn-control-carousel">
+                            <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
+                                ❮
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
+                                ❯
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="carouselExampleInterval1" class="carousel slide pointer-event" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item">
+                                <div class="article-list-sell">
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block"></a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                <p class="fsell-price">3.600.000.000 đ</p>
                                             </div>
-                                        </article>
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
-                                                    <p class="fsell-price">1.800.000.000 đ</p>
-                                                </div>
+                                        </div>
+                                    </article>
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                                <p class="fsell-price">1.800.000.000 đ</p>
                                             </div>
-                                        </article>
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
-                                                    <p class="fsell-price">5.400.000.000 đ</p>
-                                                </div>
+                                        </div>
+                                    </article>
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                                <p class="fsell-price">5.400.000.000 đ</p>
                                             </div>
-                                        </article>
-                                    </div>
+                                        </div>
+                                    </article>
                                 </div>
-                                <div class="carousel-item active">
-                                    <div class="article-list-sell">
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                    <p class="fsell-price">3.600.000.000 đ</p>
-                                                </div>
+                            </div>
+                            <div class="carousel-item active">
+                                <div class="article-list-sell">
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                <p class="fsell-price">3.600.000.000 đ</p>
                                             </div>
-                                        </article>
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/4.jpg")" alt="" class="img-fluid d-block"></a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
-                                                    <p class="fsell-price">1.800.000.000 đ</p>
-                                                </div>
+                                        </div>
+                                    </article>
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/4.jpg")" alt="" class="img-fluid d-block"></a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Ngân hàng Bình Tân hỗ trợ thanh lý KDC phía...</span></a>
+                                                <p class="fsell-price">1.800.000.000 đ</p>
                                             </div>
-                                        </article>
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell//5.jpg")" alt="" class="img-fluid d-block"></a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
-                                                    <p class="fsell-price">5.400.000.000 đ</p>
-                                                </div>
+                                        </div>
+                                    </article>
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell//5.jpg")" alt="" class="img-fluid d-block"></a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Phố Trung Kính 46*5 tầng, kinh doanh nhỏ, giá...</span></a>
+                                                <p class="fsell-price">5.400.000.000 đ</p>
                                             </div>
-                                        </article>
-                                    </div>
+                                        </div>
+                                    </article>
                                 </div>
                             </div>
                         </div>
-                        <!-- carousel slide -->
                     </div>
-                    <div class="widget-news-small widget-bg">
-                        <h6 class="merri-title">
+                    <!-- carousel slide -->
+                </div>
+                <div class="widget-news-small widget-bg">
+                    <h6 class="merri-title">
+                        <a href="#">
+                            Vận hành số
+                        </a>
+                    </h6>
+                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-6.png")" alt="news-kinh-doanh-6" class="img-fluid"></a>
+                    <div class="orthers-news-small">
+                        <h6 class="merri-title item-news">
                             <a href="#">
-                                Vận hành số
+                                'Blockchain giúp doanh nghiệp giữ chân khách hàng'
                             </a>
                         </h6>
-                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-6.png")" alt="news-kinh-doanh-6" class="img-fluid"></a>
-                        <div class="orthers-news-small">
-                            <h6 class="merri-title item-news">
-                                <a href="#">
-                                    'Blockchain giúp doanh nghiệp giữ chân khách hàng'
-                                </a>
-                            </h6>
-                            <h6 class="merri-title item-news">
-                                <a href="#">
-                                    Doanh nghiệp cần biết gì về hóa đơn điện tử trước giờ G
-                                </a>
-                            </h6>
-                            <h6 class="merri-title item-news">
-                                <a href="#">
-                                    Doanh nghiệp ký hợp đồng từ xa tiết kiệm 90% chi phí
-                                </a>
-                            </h6>
-                        </div>
+                        <h6 class="merri-title item-news">
+                            <a href="#">
+                                Doanh nghiệp cần biết gì về hóa đơn điện tử trước giờ G
+                            </a>
+                        </h6>
+                        <h6 class="merri-title item-news">
+                            <a href="#">
+                                Doanh nghiệp ký hợp đồng từ xa tiết kiệm 90% chi phí
+                            </a>
+                        </h6>
                     </div>
                 </div>
-                <div class="col-lg-12">
+            </div>
+            <div class="col-lg-12">
+                @if (relatedNews != null && relatedNews.Count() > 0)
+                {
                     <div class="topic-list">
                         <div>
                             <h6 class="topic-header">
                                 <a href="#">
-                                    Thế giới
+                                    @*Thế giới*@
+                                    @parent.GetProperty("title").Value()
                                 </a>
                             </h6>
                             <a href="#" class="topic-readmore">Xem thêm &gt;&gt;</a>
                         </div>
                         <div class="row">
-                            <div class="col-lg col-md-4 topic-item">
-                                <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-1.jpg")" alt="news-kinh-doanh-1" class="img-fluid"></a>
-                                <h6 class="merri-title">
-                                    <a href="#">
-                                        Người giàu nhất châu Á vào top 10 giàu nhất thế giới
-                                    </a>
-                                </h6>
-                                <p><span class="update-time"><a href="#">Quốc tế</a></span></p>
-                            </div>
-                            <div class="col-lg col-md-4 topic-item">
-                                <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-2.jpg")" alt="news-kinh-doanh-2" class="img-fluid"></a>
-                                <h6 class="merri-title">
-                                    <a href="#">
-                                        Nhà giàu Hàn Quốc đổ xô sắm xe sang sau dịch
-                                    </a>
-                                </h6>
-                                <p>
-                                    <span class="update-time">
-                                        <a href="#">Vĩ mô</a>
-                                    </span>
-                                    <span class="comments-count">
-                                        <i class="far fa-comment"></i>
-                                        <a href="#">32</a>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="col-lg col-md-4 topic-item">
-                                <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-3.jpg")" alt="news-kinh-doanh-3" class="img-fluid"></a>
-                                <h6 class="merri-title">
-                                    <a href="#">
-                                        Lô vải thiều Bắc Giang đầu tiên xuất đi Nhật
-                                    </a>
-                                </h6>
-                                <p>
-                                    <span class="update-time">
-                                        <a href="#">Hàng hóa</a>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="col-lg col-md-4 topic-item">
-                                <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-4.jpg")" alt="news-kinh-doanh-4" class="img-fluid"></a>
-                                <h6 class="merri-title">
-                                    <a href="#">
-                                        Nghị định giảm 50% phí trước bạ đã trình Chính phủ
-                                    </a>
-                                </h6>
-                                <p>
-                                    <span class="update-time">
-                                        <a href="#">Vĩ mô</a>
-                                    </span>
+                            <!-- Related News -->
+                            @{
+                                <div class="row pb-2 pt-4">
+                                    @foreach (var newItem in relatedNews)
+                                    {
+                                        var moreLink = newItem; /* newItem.GetProperty("Link Title");*/
 
-                                </p>
-                            </div>
-                            <div class="col-lg col-md-4 topic-item">
-                                <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-5.png")" alt="news-kinh-doanh-5" class="img-fluid"></a>
-                                <h6 class="merri-title">
-                                    <a href="#">
-                                        VNG đặt mục tiêu doanh thu tăng 20%
-                                    </a>
-                                </h6>
-                                <p>
-                                    <span class="update-time">
-                                        <a href="#">Vĩ mô</a>
-                                    </span>
+                                        //var helper = new UmbracoHelper(Umbraco.Web.UmbracoContext);
+                                        //var selectedNew = helper.get(1089);
 
-                                </p>
-                            </div>
+                                        if (moreLink != null)
+                                        {
+                                            <div class="col-lg col-md-4 topic-item">
+                                                <a href="@moreLink.Url" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-1.jpg")" alt="news-kinh-doanh-1" class="img-fluid"></a>
+                                                <h6 class="merri-title">
+                                                    <a href="@moreLink.Url">
+                                                        @newItem.Name
+                                                    </a>
+                                                </h6>
+                                                <p><span class="update-time"><a href="#">@parent.GetProperty("title").Value()</a></span></p>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            }
+
+                            @*<div class="col-lg col-md-4 topic-item">
+                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-1.jpg")" alt="news-kinh-doanh-1" class="img-fluid"></a>
+                        <h6 class="merri-title">
+                            <a href="#">
+                                Người giàu nhất châu Á vào top 10 giàu nhất thế giới
+                            </a>
+                        </h6>
+                        <p><span class="update-time"><a href="#">Quốc tế</a></span></p>
+                    </div>
+                    <div class="col-lg col-md-4 topic-item">
+                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-2.jpg")" alt="news-kinh-doanh-2" class="img-fluid"></a>
+                        <h6 class="merri-title">
+                            <a href="#">
+                                Nhà giàu Hàn Quốc đổ xô sắm xe sang sau dịch
+                            </a>
+                        </h6>
+                        <p>
+                            <span class="update-time">
+                                <a href="#">Vĩ mô</a>
+                            </span>
+                            <span class="comments-count">
+                                <i class="far fa-comment"></i>
+                                <a href="#">32</a>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-lg col-md-4 topic-item">
+                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-3.jpg")" alt="news-kinh-doanh-3" class="img-fluid"></a>
+                        <h6 class="merri-title">
+                            <a href="#">
+                                Lô vải thiều Bắc Giang đầu tiên xuất đi Nhật
+                            </a>
+                        </h6>
+                        <p>
+                            <span class="update-time">
+                                <a href="#">Hàng hóa</a>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-lg col-md-4 topic-item">
+                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-4.jpg")" alt="news-kinh-doanh-4" class="img-fluid"></a>
+                        <h6 class="merri-title">
+                            <a href="#">
+                                Nghị định giảm 50% phí trước bạ đã trình Chính phủ
+                            </a>
+                        </h6>
+                        <p>
+                            <span class="update-time">
+                                <a href="#">Vĩ mô</a>
+                            </span>
+
+                        </p>
+                    </div>
+                    <div class="col-lg col-md-4 topic-item">
+                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-5.png")" alt="news-kinh-doanh-5" class="img-fluid"></a>
+                        <h6 class="merri-title">
+                            <a href="#">
+                                VNG đặt mục tiêu doanh thu tăng 20%
+                            </a>
+                        </h6>
+                        <p>
+                            <span class="update-time">
+                                <a href="#">Vĩ mô</a>
+                            </span>
+
+                        </p>
+                    </div>*@
                         </div>
                     </div>
-                    <div class="bt-solid mt-3 mb-3"></div>
-                    <div class="mt-3">
-                        <div class="box-shop-sell-vertical p-3">
-                            <div class="box-sponsor-noslide">
-                                <div class="clearfix sell-top-box">
-                                    <h6 class="merri-title heading-line float-left"><a href="">Tin tài trợ</a></h6>
-                                </div>
-                                <div class="row article-list-sell">
-                                    <div class="col-lg-3">
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb">
-                                                    <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell1" class="img-fluid d-block">
-                                                    <span class="name-sponsor">St Moritz</span>
-                                                </a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb">
-                                                    <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell2" class="img-fluid d-block">
-                                                    <span class="name-sponsor">St Moritz</span>
-                                                </a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb">
-                                                    <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell3" class="img-fluid d-block">
-                                                    <span class="name-sponsor">St Moritz</span>
-                                                </a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <article class="article-item">
-                                            <div class="d-flex">
-                                                <a href="#" class="mr-3 img-thumb">
-                                                    <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell4" class="img-fluid d-block">
-                                                    <span class="name-sponsor">St Moritz</span>
-                                                </a>
-                                                <div class="article-desc">
-                                                    <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bt-solid mt-3 mb-3"></div>
+                }
+                <div class="bt-solid mt-3 mb-3"></div>
+                <div class="mt-3">
+                    <div class="box-shop-sell-vertical p-3">
+                        <div class="box-sponsor-noslide">
                             <div class="clearfix sell-top-box">
-                                <h6 class="merri-title heading-line float-left"><a href="">Shop VnExpress</a></h6>
-                                <div class="float-right btn-control-carousel">
-                                    <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
-                                        ❮
-                                    </a>
-                                    <a class="carousel-control-next" href="#carouselExampleInterval2" role="button" data-slide="next">
-                                        ❯
-                                    </a>
-                                </div>
+                                <h6 class="merri-title heading-line float-left"><a href="">Tin tài trợ</a></h6>
                             </div>
-
-                            <div id="carouselExampleInterval2" class="carousel slide pointer-event" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item">
-                                        <div class="row article-list-sell">
-                                            <div class="col-lg-3">
-                                                <article class="article-item">
-                                                    <div class="d-flex">
-                                                        <a href="#" class="mr-3 img-thumb">
-                                                            <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block">
-                                                            <span class="name-sponsor">St Moritz</span>
-                                                        </a>
-                                                        <div class="article-desc">
-                                                            <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <article class="article-item">
-                                                    <div class="d-flex">
-                                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
-                                                        <div class="article-desc">
-                                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                            <p class="fsell-price">3.600.000.000 đ</p>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <article class="article-item">
-                                                    <div class="d-flex">
-                                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
-                                                        <div class="article-desc">
-                                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                            <p class="fsell-price">3.600.000.000 đ</p>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <article class="article-item">
-                                                    <div class="d-flex">
-                                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
-                                                        <div class="article-desc">
-                                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                            <p class="fsell-price">3.600.000.000 đ</p>
-                                                        </div>
-                                                    </div>
-                                                </article>
+                            <div class="row article-list-sell">
+                                <div class="col-lg-3">
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb">
+                                                <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell1" class="img-fluid d-block">
+                                                <span class="name-sponsor">St Moritz</span>
+                                            </a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
                                             </div>
                                         </div>
+                                    </article>
+                                </div>
+                                <div class="col-lg-3">
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb">
+                                                <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell2" class="img-fluid d-block">
+                                                <span class="name-sponsor">St Moritz</span>
+                                            </a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="col-lg-3">
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb">
+                                                <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell3" class="img-fluid d-block">
+                                                <span class="name-sponsor">St Moritz</span>
+                                            </a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                                <div class="col-lg-3">
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            <a href="#" class="mr-3 img-thumb">
+                                                <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="fsell4" class="img-fluid d-block">
+                                                <span class="name-sponsor">St Moritz</span>
+                                            </a>
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bt-solid mt-3 mb-3"></div>
+                        <div class="clearfix sell-top-box">
+                            <h6 class="merri-title heading-line float-left"><a href="">Shop VnExpress</a></h6>
+                            <div class="float-right btn-control-carousel">
+                                <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
+                                    ❮
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleInterval2" role="button" data-slide="next">
+                                    ❯
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="carouselExampleInterval2" class="carousel slide pointer-event" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item">
+                                    <div class="row article-list-sell">
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb">
+                                                        <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block">
+                                                        <span class="name-sponsor">St Moritz</span>
+                                                    </a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
                                     </div>
-                                    <div class="carousel-item active">
-                                        <div class="row article-list-sell">
-                                            <div class="col-lg-3">
-                                                <article class="article-item">
-                                                    <div class="d-flex">
-                                                        <a href="#" class="mr-3 img-thumb">
-                                                            <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block">
-                                                            <span class="name-sponsor">St Moritz</span>
-                                                        </a>
-                                                        <div class="article-desc">
-                                                            <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
-                                                        </div>
+                                </div>
+                                <div class="carousel-item active">
+                                    <div class="row article-list-sell">
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb">
+                                                        <img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block">
+                                                        <span class="name-sponsor">St Moritz</span>
+                                                    </a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Dự án văn phòng, căn hộ khách sạn 5 sao ở đại lộ Phạm Văn Đồng</span></a>
                                                     </div>
-                                                </article>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <article class="article-item">
-                                                    <div class="d-flex">
-                                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
-                                                        <div class="article-desc">
-                                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                            <p class="fsell-price">3.600.000.000 đ</p>
-                                                        </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/2.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
                                                     </div>
-                                                </article>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <article class="article-item">
-                                                    <div class="d-flex">
-                                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
-                                                        <div class="article-desc">
-                                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                            <p class="fsell-price">3.600.000.000 đ</p>
-                                                        </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/3.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
                                                     </div>
-                                                </article>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <article class="article-item">
-                                                    <div class="d-flex">
-                                                        <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/4.jpg")" alt="" class="img-fluid d-block"></a>
-                                                        <div class="article-desc">
-                                                            <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
-                                                            <p class="fsell-price">3.600.000.000 đ</p>
-                                                        </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <article class="article-item">
+                                                <div class="d-flex">
+                                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/4.jpg")" alt="" class="img-fluid d-block"></a>
+                                                    <div class="article-desc">
+                                                        <a href="#" class="fsell-title"><span>Bán nhà Trương Định 44m2 nhà đẹp ngõ 3...</span></a>
+                                                        <p class="fsell-price">3.600.000.000 đ</p>
                                                     </div>
-                                                </article>
-                                            </div>
+                                                </div>
+                                            </article>
                                         </div>
                                     </div>
                                 </div>
@@ -456,5 +489,6 @@
             </div>
         </div>
     </div>
-        
+</div>
+
 
