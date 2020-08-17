@@ -6,8 +6,8 @@ using  Umbraco.Core.Models;
 using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder.Embedded;
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "d2b8df8b3e83b364")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.4")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "6e70d52c65814ac")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
 // FILE: models.generated.cs
@@ -144,10 +144,6 @@ namespace Umbraco.Web.PublishedModels
 		/// <summary>Meta Page Title</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		string MetaPageTitle { get; }
-
-		/// <summary>Robots</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		global::System.Collections.Generic.IEnumerable<string> Robots { get; }
 	}
 
 	/// <summary>BasePage</summary>
@@ -218,17 +214,6 @@ namespace Umbraco.Web.PublishedModels
 		/// <summary>Static getter for Meta Page Title</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		public static string GetMetaPageTitle(IBasePage that) => that.Value<string>("metaPageTitle");
-
-		///<summary>
-		/// Robots
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("robots")]
-		public global::System.Collections.Generic.IEnumerable<string> Robots => GetRobots(this);
-
-		/// <summary>Static getter for Robots</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		public static global::System.Collections.Generic.IEnumerable<string> GetRobots(IBasePage that) => that.Value<global::System.Collections.Generic.IEnumerable<string>>("robots");
 	}
 
 	/// <summary>CategoryPage</summary>
@@ -283,13 +268,6 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("metaPageTitle")]
 		public string MetaPageTitle => global::Umbraco.Web.PublishedModels.BasePage.GetMetaPageTitle(this);
-
-		///<summary>
-		/// Robots
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("robots")]
-		public global::System.Collections.Generic.IEnumerable<string> Robots => global::Umbraco.Web.PublishedModels.BasePage.GetRobots(this);
 	}
 
 	/// <summary>HomePage</summary>
@@ -344,13 +322,6 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("metaPageTitle")]
 		public string MetaPageTitle => global::Umbraco.Web.PublishedModels.BasePage.GetMetaPageTitle(this);
-
-		///<summary>
-		/// Robots
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("robots")]
-		public global::System.Collections.Generic.IEnumerable<string> Robots => global::Umbraco.Web.PublishedModels.BasePage.GetRobots(this);
 	}
 
 	/// <summary>NewsLandingPage</summary>
@@ -405,13 +376,6 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("metaPageTitle")]
 		public string MetaPageTitle => global::Umbraco.Web.PublishedModels.BasePage.GetMetaPageTitle(this);
-
-		///<summary>
-		/// Robots
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("robots")]
-		public global::System.Collections.Generic.IEnumerable<string> Robots => global::Umbraco.Web.PublishedModels.BasePage.GetRobots(this);
 	}
 
 	/// <summary>Content Root</summary>
@@ -442,7 +406,7 @@ namespace Umbraco.Web.PublishedModels
 
 	/// <summary>News</summary>
 	[PublishedModel("news")]
-	public partial class News : PublishedContentModel, IBasePage
+	public partial class News : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -501,20 +465,6 @@ namespace Umbraco.Web.PublishedModels
 		public global::System.DateTime PostedDateTime => this.Value<global::System.DateTime>("postedDateTime");
 
 		///<summary>
-		/// PostedTime
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("postedTime")]
-		public string PostedTime => this.Value<string>("postedTime");
-
-		///<summary>
-		/// Related News
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("relatedNews")]
-		public global::System.Collections.Generic.IEnumerable<global::Umbraco.Web.Models.Link> RelatedNews => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Web.Models.Link>>("relatedNews");
-
-		///<summary>
 		/// Short Description
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
@@ -541,46 +491,11 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("title")]
 		public string Title => this.Value<string>("title");
-
-		///<summary>
-		/// Main Layout
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("mainLayout")]
-		public global::Newtonsoft.Json.Linq.JToken MainLayout => global::Umbraco.Web.PublishedModels.BasePage.GetMainLayout(this);
-
-		///<summary>
-		/// Meta Description
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("metaDescription")]
-		public string MetaDescription => global::Umbraco.Web.PublishedModels.BasePage.GetMetaDescription(this);
-
-		///<summary>
-		/// Meta Keywords
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("metaKeywords")]
-		public string MetaKeywords => global::Umbraco.Web.PublishedModels.BasePage.GetMetaKeywords(this);
-
-		///<summary>
-		/// Meta Page Title
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("metaPageTitle")]
-		public string MetaPageTitle => global::Umbraco.Web.PublishedModels.BasePage.GetMetaPageTitle(this);
-
-		///<summary>
-		/// Robots
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("robots")]
-		public global::System.Collections.Generic.IEnumerable<string> Robots => global::Umbraco.Web.PublishedModels.BasePage.GetRobots(this);
 	}
 
 	/// <summary>Category</summary>
 	[PublishedModel("category")]
-	public partial class Category : PublishedContentModel, IBasePage
+	public partial class Category : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -623,41 +538,6 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("topMenu")]
 		public bool TopMenu => this.Value<bool>("topMenu");
-
-		///<summary>
-		/// Main Layout
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("mainLayout")]
-		public global::Newtonsoft.Json.Linq.JToken MainLayout => global::Umbraco.Web.PublishedModels.BasePage.GetMainLayout(this);
-
-		///<summary>
-		/// Meta Description
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("metaDescription")]
-		public string MetaDescription => global::Umbraco.Web.PublishedModels.BasePage.GetMetaDescription(this);
-
-		///<summary>
-		/// Meta Keywords
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("metaKeywords")]
-		public string MetaKeywords => global::Umbraco.Web.PublishedModels.BasePage.GetMetaKeywords(this);
-
-		///<summary>
-		/// Meta Page Title
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("metaPageTitle")]
-		public string MetaPageTitle => global::Umbraco.Web.PublishedModels.BasePage.GetMetaPageTitle(this);
-
-		///<summary>
-		/// Robots
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("robots")]
-		public global::System.Collections.Generic.IEnumerable<string> Robots => global::Umbraco.Web.PublishedModels.BasePage.GetRobots(this);
 	}
 
 	/// <summary>Folder</summary>
