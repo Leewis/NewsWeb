@@ -1,0 +1,18 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web;
+@{
+    /**/
+    var root = Model.Root();
+    var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
+
+    string title = Model.Name;
+    string description = setting.Value("descriptionSuffix").ToString();
+    var currentPage = this.ViewData.Model;
+    if (currentPage != null)
+    {
+        title = currentPage.Value("metaPageTitle").ToString();
+        description += currentPage.Value("metaDescription").ToString();
+    }
+}
+<title>@title</title>
+<meta name="description" content="@description">

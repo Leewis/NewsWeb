@@ -6,7 +6,7 @@ using  Umbraco.Core.Models;
 using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder.Embedded;
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "6e70d52c65814ac")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "906697091a1390a7")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -495,7 +495,7 @@ namespace Umbraco.Web.PublishedModels
 
 	/// <summary>Category</summary>
 	[PublishedModel("category")]
-	public partial class Category : PublishedContentModel
+	public partial class Category : PublishedContentModel, IBasePage
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -538,6 +538,34 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("topMenu")]
 		public bool TopMenu => this.Value<bool>("topMenu");
+
+		///<summary>
+		/// Main Layout
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("mainLayout")]
+		public global::Newtonsoft.Json.Linq.JToken MainLayout => global::Umbraco.Web.PublishedModels.BasePage.GetMainLayout(this);
+
+		///<summary>
+		/// Meta Description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription => global::Umbraco.Web.PublishedModels.BasePage.GetMetaDescription(this);
+
+		///<summary>
+		/// Meta Keywords
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("metaKeywords")]
+		public string MetaKeywords => global::Umbraco.Web.PublishedModels.BasePage.GetMetaKeywords(this);
+
+		///<summary>
+		/// Meta Page Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("metaPageTitle")]
+		public string MetaPageTitle => global::Umbraco.Web.PublishedModels.BasePage.GetMetaPageTitle(this);
 	}
 
 	/// <summary>Folder</summary>
