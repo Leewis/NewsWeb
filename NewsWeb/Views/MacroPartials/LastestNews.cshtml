@@ -20,6 +20,7 @@
                 <div class="col-desc">
                     <h5 class="heading-title-news merri-title"><a href="@latestNews.Url()"> @latestNews.GetProperty("title").Value()</a></h5>
                     <span>@latestNews.GetProperty("shortDescription").Value()</span>
+                    <p><span>@latestNews.GetProperty("source").Value() </span><span>@latestNews.GetProperty("postedDateTime").Value()</span></p>
                 </div>
             </article>
             <div class="child-news horizontal">

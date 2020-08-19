@@ -1,7 +1,10 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.News>
 @using ContentModels = Umbraco.Web.PublishedModels;
 @using Umbraco.Web;
-@using Umbraco.Core.Models;
+@using Umbraco.Core;
+@using Models = Umbraco.Core.Models;
+@using Umbraco.Core.Mapping;
+@using NewsWeb.Services
 @{
     Layout = "master.cshtml";
     var root = Model.Root();
@@ -11,7 +14,11 @@
     var twitter = setting.GetProperty("twitterUrl").GetValue();
     var parent = Model.Parent;
 
-    var relatedNews = Model.RelatedNews;
+    UmbracoMapper mapper = new UmbracoMapper(new MapDefinitionCollection(new List<IMapDefinition>()));
+
+    INewsService service = new NewsService(mapper);
+
+    var relatedNews = service.GetNewsModel(Model);
 }
 
 <div class="container white-bg">
@@ -47,37 +54,37 @@
                     @Model.Value("fullDescription")
                 </div>
                 @*<div class="articles-link-display">
-                    <ul>
-                        <li>
-                            <a href="#">Cánh tay phải của người giàu nhất châu Á</a>
+                        <ul>
+                            <li>
+                                <a href="#">Cánh tay phải của người giàu nhất châu Á</a>
 
-                        </li>
-                        <li>
-                            <a href="#">Cuộc đối đầu của 2 anh em gia tộc giàu nhất châu Á</a>
-                            <span class="comments-count">
-                                <i class="far fa-comment"></i>
-                                <a href="#">85</a>
-                            </span>
-                        </li>
-                    </ul>
-                </div>*@
+                            </li>
+                            <li>
+                                <a href="#">Cuộc đối đầu của 2 anh em gia tộc giàu nhất châu Á</a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">85</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>*@
                 <p class="author"><strong>@Model.Value("author")</strong></p>
                 @*<div class="footer-content">
-                    <a class="btn btn-back" href="@parent.Url()">
-                        <span>Trở về trang @parent.GetProperty("title").Value()</span>
-                    </a>
-                    <a class="btn btn-save">
-                        <i class="fa fa-bookmark"></i>
-                        Lưu
-                    </a>
-                    <div class="social-icons">
-                        <span>Chia sẻ</span>
-                        <a href="@facebook" class="fab fa-facebook-f"></a>
-                        <a href="@twitter" class="fab fa-twitter"></a>
-                        <a href="#" class="fa fa-envelope"></a>
-                        <a href="#" class="fa fa-link"></a>
-                    </div>
-                </div>*@
+                        <a class="btn btn-back" href="@parent.Url()">
+                            <span>Trở về trang @parent.GetProperty("title").Value()</span>
+                        </a>
+                        <a class="btn btn-save">
+                            <i class="fa fa-bookmark"></i>
+                            Lưu
+                        </a>
+                        <div class="social-icons">
+                            <span>Chia sẻ</span>
+                            <a href="@facebook" class="fab fa-facebook-f"></a>
+                            <a href="@twitter" class="fab fa-twitter"></a>
+                            <a href="#" class="fa fa-envelope"></a>
+                            <a href="#" class="fa fa-link"></a>
+                        </div>
+                    </div>*@
 
                 <div class="source-news">
                     <span>
@@ -196,7 +203,7 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                @if (relatedNews != null && relatedNews.Count() > 0)
+                @if (relatedNews != null && relatedNews.RelatedNews != null && relatedNews.RelatedNews.Any())
                 {
                     <div class="topic-list">
                         <div>
@@ -212,96 +219,88 @@
                             <!-- Related News -->
                             @{
                                 <div class="row pb-2 pt-4">
-                                    @foreach (var newItem in relatedNews)
-                                    {
-                                        var moreLink = newItem; /* newItem.GetProperty("Link Title");*/
-
-                                        //var helper = new UmbracoHelper(Umbraco.Web.UmbracoContext);
-                                        //var selectedNew = helper.get(1089);
-
-                                        if (moreLink != null)
-                                        {
-                                            <div class="col-lg col-md-4 topic-item">
-                                                <a href="@moreLink.Url" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-1.jpg")" alt="news-kinh-doanh-1" class="img-fluid"></a>
+                                    @foreach (var newItem in relatedNews.RelatedNews)
+                                    {                                       
+                                        <div class="col-lg col-md-4 topic-item">
+                                            <a href="@newItem.SourceUrl" class="d-inline-block img-thumb"><img src="@newItem.Picture" alt="news-kinh-doanh-1" class="img-fluid"></a>
                                                 <h6 class="merri-title">
-                                                    <a href="@moreLink.Url">
-                                                        @newItem.Name
+                                                    <a href="@newItem.SourceUrl">
+                                                        @newItem.Title
                                                     </a>
                                                 </h6>
-                                                <p><span class="update-time"><a href="#">@parent.GetProperty("title").Value()</a></span></p>
-                                            </div>
-                                        }
+                                            <p><span class="update-time"><a href="#">@parent.GetProperty("title").Value()</a></span></p>
+                                        </div>
                                     }
                                 </div>
                             }
 
                             @*<div class="col-lg col-md-4 topic-item">
-                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-1.jpg")" alt="news-kinh-doanh-1" class="img-fluid"></a>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                Người giàu nhất châu Á vào top 10 giàu nhất thế giới
-                            </a>
-                        </h6>
-                        <p><span class="update-time"><a href="#">Quốc tế</a></span></p>
-                    </div>
-                    <div class="col-lg col-md-4 topic-item">
-                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-2.jpg")" alt="news-kinh-doanh-2" class="img-fluid"></a>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                Nhà giàu Hàn Quốc đổ xô sắm xe sang sau dịch
-                            </a>
-                        </h6>
-                        <p>
-                            <span class="update-time">
-                                <a href="#">Vĩ mô</a>
-                            </span>
-                            <span class="comments-count">
-                                <i class="far fa-comment"></i>
-                                <a href="#">32</a>
-                            </span>
-                        </p>
-                    </div>
-                    <div class="col-lg col-md-4 topic-item">
-                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-3.jpg")" alt="news-kinh-doanh-3" class="img-fluid"></a>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                Lô vải thiều Bắc Giang đầu tiên xuất đi Nhật
-                            </a>
-                        </h6>
-                        <p>
-                            <span class="update-time">
-                                <a href="#">Hàng hóa</a>
-                            </span>
-                        </p>
-                    </div>
-                    <div class="col-lg col-md-4 topic-item">
-                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-4.jpg")" alt="news-kinh-doanh-4" class="img-fluid"></a>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                Nghị định giảm 50% phí trước bạ đã trình Chính phủ
-                            </a>
-                        </h6>
-                        <p>
-                            <span class="update-time">
-                                <a href="#">Vĩ mô</a>
-                            </span>
+                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-1.jpg")" alt="news-kinh-doanh-1" class="img-fluid"></a>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Người giàu nhất châu Á vào top 10 giàu nhất thế giới
+                                        </a>
+                                    </h6>
+                                    <p><span class="update-time"><a href="#">Quốc tế</a></span></p>
+                                </div>
+                                <div class="col-lg col-md-4 topic-item">
+                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-2.jpg")" alt="news-kinh-doanh-2" class="img-fluid"></a>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Nhà giàu Hàn Quốc đổ xô sắm xe sang sau dịch
+                                        </a>
+                                    </h6>
+                                    <p>
+                                        <span class="update-time">
+                                            <a href="#">Vĩ mô</a>
+                                        </span>
+                                        <span class="comments-count">
+                                            <i class="far fa-comment"></i>
+                                            <a href="#">32</a>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-lg col-md-4 topic-item">
+                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-3.jpg")" alt="news-kinh-doanh-3" class="img-fluid"></a>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Lô vải thiều Bắc Giang đầu tiên xuất đi Nhật
+                                        </a>
+                                    </h6>
+                                    <p>
+                                        <span class="update-time">
+                                            <a href="#">Hàng hóa</a>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-lg col-md-4 topic-item">
+                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-4.jpg")" alt="news-kinh-doanh-4" class="img-fluid"></a>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            Nghị định giảm 50% phí trước bạ đã trình Chính phủ
+                                        </a>
+                                    </h6>
+                                    <p>
+                                        <span class="update-time">
+                                            <a href="#">Vĩ mô</a>
+                                        </span>
 
-                        </p>
-                    </div>
-                    <div class="col-lg col-md-4 topic-item">
-                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-5.png")" alt="news-kinh-doanh-5" class="img-fluid"></a>
-                        <h6 class="merri-title">
-                            <a href="#">
-                                VNG đặt mục tiêu doanh thu tăng 20%
-                            </a>
-                        </h6>
-                        <p>
-                            <span class="update-time">
-                                <a href="#">Vĩ mô</a>
-                            </span>
+                                    </p>
+                                </div>
+                                <div class="col-lg col-md-4 topic-item">
+                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/category/news-kinh-doanh-5.png")" alt="news-kinh-doanh-5" class="img-fluid"></a>
+                                    <h6 class="merri-title">
+                                        <a href="#">
+                                            VNG đặt mục tiêu doanh thu tăng 20%
+                                        </a>
+                                    </h6>
+                                    <p>
+                                        <span class="update-time">
+                                            <a href="#">Vĩ mô</a>
+                                        </span>
 
-                        </p>
-                    </div>*@
+                                    </p>
+                                </div>*@
                         </div>
                     </div>
                 }

@@ -1,10 +1,19 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @using Umbraco.Web;
+@using Umbraco.Core.Mapping;
+@using NewsWeb.Services
 @{
-    var root = Model.Root();
-    var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
-    var logoSetting = setting.Value<IPublishedContent>("siteLogoUrl");
-    var currentDate = DateTime.Now.ToString("dddd, dd/MM/yyyy",new System.Globalization.CultureInfo("Vi-VI"));
+    //var root = Model.Root();
+    //var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
+    //var logoSetting = setting.Value<IPublishedContent>("siteLogoUrl");
+
+    UmbracoMapper mapper = new UmbracoMapper(new MapDefinitionCollection(new List<IMapDefinition>()));
+
+    ISettingsService service = new SettingsService(mapper); 
+
+    var logoSetting = service.SiteSetting;
+
+    var currentDate = DateTime.Now.ToString("dddd, dd/MM/yyyy", new System.Globalization.CultureInfo("Vi-VI"));
 }
 <header>
     <div class="header-wrapper white-bg">
@@ -15,7 +24,7 @@
                         <div class="top-left d-flex">
                             <a class="d-lg-none view-mb-menu"><i class="fas fa-bars"></i></a>
                             <div class="top-logo-time d-flex">
-                                <a class="logo" href="/home"><img src="@logoSetting.Url" alt="logo" class="img-fluid d-block"></a>
+                                <a class="logo" href="/home"><img src="@logoSetting.SiteLogoUrl" alt="logo" class="img-fluid d-block"></a>
                                 <p class="time-now">@currentDate</p>
                             </div>
                         </div>
@@ -41,7 +50,7 @@
                         <span class="btn-mb-close">&#10005;</span>
                     </div>
                     <div class="float-right">
-                        <a href="/home.html"><img src="@Url.Content("~/assets/images/logo/logo.png")" alt="logo" class="img-fluid d-block"></a>
+                        <a href="/home.html"><img src="@logoSetting.SiteLogoUrl" alt="logo" class="img-fluid d-block"></a>
                     </div>
                 </div>
                 <div class="bt-solid mt-3 mb-3"></div>
