@@ -9,13 +9,16 @@
 
 <div class="category-menu">
     <ul class="navbar-list">
-        @foreach (var item in selection)
+        @if (selection.Any())
         {
-            if (item.HasProperty("parentCategoryId"))
+            foreach (var item in selection)
             {
-                <li class="nav-item">
-                    <a class="item-link" href="@item.Url">@item.GetProperty("Title").Value()</a>
-                </li>
+                if (item.HasProperty("parentCategoryId"))
+                {
+                    <li class="nav-item">
+                        <a class="item-link" href="@item.Url">@item.GetProperty("Title").Value()</a>
+                    </li>
+                }
             }
         }
     </ul>
