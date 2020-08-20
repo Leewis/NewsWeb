@@ -6,7 +6,7 @@ using Umbraco.Core.Models.PublishedContent;
 
 namespace NewsWeb.Models
 {
-    public class Settings
+    public class Setting: BaseModel
     {
         #region Site Settings
         public string HomeUrl { get; set; }
