@@ -366,6 +366,9 @@
     <Content Include="Views\Partials\Footer.cshtml" />
     <Content Include="Views\Partials\Header.cshtml" />
     <Content Include="Views\Partials\MetaTag.cshtml" />
+    <Content Include="Views\MacroPartials\TopicList.cshtml" />
+    <Content Include="Views\MacroPartials\PostList.cshtml" />
+    <Content Include="Views\MacroPartials\CategoryWidget.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

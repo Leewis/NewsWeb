@@ -1,0 +1,94 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var pageSize = 0;
+    int.TryParse(Model.MacroParameters["pageSize"].ToString(), out pageSize);
+    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+    var latestNews = arrayNews[0];
+    var commonNews = arrayNews.Where(item => item != latestNews).ToArray();
+
+
+    var page = 1;
+    int.TryParse(Request.QueryString["page"], out page);
+    var totalPages = (int)Math.Ceiling((double)commonNews.Count() / (double)pageSize);
+
+    if (page > totalPages)
+    {
+        page = totalPages;
+    }
+    else if (page < 1)
+    {
+        page = 1;
+    }
+
+    if (category.Level == 4)
+    {
+        <div class="product-news">
+            <article class="news-item d-flex">
+                <div class="col-img mr-3">
+                    <a href="@latestNews.Url()"><img src="@latestNews.GetProperty("Picture").Value()" alt="" class="img-fluid"></a>
+                </div>
+                <div class="col-desc">
+                    <h5 class="heading-title-news merri-title">
+                        <a href="@latestNews.Url()">@latestNews.GetProperty("Title").Value()</a>
+                    </h5>
+                    <p>
+                        <span class="location-name">TPHCM -</span>
+                        <a href="@latestNews.Url()">
+                            @latestNews.GetProperty("shortDescription").Value()
+                        </a>
+                        <br>
+                        <span class="comments-count">
+                            <i class="far fa-comment"></i>
+                            <a href="#">32</a>
+                        </span>
+                    </p>
+                </div>
+            </article>
+        </div>
+    }
+    foreach (var item in commonNews.Skip((page - 1) * pageSize).Take(pageSize))
+    {
+        <div class="post-list">
+            <article class="post-item d-flex">
+                <div class="col-desc mr-5">
+                    <h5 class="merri-title">
+                        <a href="@item.Url()">@item.GetProperty("title").Value()</a>
+                    </h5>
+                    <p>
+                        <a href="@item.Url()">
+                            @item.GetProperty("shortDescription").Value()
+                        </a>
+                    </p>
+                </div>
+                @if (item.GetProperty("Picture").HasValue())
+                {
+                    <div class="col-img mr-3">
+                        <a href="#" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture")" alt="" class="img-fluid"></a>
+                    </div>
+                }
+            </article>
+        </div>
+    }
+    if (totalPages > 1)
+    {
+        <div class="pagination">
+            <ul>
+                @if (page > 1)
+                {
+                    <li><a href="?page=@(page-1)">Prev</a></li>
+                }
+                @for (int p = 1; p < totalPages + 1; p++)
+                {
+                    <li class="@(p == page ? "active" : string.Empty)">
+                        <a href="?page=@p">@p</a>
+                    </li>
+                }
+                @if (page < totalPages)
+                {
+                    <li><a href="?page=@(page+1)">Next</a></li>
+                }
+            </ul>
+        </div>
+    }
+}

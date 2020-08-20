@@ -1,0 +1,92 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var currentPage = Model.Content;
+    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+    var latestNews = arrayNews[0];
+}
+
+<div class="topic-list">
+    @if(currentPage.ContentType.Alias == "news")
+    {
+    <div>
+        <h6 class="topic-header">
+            <a href="#">
+                @category.GetProperty("Title").Value()
+            </a>
+        </h6>
+        <a href="#" class="topic-readmore">Xem thêm &gt;&gt;</a>
+    </div>
+    }
+    
+    <div class="row">
+        <div class="col-lg col-md-4 topic-item">
+            <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-1.jpg" alt="news-kinh-doanh-1" class="img-fluid"></a>
+            <h6 class="merri-title">
+                <a href="#">
+                    Người giàu nhất châu Á vào top 10 giàu nhất thế giới
+                </a>
+            </h6>
+            <p><span class="update-time"><a href="#">Quốc tế</a></span></p>
+        </div>
+        <div class="col-lg col-md-4 topic-item">
+            <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-2.jpg" alt="news-kinh-doanh-2" class="img-fluid"></a>
+            <h6 class="merri-title">
+                <a href="#">
+                    Nhà giàu Hàn Quốc đổ xô sắm xe sang sau dịch
+                </a>
+            </h6>
+            <p>
+                <span class="update-time">
+                    <a href="#">Vĩ mô</a>
+                </span>
+                <span class="comments-count">
+                    <i class="far fa-comment"></i>
+                    <a href="#">32</a>
+                </span>
+            </p>
+        </div>
+        <div class="col-lg col-md-4 topic-item">
+            <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-3.jpg" alt="news-kinh-doanh-3" class="img-fluid"></a>
+            <h6 class="merri-title">
+                <a href="#">
+                    Lô vải thiều Bắc Giang đầu tiên xuất đi Nhật
+                </a>
+            </h6>
+            <p>
+                <span class="update-time">
+                    <a href="#">Hàng hóa</a>
+                </span>
+            </p>
+        </div>
+        <div class="col-lg col-md-4 topic-item">
+            <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-4.jpg" alt="news-kinh-doanh-4" class="img-fluid"></a>
+            <h6 class="merri-title">
+                <a href="#">
+                    Nghị định giảm 50% phí trước bạ đã trình Chính phủ
+                </a>
+            </h6>
+            <p>
+                <span class="update-time">
+                    <a href="#">Vĩ mô</a>
+                </span>
+
+            </p>
+        </div>
+        <div class="col-lg col-md-4 topic-item">
+            <a href="#" class="d-inline-block img-thumb"><img src="assets/images/category/news-kinh-doanh-5.png" alt="news-kinh-doanh-5" class="img-fluid"></a>
+            <h6 class="merri-title">
+                <a href="#">
+                    VNG đặt mục tiêu doanh thu tăng 20%
+                </a>
+            </h6>
+            <p>
+                <span class="update-time">
+                    <a href="#">Vĩ mô</a>
+                </span>
+
+            </p>
+        </div>
+    </div>
+</div>
+<div class="bt-solid mt-3 mb-3"></div>
