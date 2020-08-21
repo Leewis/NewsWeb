@@ -403,7 +403,6 @@ E:\Project\Umbraco\NewsWeb\NewsWeb\bin\System.Web.Webpages.Deployment.xml
 E:\Project\Umbraco\NewsWeb\NewsWeb\bin\System.Web.Webpages.Razor.xml
 E:\Project\Umbraco\NewsWeb\NewsWeb\bin\System.Web.Helpers.xml
 E:\Project\Umbraco\NewsWeb\NewsWeb\bin\System.Web.Mvc.xml
-E:\Project\Umbraco\NewsWeb\NewsWeb\obj\Debug\NewsWeb.csprojAssemblyReference.cache
 E:\Project\Umbraco\NewsWeb\NewsWeb\obj\Debug\NewsWeb.csproj.CoreCompileInputs.cache
 E:\Project\Umbraco\NewsWeb\NewsWeb\obj\Debug\NewsWeb.csproj.CopyComplete
 E:\Project\Umbraco\NewsWeb\NewsWeb\obj\Debug\NewsWeb.dll
@@ -818,3 +817,4 @@ D:\Working\Private\ub\NewsWeb\NewsWeb\obj\Debug\NewsWeb.csproj.CoreCompileInputs
 D:\Working\Private\ub\NewsWeb\NewsWeb\obj\Debug\NewsWeb.csproj.CopyComplete
 D:\Working\Private\ub\NewsWeb\NewsWeb\obj\Debug\NewsWeb.dll
 D:\Working\Private\ub\NewsWeb\NewsWeb\obj\Debug\NewsWeb.pdb
+E:\Project\Umbraco\NewsWeb\NewsWeb\obj\Debug\NewsWeb.csprojAssemblyReference.cache
