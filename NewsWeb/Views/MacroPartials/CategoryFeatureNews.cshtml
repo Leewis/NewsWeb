@@ -1,70 +1,76 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @using Umbraco.Core.Services;
 @{
-    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
-    var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
-    var latestNews = arrayNews[0];
-}
+    var categories = Model.MacroParameters["categories"].ToString().Split(',');
+    foreach (var cat in categories)
+    {
+        var category = Umbraco.Content(cat);
+        var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+        if (arrayNews.Count() != 0)
+        {
+            var latestNews = arrayNews[0];
 
+            <div class="home-categories-list pl-3">
+                <!-- category-box-item 1-->
+                <div class="category-box-item">
+                    <div class="cate-options d-flex">
+                        <h5 class="cate-title merri-title"><a href="@category.Url()">@category.GetProperty("Title").Value()</a></h5>
+                        <ul>
+                            @foreach (var item in category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category"))
+                            {
+                                <li><a href="@item.Url">@item.GetProperty("Title").Value()</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="cate-content-box d-flex">
+                        <article class="thumb-cate mr-3">
+                            <a href="#" class="d-inline-block img-thumb"><img src="@latestNews.GetProperty("Picture").Value()" class="img-fluid" alt="" /></a>
+                            <div class="cate-thumb-desc mt-3">
+                                <h6 class="merri-title">
+                                    <a href="@latestNews.Url()">
+                                        @latestNews.GetProperty("Title").Value()
+                                    </a>
+                                </h6>
+                                <div class="child-news-desc">
+                                    <a href="#">
+                                        <span>
+                                            @latestNews.GetProperty("shortDescription").Value()
+                                        </span>
+                                    </a>
+                                    <div class="update-time">
+                                        <span>
+                                            4' trước Trong nước
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </article>
+                        <div class="others-news-cate">
+                            @for (int i = 1; i < 4 && i < arrayNews.Count(); i++)
+                            {
+                                <article class="cate-item">
+                                    <h6 class="merri-title"><a href="@arrayNews[i].Url()"> @arrayNews[i].GetProperty("title").Value()</a></h6>
+                                    <div class="article-desc">
+                                        <a href="@arrayNews[i].Url()">
+                                            @arrayNews[i].GetProperty("shortDescription").Value()
+                                        </a>
+                                        <span class="comments-count">
+                                            <i class="far fa-comment"></i>
+                                            <a href="#">85</a>
+                                        </span>
+                                    </div>
 
-<div class="home-categories-list pl-3">
-    <!-- category-box-item 1-->
-    <div class="category-box-item">
-        <div class="cate-options d-flex">
-            <h5 class="cate-title merri-title"><a href="@category.Url()">@category.GetProperty("Title").Value()</a></h5>
-            <ul>
-                @foreach (var item in category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category"))
-                {
-                    <li><a href="@item.Url">@item.GetProperty("Title").Value()</a></li>
-                }
-            </ul>
-        </div>
-        <div class="cate-content-box d-flex">
-            <article class="thumb-cate mr-3">
-                <a href="#" class="d-inline-block img-thumb"><img src="@latestNews.GetProperty("Picture").Value()" class="img-fluid" alt="" /></a>
-                <div class="cate-thumb-desc mt-3">
-                    <h6 class="merri-title">
-                        <a href="@latestNews.Url()">
-                            @latestNews.GetProperty("Title").Value()
-                        </a>
-                    </h6>
-                    <div class="child-news-desc">
-                        <a href="#">
-                            <span>
-                                @latestNews.GetProperty("shortDescription").Value()
-                            </span>
-                        </a>
-                        <div class="update-time">
-                            <span>
-                                4' trước Trong nước
-                            </span>
+                                </article>
+                            }
                         </div>
                     </div>
                 </div>
-
-            </article>
-            <div class="others-news-cate">
-                @for(int i = 1; i < 4 && i < arrayNews.Count(); i++)
-                {
-                <article class="cate-item">
-                    <h6 class="merri-title"><a href="@arrayNews[i].Url()"> @arrayNews[i].GetProperty("title").Value()</a></h6>
-                    <div class="article-desc">
-                        <a href="@arrayNews[i].Url()">
-                            @arrayNews[i].GetProperty("shortDescription").Value()
-                        </a>
-                        <span class="comments-count">
-                            <i class="far fa-comment"></i>
-                            <a href="#">85</a>
-                        </span>
-                    </div>
-
-                </article>
-                }
-                
-
             </div>
-        </div>
+            <div class="bt-solid mt-3 mb-3"></div>
 
-    </div>
-</div>
+        }
+    }
+}
+
+

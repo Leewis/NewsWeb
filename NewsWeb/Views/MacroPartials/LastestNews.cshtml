@@ -1,10 +1,9 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @using Umbraco.Core.Services;
-@{ 
+@{
     var numsofNews = Model.MacroParameters["numbersNews"];
-    var root = Umbraco.ContentAtRoot().FirstOrDefault();
-    var homepage = root.Children.FirstOrDefault(x => x.Id == 1089);
-    var arrayNews = homepage.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+    var content = Umbraco.Content(Udi.Parse(Model.MacroParameters["content"].ToString()));
+    var arrayNews = content.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
     var latestNews = arrayNews[0];
 }
 
@@ -14,36 +13,35 @@
         <div class="col-lg-9">
             <article class="news-item d-flex">
                 <div class="col-img mr-3">
-                    <a href="@latestNews.Url()"><img src="@latestNews.GetProperty("Picture").Value()" class="img-fluid"  alt="" /></a>
+                    <a href="@latestNews.Url()"><img src="@latestNews.GetProperty("Picture").Value()" class="img-fluid" alt="" /></a>
 
                 </div>
                 <div class="col-desc">
                     <h5 class="heading-title-news merri-title"><a href="@latestNews.Url()"> @latestNews.GetProperty("title").Value()</a></h5>
                     <span>@latestNews.GetProperty("shortDescription").Value()</span>
-                    <p><span>@latestNews.GetProperty("source").Value() </span><span>@latestNews.GetProperty("postedDateTime").Value()</span></p>
                 </div>
             </article>
             <div class="child-news horizontal">
                 <ul class="d-flex">
-                    @for(int i = 1; i < 4; i++)
+                    @for (int i = 1; i < 4 && i < arrayNews.Count(); i++)
                     {
-                    <li>
-                        <h6 class="merri-title">
-                            <a href="@arrayNews[i].Url()">
-                                @arrayNews[i].GetProperty("title").Value()
-                            </a>
-                        </h6>
-                        <div class="child-news-desc">
-                            <a href="#">
-                                @*<span class="location-name"> </span>*@
-                                <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
-                            </a>
-                            <span class="comments-count">
-                                <i class="far fa-comment"></i>
-                                <a href="#">85</a>
-                            </span>
-                        </div>
-                    </li>
+                        <li>
+                            <h6 class="merri-title">
+                                <a href="@arrayNews[i].Url()">
+                                    @arrayNews[i].GetProperty("title").Value()
+                                </a>
+                            </h6>
+                            <div class="child-news-desc">
+                                <a href="#">
+                                    @*<span class="location-name"> </span>*@
+                                    <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
+                                </a>
+                                <span class="comments-count">
+                                    <i class="far fa-comment"></i>
+                                    <a href="#">85</a>
+                                </span>
+                            </div>
+                        </li>
                     }
                 </ul>
 
@@ -78,4 +76,61 @@
         </div>
     </div>
     <div class="bt-solid mt-3 mb-3"></div>
+    @if (content.Level == 3)
+    {
+        <!-- box-slide-topic  -->
+        <div class="box-slide-topic d-flex">
+            <div class="col-box-topic-1">
+                <div><strong>Chủ đề</strong></div>
+            </div>
+            <div class="col-box-topic-2">
+                <div class="box-shop-sell-vertical d-flex">
+                    <div class="sell-top-box">
+                        <div class=" btn-control-carousel">
+                            <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
+                                ❮
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
+                                ❯
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="carouselExampleInterval1" class="slide pointer-event" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item carousel-item-next carousel-item-left">
+                                <div class="article-list-sell d-flex">
+                                    <article class="article-item">
+                                        <div>Kinh tế sau đại dịch</div>
+                                    </article>
+                                    <article class="article-item">
+                                        <div>Mâu thuẫn cổ đông Coteccons</div>
+                                    </article>
+                                    <article class="article-item">
+                                        <div>Làn sóng dịch chuyển đầu tư</div>
+                                    </article>
+                                </div>
+                            </div>
+                            <div class="carousel-item active carousel-item-left">
+                                <div class="article-list-sell d-flex">
+                                    <article class="article-item">
+                                        <div>Kinh tế sau đại dịch 2</div>
+                                    </article>
+                                    <article class="article-item">
+                                        <div>Mâu thuẫn cổ đông Coteccons 2</div>
+                                    </article>
+                                    <article class="article-item">
+                                        <div>Làn sóng dịch chuyển đầu tư 2</div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- box-slide-topic  -->
+        <div class="bt-solid mt-3 mb-3"></div>
+    }
 </div>

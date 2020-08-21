@@ -1,0 +1,28 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var currentPage = Model.Content;
+    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var arrayCategories = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category").ToArray();
+    foreach (var item in arrayCategories)
+    {
+        var arrayNews = item.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(i => i.Value("postedDateTime")).ToArray();
+        <div class="widget-news-small">
+            <h6 class="merri-title">
+                <a href="@item.Url()">
+                    @item.GetProperty("Title").Value()
+                </a>
+            </h6>
+            <a href="#" class="d-inline-block img-thumb"><img src="@arrayNews[0].GetProperty("Picture").Value()"  class="img-fluid"></a>
+            <div class="orthers-news-small">
+                @for (int i = 0; i < 3 && i < arrayNews.Count(); i++)
+                {
+                    <h6 class="merri-title item-news">
+                        <a href="@arrayNews[i].Url()">
+                            @arrayNews[i].GetProperty("Title").Value()
+                        </a>
+                    </h6>
+                }
+            </div>
+        </div>
+    }
+}
