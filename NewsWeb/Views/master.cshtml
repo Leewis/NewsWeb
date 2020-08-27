@@ -6,6 +6,7 @@
     var site = Model.Root();
     var home = site.Children.FirstOrDefault(x => x.Id == 1089);
     var setting = site.Children.FirstOrDefault(x => x.Id == 1118);
+    var searchTerm = string.IsNullOrEmpty(Request["q"]) ? string.Empty : Request["q"];
     //var logo = Model.Value<IPublishedContent>("Logo");
 }
 <!DOCTYPE html>
@@ -39,6 +40,7 @@
     @Html.Partial("Header")
     <main>
         <div class="wrapper-content">
+
             @RenderBody()
         </div>
     </main>

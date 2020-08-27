@@ -1,7 +1,8 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @using Umbraco.Core.Services;
 @{
-    var numsofNews = Model.MacroParameters["numbersNews"];
+    var numsofNews = 0;
+    int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out numsofNews);
     var content = Umbraco.Content(Udi.Parse(Model.MacroParameters["content"].ToString()));
     var arrayNews = content.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
     var latestNews = arrayNews[0];
@@ -50,7 +51,7 @@
         <div class="col-lg-3">
             <div class="child-news vertical">
                 <ul class="d-flex flex-column">
-                    @for (int i = 4; i < 7 && i < arrayNews.Count(); i++)
+                    @for (int i = 4; i < numsofNews && i < arrayNews.Count(); i++)
                     {
                         <li>
                             <h6 class="merri-title">

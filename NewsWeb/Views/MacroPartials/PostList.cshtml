@@ -64,7 +64,7 @@
                 @if (item.GetProperty("Picture").HasValue())
                 {
                     <div class="col-img mr-3">
-                        <a href="#" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture")" alt="" class="img-fluid"></a>
+                        <a href="#" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture").Value()" alt="" class="img-fluid"></a>
                     </div>
                 }
             </article>
@@ -72,8 +72,8 @@
     }
     if (totalPages > 1)
     {
-        <div class="pagination">
-            <ul class="row">
+        <div class="pagination-center">
+            <ul class="row category-pagination">
                 @if (page > 1)
                 {
                     <li><a href="?page=@(page-1)">Prev</a></li>
