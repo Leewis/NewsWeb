@@ -1,0 +1,51 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var serchTerm = string.IsNullOrEmpty(Request["q"]) ? string.Empty : Request["q"];
+}
+<div>
+    <h1>Tìm kiếm</h1>
+    <form class="form-group" action="/home/tim-kiem">
+        <input class="form-control" type="search" value="@serchTerm" aria-label="Search" id="query" name="q">
+        <button class="" type="submit"><i class="fas fa-search"></i></button>
+        <div class="row">
+            <label for="date" class="input-form">
+                <span>Thời gian</span>
+                <select class="form-control" id="thoigian" data-type="date_format">
+                    <option value="all" selected="">Tất cả</option>
+                    <option value="day">1 ngày qua</option>
+                    <option value="week">1 tuần qua</option>
+                    <option value="month">1 tháng qua</option>
+                    <option value="year">1 năm qua</option>
+                </select>
+            </label>
+            <label for="category" class="input-form">
+                <span class="title-input">Chuyên mục</span>
+                <select class="form-control" id="chuyenmuc" data-type="cate_code">
+                    <option selected="" value="">Tất cả</option>
+                    <option value="the-gioi">Thế giới</option>
+                    <option value="kinhdoanh">Kinh doanh</option>
+                    <option value="giaitri">Giải trí</option>
+                    <option value="oto-xe-may">Xe</option>
+                    <option value="thethao">Thể thao</option>
+                    <option value="sohoa">Số hóa</option>
+                </select>
+            </label>
+            <label for="dangbai" class="input-form">
+                <span class="title-input">Dạng bài</span>
+                <select class="form-control" id="dangbai" data-type="media_type">
+                    <option value="all" selected="">Tất cả</option>
+                    <option value="text">Bài viết</option>
+                    <option value="image">Ảnh</option>
+                    <option value="video">Video</option>
+                    <option value="topic">Chủ đề</option>
+                    <option value="infographic">Infographic</option>
+                </select>
+            </label>
+        </div>
+    </form>
+</div>
+<div class="bt-solid mt-3 mb-3"></div>
+<ul class="">
+    <li><a href="">Mới nhất</a></li>
+    <li class="active"><a href="">Liên quan</a></li>
+</ul>

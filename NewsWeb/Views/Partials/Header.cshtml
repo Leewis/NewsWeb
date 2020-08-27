@@ -1,4 +1,4 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+﻿    @inherits Umbraco.Web.Mvc.UmbracoViewPage
 @using Umbraco.Web;
 @using Umbraco.Core.Mapping;
 @using NewsWeb.Services
@@ -33,8 +33,8 @@
                         <div class="top-right d-inline-flex w-100">
                             <a href="#" class="tag-link">Mới nhất</a>
                             <a href="#" class="tag-link">International</a>
-                            <form class="form-inline search-box">
-                                <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                            <form class="form-inline search-box" action="/home/tim-kiem">
+                                <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search" id="query" name="q">
                                 <button class="" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
@@ -50,7 +50,7 @@
                         <span class="btn-mb-close">&#10005;</span>
                     </div>
                     <div class="float-right">
-                        <a href="/home.html"><img src="@logoSetting.SiteLogoUrl" alt="logo" class="img-fluid d-block"></a>
+                        <a href="/home"><img src="@logoSetting.SiteLogoUrl" alt="logo" class="img-fluid d-block"></a>
                     </div>
                 </div>
                 <div class="bt-solid mt-3 mb-3"></div>

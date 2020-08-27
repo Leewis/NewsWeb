@@ -18,8 +18,9 @@
                                 <i class="far fa-calendar-alt"></i>
                                 <input type="text" class="calendar flatpickr-input" placeholder="Xem theo ngày" data-input="" readonly="readonly">
                             </form>
-                            <form class="form-inline search-box">
-                                <input class="form-control" type="search" placeholder="Tìm kiếm trong chuyên mục" aria-label="Search">
+                            <form class="form-inline search-box" action="/home/tim-kiem">
+                                <input class="form-control" type="search" placeholder="Tìm kiếm trong chuyên mục" aria-label="Search" id="query" name="q">
+                                <input class="form-control" type="search" hidden id="category" name="cat" value="@Model.Name()">
                                 <button class="" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>

@@ -36,14 +36,11 @@
                                 {
                                     var pageTitle = item.GetProperty("Title").Value();
                                     <li>
-                                        <a href="@item.Url" title="@pageTitle">
+                                        <a href="@item.Url()" title="@pageTitle">
                                             @pageTitle
                                         </a>
                                     </li>
                                 }
-                                <li class="active">
-                                    @currentPageTitle
-                                </li>
                             </ul>
                         }
                     }
@@ -90,7 +87,6 @@
                     <span>
                         Nguồn:
                     </span>
-                    @*<span>@Model.Value("source") / </span>*@
                     <a href="@Model.Value("sourceUrl")"> @Model.Value("sourceUrl")</a>
                 </div>
             </div>
