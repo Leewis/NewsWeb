@@ -19,7 +19,11 @@
         if (ExamineManager.Instance.TryGetIndex("ExternalIndex", out var index))
         {
             var searcher = index.GetSearcher();
-            var results = searcher.CreateQuery("content").NodeTypeAlias("news").And().GroupedOr(filter, searchTerm).Execute().ToArray();
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("\\p{IsCombiningDiacriticalMarks}+");
+            string temp = searchTerm.Normalize(System.Text.NormalizationForm.FormD);
+            var tempSearch = regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
+
+            var results = searcher.CreateQuery("content").NodeTypeAlias("news").And().GroupedOr(filter, tempSearch).Execute().ToArray();
             Array.Clear(_results, 0, _results.Count());
 
             if (category != string.Empty)
@@ -37,7 +41,7 @@
                                                     .Descendants().Where(x => x.IsVisible()
                                                                     && x.ContentType.Alias == "news"
                                                                     && x.Properties.Any(y => y.GetValue() != null
-                                                                                           && y.GetValue().ToString().Contains(searchTerm))).ToArray();
+                                                                                           && y.GetValue().ToString().Contains(tempSearch))).ToArray();
 
                             //results.Add(searcher.CreateQuery("content").ParentId(parentId).And().GroupedOr(filter, searchTerm).Execute());
 
@@ -49,28 +53,28 @@
             {
                 foreach (var result in _results)
                 {
-                        //var node = Umbraco.Content(result.Id);
-                        <div class="post-list">
-                            <article class="post-item d-flex">
-                                <div class="col-desc mr-5 col-md-8">
-                                    <h5 class="merri-title">
-                                        <a href="@result.Url()">@result.GetProperty("title").Value()</a>
-                                    </h5>
-                                    <p>
-                                        <a href="@result.Url()">
-                                            @result.GetProperty("shortDescription").Value()
-                                        </a>
-                                    </p>
+                    //var node = Umbraco.Content(result.Id);
+                    <div class="post-list">
+                        <article class="post-item d-flex">
+                            <div class="col-desc mr-5 col-md-8">
+                                <h5 class="merri-title">
+                                    <a href="@result.Url()">@result.GetProperty("title").Value()</a>
+                                </h5>
+                                <p>
+                                    <a href="@result.Url()">
+                                        @result.GetProperty("shortDescription").Value()
+                                    </a>
+                                </p>
+                            </div>
+                            @if (result.GetProperty("Picture").HasValue())
+                            {
+                                <div class="col-img mr-3 col-md-4">
+                                    <a href="#" class="mr-3 img-thumb"><img src="@result.GetProperty("Picture").Value()" alt="" class="img-fluid" style='max-height: 100%; max-width: 100%; object-fit: contain'></a>
                                 </div>
-                                @if (result.GetProperty("Picture").HasValue())
-                                {
-                                    <div class="col-img mr-3 col-md-4">
-                                        <a href="#" class="mr-3 img-thumb"><img src="@result.GetProperty("Picture").Value()" alt="" class="img-fluid" style='max-height: 100%; max-width: 100%; object-fit: contain'></a>
-                                    </div>
-                                }
-                            </article>
-                        </div>
-                        <div class="bt-solid mt-3 mb-3"></div>
+                            }
+                        </article>
+                    </div>
+                    <div class="bt-solid mt-3 mb-3"></div>
                 }
             }
             else if (results.Any())
