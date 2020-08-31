@@ -226,6 +226,8 @@ namespace NewsWeb.Services
                         dst.Category = src.GetProperty("category") != null && src.GetProperty("category").HasValue() ? src.Value<IPublishedContent>("category").Value("Title").ToString() : "";
 
                         dst.CategoryPublishedContent = src.Value<IPublishedContent>("category") as IPublishedContent;
+
+                        dst.Url = src.Url;
                     }
                 );
 
