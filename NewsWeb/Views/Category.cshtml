@@ -2,13 +2,6 @@
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
     Layout = "master.cshtml";
-    var parent = Model.Parent;
-    var subCategory = Model.Descendants().Where(c => c.ContentType.Alias == "category").ToArray();
-    bool isMainCategory = subCategory.Count() != 0 ? true : false;
-    var title = isMainCategory ? Model.Value("Title") : parent.Value("Title");
-    var url = isMainCategory ? Model.Url() : parent.Url();
-    var udi = new GuidUdi("document", isMainCategory ? Model.Key : parent.Key);
-    var arrayNews = Model.Descendants().Where(c => c.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
 }
 
 <div class="container white-bg pt-2 pb-2">

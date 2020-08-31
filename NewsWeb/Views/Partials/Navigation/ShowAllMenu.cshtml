@@ -2,7 +2,7 @@
 @using Umbraco.Web;
 @{
     var site = Model.AncestorOrSelf(2);
-    var selection = site.Children.Where(x => x.IsVisible());
+    var selection = site.Children.Where(x => x.IsVisible() && x.ContentType.Alias == "category");
 }
 <div class="container">
     <div class="header-menu">
@@ -12,21 +12,24 @@
     <div class="content-left">
         @foreach (var item in selection)
         {
-            <ul class="cate-menu">
-                <li>
-                    <a href="">@item.GetProperty("Title").Value()</a>
-                </li>
-                @foreach (var child in item.Children().Where(c => c.IsVisible()))
-                {
-                    if (child.HasProperty("parentCategoryId"))
+            if ((bool)item.GetProperty("topMenu").Value())
+            {
+                <ul class="cate-menu">
+                    <li>
+                        <a href="">@item.GetProperty("Title").Value()</a>
+                    </li>
+                    @foreach (var child in item.Children().Where(c => c.IsVisible()))
                     {
-                        <li>
-                            <a href="@child.Url">@child.GetProperty("Title").Value()</a>
-                        </li>
+                        if (child.HasProperty("parentCategoryId"))
+                        {
+                            <li>
+                                <a href="@child.Url">@child.GetProperty("Title").Value()</a>
+                            </li>
+                        }
                     }
-                }
-                <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
-            </ul>
+                    <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+                </ul>
+            }
         }
     </div>
     <div class="content-right">
