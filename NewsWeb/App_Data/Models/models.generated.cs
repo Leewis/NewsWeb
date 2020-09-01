@@ -17,7 +17,7 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.ModelsBuilder.Embedded;
 
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "65f9424a49235b1f")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "4c8241c57fe16b0")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedModels
@@ -506,6 +506,13 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("shortDescription")]
 		public string ShortDescription => this.Value<string>("shortDescription");
+
+		///<summary>
+		/// ShowInTopicList
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("showInTopicList")]
+		public bool ShowInTopicList => this.Value<bool>("showInTopicList");
 
 		///<summary>
 		/// Source

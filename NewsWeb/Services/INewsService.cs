@@ -12,5 +12,6 @@ namespace NewsWeb.Services
         Setting SiteSetting { get; }
         IList<NewsModel> GetRelatedNews(IPublishedContent newsDetail);
         NewsModel GetNewsModel(IPublishedContent newsDetail);
+        NewsModel[] GetCategory(IOrderedEnumerable<IPublishedContent> fillterData);
     }
 }
