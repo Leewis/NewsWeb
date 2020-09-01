@@ -1,0 +1,51 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Aio.Umbraco.Services.Interfaces;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Common.ContentModels
+@{
+    var currentPage = Model.Content.Root();
+
+    IAdvertisementsService service = new AdvertisementsService();
+    var advertisings = service.GetByType("AioShop");
+    var numOfCarouSelItem = advertisings.Count() / 3;
+}
+
+<div class="box-shop-sell-vertical p-3">
+    <div class="clearfix sell-top-box">
+        <h5 class="merri-title heading-line float-left"><a href="">@Model.Content.Value("Title")</a></h5>
+        <div class="float-right btn-control-carousel">
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                &#10094;
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                &#10095;
+            </a>
+        </div>
+    </div>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @for (int i = 0; i <= numOfCarouSelItem; i++)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : "")" data-target="#myCarousel" data-slide-to="@i">
+                    <div class="article-list-sell">
+                        @for (int y = 0; y < advertisings.Count; y++)
+                        {
+                            <article class="article-item">
+                                <div class="d-flex">
+                                    <a href="@advertisings[y].Link" class="mr-3 img-thumb"><img src="@Url.Content(advertisings[y].IconUrl)" alt="" class="img-fluid d-block"></a>
+                                    <div class="article-desc">
+                                        <a href="#" class="fsell-title"><span>@advertisings[y].Title</span></a>
+                                        <p class="fsell-price">@advertisings[y].Price</p>
+                                    </div>
+                                </div>
+                            </article>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
