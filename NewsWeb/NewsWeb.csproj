@@ -291,6 +291,13 @@
     <Content Include="App_Plugins\uSync8\uSyncService.js" />
     <Content Include="App_Plugins\uSync8\usync_864.css" />
     <Content Include="App_Plugins\uSync8\uSync_864.js" />
+    <Content Include="assets\stylesheets\bootstrap.min.css" />
+    <Content Include="assets\stylesheets\custom.css" />
+    <Content Include="assets\stylesheets\flatpickr.css" />
+    <Content Include="assets\stylesheets\fontawesome-all.min.css" />
+    <Content Include="assets\stylesheets\main.css" />
+    <Content Include="assets\stylesheets\main.min.css" />
+    <Content Include="assets\stylesheets\normalize.css" />
     <Content Include="config\grid.editors.config.js" />
     <Content Include="config\Lang\cs-CZ.user.xml" />
     <Content Include="config\Lang\da-DK.user.xml" />
@@ -320,6 +327,11 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="assets\stylesheets\bootstrap.min.css.map" />
+    <Content Include="assets\stylesheets\scss\category.scss" />
+    <Content Include="assets\stylesheets\scss\detail.scss" />
+    <Content Include="assets\stylesheets\scss\main.scss" />
+    <Content Include="assets\stylesheets\scss\responsive.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
