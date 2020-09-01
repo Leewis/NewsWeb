@@ -826,3 +826,11 @@ D:\Working\Private\ub\NewsWeb\NewsWeb\bin\Aio.Umbraco.Common.pdb
 D:\Working\Private\ub\NewsWeb\NewsWeb\bin\Aio.Umbraco.Services.pdb
 D:\Working\Private\ub\NewsWeb\NewsWeb\bin\Aio.Umbraco.Services.dll.config
 D:\Working\Private\ub\NewsWeb\NewsWeb\obj\Debug\NewsWeb.csprojAssemblyReference.cache
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\NewsWeb\bin\Aio.Umbraco.Common.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\NewsWeb\bin\Aio.Umbraco.Services.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\NewsWeb\bin\Zone.UmbracoMapper.V8.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\NewsWeb\bin\Zone.UmbracoMapper.Common.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\NewsWeb\bin\Autofac.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\NewsWeb\bin\Aio.Umbraco.Common.pdb
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\NewsWeb\bin\Aio.Umbraco.Services.pdb
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\NewsWeb\bin\Aio.Umbraco.Services.dll.config

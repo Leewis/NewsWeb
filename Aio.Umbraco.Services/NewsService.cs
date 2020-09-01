@@ -64,5 +64,16 @@ namespace Aio.Umbraco.Services
             }
             return null;
         }
+
+        public NewsModel[] GetCategory(IOrderedEnumerable<IPublishedContent> fillterData)
+        {
+            var count = fillterData.ToArray().Count();
+            NewsModel[] arr = new NewsModel[count];
+            foreach (var i in fillterData.ToArray())
+            {
+                arr[fillterData.ToArray().IndexOf(i)] = GetNewsModel(i);
+            }
+            return arr;
+        }
     }
 }
