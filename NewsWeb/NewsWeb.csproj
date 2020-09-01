@@ -331,17 +331,7 @@
   <ItemGroup>
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="ExamineComposerPublic.cs" />
-    <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\CategoryModel.cs" />
-    <Compile Include="Models\NewsModel.cs" />
-    <Compile Include="Models\NewsSearchModel.cs" />
-    <Compile Include="Models\Setting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\INewsService.cs" />
-    <Compile Include="Services\ISearchHelper.cs" />
-    <Compile Include="Services\ISettingsService.cs" />
-    <Compile Include="Services\NewsService.cs" />
-    <Compile Include="Services\SettingsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\imageprocessor\security.config" />
@@ -419,6 +409,16 @@
     <Folder Include="App_Data\" />
     <Folder Include="App_Start\" />
     <Folder Include="Views\Search\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aio.Umbraco.Common\Aio.Umbraco.Common.csproj">
+      <Project>{76f3cd90-7281-4030-9ff6-c01da514acbb}</Project>
+      <Name>Aio.Umbraco.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aio.Umbraco.Services\Aio.Umbraco.Services.csproj">
+      <Project>{d1299308-4eb7-4bdb-9644-5eace401009d}</Project>
+      <Name>Aio.Umbraco.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

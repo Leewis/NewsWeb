@@ -1,7 +1,15 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Aio.Umbraco.Services.Interfaces;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Common.ContentModels
 @{
+    IAdvertisementsService service = new AdvertisementsService();
+
+    var advertisings = service.GetByType("Fsell");
+
     var category = Model.MacroParameters["itemSell"].ToString();
-    switch (category) {
+    switch (category)
+    {
         case "fsell":
             <div class="box-shop-sell-vertical p-3">
                 <div class="clearfix sell-top-box">
@@ -19,8 +27,28 @@
                 <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
+                            
                             <div class="article-list-sell">
-                                <article class="article-item">
+                                @foreach (var adv in advertisings)
+                                {
+                                    <article class="article-item">
+                                        <div class="d-flex">
+                                            @if (!string.IsNullOrEmpty(adv.IconUrl))
+                                            {
+                                                <a href="#" class="mr-3 img-thumb"><img src="@Url.Content(@adv.IconUrl)" alt="" class="img-fluid d-block"></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block"></a>
+                                            }
+                                            <div class="article-desc">
+                                                <a href="#" class="fsell-title"><span>@adv.Title</span></a>
+                                                <p class="fsell-price">@adv.Price đ</p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                }
+                                @*<article class="article-item">
                                     <div class="d-flex">
                                         <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/fsell/1.jpg")" alt="" class="img-fluid d-block"></a>
                                         <div class="article-desc">
@@ -46,7 +74,7 @@
                                             <p class="fsell-price">5.400.000.000 đ</p>
                                         </div>
                                     </div>
-                                </article>
+                                </article>*@
                             </div>
                         </div>
                         <div class="carousel-item">
@@ -86,9 +114,9 @@
                 <!-- carousel slide -->
             </div>
             break;
-        
+
         case "vnshop":
-            
+
             <div class="box-shop-sell-vertical p-3">
                 <div class="clearfix sell-top-box">
                     <h5 class="merri-title heading-line float-left"><a href="">VNShop</a></h5>
@@ -172,7 +200,7 @@
                 <!-- carousel slide -->
             </div>
             break;
-            
+
         default:
             break;
     }

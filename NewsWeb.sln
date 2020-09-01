@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsWeb", "NewsWeb\NewsWeb.csproj", "{75465B31-4B64-41F7-9BA8-6C01481A7726}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aio.Umbraco.Services", "Aio.Umbraco.Services\Aio.Umbraco.Services.csproj", "{D1299308-4EB7-4BDB-9644-5EACE401009D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aio.Umbraco.Common", "Aio.Umbraco.Common\Aio.Umbraco.Common.csproj", "{76F3CD90-7281-4030-9FF6-C01DA514ACBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{75465B31-4B64-41F7-9BA8-6C01481A7726}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75465B31-4B64-41F7-9BA8-6C01481A7726}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75465B31-4B64-41F7-9BA8-6C01481A7726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1299308-4EB7-4BDB-9644-5EACE401009D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1299308-4EB7-4BDB-9644-5EACE401009D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1299308-4EB7-4BDB-9644-5EACE401009D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1299308-4EB7-4BDB-9644-5EACE401009D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76F3CD90-7281-4030-9FF6-C01DA514ACBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F3CD90-7281-4030-9FF6-C01DA514ACBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F3CD90-7281-4030-9FF6-C01DA514ACBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F3CD90-7281-4030-9FF6-C01DA514ACBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

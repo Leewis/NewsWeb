@@ -1,5 +1,5 @@
-﻿using NewsWeb.Models;
-using NewsWeb.Services;
+﻿using Aio.Umbraco.Common.ContentModels;
+using Aio.Umbraco.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

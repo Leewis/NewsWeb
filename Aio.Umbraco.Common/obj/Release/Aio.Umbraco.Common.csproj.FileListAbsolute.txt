@@ -1,0 +1,6 @@
+C:\Working\Private\ub\Aff\CheapCheapVN\SourceCode\AffiliateMarketing\Web\Aio.Umbraco.Common\bin\Release\Aio.Umbraco.Common.dll
+C:\Working\Private\ub\Aff\CheapCheapVN\SourceCode\AffiliateMarketing\Web\Aio.Umbraco.Common\bin\Release\Aio.Umbraco.Common.pdb
+C:\Working\Private\ub\Aff\CheapCheapVN\SourceCode\AffiliateMarketing\Web\Aio.Umbraco.Common\bin\Release\Zone.UmbracoMapper.dll
+C:\Working\Private\ub\Aff\CheapCheapVN\SourceCode\AffiliateMarketing\Web\Aio.Umbraco.Common\obj\Release\Aio.Umbraco.Common.csprojResolveAssemblyReference.cache
+C:\Working\Private\ub\Aff\CheapCheapVN\SourceCode\AffiliateMarketing\Web\Aio.Umbraco.Common\obj\Release\Aio.Umbraco.Common.dll
+C:\Working\Private\ub\Aff\CheapCheapVN\SourceCode\AffiliateMarketing\Web\Aio.Umbraco.Common\obj\Release\Aio.Umbraco.Common.pdb

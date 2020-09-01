@@ -1,4 +1,5 @@
-﻿using NewsWeb.Services;
+﻿using Aio.Umbraco.Services.Interfaces;
+using Aio.Umbraco.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace NewsWeb
         {
             composition.Components().Append<ExamineComponent>();
             composition.Register<ISearchHelper, SearchHelper>(Lifetime.Singleton);
+            composition.Register<ISettingsService, SettingsService>(Lifetime.Singleton);
         }
     }
 }
