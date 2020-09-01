@@ -51,7 +51,7 @@
     {
         <div class="post-list">
             <article class="post-item d-flex">
-                <div class="col-desc mr-5">
+                <div class="col-desc mr-5 col-md-8">
                     <h5 class="merri-title">
                         <a href="@item.Url()">@item.GetProperty("title").Value()</a>
                     </h5>
@@ -63,32 +63,42 @@
                 </div>
                 @if (item.GetProperty("Picture").HasValue())
                 {
-                    <div class="col-img mr-3">
-                        <a href="#" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture").Value()" alt="" class="img-fluid"></a>
+                    <div class="col-img mr-3 col-md-4">
+                        <a href="#" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture").Value()" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
                     </div>
                 }
             </article>
         </div>
+        <div class="bt-solid mt-3 mb-3"></div>
     }
     if (totalPages > 1)
     {
-        <div class="pagination-center">
-            <ul class="row category-pagination">
-                @if (page > 1)
-                {
-                    <li><a href="?page=@(page-1)">Prev</a></li>
-                }
-                @for (int p = 1; p < totalPages + 1; p++)
-                {
-                    <li class="@(p == page ? "active" : string.Empty)">
-                        <a href="?page=@p">@p</a>
-                    </li>
-                }
-                @if (page < totalPages)
-                {
-                    <li><a href="?page=@(page+1)">Next</a></li>
-                }
-            </ul>
+        <div class="category-footer">
+            <form class="view-date">
+                <i class="far fa-calendar-alt"></i>
+                <a class="input-button" title="toggle" data-toggle="">
+                    <i class="far fa-calendar-alt"></i>
+                </a>
+                <input type="text" class="calendar flatpickr-input" placeholder="Xem theo ngày" data-input="" readonly="readonly">
+            </form>
+            <div class="pagination-center">
+                <div class="category-pagination row">
+                    <span>Trang</span>&nbsp;&nbsp;
+                    <ul class="pagination">
+                        @if (page > 1)
+                        {
+                            <li><a href="?page=@(page-1)">❮</a></li>
+                        }
+                        <li class="active">
+                            <a href="?page=@page">@page</a>
+                        </li>
+                        @if (page < totalPages)
+                        {
+                            <li><a href="?page=@(page+1)">❯</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
         </div>
     }
 }
