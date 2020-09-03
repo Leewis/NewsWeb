@@ -6,13 +6,8 @@ using  Umbraco.Core.Models;
 using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder.Embedded;
-<<<<<<< HEAD
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "c0ba1dd8dac1a0db")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "8678e010efdd7e8e")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
-=======
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "756751f197396d5b")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.3")]
->>>>>>> b5c43733662bc2d7a0513330fdc01831e8cd6702
 
 
 // FILE: models.generated.cs
@@ -490,6 +485,13 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("fullDescription")]
 		public global::System.Web.IHtmlString FullDescription => this.Value<global::System.Web.IHtmlString>("fullDescription");
+
+		///<summary>
+		/// MostView
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("mostView")]
+		public bool MostView => this.Value<bool>("mostView");
 
 		///<summary>
 		/// Picture
