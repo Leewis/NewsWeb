@@ -11,5 +11,6 @@ namespace Aio.Umbraco.Services.Interfaces
     {
         NewsModel GetNewsModel(IPublishedContent newsDetail);
         NewsModel[] GetCategory(IOrderedEnumerable<IPublishedContent> fillterData);
+        string CalculatePostedDateTime(string dateTime);
     }
 }
