@@ -420,6 +420,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Partials\SearchResultPartial.cshtml" />
     <Content Include="Views\MacroPartials\CategoriesBoxListWithoutImg.cshtml" />
+    <Content Include="Views\MacroPartials\AioShop.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

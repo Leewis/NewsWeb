@@ -53,7 +53,6 @@ E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\bin\Debug\Zone.UmbracoMapp
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\bin\Debug\Examine.dll
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\bin\Debug\Umbraco.Examine.dll
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\bin\Debug\System.Threading.Tasks.Dataflow.dll
-E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.csprojAssemblyReference.cache
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.csproj.CoreCompileInputs.cache
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.csproj.CopyComplete
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.dll

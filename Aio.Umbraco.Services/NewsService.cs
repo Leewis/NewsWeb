@@ -85,7 +85,9 @@ namespace Aio.Umbraco.Services
             string dateTimeStr = string.Empty;
             //ExactPostedHours
             var slipDateTime = dateTime.Split(' ');
-            DateTime dateVal = DateTime.ParseExact(slipDateTime[0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            DateTime dateVal = Convert.ToDateTime(slipDateTime[0]);
+            //DateTime dateVal = DateTime.ParseExact(slipDateTime[0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             var splipTime = slipDateTime[1].Split(':');
 
