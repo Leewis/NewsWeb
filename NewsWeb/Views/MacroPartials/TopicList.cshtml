@@ -1,14 +1,13 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @using Umbraco.Core.Mapping;
-@using NewsWeb.Services
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
 @{
     var currentPage = Model.Content;
     var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
-    var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
 
     var news = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news" && (bool)(x.GetProperty("showInTopicList").Value()) == true).OrderByDescending(item => item.Value("postedDateTime"));
-    UmbracoMapper mapper = new UmbracoMapper(new MapDefinitionCollection(new List<IMapDefinition>()));
-    INewsService service = new NewsService(mapper);
+    INewsService service = new NewsService();
     var categoryData = service.GetCategory(news);
     var maxItem = 5;
     //int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out maxItem);

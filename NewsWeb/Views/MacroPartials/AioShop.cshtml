@@ -6,7 +6,7 @@
     var currentPage = Model.Content.Root();
 
     IAdvertisementsService service = new AdvertisementsService();
-    var advertisings = service.GetByType("Fsell");
+    var advertisings = service.GetByType("AioShop");
     var showItem = advertisings.Take(3).ToArray();
     var iterations = 0;
 }
@@ -14,22 +14,22 @@
 
 <div class="box-shop-sell-vertical p-3">
     <div class="clearfix sell-top-box">
-        <h5 class="merri-title heading-line float-left"><a href="">Fsell</a></h5>
+        <h5 class="merri-title heading-line float-left"><a href="">AioShop</a></h5>
         <div class="float-right btn-control-carousel">
-            <a class="carousel-control-prev" href="#FsellCarousel" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#AioShopCarousel" role="button" data-slide="prev">
                 &#10094;
             </a>
-            <a class="carousel-control-next" href="#FsellCarousel" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#AioShopCarousel" role="button" data-slide="next">
                 &#10095;
             </a>
         </div>
     </div>
 
-    <div id="FsellCarousel" class="carousel slide" data-ride="carousel">
+    <div id="AioShopCarousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             @while (showItem.Count() > 0)
             {
-                <div class="carousel-item @(iterations == 0 ? "active" : "")" data-target="#FsellCarousel" data-slide-to="@iterations">
+                <div class="carousel-item @(iterations == 0 ? "active" : "")" data-target="#AioShopCarousel" data-slide-to="@iterations">
                     <div class="article-list-sell">
                         @for (int y = 0; y < showItem.Count(); y++)
                         {

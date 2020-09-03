@@ -11,6 +11,7 @@ using Aio.Umbraco.Common.ContentModels;
 using Aio.Umbraco.Services.Interfaces;
 using Aio.Umbraco.Common.Extensions;
 using Umbraco.Web.Models;
+using System.Globalization;
 
 namespace Aio.Umbraco.Services
 {
@@ -47,6 +48,7 @@ namespace Aio.Umbraco.Services
             {
                 Aio.Umbraco.Common.ContentModels.NewsModel mappedNewsModel = new Aio.Umbraco.Common.ContentModels.NewsModel();
                 mappedNewsModel = newsDetail.To<NewsModel>();
+                mappedNewsModel.PostedTime = CalculatePostedDateTime(mappedNewsModel.PostedDateTime);
 
                 var news = newsDetail.Value<IEnumerable<Link>>("relatedNews");
 
@@ -64,5 +66,55 @@ namespace Aio.Umbraco.Services
             }
             return null;
         }
+
+        public NewsModel[] GetCategory(IOrderedEnumerable<IPublishedContent> fillterData)
+        {
+            var count = fillterData.ToArray().Count();
+            NewsModel[] arr = new NewsModel[count];
+            foreach (var i in fillterData.ToArray())
+            {
+                arr[fillterData.ToArray().IndexOf(i)] = GetNewsModel(i);
+            }
+            return arr;
+        }
+
+        #region Helpers
+
+        public string CalculatePostedDateTime(string dateTime)
+        {
+            string dateTimeStr = string.Empty;
+            //ExactPostedHours
+            var slipDateTime = dateTime.Split(' ');
+            DateTime dateVal = DateTime.ParseExact(slipDateTime[0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            var splipTime = slipDateTime[1].Split(':');
+
+            DateTime postedDate = new DateTime(dateVal.Year, dateVal.Month, dateVal.Day, int.Parse(splipTime[0]) + 4, int.Parse(splipTime[1]), int.Parse(splipTime[2]), DateTimeKind.Local);
+
+            var excatPostHours = DateTime.Now - postedDate;
+
+            if (excatPostHours.Days > 0)
+            {
+                dateTimeStr += excatPostHours.Days + " ngày";
+            }
+            else if (excatPostHours.Hours > 0)
+            {
+                dateTimeStr += excatPostHours.Hours + " giờ";
+
+                if (excatPostHours.Minutes > 0)
+                {
+                    dateTimeStr += excatPostHours.Hours + " giờ" + excatPostHours.Minutes + " phút";
+                }
+            }
+            else
+                if (excatPostHours.Minutes > 0)
+            {
+                dateTimeStr += excatPostHours.Minutes + " phút";
+            }
+
+            return dateTimeStr;
+        }
+
+        #endregion
     }
 }

@@ -20,6 +20,8 @@ namespace Aio.Umbraco.Services
         public List<Advertising> GetByType(string typeName)
         {
             var advItems = new List<Advertising>();
+            var advItemLowPriority = new List<Advertising>();
+            var advItemHightPriority = new List<Advertising>();
 
             var currentNode = CurrentPublishedContent;
 
@@ -28,29 +30,51 @@ namespace Aio.Umbraco.Services
 
             if (advertisements != null)
             {
-                var advs  = advertisements.Value<IEnumerable<IPublishedElement>>("AdvertisingData");
+                var advs = advertisements.Value<IEnumerable<IPublishedElement>>("AdvertisingData");
                 foreach (var content in advs)
                 {
-                    if (content != null)
+                    if (content != null && isValidDate(content.Value<DateTime>("ExpiredDate"), content.Value<DateTime>("PublishedDate")))
                     {
                         Advertising adv = new Advertising();
-                        adv.Title = content.Value("Title") as string;
-                        adv.PublishDate = content.Value<DateTime>("PublishedDate");
-                        adv.ExpiredDate = content.Value<DateTime>("ExpiredDate");
-                        adv.Link = content.Value<string>("LinkToSite");
-                        adv.Price = content.Value<Double>("price");
-                        adv.Priority = content.Value<bool>("priority");
-                        adv.IconUrl = content.Value<IPublishedContent>("siteImage").Url;
-
-                        if (!string.IsNullOrEmpty(adv.PublishDate.ToLongTimeString()) && DateTime.Now >= adv.PublishDate && DateTime.Now <= adv.ExpiredDate)
+                        MappingAdvertising(adv, content);
+                        if (content.Value<bool>("priority") == true)
                         {
-                            advItems.Add(adv);
+                            advItemHightPriority.Add(adv);
+                        }
+                        else
+                        {
+                            advItemLowPriority.Add(adv);
                         }
                     }
                 }
+                advItems.AddRange(advItemHightPriority);
+                advItems.AddRange(advItemLowPriority);
             }
-
             return advItems;
+        }
+        private bool isValidDate(DateTime expiredDate, DateTime publishedDate)
+        {
+            DateTime _CurDate = DateTime.Now;
+            if (_CurDate <= expiredDate)
+            {
+                if (_CurDate >= publishedDate)
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else return false;
+        }
+
+        private void MappingAdvertising(Advertising adv, IPublishedElement content)
+        {
+            adv.Title = content.Value("Title") as string;
+            adv.PublishDate = content.Value<DateTime>("PublishedDate");
+            adv.ExpiredDate = content.Value<DateTime>("ExpiredDate");
+            adv.Link = content.Value<string>("LinkToSite");
+            adv.Price = content.Value<Double>("price");
+            adv.Priority = content.Value<bool>("priority");
+            adv.IconUrl = content.Value<IPublishedContent>("siteImage").Url;
         }
     }
 }

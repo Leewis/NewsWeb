@@ -4,7 +4,8 @@
 @using Umbraco.Core;
 @using Models = Umbraco.Core.Models;
 @using Umbraco.Core.Mapping;
-@using NewsWeb.Services
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
 @{
     Layout = "master.cshtml";
     var root = Model.Root();
@@ -14,9 +15,8 @@
     var twitter = setting.GetProperty("twitterUrl").GetValue();
     var parent = Model.Parent;
 
-    UmbracoMapper mapper = new UmbracoMapper(new MapDefinitionCollection(new List<IMapDefinition>()));
 
-    INewsService service = new NewsService(mapper);
+    INewsService service = new NewsService();
 
     var relatedNews = service.GetNewsModel(Model);
 }
@@ -199,7 +199,7 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                @if (relatedNews != null && relatedNews.RelatedNews != null && relatedNews.RelatedNews.Any())
+                @if (relatedNews != null && relatedNews.RelatedNewsModel != null && relatedNews.RelatedNewsModel.Any())
                 {
                     <div class="topic-list">
                         <div>
@@ -215,15 +215,15 @@
                             <!-- Related News -->
                             @{
                                 <div class="row pb-2 pt-4">
-                                    @foreach (var newItem in relatedNews.RelatedNews)
-                                    {                                       
+                                    @foreach (var newItem in relatedNews.RelatedNewsModel)
+                                    {
                                         <div class="col-lg col-md-4 topic-item">
                                             <a href="@newItem.SourceUrl" class="d-inline-block img-thumb"><img src="@newItem.Picture" alt="news-kinh-doanh-1" class="img-fluid"></a>
-                                                <h6 class="merri-title">
-                                                    <a href="@newItem.SourceUrl">
-                                                        @newItem.Title
-                                                    </a>
-                                                </h6>
+                                            <h6 class="merri-title">
+                                                <a href="@newItem.SourceUrl">
+                                                    @newItem.Title
+                                                </a>
+                                            </h6>
                                             <p><span class="update-time"><a href="#">@parent.GetProperty("title").Value()</a></span></p>
                                         </div>
                                     }
