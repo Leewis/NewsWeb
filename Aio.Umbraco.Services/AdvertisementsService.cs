@@ -72,9 +72,10 @@ namespace Aio.Umbraco.Services
             adv.PublishDate = content.Value<DateTime>("PublishedDate");
             adv.ExpiredDate = content.Value<DateTime>("ExpiredDate");
             adv.Link = content.Value<string>("LinkToSite");
+            adv.Iframe = content.Value<string>("Iframe");
             adv.Price = content.Value<Double>("price");
             adv.Priority = content.Value<bool>("priority");
-            adv.IconUrl = content.Value<IPublishedContent>("siteImage").Url;
+            adv.IconUrl = content.Value<IPublishedContent>("siteImage") != null ? content.Value<IPublishedContent>("siteImage").Url : "/media/xmhhfjct/noimage.jpg";
         }
     }
 }

@@ -62,20 +62,26 @@ namespace Aio.Umbraco.Services
                     }
                 }
 
+                if (newsDetail.Parent != null)
+                {
+                    CategoryModel cat = newsDetail.Parent.To<CategoryModel>();
+                    mappedNewsModel.Category = cat != null ? cat.Title : newsDetail.Parent.GetProperty("title").GetValue().ToString();
+                    mappedNewsModel.CategoryUrl = cat != null ? cat.Url : newsDetail.Parent.GetProperty("url").GetValue().ToString();
+                }
+
                 return mappedNewsModel;
             }
             return null;
         }
 
-        public NewsModel[] GetCategory(IOrderedEnumerable<IPublishedContent> fillterData)
+        public List<NewsModel> GetTopicNews(IEnumerable<IPublishedContent> newestNews)
         {
-            var count = fillterData.ToArray().Count();
-            NewsModel[] arr = new NewsModel[count];
-            foreach (var i in fillterData.ToArray())
+            List<NewsModel> listItem = new List<NewsModel>();
+            foreach (var i in newestNews)
             {
-                arr[fillterData.ToArray().IndexOf(i)] = GetNewsModel(i);
+                listItem.Add(GetNewsModel(i));
             }
-            return arr;
+            return listItem;
         }
 
         #region Helpers

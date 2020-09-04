@@ -10,6 +10,7 @@ namespace Aio.Umbraco.Common.ContentModels
     {
         #region Category
         public string Category { get; set; }
+        public string CategoryUrl { get; set; }
         public IPublishedContent CategoryPublishedContent { get; set; }
 
         #endregion

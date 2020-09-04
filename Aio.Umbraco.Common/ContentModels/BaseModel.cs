@@ -26,15 +26,17 @@ namespace Aio.Umbraco.Common.ContentModels
             var children = new List<T>();
 
             if (Children == null) return children;
-            
-            foreach(var c in Children)
+
+            foreach (var c in Children)
             {
                 children.Add(c.To<T>());
             }
 
             return children;
         }
-        
+
         public int ParentId { get; set; }
+
+        public string MetaPageTitle { get; set; }
     }
 }

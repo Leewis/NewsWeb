@@ -42,6 +42,24 @@ D:\Working\Private\ub\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.dl
 D:\Working\Private\ub\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.pdb
 D:\Working\Private\ub\NewsWeb\Aio.Umbraco.Common\bin\Debug\Umbraco.Examine.dll
 D:\Working\Private\ub\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.csprojAssemblyReference.cache
+<<<<<<< HEAD
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Aio.Umbraco.Common.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Aio.Umbraco.Common.pdb
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Umbraco.Core.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Umbraco.Web.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Umbraco.Web.UI.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Zone.UmbracoMapper.Common.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Zone.UmbracoMapper.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Zone.UmbracoMapper.V8.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Examine.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\Umbraco.Examine.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\bin\Debug\System.Threading.Tasks.Dataflow.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.csprojAssemblyReference.cache
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.csproj.CoreCompileInputs.cache
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.csproj.CopyComplete
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.dll
+C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.pdb
+=======
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\bin\Debug\Aio.Umbraco.Common.dll
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\bin\Debug\Aio.Umbraco.Common.pdb
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\bin\Debug\Umbraco.Core.dll
@@ -57,3 +75,4 @@ E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Comm
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.csproj.CopyComplete
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.dll
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Common\obj\Debug\Aio.Umbraco.Common.pdb
+>>>>>>> 2928cc5e38ce516150067b63639dee9d407bc5b2
