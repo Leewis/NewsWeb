@@ -10,6 +10,6 @@ namespace Aio.Umbraco.Services.Interfaces
     public interface INewsService
     {
         NewsModel GetNewsModel(IPublishedContent newsDetail);
-        NewsModel[] GetCategory(IOrderedEnumerable<IPublishedContent> fillterData);
+        List<NewsModel> GetTopicNews(IEnumerable<IPublishedContent> fillterData);
     }
 }

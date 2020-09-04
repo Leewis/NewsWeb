@@ -5,11 +5,11 @@
 @{
     var currentPage = Model.Content;
     var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var maxItem = 1;
 
-    var news = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news" && (bool)(x.GetProperty("showInTopicList").Value()) == true).OrderByDescending(item => item.Value("postedDateTime"));
+    var newsIsShowedInTopicList = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news" && (bool)(x.GetProperty("showInTopicList").Value()) == true).OrderByDescending(item => item.Value("postedDateTime")).Take(maxItem);
     INewsService service = new NewsService();
-    var categoryData = service.GetCategory(news);
-    var maxItem = 5;
+    var categoryData = service.GetTopicNews(newsIsShowedInTopicList);
     //int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out maxItem);
 }
 
@@ -19,7 +19,7 @@
         {
             if (i == maxItem) { break; }
             <div class="col-lg col-md-4 topic-item">
-                <a href="#" class="d-inline-block img-thumb"><img src="@categoryData[i].Picture" alt="news-kinh-doanh-1" class="img-fluid"></a>
+                <a href="@categoryData[i].Url" class="d-inline-block img-thumb"><img src="@categoryData[i].Picture" alt="news-kinh-doanh-1" class="img-fluid"></a>
                 <h6 class="merri-title">
                     <a href="@categoryData[i].Url">
                         @categoryData[i].Title
@@ -27,12 +27,12 @@
                 </h6>
                 <p>
                     <span class="update-time">
-                        <a href="#">Vĩ mô</a>
+                        <a href="@categoryData[i].CategoryUrl">@categoryData[i].Category</a>
                     </span>
-                    <span class="comments-count">
+                    @*<span class="comments-count">
                         <i class="far fa-comment"></i>
                         <a href="#">32</a>
-                    </span>
+                    </span>*@
                 </p>
             </div>
 
