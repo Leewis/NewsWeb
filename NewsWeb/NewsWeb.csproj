@@ -412,7 +412,6 @@
     <Content Include="Views\MacroPartials\TopicList.cshtml" />
     <Content Include="Views\MacroPartials\PostList.cshtml" />
     <Content Include="Views\MacroPartials\CategoryWidget.cshtml" />
-    <Content Include="Views\MacroPartials\SearchResult.cshtml" />
     <Content Include="Views\MacroPartials\SearchForm.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -421,6 +420,7 @@
     <Content Include="Views\Partials\SearchResultPartial.cshtml" />
     <Content Include="Views\MacroPartials\CategoriesBoxListWithoutImg.cshtml" />
     <Content Include="Views\MacroPartials\AioShop.cshtml" />
+    <Content Include="Views\MacroPartials\MostViewsLandingPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

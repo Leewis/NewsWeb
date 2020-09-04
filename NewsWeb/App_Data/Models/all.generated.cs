@@ -6,7 +6,7 @@ using  Umbraco.Core.Models;
 using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder.Embedded;
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "8678e010efdd7e8e")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "34a6cc09aac39f75")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -353,7 +353,7 @@ namespace Umbraco.Web.PublishedModels
 		public global::System.Collections.Generic.IEnumerable<string> Robots => global::Umbraco.Web.PublishedModels.BasePage.GetRobots(this);
 	}
 
-	/// <summary>SearchPage</summary>
+	/// <summary>NewsLandingPage</summary>
 	[PublishedModel("newsLandingPage")]
 	public partial class NewsLandingPage : PublishedContentModel, IBasePage
 	{
