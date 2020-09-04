@@ -343,7 +343,17 @@
   <ItemGroup>
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="ExamineComposerPublic.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\NewsModel.cs" />
+    <Compile Include="Models\NewsSearchModel.cs" />
+    <Compile Include="Models\Setting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\INewsService.cs" />
+    <Compile Include="Services\ISearchHelper.cs" />
+    <Compile Include="Services\ISettingsService.cs" />
+    <Compile Include="Services\NewsService.cs" />
+    <Compile Include="Services\SettingsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\imageprocessor\security.config" />
@@ -390,7 +400,6 @@
     <Content Include="Views\MacroPartials\LastestNews.cshtml" />
     <Content Include="Views\MacroPartials\MostViews.cshtml" />
     <Content Include="Views\MacroPartials\NewsByCategory.cshtml" />
-    <Content Include="Views\MacroPartials\testPicker.cshtml" />
     <Content Include="Views\Category.cshtml" />
     <Content Include="Views\CategoryPage.cshtml" />
     <Content Include="Views\NewsLandingPage.cshtml" />
@@ -410,7 +419,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Partials\SearchResultPartial.cshtml" />
-    <Content Include="Views\MacroPartials\VnShop.cshtml" />
+    <Content Include="Views\MacroPartials\CategoriesBoxListWithoutImg.cshtml" />
     <Content Include="Views\MacroPartials\AioShop.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

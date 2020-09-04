@@ -1,90 +1,86 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @{
-    var category = Model.MacroParameters["category"].ToString();
-    switch (category) {
-        case "du-lich":
-        
-            <div class="row categories-box-list">
-                <div class="col-lg-12">
-                    <div class="cate-options d-flex">
-                        <h5 class="cate-title merri-title"><a href="#">Du lịch</a></h5>
-                        <ul>
-                            <li><a href="#">Cẩm nang</a></li>
-                            <li><a href="#">Dấu chân</a></li>
-                            <li><a href="#">Tư vấn</a></li>
-                            <li><a href="#">Safe Go</a></li>
-                            <li><a href="#">Điểm đến</a></li>
-                            <li><a href="#">Ảnh</a></li>
-                        </ul>
+    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+    var subCategory = category.Children.Where(x => x.IsVisible()).ToArray();
+    var latestNews = arrayNews[0];
+    <div class="row categories-box-list">
+        <div class="col-lg-12">
+            <div class="cate-options d-flex">
+                <h5 class="cate-title merri-title"><a href="@category.Url">@category.GetProperty("title").Value()</a></h5>
+                <ul>
+                    @foreach (var item in subCategory)
+                    {
+                        var typeContent = item.ContentType.Alias;
+                        if (typeContent != "news")
+                        {
+                            <li><a href="@item.Url">@item.GetProperty("Title").Value()</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="cate-box-left">
+                <div class="category-box-item">
+                    <div class="cate-content-box d-flex">
+                        <article class="thumb-cate">
+                            <a href="@latestNews.Url" class="d-inline-block img-thumb"><img src="@latestNews.GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt=""></a>
+                            <div class="cate-thumb-desc mt-3">
+                                <h4 class="merri-title">
+                                    <a href="@latestNews.Url">
+                                        @latestNews.GetProperty("title").Value()
+                                    </a>
+                                </h4>
+                                <div class="child-news-desc">
+                                    <a href="#">
+                                        <span>
+                                            @latestNews.GetProperty("shortDescription").Value()
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="cate-box-left">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="cate-box-right d-flex">
+                <div class="first-cate-box">
+                    @for (int i = 1; i < 2 && i < arrayNews.Count(); i++)
+                    {
                         <div class="category-box-item">
                             <div class="cate-content-box d-flex">
                                 <article class="thumb-cate">
-                                    <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/articles/6.jpg")" class="img-fluid" alt=""></a>
+                                    <a href="@arrayNews[i].Url" class="d-inline-block img-thumb">
+                                        <img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt="">
+                                    </a>
                                     <div class="cate-thumb-desc mt-3">
-                                        <h4 class="merri-title">
-                                            <a href="#">
-                                                Các điểm vui chơi ở Nghệ An
+                                        <h6 class="merri-title">
+                                            <a href="@arrayNews[i].Url">
+                                                @arrayNews[i].GetProperty("title").Value()
                                             </a>
-                                        </h4>
-                                        <div class="child-news-desc">
-                                            <a href="#">
-                                                <span>
-                                                    Làng Sen quê Bác, đồi chè Thanh Chương hay cánh đồng hoa hướng dương... là những gợi ý dành cho bạn khi du lịch xứ Nghệ.
-                                                </span>
-                                            </a>
-                                        </div>
+                                        </h6>
+
                                     </div>
                                 </article>
                             </div>
                         </div>
-                    </div>
+                    }
+
                 </div>
-                <div class="col-lg-6">
-                    <div class="cate-box-right d-flex">
-                        <div class="first-cate-box">
-                            <div class="category-box-item">
-                                <div class="cate-content-box d-flex">
-                                    <article class="thumb-cate">
-                                        <a href="#" class="d-inline-block img-thumb">
-                                            <img src="@Url.Content("~/assets/images/articles/7.jpg")" class="img-fluid" alt="">
-                                        </a>
-                                        <div class="cate-thumb-desc mt-3">
-                                            <h6 class="merri-title">
-                                                <a href="#">
-                                                    Nơi Covid-19 như chưa từng xuất hiện
-                                                </a>
-                                            </h6>
-        
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                            <div class="category-box-item">
-                                <div class="cate-content-box d-flex">
-                                    <article class="thumb-cate">
-                                        <a href="#" class="d-inline-block img-thumb"><img src="@Url.Content("~/assets/images/articles/8.jpg")" class="img-fluid" alt=""></a>
-                                        <div class="cate-thumb-desc mt-3">
-                                            <h6 class="merri-title">
-                                                <a href="#">
-                                                    'Vòng xoáy tử thần' của du lịch Trung Quốc
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="second-cate-box">
+                <div class="second-cate-box">
+                    @for (int i = 3; i < 8 && i < arrayNews.Count(); i++)
+                    {
+                        if (arrayNews[i].GetProperty("Picture").HasValue())
+                        {
                             <article class="article-item">
                                 <div class="d-flex">
                                     <div class="article-desc">
                                         <h6 class="merri-title">
-                                            <a href="#">
-                                                Quán phở bán 400 tô một ngày
+                                            <a href="@arrayNews[i].Url">
+                                                @arrayNews[i].GetProperty("title").Value()
                                             </a>
                                             <span class="comments-count">
                                                 <i class="far fa-comment"></i>
@@ -92,19 +88,22 @@
                                             </span>
                                         </h6>
                                     </div>
-                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/thumb/1.png")" class="img-fluid" alt=""></a>
+                                    <a href="@arrayNews[i].Url" class="mr-3 img-thumb"><img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt=""></a>
                                 </div>
                             </article>
+                        }
+                        else
+                        {
                             <article class="article-item has-no-image">
                                 <div class="article-desc">
                                     <h6 class="merri-title">
-                                        <a href="#">
-                                            Ăn gì ở phố cổ Hội An?
+                                        <a href="@arrayNews[i].Url">
+                                            @arrayNews[i].GetProperty("title").Value()
                                         </a>
                                     </h6>
                                     <div class="article-desc">
                                         <a href="#">
-                                            <span class="location-name">QUẢNG NAM -</span><span>Ngoài bánh mì Phượng và cơm gà, tôi không biết thêm bất kỳ món ngon nào khác. </span>
+                                            <span>@arrayNews[i].GetProperty("shortDescription").Value() </span>
                                         </a>
                                         <span class="comments-count">
                                             <i class="far fa-comment"></i>
@@ -112,152 +111,14 @@
                                         </span>
                                     </div>
                                 </div>
-        
+
                             </article>
-                            <article class="article-item">
-                                <div class="d-flex">
-                                    <div class="article-desc">
-                                        <h6 class="merri-title">
-                                            <a href="#">
-                                                3 trải nghiệm từ bình dân đến sang chảnh ở Phú Quốc
-                                            </a>
-                                            <span class="comments-count">
-                                                <i class="far fa-comment"></i>
-                                                <a href="#">85</a>
-                                            </span>
-                                        </h6>
-        
-                                    </div>
-                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/thumb/2.jpg")" class="img-fluid" alt=""></a>
-                                </div>
-                            </article>
-                            <article class="article-item">
-                                <div class="d-flex">
-                                    <div class="article-desc">
-                                        <h6 class="merri-title">
-                                            <a href="#">
-                                                Khách Việt băng sa mạc Thar trên lưng lạc đà
-                                            </a>
-                                            <span class="comments-count">
-                                                <i class="far fa-comment"></i>
-                                                <a href="#">85</a>
-                                            </span>
-                                        </h6>
-        
-                                    </div>
-                                    <a href="#" class="mr-3 img-thumb"><img src="@Url.Content("~/assets/images/thumb/1.jpg")" class="img-fluid" alt=""></a>
-                                </div>
-                            </article>
-        
-                        </div>
-                    </div>
-                </div>
-        
-            </div>
-            <div class="bt-solid mt-3 mb-3"></div>
-            break;
-        
-        case "tam-su":
-            
-            <div class="categories-box-list">
-                <div class="other-cate-news-list">
-                    <div class="cate-options d-flex">
-                        <h5 class="cate-title merri-title"><a href="#">Tâm sự</a></h5>
-                        <ul>
-                            <li><a href="#">Chuyên gia gỡ rối</a></li>
-                            <li><a href="#">Hẹn hò</a></li>
-                        </ul>
-                    </div>
-                    <div class="other-cate-news-item d-flex">
-                        <div class="category-box-item full-box">
-                            <div class="cate-content-box d-flex">
-                                <article class="thumb-cate mr-3">
-                                    <!-- <a href="#" class="d-inline-block img-thumb"><img src="assets/images/articles/6.jpg" class="img-fluid" alt=""></a> -->
-                                    <div class="cate-thumb-desc mt-3">
-                                        <h5 class="merri-title">
-                                            <a href="#">
-                                                Bất lực khi dạy dỗ con 3 tuổi
-                                            </a>
-                                        </h5>
-                                        <p class="child-news-desc">
-                                            <a href="#">
-                                                <span>
-                                                    Tôi là ông bố trẻ, có hai con trai 5 tuổi và hơn 3 tuổi. Cách dạy con của tôi thường áp dụng là vừa yêu thương vừa có kỷ luật.
-                                                    Nhóc đầu rất ngoan, đáng yêu, sống tình cảm, quan tâm đến cảm xúc của bố mẹ; nhóc sau nhiều lúc khiến tôi phiền lòng. Không biết có phải cháu sinh vào mồng 1 âm lịch không mà tính có phần ương bướng và cá tính. Hàng ngày cháu ít chơi với các bạn, nếu có thì thích...
-    
-                                                </span>
-                                            </a>
-                                            <span class="comments-count">
-                                                <i class="far fa-comment"></i>
-                                                <a href="#">85</a>
-                                            </span>
-    
-                                        </p>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                        <div class="two-items">
-                            <div class="category-box-item">
-                                <div class="cate-content-box d-flex">
-                                    <article class="thumb-cate mr-3">
-                                        <!-- <a href="#" class="d-inline-block img-thumb"><img src="assets/images/articles/6.jpg" class="img-fluid" alt=""></a> -->
-                                        <div class="cate-thumb-desc mt-3">
-                                            <h5 class="merri-title">
-                                                <a href="#">
-                                                    Mệt mỏi vì tối nào cũng phải massage cho chồng
-                                                </a>
-                                            </h5>
-                                            <div class="child-news-desc">
-                                                <a href="#">
-                                                    <span>
-                                                        Tôi 30 tuổi, chồng 40 tuổi, có một bé gái 5 tuổi. Lúc mới lấy nhau, anh có một thói quen xấu là ngủ ngáy rất lớn, thở mạnh.
-    
-                                                    </span>
-                                                </a>
-                                                <span class="comments-count">
-                                                    <i class="far fa-comment"></i>
-                                                    <a href="#">85</a>
-                                                </span>
-    
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                            <div class="category-box-item">
-                                <div class="cate-content-box d-flex">
-                                    <article class="thumb-cate mr-3">
-                                        <!-- <a href="#" class="d-inline-block img-thumb"><img src="assets/images/articles/6.jpg" class="img-fluid" alt=""></a> -->
-                                        <div class="cate-thumb-desc mt-3">
-                                            <h5 class="merri-title">
-                                                <a href="#">
-                                                    Hoàn cảnh sống quê chồng kém nên tôi không muốn về ở
-                                                </a>
-                                            </h5>
-                                            <div class="child-news-desc">
-                                                <a href="#">
-                                                    <span>
-                                                        Tôi lấy chồng được 2 năm rưỡi, có con trai 18 tháng. Từ khi cưới, chúng tôi sống ở xa nhà chồng.
-                                                    </span>
-                                                </a>
-                                                <span class="comments-count">
-                                                    <i class="far fa-comment"></i>
-                                                    <a href="#">85</a>
-                                                </span>
-    
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
+                        }
+                    }
                 </div>
             </div>
-            break;
-        default:
-            break;
-    }
+        </div>
+        
+    </div>
+    <div class="bt-solid mt-3 mb-3"></div>
 }

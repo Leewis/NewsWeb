@@ -1,11 +1,15 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @using Umbraco.Core.Services;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
 @{
     var numsofNews = 0;
     int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out numsofNews);
     var content = Umbraco.Content(Udi.Parse(Model.MacroParameters["content"].ToString()));
     var arrayNews = content.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
     var latestNews = arrayNews[0];
+
+    INewsService service = new NewsService();
 }
 
 <!-- product-news -->
@@ -20,29 +24,36 @@
                 <div class="col-desc">
                     <h5 class="heading-title-news merri-title"><a href="@latestNews.Url()"> @latestNews.GetProperty("title").Value()</a></h5>
                     <span>@latestNews.GetProperty("shortDescription").Value()</span>
+                    <span class="comments-count">
+                        @latestNews.GetProperty("source").Value()
+                    </span>
+                    <span class="comments-count">
+                        @service.CalculatePostedDateTime(@latestNews.GetProperty("postedDateTime").Value().ToString())
+                    </span>
                 </div>
             </article>
             <div class="child-news horizontal">
                 <ul class="d-flex">
                     @for (int i = 1; i < 4 && i < arrayNews.Count(); i++)
                     {
-                        <li>
-                            <h6 class="merri-title">
-                                <a href="@arrayNews[i].Url()">
-                                    @arrayNews[i].GetProperty("title").Value()
-                                </a>
-                            </h6>
-                            <div class="child-news-desc">
-                                <a href="#">
-                                    @*<span class="location-name"> </span>*@
-                                    <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
-                                </a>
-                                <span class="comments-count">
-                                    <i class="far fa-comment"></i>
-                                    <a href="#">85</a>
-                                </span>
-                            </div>
-                        </li>
+                    <li>
+                        <h6 class="merri-title">
+                            <a href="@arrayNews[i].Url()">
+                                @arrayNews[i].GetProperty("title").Value()
+                            </a>
+                        </h6>
+                        <div class="child-news-desc">                            
+                                <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
+                        </div>
+                        <span class="comments-count">
+                            @*<i class="far fa-comment"></i>*@
+                            @arrayNews[i].GetProperty("source").Value()
+
+                        </span>
+                        <span class="comments-count">
+                            @service.CalculatePostedDateTime(@arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                        </span>
+                    </li>
                     }
                 </ul>
 
@@ -53,23 +64,25 @@
                 <ul class="d-flex flex-column">
                     @for (int i = 4; i < numsofNews && i < arrayNews.Count(); i++)
                     {
-                        <li>
-                            <h6 class="merri-title">
-                                <a href="@arrayNews[i].Url()">
-                                    @arrayNews[i].GetProperty("title").Value()
-                                </a>
-                            </h6>
-                            <div class="child-news-desc">
-                                <a href="#">
-                                    @*<span class="location-name"> </span>*@
-                                    <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
-                                </a>
-                                <span class="comments-count">
-                                    <i class="far fa-comment"></i>
-                                    <a href="#">85</a>
-                                </span>
-                            </div>
-                        </li>
+                    <li>
+                        <h6 class="merri-title">
+                            <a href="@arrayNews[i].Url()">
+                                @arrayNews[i].GetProperty("title").Value()
+                            </a>
+                        </h6>
+                        <div class="child-news-desc">
+                            <a href="#">
+                                @*<span class="location-name"> </span>*@
+                                <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
+                            </a>
+                        </div>
+                        <span class="comments-count">
+                            @arrayNews[i].GetProperty("source").Value()
+                        </span>
+                        <span class="comments-count">
+                            @service.CalculatePostedDateTime(@arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                        </span>
+                    </li>
                     }
                 </ul>
 
