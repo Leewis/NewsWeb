@@ -17,7 +17,7 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.ModelsBuilder.Embedded;
 
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "34a6cc09aac39f75")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "bb1438ed3c500da")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedModels
@@ -609,13 +609,6 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("parentCategoryId")]
 		public global::Umbraco.Core.Models.PublishedContent.IPublishedContent ParentCategoryId => this.Value<global::Umbraco.Core.Models.PublishedContent.IPublishedContent>("parentCategoryId");
-
-		///<summary>
-		/// ShowInTopicList
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
-		[ImplementPropertyType("showInTopicList")]
-		public bool ShowInTopicList => this.Value<bool>("showInTopicList");
 
 		///<summary>
 		/// Title

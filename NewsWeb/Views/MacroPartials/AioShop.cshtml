@@ -33,15 +33,26 @@
                     <div class="article-list-sell">
                         @for (int y = 0; y < showItem.Count(); y++)
                         {
-                            <article class="article-item">
-                                <div class="d-flex">
-                                    <a href="@showItem[y].Link" class="mr-3 img-thumb"><img src="@Url.Content(showItem[y].IconUrl)" alt="" class="img-fluid d-block"></a>
-                                    <div class="article-desc">
-                                        <a href="@showItem[y].Link" class="fsell-title"><span>@showItem[y].Title</span></a>
-                                        <p class="fsell-price">@showItem[y].Price</p>
+                            if (showItem[y].Iframe == "")
+                            {
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a target="_blank" href="@showItem[y].Link" class="mr-3 img-thumb"><img src="@Url.Content(showItem[y].IconUrl)" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a target="_blank" href="@showItem[y].Link" class="fsell-title"><span>@showItem[y].Title</span></a>
+                                            <p class="fsell-price">@showItem[y].Price</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
+                                </article>
+                            }
+                            else
+                            {
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        @Html.Raw(showItem[y].Iframe)
+                                    </div>
+                                </article>
+                            }
                         }
                     </div>
                 </div>
