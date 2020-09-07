@@ -5,12 +5,12 @@
 @{
     var currentPage = Model.Content;
     var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
-    var maxItem = 1;
+    var maxItem = 5;
+    //int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out maxItem);
 
     var newsIsShowedInTopicList = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news" && (bool)(x.GetProperty("showInTopicList").Value()) == true).OrderByDescending(item => item.Value("postedDateTime")).Take(maxItem);
     INewsService service = new NewsService();
     var categoryData = service.GetTopicNews(newsIsShowedInTopicList);
-    //int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out maxItem);
 }
 
 <div class="topic-list">
