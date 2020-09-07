@@ -1,7 +1,13 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @using Umbraco.Core.Services;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
 @{
+    var numOfNews = 0;
+    int.TryParse(Model.MacroParameters["numOfNews"].ToString(), out numOfNews);
     var categories = Model.MacroParameters["categories"].ToString().Split(',');
+
+    INewsService service = new NewsService();
     foreach (var cat in categories)
     {
         var category = Umbraco.Content(cat);
@@ -32,14 +38,12 @@
                                     </a>
                                 </h6>
                                 <div class="child-news-desc">
-                                    <a href="#">
-                                        <span>
-                                            @latestNews.GetProperty("shortDescription").Value()
-                                        </span>
-                                    </a>
+                                    <span>
+                                        @latestNews.GetProperty("shortDescription").Value()
+                                    </span>
                                     <div class="update-time">
                                         <span>
-                                            4' trước Trong nước
+                                            @service.CalculatePostedDateTime(latestNews.GetProperty("postedDateTime").Value().ToString())
                                         </span>
                                     </div>
                                 </div>
@@ -47,7 +51,7 @@
 
                         </article>
                         <div class="others-news-cate">
-                            @for (int i = 1; i < 4 && i < arrayNews.Count(); i++)
+                            @for (int i = 1; i < numOfNews +1 && i < arrayNews.Count(); i++)
                             {
                                 <article class="cate-item">
                                     <h6 class="merri-title"><a href="@arrayNews[i].Url()"> @arrayNews[i].GetProperty("title").Value()</a></h6>
@@ -55,10 +59,14 @@
                                         <a href="@arrayNews[i].Url()">
                                             @arrayNews[i].GetProperty("shortDescription").Value()
                                         </a>
-                                        <span class="comments-count">
-                                            <i class="far fa-comment"></i>
-                                            <a href="#">85</a>
-                                        </span>
+                                        <div class="update-time">
+                                            <span class="comments-count">
+                                                @arrayNews[i].GetProperty("source").Value() - 
+                                            </span>
+                                            <span class="comments-count">
+                                                @service.CalculatePostedDateTime(arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                                            </span>
+                                        </div>
                                     </div>
 
                                 </article>

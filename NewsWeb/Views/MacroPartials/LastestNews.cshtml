@@ -24,12 +24,14 @@
                 <div class="col-desc">
                     <h5 class="heading-title-news merri-title"><a href="@latestNews.Url()"> @latestNews.GetProperty("title").Value()</a></h5>
                     <span>@latestNews.GetProperty("shortDescription").Value()</span>
-                    <span class="comments-count">
-                        @latestNews.GetProperty("source").Value()
-                    </span>
-                    <span class="comments-count">
-                        @service.CalculatePostedDateTime(@latestNews.GetProperty("postedDateTime").Value().ToString())
-                    </span>
+                    <div class="update-time">
+                        <span class="comments-count">
+                            @latestNews.GetProperty("source").Value() - 
+                        </span>
+                        <span class="comments-count">
+                            @service.CalculatePostedDateTime(@latestNews.GetProperty("postedDateTime").Value().ToString())
+                        </span>
+                    </div>
                 </div>
             </article>
             <div class="child-news horizontal">
@@ -45,14 +47,16 @@
                         <div class="child-news-desc">                            
                                 <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
                         </div>
-                        <span class="comments-count">
-                            @*<i class="far fa-comment"></i>*@
-                            @arrayNews[i].GetProperty("source").Value()
+                        <div class="update-time">
+                            <span class="comments-count">
+                                @*<i class="far fa-comment"></i>*@
+                                @arrayNews[i].GetProperty("source").Value() - 
 
-                        </span>
-                        <span class="comments-count">
-                            @service.CalculatePostedDateTime(@arrayNews[i].GetProperty("postedDateTime").Value().ToString())
-                        </span>
+                            </span>
+                            <span class="comments-count">
+                                @service.CalculatePostedDateTime(@arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                            </span>
+                        </div>
                     </li>
                     }
                 </ul>
@@ -71,17 +75,18 @@
                             </a>
                         </h6>
                         <div class="child-news-desc">
-                            <a href="#">
-                                @*<span class="location-name"> </span>*@
+                            <a href="@arrayNews[i].Url()">
                                 <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
                             </a>
                         </div>
-                        <span class="comments-count">
-                            @arrayNews[i].GetProperty("source").Value()
-                        </span>
-                        <span class="comments-count">
-                            @service.CalculatePostedDateTime(@arrayNews[i].GetProperty("postedDateTime").Value().ToString())
-                        </span>
+                        <div class="update-time">
+                            <span class="comments-count">
+                                @arrayNews[i].GetProperty("source").Value() - 
+                            </span>
+                            <span class="comments-count">
+                                @service.CalculatePostedDateTime(@arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                            </span>
+                        </div>
                     </li>
                     }
                 </ul>
