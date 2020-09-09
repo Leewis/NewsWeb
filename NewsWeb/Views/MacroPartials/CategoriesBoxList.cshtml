@@ -82,10 +82,6 @@
                                             <a href="@arrayNews[i].Url">
                                                 @arrayNews[i].GetProperty("title").Value()
                                             </a>
-                                            <span class="comments-count">
-                                                <i class="far fa-comment"></i>
-                                                <a href="#">85</a>
-                                            </span>
                                         </h6>
                                     </div>
                                     <a href="@arrayNews[i].Url" class="mr-3 img-thumb"><img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt=""></a>
@@ -102,13 +98,7 @@
                                         </a>
                                     </h6>
                                     <div class="article-desc">
-                                        <a href="#">
-                                            <span>@arrayNews[i].GetProperty("shortDescription").Value() </span>
-                                        </a>
-                                        <span class="comments-count">
-                                            <i class="far fa-comment"></i>
-                                            <a href="#">85</a>
-                                        </span>
+                                        <span>@arrayNews[i].GetProperty("shortDescription").Value() </span>
                                     </div>
                                 </div>
 

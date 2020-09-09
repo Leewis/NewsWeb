@@ -1,9 +1,13 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
 @{
     var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
     var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
     var subCategory = category.Children.Where(x => x.IsVisible()).ToArray();
     var latestNews = arrayNews.Count() != 0 ? arrayNews[0] : null;
+
+    INewsService service = new NewsService();
 }
 <div class="categories-box-list">
     <div class="other-cate-news-list">
@@ -38,10 +42,11 @@
                                         @latestNews.GetProperty("shortDescription").Value()
                                     </span>
                                 </a>
-                                <span class="comments-count">
-                                    <i class="far fa-comment"></i>
-                                    <a href="#">85</a>
-                                </span>
+                                <div class="update-time">
+                                    <span>
+                                        @service.CalculatePostedDateTime(latestNews.GetProperty("postedDateTime").Value().ToString())
+                                    </span>
+                                </div>
 
                             </p>
                         </div>
@@ -66,11 +71,11 @@
                                                 @arrayNews[i].GetProperty("shortDescription").Value()
                                             </span>
                                         </a>
-                                        <span class="comments-count">
-                                            <i class="far fa-comment"></i>
-                                            <a href="#">85</a>
-                                        </span>
-
+                                        <div class="update-time">
+                                            <span>
+                                                @service.CalculatePostedDateTime(arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </article>
