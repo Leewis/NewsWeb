@@ -4,7 +4,9 @@
     int.TryParse(Model.MacroParameters["numOfCategories"].ToString(), out numOfCategories);
 
     var currentPage = Model.Content;
-    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+
+    //var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var category = Model.Content;
     var arrayCategories = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category" && x.Name != currentPage.Name).ToArray();
     for (int index = 0; index < numOfCategories && index < arrayCategories.Count(); index++)
     {

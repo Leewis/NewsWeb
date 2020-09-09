@@ -6,7 +6,7 @@ using  Umbraco.Core.Models;
 using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder.Embedded;
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "bb1438ed3c500da")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "4fb97c81bbe0d0d9")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -485,6 +485,13 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("fullDescription")]
 		public global::System.Web.IHtmlString FullDescription => this.Value<global::System.Web.IHtmlString>("fullDescription");
+
+		///<summary>
+		/// Location
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("location")]
+		public string Location => this.Value<string>("location");
 
 		///<summary>
 		/// MostView

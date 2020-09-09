@@ -25,7 +25,8 @@ namespace Aio.Umbraco.Common.ContentModels
         public string Picture { get; set; }
         public string PostedDateTime { get; set; }
         public string PostedTime { get; set; }
-        
+        public string Location { get; set; }
+
         #endregion
 
         #region Meta Tags
@@ -35,7 +36,7 @@ namespace Aio.Umbraco.Common.ContentModels
 
         #region Related News
 
-        public IList<NewsModel> RelatedNewsModel {get;set;}
+        public IList<NewsModel> RelatedNewsModel { get; set; }
 
         #endregion
 

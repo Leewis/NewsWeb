@@ -1,0 +1,36 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using ContentModels = Umbraco.Web.PublishedModels;
+@using Umbraco.Web;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
+@{
+    var numOfCategories = 5;
+    var currentPage = Model;
+
+    var category = Model.Parent;
+    var arrayCategories = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category" && x.Name != currentPage.Name).ToArray();
+
+}
+@for (int index = 0; index < numOfCategories && index < arrayCategories.Count(); index++)
+{
+    var arrayNews = arrayCategories[index].Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(i => i.Value("postedDateTime")).ToArray();
+    <div class="widget-news-small">
+        <h6 class="merri-title">
+            <a href="@arrayCategories[index].Url()">
+                @arrayCategories[index].GetProperty("Title").Value()
+            </a>
+        </h6>
+        <a href="#" class="d-inline-block img-thumb"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid"></a>
+        <div class="orthers-news-small">
+            @for (int i = 0; i < 3 && i < arrayNews.Count(); i++)
+            {
+                <h6 class="merri-title item-news">
+                    <a href="@arrayNews[i].Url()">
+                        @arrayNews[i].GetProperty("Title").Value()
+                    </a>
+                </h6>
+            }
+        </div>
+    </div>
+}
+

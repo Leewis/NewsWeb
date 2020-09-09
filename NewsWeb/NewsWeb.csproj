@@ -401,7 +401,7 @@
     <Content Include="Views\MacroPartials\MostViews.cshtml" />
     <Content Include="Views\MacroPartials\NewsByCategory.cshtml" />
     <Content Include="Views\Category.cshtml" />
-    <Content Include="Views\CategoryPage.cshtml" />
+    <Content Include="Views\SubCategory.cshtml" />
     <Content Include="Views\NewsLandingPage.cshtml" />
     <Content Include="Views\Partials\Navigation\CategoryHeader.cshtml" />
     <Content Include="Views\Partials\Navigation\CategoryMenu.cshtml" />
@@ -421,6 +421,8 @@
     <Content Include="Views\MacroPartials\CategoriesBoxListWithoutImg.cshtml" />
     <Content Include="Views\MacroPartials\AioShop.cshtml" />
     <Content Include="Views\MacroPartials\MostViewsLandingPage.cshtml" />
+    <Content Include="Views\Partials\SubCategoryWidget.cshtml" />
+    <Content Include="Views\Partials\SubCategoryPostList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

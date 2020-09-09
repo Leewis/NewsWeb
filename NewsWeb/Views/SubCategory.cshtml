@@ -1,0 +1,25 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Category>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "master.cshtml";
+}
+
+<div class="container white-bg pt-2 pb-2">
+    <div class="category-page">
+        @Html.Partial("Navigation/CategoryHeader")
+        @Html.Partial("Navigation/CategoryMenu")
+        <!-- product-news -->
+        <div class="product-news">
+            <div class="row">
+                <div class="col-lg-8 col-line">
+                    @Html.Partial("SubCategoryPostList")
+                </div>
+                <div class="col-lg-4 d-none d-lg-block">
+                    <div class="categories-widgets pl-3">
+                        @Html.Partial("SubCategoryWidget")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
