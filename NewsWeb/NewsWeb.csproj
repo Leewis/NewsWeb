@@ -423,6 +423,8 @@
     <Content Include="Views\MacroPartials\MostViewsLandingPage.cshtml" />
     <Content Include="Views\Partials\SubCategoryWidget.cshtml" />
     <Content Include="Views\Partials\SubCategoryPostList.cshtml" />
+    <Content Include="Views\Partials\AioShop.cshtml" />
+    <Content Include="Views\Partials\Widget_1_item.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
