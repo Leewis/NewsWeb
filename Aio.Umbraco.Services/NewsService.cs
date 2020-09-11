@@ -90,16 +90,17 @@ namespace Aio.Umbraco.Services
         {
             string dateTimeStr = string.Empty;
             //ExactPostedHours
-            var slipDateTime = dateTime.Split(' ');
 
-            DateTime dateVal = Convert.ToDateTime(slipDateTime[0]);
-            //DateTime dateVal = DateTime.ParseExact(slipDateTime[0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            //var slipDateTime = dateTime.Split(' ');
+            ////DateTime dateVal = DateTime.ParseExact(slipDateTime[0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            //DateTime dateVal = Convert.ToDateTime(slipDateTime[0]);
 
-            var splipTime = slipDateTime[1].Split(':');
+            //var splipTime = slipDateTime[1].Split(':');
 
-            DateTime postedDate = new DateTime(dateVal.Year, dateVal.Month, dateVal.Day, int.Parse(splipTime[0]) + 4, int.Parse(splipTime[1]), int.Parse(splipTime[2]), DateTimeKind.Local);
+            //DateTime postedDate = new DateTime(dateVal.Year, dateVal.Month, dateVal.Day, (slipDateTime.Length >=3 && slipDateTime[2].Equals("PM", StringComparison.InvariantCultureIgnoreCase) ? int.Parse(splipTime[0]) + 12 : int.Parse(splipTime[0])), int.Parse(splipTime[1]), int.Parse(splipTime[2]), DateTimeKind.Local);
+            DateTime postedDate = Convert.ToDateTime(dateTime);
 
-            var excatPostHours = DateTime.Now - postedDate;
+            var excatPostHours = Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt")) - postedDate;
 
             if (excatPostHours.Days > 0)
             {
@@ -107,11 +108,13 @@ namespace Aio.Umbraco.Services
             }
             else if (excatPostHours.Hours > 0)
             {
-                dateTimeStr += excatPostHours.Hours + " giờ";
-
                 if (excatPostHours.Minutes > 0)
                 {
                     dateTimeStr += excatPostHours.Hours + " giờ" + excatPostHours.Minutes + " phút";
+                }
+                else
+                {
+                    dateTimeStr += excatPostHours.Hours + " giờ";
                 }
             }
             else
