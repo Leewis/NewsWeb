@@ -11,5 +11,6 @@ namespace Aio.Umbraco.Services.Interfaces
     {
         CategoryModel GetCategoryModel(IPublishedContent category);
         IList<CategoryModel> GetAllCategoryModel();
+        IPublishedContent GetCategory(string categoryName);
     }
 }

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aio.Umbraco.Common\Aio.Umbraco.Common.csproj" />
+    <ProjectReference Include="..\Aio.Umbraco.Services\Aio.Umbraco.Services.csproj" />
+  </ItemGroup>
+
+</Project>

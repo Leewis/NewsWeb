@@ -38,5 +38,11 @@ namespace Aio.Umbraco.Common.ContentModels
         public int ParentId { get; set; }
 
         public string MetaPageTitle { get; set; }
+
+        #region Meta Tags
+        public virtual string MetaKeywords { get; set; }
+        public virtual string MetaDescription { get; set; }
+
+        #endregion
     }
 }

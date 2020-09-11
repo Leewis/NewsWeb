@@ -3,7 +3,9 @@
 @using Aio.Umbraco.Services.Interfaces;
 @{
     var numOfNews = 0;
-    int.TryParse(Model.MacroParameters["numOfNews"].ToString(), out numOfNews);
+    if (Model.MacroParameters.Any() && Model.MacroParameters.Keys.Contains("numOfNews")) {        
+        int.TryParse(Model.MacroParameters["numOfNews"].ToString(), out numOfNews);
+    }
     var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
     var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
     var subCategory = category.Children.Where(x => x.IsVisible()).OrderBy(item => item.Name).ToArray();

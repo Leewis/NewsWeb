@@ -44,5 +44,13 @@ namespace Aio.Umbraco.Common.ContentModels
         {
             RelatedNewsModel = new List<NewsModel>();
         }
+
+        #region Crawl properties
+
+        public string PictureUrl { get; set; }
+        public string PictureName { get; set; }
+        public string PictureExternalUrl { get; set; }
+
+        #endregion
     }
 }

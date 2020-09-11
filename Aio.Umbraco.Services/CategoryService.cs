@@ -140,5 +140,25 @@ namespace Aio.Umbraco.Services
 
             return categories;
         }
+
+        public IPublishedContent GetCategory(string categoryName)
+        {
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                var home = CurrentPublishedContent.FirstChild();
+
+                var category = home.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category");
+
+                foreach (var ca in category)
+                {
+                    if (ca.Name.Equals(categoryName, StringComparison.CurrentCultureIgnoreCase) || ca.GetProperty("title").GetValue().Equals(categoryName))
+                    {
+                        return ca;
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace NewsWeb
             composition.Components().Append<ExamineComponent>();
             composition.Register<ISearchHelper, SearchHelper>(Lifetime.Singleton);
             composition.Register<ISettingsService, SettingsService>(Lifetime.Singleton);
+            composition.Register<INewsService, NewsService>(Lifetime.Singleton);
+            composition.Register<ICategoryService, CategoryService>(Lifetime.Singleton);
         }
     }
 }

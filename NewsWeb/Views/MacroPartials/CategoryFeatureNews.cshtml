@@ -4,7 +4,9 @@
 @using Aio.Umbraco.Services.Interfaces;
 @{
     var numOfNews = 0;
-    int.TryParse(Model.MacroParameters["numOfNews"].ToString(), out numOfNews);
+    if (Model.MacroParameters.Any() && Model.MacroParameters.Keys.Contains("numOfNews")) {        
+        int.TryParse(Model.MacroParameters["numOfNews"].ToString(), out numOfNews);
+    }
     var categories = Model.MacroParameters["categories"].ToString().Split(',');
 
     INewsService service = new NewsService();
