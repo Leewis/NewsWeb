@@ -84,6 +84,27 @@ namespace Aio.Umbraco.Services
             return listItem;
         }
 
+        public IPublishedContent GetNewsByCategoryAndName(string categoryName, string name)
+        {
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                var home = CurrentPublishedContent.FirstChild();
+
+                var category = home.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category");
+                
+                foreach (var ca in category)
+                {
+                    if (ca.Name.Equals(categoryName, StringComparison.CurrentCultureIgnoreCase) || ca.GetProperty("title").GetValue().Equals(categoryName))
+                    {
+                        var newsChildren = ca.Descendants().Where(news => news.IsVisible() && news.ContentType.Alias == "news" && news.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+                        return newsChildren.FirstOrDefault() ;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         #region Helpers
 
         public string CalculatePostedDateTime(string dateTime)
