@@ -341,6 +341,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="ExamineComposerPublic.cs" />

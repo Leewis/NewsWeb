@@ -69,6 +69,22 @@ Hiện nay ngành giao thông vận tải phụ trách sát hạch bằng lái, 
 
             PostNewsAsync(news1);
 
+            //Insert Category
+            Console.WriteLine("Starting crawling Category!");
+            CategoryModel cat = new CategoryModel();
+            cat.Name = "Test1-Thoi-Su";
+            cat.Title = "Test Thời Sự";
+            cat.ParentId = 1107;
+           
+            PostCategoryAsync(cat);
+            Console.WriteLine("Starting crawling Update Category!");
+            CategoryModel cat1 = new CategoryModel();
+            cat1.Name = "Test1-Thoi-Su";
+            cat1.Title = "Test Thời Sự";
+            cat1.ParentId = 1107;
+
+            PostCategoryAsync(cat1);
+
             Console.ReadLine();
         }
 
@@ -126,6 +142,26 @@ Hiện nay ngành giao thông vận tải phụ trách sát hạch bằng lái, 
             else
             {
                 Console.WriteLine("Failed to poste data");
+            }
+        }
+
+        static async Task PostCategoryAsync(CategoryModel categoryModel)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:26268/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var content = new StringContent(JsonConvert.SerializeObject(categoryModel), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync("/umbraco/api/CategoryApi/InsertCategory", content);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Data posted");
+            }
+            else
+            {
+                Console.WriteLine($"Failed to poste data. Status code:{response.StatusCode}");
             }
         }
     }

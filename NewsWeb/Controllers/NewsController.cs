@@ -44,75 +44,92 @@ namespace NewsWeb.Controllers
 
         public bool InsertNews(NewsModel news)
         {
-            //imageId = UploadImage(1115, filePath, news.PictureTitle, news.PictureName);
-           
-            var category = _iCategoryService.GetCategory(news.Category);
-            //IMedia media = Services.MediaService.GetById(imageId);               
+            //Check if this News has existed or not
+            var existedNews =_iNewsService.GetNewsByCategoryAndName(news.Category, news.Name);
 
-            if (category != null)
+            if (existedNews == null)
             {
-                IContent createdNews = Services.ContentService.Create(news.Name, category.Id > 0 ? category.Id : news.ParentId, "news");
+                //imageId = UploadImage(1115, filePath, news.PictureTitle, news.PictureName);
 
-                //TODO
-                //IList<string> categoryName = new List<string>();
-                //categoryName.Add(category.Name);
-                //createdNews.AssignTags("category", categoryName.ToArray());
+                var category = _iCategoryService.GetCategory(news.Category);
+                //IMedia media = Services.MediaService.GetById(imageId);               
 
-                //var categoryUdi = Udi.Create(Constants.UdiEntityType.Document, category.Key);
-                //var searchCategoryPage = Umbraco.PublishedContent(categoryUdi);
-                //createdNews.SetValue("category", searchCategoryPage);                   
-
-                //IList <Link> links = new List<Link>();
-                //links.Add(new Link()
-                //{
-                //    Name = "Test 1",
-                //    Type = LinkType.Content,
-                //    Udi = locaUdi,
-                //    Url = "/home/thoi-su/giao-thong/xe-qua-tai-giam-manh-tren-quoc-lo-5/"
-                //});
-
-                //TODO: this field will be set data later
-                //createdNews.SetValue("relatedNews", links);
-
-                //TODO: this field will be set data later
-                bool imageSaved = false;
-                if (!string.IsNullOrEmpty(news.PictureUrl))
+                if (category != null)
                 {
-                    using (Stream stream = System.IO.File.OpenRead(news.PictureUrl))
+                    IContent createdNews = Services.ContentService.Create(news.Name, category.Id > 0 ? category.Id : news.ParentId, "news");
+
+                    //TODO
+                    //IList<string> categoryName = new List<string>();
+                    //categoryName.Add(category.Name);
+                    //createdNews.AssignTags("category", categoryName.ToArray());
+
+                    //var categoryUdi = Udi.Create(Constants.UdiEntityType.Document, category.Key);
+                    //var searchCategoryPage = Umbraco.PublishedContent(categoryUdi);
+                    //createdNews.SetValue("category", searchCategoryPage);                   
+
+                    //IList <Link> links = new List<Link>();
+                    //links.Add(new Link()
+                    //{
+                    //    Name = "Test 1",
+                    //    Type = LinkType.Content,
+                    //    Udi = locaUdi,
+                    //    Url = "/home/thoi-su/giao-thong/xe-qua-tai-giam-manh-tren-quoc-lo-5/"
+                    //});
+
+                    //TODO: this field will be set data later
+                    //createdNews.SetValue("relatedNews", links);
+
+                    //TODO: this field will be set data later
+                    bool imageSaved = false;
+                    if (!string.IsNullOrEmpty(news.PictureUrl))
                     {
-                        createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, stream);
-                        imageSaved = true;
+                        using (Stream stream = System.IO.File.OpenRead(news.PictureUrl))
+                        {
+                            createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, stream);
+                            imageSaved = true;
+                        }
                     }
-                }
-                else if (!string.IsNullOrEmpty(news.PictureExternalUrl))
-                {
-                    try
+                    else if (!string.IsNullOrEmpty(news.PictureExternalUrl))
                     {
-                       //TODO
-                       createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
+                        try
+                        {
+                            //TODO
+                            createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
+                        }
+                        catch (Exception exception)
+                        {
+                            return false;
+                        }
                     }
-                    catch (Exception exception)
+
+
+                    if (imageSaved)
                     {
-                        return false;
+                        //this is a work around for the SetValue method to save a file, since it doesn't currently take into account the image cropper
+                        //which we are using so we need to fix that.
+                        var propType = createdNews.Properties["picture"].PropertyType;
+                        var cropperValue = CreateImageCropperValue(propType, createdNews.GetValue("picture"), _dataTypeService);
+                        createdNews.SetValue("picture", cropperValue);
                     }
+
+                    //TOD
+                    //createdNews.SetValue("thumbnailImage", imageId); //media.Path = -1,newsId,mediaId;
+
+                    PopulateContentFields(createdNews, news);
+
+                    var newsResult = Services.ContentService.Save(createdNews);
+
+                    if (newsResult.Success)
+                        return true;
                 }
+            }
+            else
+            {
+                var content = Services.ContentService.GetById(existedNews.Id);
+                //Update News
+                PopulateContentFields(content, news);
 
-
-                if (imageSaved)
-                {
-                    //this is a work around for the SetValue method to save a file, since it doesn't currently take into account the image cropper
-                    //which we are using so we need to fix that.
-                    var propType = createdNews.Properties["picture"].PropertyType;
-                    var cropperValue = CreateImageCropperValue(propType, createdNews.GetValue("picture"), _dataTypeService);
-                    createdNews.SetValue("picture", cropperValue);
-                }
-
-                //TOD
-                //createdNews.SetValue("thumbnailImage", imageId); //media.Path = -1,newsId,mediaId;
-
-                PopulateContentFields(createdNews, news);
-
-                var newsResult = Services.ContentService.Save(createdNews);
+                var newsResult = Services.ContentService.Save(content);
 
                 if (newsResult.Success)
                     return true;
@@ -200,7 +217,7 @@ namespace NewsWeb.Controllers
             content.SetValue("metaDescription", model.MetaDescription);
 
             content.CreateDate = Convert.ToDateTime(model.PostedDateTime);
-        }
+        }        
 
         //borrowed from CMS core until SetValue is fixed with a stream
         private string CreateImageCropperValue(PropertyType propertyType, object value, IDataTypeService dataTypeService)
