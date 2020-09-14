@@ -286,6 +286,7 @@ Umbraco.ModelsBuilder.Embedded.BackOffice.MemberTypeModelValidator, Umbraco.Mode
 Umbraco.ModelsBuilder.Embedded.BackOffice.ModelsBuilderDashboardController, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Embedded.BackOffice.ContentTypeModelValidator, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 NewsWeb.ExamineComposerPublic, NewsWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+NewsWeb.Controllers.NewsApiController, NewsWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 NewsWeb.Controllers.SearchController, NewsWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 uSync8.BackOffice.uSyncBackOfficeConfigComposer, uSync8.BackOffice, Version=8.6.4.0, Culture=neutral, PublicKeyToken=null
 uSync8.BackOffice.uSyncBackOfficeComposer, uSync8.BackOffice, Version=8.6.4.0, Culture=neutral, PublicKeyToken=null
@@ -445,6 +446,7 @@ Umbraco.Web.Editors.MediaTypeController, Umbraco.Web, Version=8.0.0.0, Culture=n
 Umbraco.Web.Editors.SectionController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.Web.Editors.MediaController, Umbraco.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
 Umbraco.ModelsBuilder.Embedded.BackOffice.ModelsBuilderDashboardController, Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null
+NewsWeb.Controllers.NewsApiController, NewsWeb, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 uSync8.BackOffice.Controllers.uSyncDashboardApiController, uSync8.BackOffice, Version=8.6.4.0, Culture=neutral, PublicKeyToken=null
 uSync8.BackOffice.Controllers.Trees.uSyncTreeController, uSync8.BackOffice, Version=8.6.4.0, Culture=neutral, PublicKeyToken=null
 

@@ -30,7 +30,9 @@
             </div>
             <div class="cate-content-box">
                 <article class="thumb-cate">
-                    <a href="@latestNews.Url" class="d-inline-block img-thumb"><img src="@latestNews.GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt="" /></a>
+                    <a href="@latestNews.Url" class="d-inline-block img-thumb">
+                        <img src="@latestNews.GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt="" />
+                    </a>
                     <div class="cate-thumb-desc mt-3">
                         <h6 class="merri-title">
                             <a href="@latestNews.Url">
@@ -45,7 +47,7 @@
                                 </span>
                             </a>
                             <div class="update-time">
-                                <span>@latestNews.Parent.GetProperty("title").Value() - </span>
+                                <span>@latestNews.Parent.GetProperty("title").Value().ToString() - </span>
                                 <span class="comments-count">
                                     @service.CalculatePostedDateTime(latestNews.GetProperty("postedDateTime").Value().ToString())
                                 </span>

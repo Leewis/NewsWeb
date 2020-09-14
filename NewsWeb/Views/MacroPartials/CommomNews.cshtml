@@ -19,7 +19,7 @@
         <article class="article-item">
             <h6 class="title-news merri-title"><a href="@arrayNews[i].Url()">@arrayNews[i].GetProperty("title").Value()</a></h6>
             <div class="d-flex">
-                <a href="#" class="mr-3 img-thumb"><img src="@arrayNews[i].GetProperty("Picture").Value()" style='height: 100%; width: 100%; object-fit: contain' class="img-fluid" alt="" /></a>
+                <a href="#" class="mr-3 img-thumb"><img src="@arrayNews[i].GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt="" /></a>
                 <p class="article-desc">
                     <a href="#">
                         @arrayNews[i].GetProperty("shortDescription").Value()

@@ -3,8 +3,11 @@
 @using Aio.Umbraco.Services;
 @using Aio.Umbraco.Services.Interfaces;
 @{
-    var numsofNews = 0;
-    int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out numsofNews);
+    var numsofNews = 0; 
+    if (Model.MacroParameters.Any() && Model.MacroParameters.Keys.Contains("numbersNews"))
+    {
+        int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out numsofNews);
+    }
     var content = Umbraco.Content(Udi.Parse(Model.MacroParameters["content"].ToString()));
     var arrayNews = content.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
     var latestNews = arrayNews[0];

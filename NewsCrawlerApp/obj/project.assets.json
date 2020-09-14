@@ -760,48 +760,40 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tnguyen205.EAD\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
-    "C:\\ProgramData\\Xamarin\\NuGet\\": {},
-    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\dle50\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\r\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj",
+      "projectUniqueName": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj",
       "projectName": "NewsCrawlerApp",
-      "projectPath": "D:\\r\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj",
-      "packagesPath": "C:\\Users\\tnguyen205.EAD\\.nuget\\packages\\",
-      "outputPath": "D:\\r\\NewsWeb\\NewsCrawlerApp\\obj\\",
+      "projectPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj",
+      "packagesPath": "C:\\Users\\dle50\\.nuget\\packages\\",
+      "outputPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
-        "C:\\ProgramData\\Xamarin\\NuGet\\",
-        "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\tnguyen205.EAD\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.1.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\dle50\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\DevExpress 18.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\r\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj": {
-              "projectPath": "D:\\r\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj"
+            "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj": {
+              "projectPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj"
             },
-            "D:\\r\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj": {
-              "projectPath": "D:\\r\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj"
+            "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj": {
+              "projectPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj"
             }
           }
         }
@@ -827,10 +819,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

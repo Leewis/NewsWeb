@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "5c8ba217fe1d4c7004dddaea3eac7af88348b72a"
+    "signature": ""
   },
   "compilationOptions": {},
   "targets": {
@@ -25,29 +25,19 @@
         }
       },
       "Aio.Umbraco.Common/1.0.0": {
-        "dependencies": {
-          "Umbraco.Core": "8.0.0.0",
-          "Zone.UmbracoMapper.V8": "4.2.1.0",
-          "Zone.UmbracoMapper.Common": "1.0.0.0"
-        },
         "runtime": {
           "Aio.Umbraco.Common.dll": {}
         }
       },
       "Aio.Umbraco.Services/1.0.0": {
         "dependencies": {
-          "Aio.Umbraco.Common": "1.0.0",
-          "Umbraco.Web": "8.0.0.0",
-          "Examine": "1.0.2.0",
-          "Autofac": "4.0.1.0",
-          "System.Web.Mvc": "5.2.7.0",
-          "Umbraco.Examine": "8.0.0.0"
+          "Aio.Umbraco.Common": "1.0.0"
         },
         "runtime": {
           "Aio.Umbraco.Services.dll": {}
         }
       },
-      "Umbraco.Core.Reference/8.0.0.0": {
+      "Umbraco.Core/8.0.0.0": {
         "runtime": {
           "Umbraco.Core.dll": {
             "assemblyVersion": "8.0.0.0",
@@ -55,7 +45,7 @@
           }
         }
       },
-      "Zone.UmbracoMapper.V8.Reference/4.2.1.0": {
+      "Zone.UmbracoMapper.V8/4.2.1.0": {
         "runtime": {
           "Zone.UmbracoMapper.V8.dll": {
             "assemblyVersion": "4.2.1.0",
@@ -63,7 +53,7 @@
           }
         }
       },
-      "Zone.UmbracoMapper.Common.Reference/1.0.0.0": {
+      "Zone.UmbracoMapper.Common/1.0.0.0": {
         "runtime": {
           "Zone.UmbracoMapper.Common.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -71,7 +61,7 @@
           }
         }
       },
-      "Umbraco.Web.Reference/8.0.0.0": {
+      "Umbraco.Web/8.0.0.0": {
         "runtime": {
           "Umbraco.Web.dll": {
             "assemblyVersion": "8.0.0.0",
@@ -79,7 +69,7 @@
           }
         }
       },
-      "Examine.Reference/1.0.2.0": {
+      "Examine/1.0.2.0": {
         "runtime": {
           "Examine.dll": {
             "assemblyVersion": "1.0.2.0",
@@ -87,7 +77,7 @@
           }
         }
       },
-      "Autofac.Reference/4.0.1.0": {
+      "Autofac/4.0.1.0": {
         "runtime": {
           "Autofac.dll": {
             "assemblyVersion": "4.0.1.0",
@@ -95,7 +85,7 @@
           }
         }
       },
-      "System.Web.Mvc.Reference/5.2.7.0": {
+      "System.Web.Mvc/5.2.7.0": {
         "runtime": {
           "System.Web.Mvc.dll": {
             "assemblyVersion": "5.2.7.0",
@@ -103,7 +93,7 @@
           }
         }
       },
-      "Umbraco.Examine.Reference/8.0.0.0": {
+      "Umbraco.Examine/8.0.0.0": {
         "runtime": {
           "Umbraco.Examine.dll": {
             "assemblyVersion": "8.0.0.0",
@@ -136,42 +126,42 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Umbraco.Core.Reference/8.0.0.0": {
+    "Umbraco.Core/8.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "Zone.UmbracoMapper.V8.Reference/4.2.1.0": {
+    "Zone.UmbracoMapper.V8/4.2.1.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "Zone.UmbracoMapper.Common.Reference/1.0.0.0": {
+    "Zone.UmbracoMapper.Common/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "Umbraco.Web.Reference/8.0.0.0": {
+    "Umbraco.Web/8.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "Examine.Reference/1.0.2.0": {
+    "Examine/1.0.2.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "Autofac.Reference/4.0.1.0": {
+    "Autofac/4.0.1.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "System.Web.Mvc.Reference/5.2.7.0": {
+    "System.Web.Mvc/5.2.7.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "Umbraco.Examine.Reference/8.0.0.0": {
+    "Umbraco.Examine/8.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
