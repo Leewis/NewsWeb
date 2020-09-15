@@ -15,6 +15,7 @@
     var robots = "<meta name=\"robots\" content=\"{0} \">";
     string robot = "";
     string metaProps = "";
+    string keywords = string.Empty;
     if (currentPage != null)
     {
         title = !string.IsNullOrEmpty(currentPage.Value("metaPageTitle") as string) ? currentPage.Value("metaPageTitle").ToString()
@@ -23,6 +24,10 @@
         description += !string.IsNullOrEmpty(currentPage.Value("metaDescription") as string) ? currentPage.Value("metaDescription").ToString()
                     : !string.IsNullOrEmpty(currentPage.Parent.Value("metaDescription") as string) ? currentPage.Parent.Value("metaDescription").ToString()
                         : setting.Value("metaDescription").ToString();
+
+        keywords += !string.IsNullOrEmpty(currentPage.Value("metaKeywords") as string) ? currentPage.Value("metaKeywords").ToString()
+                    : !string.IsNullOrEmpty(currentPage.Parent.Value("metaKeywords") as string) ? currentPage.Parent.Value("metaKeywords").ToString()
+                        : setting.Value("metaKeywords").ToString();
 
         if (Model.HasValue("robots") || setting.HasValue("robots"))
         {
@@ -44,13 +49,17 @@
                         : setting.Value("metaProperties").ToString();
     }
 
-    metaProps = metaProps.Replace("[site_name]", home.Url).Replace("[url]", Model.Url).Replace("[image]", imgUrl)
+    var hostUrl = Request.Url.AbsoluteUri.StartsWith("https") ? "https://" + Request.Url.Authority.Replace(":80","") : "http://" + Request.Url.Authority.Replace(":80","");
+    var homePageUrl = Request.Url.AbsoluteUri.EndsWith("/home") ? hostUrl.Replace("/home", "") : Request.Url.AbsoluteUri.Replace(":80","");
+
+    metaProps = metaProps.Replace("[site_name]", homePageUrl).Replace("[url]", homePageUrl).Replace("[image]", hostUrl + imgUrl)
                                                   .Replace("[title]", title).Replace("[description]", description);
 
 }
 <title>@title</title>
 @Html.Raw(metaProps)
 <meta name="description" content="@Html.Raw(@description)">
+<meta name="keywords" content="@keywords" />
 @if (!string.IsNullOrEmpty(robot))
 {
     robots = string.Format(robots, robot.Substring(0, robot.Length - 2));
