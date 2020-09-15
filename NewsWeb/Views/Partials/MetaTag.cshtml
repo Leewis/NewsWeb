@@ -1,32 +1,55 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
 @using Umbraco.Web;
 @using Umbraco.Core.Models.PublishedContent;
+@using Umbraco.Core.PropertyEditors.ValueConverters
 @{
     var root = Model.Root();
+    var home = root.Children.FirstOrDefault(x => x.Id == 1089);
     var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
 
     string title = Model.Name;
     string description = setting.Value("descriptionSuffix").ToString();
+    var image = setting.Value<IPublishedContent>("siteLogoUrl");
+    var imgUrl = image.Url;
     var currentPage = this.ViewData.Model;
     var robots = "<meta name=\"robots\" content=\"{0} \">";
     string robot = "";
+    string metaProps = "";
     if (currentPage != null)
     {
-        title = !string.IsNullOrEmpty(currentPage.Value("metaPageTitle") as string) ? currentPage.Value("metaPageTitle").ToString() : currentPage.Parent.Value("metaPageTitle").ToString();
-        description += !string.IsNullOrEmpty(currentPage.Value("metaDescription") as string) ? currentPage.Value("metaPageTitle").ToString() : currentPage.Parent.Value("metaDescription").ToString();
+        title = !string.IsNullOrEmpty(currentPage.Value("metaPageTitle") as string) ? currentPage.Value("metaPageTitle").ToString()
+                    : !string.IsNullOrEmpty(currentPage.Parent.Value("metaPageTitle") as string) ? currentPage.Parent.Value("metaPageTitle").ToString()
+                        : setting.Value("metaPageTitle").ToString();
+        description += !string.IsNullOrEmpty(currentPage.Value("metaDescription") as string) ? currentPage.Value("metaDescription").ToString()
+                    : !string.IsNullOrEmpty(currentPage.Parent.Value("metaDescription") as string) ? currentPage.Parent.Value("metaDescription").ToString()
+                        : setting.Value("metaDescription").ToString();
 
-        if (Model.HasValue("robots"))
+        if (Model.HasValue("robots") || setting.HasValue("robots"))
         {
-            var robotsTag = Model.Value("Robots") as string[];
-           
+
+            var robotsTag = Model.HasValue("robots") ? Model.Value("Robots") as string[] : setting.Value("robots") as string[];
+
             foreach (var item in robotsTag)
             {
                 robot += item + ", ";
             }
         }
+        if (Model.HasValue("Picture"))
+        {
+            ImageCropperValue picture = Model.Value<ImageCropperValue>("Picture");
+            imgUrl = picture.Src + picture.GetCropUrl("thumbnail");
+        }
+        metaProps = !string.IsNullOrEmpty(currentPage.Value("metaProperties") as string) ? currentPage.Value("metaProperties").ToString()
+                    : !string.IsNullOrEmpty(currentPage.Parent.Value("metaProperties") as string) ? currentPage.Parent.Value("metaProperties").ToString()
+                        : setting.Value("metaProperties").ToString();
     }
+
+    metaProps = metaProps.Replace("[site_name]", home.Url).Replace("[url]", Model.Url).Replace("[image]", imgUrl)
+                                                  .Replace("[title]", title).Replace("[description]", description);
+
 }
 <title>@title</title>
+@Html.Raw(metaProps)
 <meta name="description" content="@Html.Raw(@description)">
 @if (!string.IsNullOrEmpty(robot))
 {
