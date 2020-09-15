@@ -172,3 +172,4 @@ D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.csproj.CopyComp
 D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.dll
 D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.pdb
 D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.csprojAssemblyReference.cache
+D:\r\NewsWeb\Aio.Umbraco.Services\bin\Debug\System.Threading.Tasks.Dataflow.dll
