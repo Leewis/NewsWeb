@@ -49,10 +49,10 @@
                         : setting.Value("metaProperties").ToString();
     }
 
-    var hostUrl = Request.Url.AbsoluteUri.StartsWith("https") ? "https://" + Request.Url.Authority.Replace(":80","") : "http://" + Request.Url.Authority.Replace(":80","");
-    var homePageUrl = Request.Url.AbsoluteUri.EndsWith("/home") ? hostUrl.Replace("/home", "") : Request.Url.AbsoluteUri.Replace(":80","");
+    var hostUrl = Request.Url.Authority.TrimEnd('/'); //Request.Url.AbsoluteUri.StartsWith("https") ? "https://" + Request.Url.Authority.Replace(":8014","") : "http://" + Request.Url.Authority.Replace(":8014","");
+    var homePageUrl = Request.Url.AbsoluteUri.EndsWith("/home") ? hostUrl.Replace("/home", "") : Request.Url.AbsoluteUri;
 
-    metaProps = metaProps.Replace("[site_name]", homePageUrl).Replace("[url]", homePageUrl).Replace("[image]", hostUrl + imgUrl)
+    metaProps = metaProps.Replace("[site_name]", homePageUrl.TrimEnd('/')).Replace("[url]", homePageUrl.TrimEnd('/')).Replace("[image]", hostUrl + imgUrl)
                                                   .Replace("[title]", title).Replace("[description]", description);
 
 }
