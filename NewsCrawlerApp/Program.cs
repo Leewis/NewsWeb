@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Permissions;
+using System.IO;
 
 namespace NewsCrawlerApp
 {
@@ -13,6 +15,8 @@ namespace NewsCrawlerApp
     {
         static void Main(string[] args)
         {
+            string path = @"E:\Project\Umbraco\AioNews\NewsWeb\NewsWeb\assets\NewsCrawl";
+            RunWatcher(path);
             Console.WriteLine("Starting crawling!");
 
             //dynamic newsrDynamic = new ExpandoObject();
@@ -35,6 +39,7 @@ namespace NewsCrawlerApp
             //newsrDynamic.PictureType = "jpg";
             //PostCarAsync(newsrDynamic);
 
+            /*
             NewsModel news1 = new NewsModel();
             news1.Name = "chuyen-gia-nen-giu-on-dinh-viec-sat-hach-lai-xe";
             news1.Title = "Chuyên gia: 'Nên giữ ổn định việc sát hạch lái xe'";
@@ -84,6 +89,7 @@ Hiện nay ngành giao thông vận tải phụ trách sát hạch bằng lái, 
             cat1.ParentId = 1107;
 
             PostCategoryAsync(cat1);
+            */
 
             Console.ReadLine();
         }
@@ -163,6 +169,57 @@ Hiện nay ngành giao thông vận tải phụ trách sát hạch bằng lái, 
             {
                 Console.WriteLine($"Failed to poste data. Status code:{response.StatusCode}");
             }
+        }
+
+        [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+        private static void RunWatcher(string path)
+        {
+            // Create a new FileSystemWatcher and set its properties.
+            using (FileSystemWatcher watcher = new FileSystemWatcher())
+            {
+                watcher.Path = path;
+
+                // Watch for changes in LastAccess and LastWrite times, and
+                // the renaming of files or directories.
+                watcher.NotifyFilter = NotifyFilters.LastAccess
+                                     | NotifyFilters.LastWrite
+                                     | NotifyFilters.FileName
+                                     | NotifyFilters.DirectoryName;
+
+                // Only watch text files.
+                watcher.Filter = "*.txt";
+
+                // Add event handlers.
+                watcher.Changed += OnChanged;
+                watcher.Created += OnChanged;
+                watcher.Deleted += OnChanged;
+                watcher.Renamed += OnRenamed;
+
+                // Begin watching.
+                watcher.EnableRaisingEvents = true;
+
+                // Wait for the user to quit the program.
+                Console.WriteLine("Press 'q' to quit the sample.");
+                while (Console.Read() != 'q') ;
+            }
+        }
+
+        // Define the event handlers.
+        private static void OnChanged(object source, FileSystemEventArgs e)
+        {
+            // Specify what is done when a file is changed, created, or deleted.
+            //string news = File.ReadAllText(e.FullPath);
+            NewsModel news = JsonConvert.DeserializeObject<NewsModel>(File.ReadAllText(e.FullPath, Encoding.UTF8));
+            PostNewsAsync(news);
+            Console.WriteLine($"File: {e.FullPath} {e.ChangeType}");
+        }
+
+        private static void OnRenamed(object source, RenamedEventArgs e)
+        {
+            // Specify what is done when a file is renamed.
+            //NewsModel news = JsonConvert.DeserializeObject<NewsModel>(File.ReadAllText(e.FullPath, Encoding.UTF8));
+            //PostNewsAsync(news);
+            Console.WriteLine($"File: {e.OldFullPath} renamed to {e.FullPath}");
         }
     }
 }

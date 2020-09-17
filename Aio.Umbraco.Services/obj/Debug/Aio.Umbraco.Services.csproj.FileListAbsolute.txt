@@ -112,7 +112,6 @@ E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\Umbraco.Web.dl
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\Umbraco.Web.UI.dll
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\Zone.UmbracoMapper.V8.dll
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\Zone.UmbracoMapper.Common.dll
-E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\System.Threading.Tasks.Dataflow.dll
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\Aio.Umbraco.Common.pdb
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\Examine.pdb
 E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\System.Web.Mvc.xml
@@ -173,3 +172,4 @@ D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.dll
 D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.pdb
 D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.csprojAssemblyReference.cache
 D:\r\NewsWeb\Aio.Umbraco.Services\bin\Debug\System.Threading.Tasks.Dataflow.dll
+E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\System.Threading.Tasks.Dataflow.dll

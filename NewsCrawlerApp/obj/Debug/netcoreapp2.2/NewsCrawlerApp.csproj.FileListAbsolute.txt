@@ -81,8 +81,8 @@ E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\bin\Debug\netcoreapp2.2\System
 E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\obj\Debug\netcoreapp2.2\NewsCrawlerApp.csprojAssemblyReference.cache
 E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\obj\Debug\netcoreapp2.2\NewsCrawlerApp.AssemblyInfoInputs.cache
 E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\obj\Debug\netcoreapp2.2\NewsCrawlerApp.AssemblyInfo.cs
-E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\obj\Debug\netcoreapp2.2\NewsCrawlerApp.csproj.CoreCompileInputs.cache
 E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\obj\Debug\netcoreapp2.2\NewsCrawlerApp.csproj.CopyComplete
 E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\obj\Debug\netcoreapp2.2\NewsCrawlerApp.dll
 E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\obj\Debug\netcoreapp2.2\NewsCrawlerApp.pdb
 E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\obj\Debug\netcoreapp2.2\NewsCrawlerApp.genruntimeconfig.cache
+E:\Project\Umbraco\AioNews\NewsWeb\NewsCrawlerApp\obj\Debug\netcoreapp2.2\NewsCrawlerApp.csproj.CoreCompileInputs.cache
