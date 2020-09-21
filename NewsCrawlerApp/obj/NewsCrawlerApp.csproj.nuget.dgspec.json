@@ -1,29 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj": {}
+    "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj": {}
   },
   "projects": {
-    "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj": {
+    "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj": {
       "restore": {
-        "projectUniqueName": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj",
+        "projectUniqueName": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj",
         "projectName": "Aio.Umbraco.Common",
-        "projectPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj"
+        "projectPath": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj"
       },
       "frameworks": {
         "net472": {}
       }
     },
-    "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj": {
+    "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj": {
       "restore": {
-        "projectUniqueName": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj",
+        "projectUniqueName": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj",
         "projectName": "Aio.Umbraco.Services",
-        "projectPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj",
+        "projectPath": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj",
         "frameworks": {
           "net472": {
             "projectReferences": {
-              "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj": {
-                "projectPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj"
+              "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj": {
+                "projectPath": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj"
               }
             }
           }
@@ -33,20 +33,17 @@
         "net472": {}
       }
     },
-    "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj": {
+    "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj",
+        "projectUniqueName": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj",
         "projectName": "NewsCrawlerApp",
-        "projectPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj",
-        "packagesPath": "C:\\Users\\dle50\\.nuget\\packages\\",
-        "outputPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\obj\\",
+        "projectPath": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\NewsCrawlerApp\\NewsCrawlerApp.csproj",
+        "packagesPath": "C:\\Users\\knguyen220\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\NewsCrawlerApp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\dle50\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\knguyen220\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -59,11 +56,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj": {
-                "projectPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj"
+              "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj": {
+                "projectPath": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Common\\Aio.Umbraco.Common.csproj"
               },
-              "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj": {
-                "projectPath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj"
+              "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj": {
+                "projectPath": "C:\\Users\\knguyen220\\Desktop\\UmbracoSource\\NewsWeb\\Aio.Umbraco.Services\\Aio.Umbraco.Services.csproj"
               }
             }
           }
@@ -102,7 +99,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
