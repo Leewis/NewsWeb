@@ -27,7 +27,7 @@
             if (categoryData[i].Picture.Length != 0)
             {
                 ImageCropperValue img = JsonConvert.DeserializeObject<ImageCropperValue>(categoryData[i].Picture);
-                imgUrl = img.Src + img.GetCropUrl("thumbnail");
+                imgUrl = img.Src;
             }
             <div class="col-lg col-md-4 topic-item">
                 <a href="@categoryData[i].Url" class="d-inline-block img-thumb"><img src="@imgUrl" alt="news-kinh-doanh-1" class="img-fluid"></a>
