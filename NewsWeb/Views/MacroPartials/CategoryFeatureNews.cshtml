@@ -26,7 +26,10 @@
                         <ul>
                             @foreach (var item in category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category"))
                             {
-                                <li><a href="@item.Url">@item.GetProperty("Title").Value()</a></li>
+                                if (item.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
+                                {
+                                    <li><a href="@item.Url">@item.GetProperty("Title").Value()</a></li>
+                                }
                             }
                         </ul>
                     </div>

@@ -12,7 +12,7 @@
     <div class="content-left">
         @foreach (var item in selection)
         {
-            if ((bool)item.GetProperty("topMenu").Value())
+            if ((bool)item.GetProperty("topMenu").Value() && item.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
             {
                 <ul class="cate-menu">
                     <li>
@@ -20,7 +20,7 @@
                     </li>
                     @foreach (var child in item.Children().Where(c => c.IsVisible()))
                     {
-                        if (child.HasProperty("parentCategoryId"))
+                        if (child.HasProperty("parentCategoryId") && child.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
                         {
                             <li>
                                 <a href="@child.Url">@child.GetProperty("Title").Value()</a>

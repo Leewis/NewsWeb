@@ -13,9 +13,9 @@
         {
             foreach (var item in selection)
             {
-                if (item.HasProperty("parentCategoryId"))
+                if (item.HasProperty("parentCategoryId") && item.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
                 {
-                    <li class="nav-item">
+                    <li class="@(Model.Name == item.Name ? "nav-item active": "nav-item")">
                         <a class="item-link" href="@item.Url">@item.GetProperty("Title").Value()</a>
                     </li>
                 }

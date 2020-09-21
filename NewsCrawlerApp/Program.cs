@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Permissions;
 using System.IO;
+using System.Security.Principal;
 
 namespace NewsCrawlerApp
 {
@@ -151,6 +152,27 @@ Hiện nay ngành giao thông vận tải phụ trách sát hạch bằng lái, 
             }
         }
 
+        static async Task DeleteNewsAsync(NewsModel newsModel)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:26268/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var content = new StringContent(JsonConvert.SerializeObject(newsModel), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync("/umbraco/api/NewsApi/DeteleNews", content);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Data deleted");
+            }
+            else
+            {
+                Console.WriteLine($"Failed to poste data. Status code:{response.StatusCode} - Message: {response.Content.ReadAsStringAsync().Result}");
+            }
+        }
+
+
         static async Task PostCategoryAsync(CategoryModel categoryModel)
         {
             var client = new HttpClient();
@@ -174,10 +196,13 @@ Hiện nay ngành giao thông vận tải phụ trách sát hạch bằng lái, 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         private static void RunWatcher(string path)
         {
+            //WindowsIdentity currentUser = WindowsIdentity.GetCurrent();
             // Create a new FileSystemWatcher and set its properties.
-            using (FileSystemWatcher watcher = new FileSystemWatcher())
+            FileSystemWatcher watcher = new FileSystemWatcher();
+            //FileSystemWatcher RecycleWatcher = new FileSystemWatcher();
             {
                 watcher.Path = path;
+                //RecycleWatcher.Path = string.Format(@"C:\$Recycle.Bin\{0}", currentUser.User.Value);
 
                 // Watch for changes in LastAccess and LastWrite times, and
                 // the renaming of files or directories.
@@ -186,17 +211,25 @@ Hiện nay ngành giao thông vận tải phụ trách sát hạch bằng lái, 
                                      | NotifyFilters.FileName
                                      | NotifyFilters.DirectoryName;
 
+                /*RecycleWatcher.NotifyFilter = NotifyFilters.LastAccess
+                                     | NotifyFilters.LastWrite
+                                     | NotifyFilters.FileName
+                                     | NotifyFilters.DirectoryName;
+                */
+
                 // Only watch text files.
                 watcher.Filter = "*.txt";
+                //RecycleWatcher.Filter = "*.txt";
 
                 // Add event handlers.
                 watcher.Changed += OnChanged;
                 watcher.Created += OnChanged;
-                watcher.Deleted += OnChanged;
+                watcher.Deleted += OnDeleted;
                 watcher.Renamed += OnRenamed;
 
                 // Begin watching.
                 watcher.EnableRaisingEvents = true;
+
 
                 // Wait for the user to quit the program.
                 Console.WriteLine("Press 'q' to quit the sample.");
@@ -208,18 +241,35 @@ Hiện nay ngành giao thông vận tải phụ trách sát hạch bằng lái, 
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
             // Specify what is done when a file is changed, created, or deleted.
-            //string news = File.ReadAllText(e.FullPath);
-            NewsModel news = JsonConvert.DeserializeObject<NewsModel>(File.ReadAllText(e.FullPath, Encoding.UTF8));
-            PostNewsAsync(news);
+            string _stringNews = File.ReadAllText(e.FullPath, Encoding.UTF8);
+            if (string.IsNullOrEmpty(_stringNews)) 
+            {
+                NewsModel news = JsonConvert.DeserializeObject<NewsModel>(_stringNews);
+                PostNewsAsync(news);
+            }
             Console.WriteLine($"File: {e.FullPath} {e.ChangeType}");
         }
 
         private static void OnRenamed(object source, RenamedEventArgs e)
         {
             // Specify what is done when a file is renamed.
-            //NewsModel news = JsonConvert.DeserializeObject<NewsModel>(File.ReadAllText(e.FullPath, Encoding.UTF8));
-            //PostNewsAsync(news);
+            /*
+            string _stringNews = File.ReadAllText(e.FullPath, Encoding.UTF8);
+            if (string.IsNullOrEmpty(_stringNews))
+            {
+                NewsModel news = JsonConvert.DeserializeObject<NewsModel>(_stringNews);
+                PostNewsAsync(news);
+            }
+            */
             Console.WriteLine($"File: {e.OldFullPath} renamed to {e.FullPath}");
+        }
+        private static void OnDeleted(object source, FileSystemEventArgs e)
+        {
+            // Specify what is done when a file is delete.
+            //string _stringNews = File.ReadAllText(e.FullPath, Encoding.UTF8);
+            //NewsModel news = JsonConvert.DeserializeObject<NewsModel>(File.ReadAllText(e.FullPath, Encoding.UTF8));
+            //DeleteNewsAsync(news);
+            Console.WriteLine($"File: {e.FullPath} has been deleted");
         }
     }
 }

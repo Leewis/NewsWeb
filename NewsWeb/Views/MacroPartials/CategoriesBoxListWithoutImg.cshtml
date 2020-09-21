@@ -19,7 +19,7 @@
                 @foreach (var item in subCategory)
                 {
                     var typeContent = item.ContentType.Alias;
-                    if (typeContent != "news")
+                    if (typeContent != "news" && item.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
                     {
                         <li><a href="@item.Url">@item.GetProperty("Title").Value()</a></li>
                     }

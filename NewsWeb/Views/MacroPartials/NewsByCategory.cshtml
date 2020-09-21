@@ -8,7 +8,7 @@
     }
     var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
     var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
-    var subCategory = category.Children.Where(x => x.IsVisible()).OrderBy(item => item.Name).ToArray();
+    var subCategory = category.Children.Where(x => x.IsVisible() && x.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any()).OrderBy(item => item.Name).ToArray();
     var latestNews = arrayNews[0];
 
     INewsService service = new NewsService();

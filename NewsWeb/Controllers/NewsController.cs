@@ -16,6 +16,7 @@ using Umbraco.Web.Models;
 using Umbraco.Core.PropertyEditors;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Umbraco.Core.Models.PublishedContent;
 
 namespace NewsWeb.Controllers
 {
@@ -138,6 +139,23 @@ namespace NewsWeb.Controllers
             return false;
         }
 
+        public async Task<HttpResponseMessage> DeteleNews(NewsModel news)
+        {
+            IContent existedNews = Services.ContentService.GetById(news.Id);
+            HttpResponseMessage response = new HttpResponseMessage();
+            if (existedNews == null)
+            {
+                response.StatusCode = System.Net.HttpStatusCode.NotFound;
+            }
+            else
+            {
+                Services.ContentService.Unpublish(existedNews);
+                Services.ContentService.Delete(existedNews);
+                response.StatusCode = System.Net.HttpStatusCode.OK;
+
+            }
+            return response;
+        }
         private static HttpClient Client { get; } = new HttpClient();
         public async Task<Stream> GetImage(string url)
         {
