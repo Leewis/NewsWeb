@@ -11,26 +11,34 @@
     var arrayCategories = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category" && x.Name != currentPage.Name).ToArray();
 
 }
-@for (int index = 0; index < numOfCategories && index < arrayCategories.Count(); index++)
+@if (arrayCategories.Count() > 0)
 {
-    var arrayNews = arrayCategories[index].Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(i => i.Value("postedDateTime")).ToArray();
-    <div class="widget-news-small">
-        <h6 class="merri-title">
-            <a href="@arrayCategories[index].Url()">
-                @arrayCategories[index].GetProperty("Title").Value()
-            </a>
-        </h6>
-        <a href="#" class="d-inline-block img-thumb"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid"></a>
-        <div class="orthers-news-small">
-            @for (int i = 0; i < 3 && i < arrayNews.Count(); i++)
-            {
-                <h6 class="merri-title item-news">
-                    <a href="@arrayNews[i].Url()">
-                        @arrayNews[i].GetProperty("Title").Value()
+    for (int index = 0; index < numOfCategories && index < arrayCategories.Count(); index++)
+    {
+        var arrayNews = arrayCategories[index].Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(i => i.Value("postedDateTime")).ToArray();
+        if (arrayNews.Count() > 0)
+        {
+            <div class="widget-news-small">
+                <h6 class="merri-title">
+                    <a href="@arrayCategories[index].Url()">
+                        @arrayCategories[index].GetProperty("Title").Value()
                     </a>
                 </h6>
-            }
-        </div>
-    </div>
+                <a href="#" class="d-inline-block img-thumb"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid"></a>
+                <div class="orthers-news-small">
+                    @for (int i = 0; i < 3 && i < arrayNews.Count(); i++)
+                    {
+                        <h6 class="merri-title item-news">
+                            <a href="@arrayNews[i].Url()">
+                                @arrayNews[i].GetProperty("Title").Value()
+                            </a>
+                        </h6>
+                    }
+                </div>
+            </div>
+        }
+
+    }
 }
+
 
