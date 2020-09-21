@@ -91,18 +91,27 @@ namespace Aio.Umbraco.Services
                 var home = CurrentPublishedContent.FirstChild();
 
                 var category = home.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category");
-                
+
                 foreach (var ca in category)
                 {
                     if (ca.Name.Equals(categoryName, StringComparison.CurrentCultureIgnoreCase) || ca.GetProperty("title").GetValue().Equals(categoryName))
                     {
                         var newsChildren = ca.Descendants().Where(news => news.IsVisible() && news.ContentType.Alias == "news" && news.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase));
-                        return newsChildren.FirstOrDefault() ;
+                        return newsChildren.FirstOrDefault();
                     }
                 }
             }
 
             return null;
+        }
+
+        public IList<IPublishedContent> GetNewsByCategoryId(int id)
+        {
+            var home = CurrentPublishedContent.FirstChild();
+
+            var category = home.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category" && x.Id == id).FirstOrDefault();
+
+            return category != null && category.Children.Any() ? category.Children.ToList() : null;
         }
 
         #region Helpers

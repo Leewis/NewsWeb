@@ -26,15 +26,19 @@ namespace NewsWeb.Controllers
         private readonly ICategoryService _iCategoryService;
         private readonly IContentTypeBaseServiceProvider _contentTypeBaseServiceProvider;
         private readonly IDataTypeService _dataTypeService;
+        private readonly ISearchHelper _searchHelper;
+
+        NewsSearchModel vm = new NewsSearchModel();
 
         NewsModel _newModel = new NewsModel();
 
-        public NewsApiController(INewsService iNewsService, ICategoryService iCategoryService, IContentTypeBaseServiceProvider contentTypeBaseServiceProvider, IDataTypeService dataTypeService)
+        public NewsApiController(INewsService iNewsService, ICategoryService iCategoryService, IContentTypeBaseServiceProvider contentTypeBaseServiceProvider, IDataTypeService dataTypeService, ISearchHelper searchHelper)
         {
             _iNewsService = iNewsService;
             _iCategoryService = iCategoryService;
             _contentTypeBaseServiceProvider = contentTypeBaseServiceProvider;
             _dataTypeService = dataTypeService;
+            _searchHelper = searchHelper;
         }
         public int GetAllNews()
         {
@@ -46,19 +50,26 @@ namespace NewsWeb.Controllers
         public bool InsertNews(NewsModel news)
         {
             //Check if this News has existed or not
-            var existedNews =_iNewsService.GetNewsByCategoryAndName(news.Category, news.Name);
+            var existedNews = GetNews(news.Title);
 
-            if (existedNews == null)
+            if (existedNews < 0)
             {
                 //imageId = UploadImage(1115, filePath, news.PictureTitle, news.PictureName);
 
                 var category = _iCategoryService.GetCategory(news.Category);
                 //IMedia media = Services.MediaService.GetById(imageId);               
-
+                IContent createdNews = null;
                 if (category != null)
                 {
-                    IContent createdNews = Services.ContentService.Create(news.Name, category.Id > 0 ? category.Id : news.ParentId, "news");
+                    createdNews = Services.ContentService.Create(news.Name, category.Id, "news");
+                }
+                else
+                {
+                    createdNews = Services.ContentService.Create(news.Name, news.ParentId, "news");
+                }
 
+                if (createdNews != null)
+                {
                     //TODO
                     //IList<string> categoryName = new List<string>();
                     //categoryName.Add(category.Name);
@@ -95,7 +106,8 @@ namespace NewsWeb.Controllers
                         try
                         {
                             //TODO
-                            createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
+                            ImportFirstImageAsync(createdNews, news.PictureExternalUrl, news.PictureName);
+                            //createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
                         }
                         catch (Exception exception)
                         {
@@ -126,7 +138,7 @@ namespace NewsWeb.Controllers
             }
             else
             {
-                var content = Services.ContentService.GetById(existedNews.Id);
+                var content = Services.ContentService.GetById(existedNews);
                 //Update News
                 PopulateContentFields(content, news);
 
@@ -156,6 +168,208 @@ namespace NewsWeb.Controllers
             }
             return response;
         }
+
+        public int GetNews(string title)
+        {
+            NewsSearchModel newsSearch = new NewsSearchModel();
+            newsSearch.CurrentPage = 1;
+            newsSearch.ItemsPerPage = 1;
+            newsSearch.Keywords = title;
+            var news = _searchHelper.Search(newsSearch);
+
+            return news != null && news.News != null && news.News.Any() ? news.News.FirstOrDefault().Id : -1;
+        }
+
+        public string[] InsertListNews(IEnumerable<NewsModel> listNews)
+        {
+            List<string> results = new List<string>();
+            List<IContent> newsContents = new List<IContent>();
+            foreach (var news in listNews)
+            {
+                //Check if this News has existed or not
+                var existedNews = _iNewsService.GetNewsByCategoryAndName(news.Category, news.Name);
+
+                if (existedNews == null)
+                {
+                    //imageId = UploadImage(1115, filePath, news.PictureTitle, news.PictureName);
+
+                    var category = _iCategoryService.GetCategory(news.Category);
+                    //IMedia media = Services.MediaService.GetById(imageId);               
+                    IContent createdNews = null;
+                    if (category != null)
+                    {
+                        createdNews = Services.ContentService.Create(news.Name, category.Id, "news");
+                    }
+                    else
+                    {
+                        createdNews = Services.ContentService.Create(news.Name, news.ParentId, "news");
+                    }
+
+                    if (createdNews != null)
+                    {
+                        //TODO
+                        //IList<string> categoryName = new List<string>();
+                        //categoryName.Add(category.Name);
+                        //createdNews.AssignTags("category", categoryName.ToArray());
+
+                        //var categoryUdi = Udi.Create(Constants.UdiEntityType.Document, category.Key);
+                        //var searchCategoryPage = Umbraco.PublishedContent(categoryUdi);
+                        //createdNews.SetValue("category", searchCategoryPage);                   
+
+                        //IList <Link> links = new List<Link>();
+                        //links.Add(new Link()
+                        //{
+                        //    Name = "Test 1",
+                        //    Type = LinkType.Content,
+                        //    Udi = locaUdi,
+                        //    Url = "/home/thoi-su/giao-thong/xe-qua-tai-giam-manh-tren-quoc-lo-5/"
+                        //});
+
+                        //TODO: this field will be set data later
+                        //createdNews.SetValue("relatedNews", links);
+
+                        //TODO: this field will be set data later
+                        bool imageSaved = false;
+                        if (!string.IsNullOrEmpty(news.PictureUrl))
+                        {
+                            using (Stream stream = System.IO.File.OpenRead(news.PictureUrl))
+                            {
+                                createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, stream);
+                                imageSaved = true;
+                            }
+                        }
+                        else if (!string.IsNullOrEmpty(news.PictureExternalUrl))
+                        {
+                            try
+                            {
+                                //TODO
+                                DownloadImage(news.PictureExternalUrl, news.PictureName, createdNews);
+                                //createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
+                            }
+                            catch (Exception exception)
+                            {
+                                //return false;
+                            }
+                        }
+
+
+                        if (imageSaved)
+                        {
+                            //this is a work around for the SetValue method to save a file, since it doesn't currently take into account the image cropper
+                            //which we are using so we need to fix that.
+                            var propType = createdNews.Properties["picture"].PropertyType;
+                            var cropperValue = CreateImageCropperValue(propType, createdNews.GetValue("picture"), _dataTypeService);
+                            createdNews.SetValue("picture", cropperValue);
+                        }
+
+                        //TOD
+                        //createdNews.SetValue("thumbnailImage", imageId); //media.Path = -1,newsId,mediaId;
+
+                        PopulateContentFields(createdNews, news);
+
+                        newsContents.Add(createdNews);
+                        //var newsResult = Services.ContentService.Save(createdNews);
+
+                        //if (newsResult.Success)
+                        //{
+                        //    results.Add(createdNews.Name + " status: " + true);
+                        //}
+                        //else
+                        //{
+                        //    results.Add(createdNews.Name + " status: " + false);
+                        //}
+                        //return true;
+                    }
+                }
+                else
+                {
+                    var content = Services.ContentService.GetById(existedNews.Id);
+                    //Update News
+                    PopulateContentFields(content, news);
+
+                    newsContents.Add(content);
+
+                    //var newsResult = Services.ContentService.SaveAndPublish(content);
+
+                    //if (newsResult.Success)
+                    //{
+                    //    results.Add(existedNews.Name + " status: " + true);
+                    //}
+                    //else
+                    //{
+                    //    results.Add(existedNews.Name + " status: " + false);
+                    //}
+                    //return true;
+                }
+            }
+            if (newsContents.Any())
+            {
+                var savedResults = Services.ContentService.Save(newsContents);
+
+                if (savedResults.Success)
+                {
+                    results.Add("Saved sucessfully - status = " + true);
+                }
+                else
+                {
+                    results.Add("Saved unsucessfully - status =" + false);
+
+                }
+            }
+
+            return results.ToArray(); ;
+        }
+
+        public bool DeleteNews(string title)
+        {
+            //Check if this News has existed or not
+            var existedNewsId = GetNews(title);
+
+            if (existedNewsId > 0)
+            {
+                var content = Services.ContentService.GetById(existedNewsId);
+
+                var newsResult = Services.ContentService.Delete(content);
+
+                if (newsResult.Success)
+                    return true;
+            }
+
+            return false;
+        }
+        public string[] DeleteNewsByCategory(int id)
+        {
+            //Check if this News has existed or not
+            var existedNews = _iNewsService.GetNewsByCategoryId(id);
+            List<string> results = new List<string>();
+            if (existedNews != null)
+            {
+                foreach (var news in existedNews)
+                {
+                    if (news.ContentType.Alias.Equals("category"))
+                    {
+                        continue;
+                    }
+
+                    var content = Services.ContentService.GetById(news.Id);
+
+                    var newsResult = Services.ContentService.Delete(content);
+
+                    if (newsResult.Success)
+                    {
+                        results.Add(news.Name + " status: " + true);
+                    }
+                    else
+                    {
+                        results.Add(news.Name + " status: " + false);
+                    }
+                }
+            }
+
+            return results.ToArray();
+        }
+
+        #region Helpers
         private static HttpClient Client { get; } = new HttpClient();
         public async Task<Stream> GetImage(string url)
         {
@@ -173,7 +387,7 @@ namespace NewsWeb.Controllers
         private int UploadImage(int parentId, string imageSrc, string imageTitle, string imageFile)
         {
             try
-            {   
+            {
                 // Open a new stream to the file
                 using (Stream stream = System.IO.File.OpenRead(imageSrc))
                 {
@@ -235,7 +449,7 @@ namespace NewsWeb.Controllers
             content.SetValue("metaDescription", model.MetaDescription);
 
             content.CreateDate = Convert.ToDateTime(model.PostedDateTime);
-        }        
+        }
 
         //borrowed from CMS core until SetValue is fixed with a stream
         private string CreateImageCropperValue(PropertyType propertyType, object value, IDataTypeService dataTypeService)
@@ -257,5 +471,56 @@ namespace NewsWeb.Controllers
                 crops = crops
             });
         }
+        private async Task ImportFirstImageAsync(IContent news, string imageUrl, string imageName)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    using (var stream = await client.GetStreamAsync(imageUrl))
+                    {
+                        news.SetValue(_contentTypeBaseServiceProvider, "picture", imageName, stream);
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+        }
+        private System.Drawing.Image DownloadImage(string imageUrl, string imageName, IContent news)
+        {
+            System.Drawing.Image image = null;
+
+            try
+            {
+                System.Net.HttpWebRequest webRequest = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(imageUrl);
+                webRequest.AllowWriteStreamBuffering = true;
+                webRequest.Timeout = 30000;
+                webRequest.ServicePoint.ConnectionLeaseTimeout = 5000;
+                webRequest.ServicePoint.MaxIdleTime = 5000;
+
+                using (System.Net.WebResponse webResponse = webRequest.GetResponse())
+                {
+
+                    using (System.IO.Stream stream = webResponse.GetResponseStream())
+                    {
+                        news.SetValue(_contentTypeBaseServiceProvider, "picture", imageName, stream);
+                        //image = System.Drawing.Image.FromStream(stream);
+                    }
+                }
+
+                webRequest.ServicePoint.CloseConnectionGroup(webRequest.ConnectionGroupName);
+                webRequest = null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+
+            }
+
+            return image;
+        }
+
+        #endregion
     }
 }
