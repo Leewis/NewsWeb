@@ -74,29 +74,18 @@
     if (totalPages > 1)
     {
         <div class="category-footer">
-            <form class="view-date">
-                <i class="far fa-calendar-alt"></i>
-                <a class="input-button" title="toggle" data-toggle="">
-                    <i class="far fa-calendar-alt"></i>
-                </a>
-                <input type="text" class="calendar flatpickr-input" placeholder="Xem theo ngày" data-input="" readonly="readonly">
-            </form>
             <div class="pagination-center">
-                <div class="category-pagination row">
+                <div class="category-pagination">
                     <span>Trang</span>&nbsp;&nbsp;
-                    <ul class="pagination">
                         @if (page > 1)
                         {
-                            <li><a href="?page=@(page-1)">❮</a></li>
+                            <a href="?page=@(page-1)">❮</a>
                         }
-                        <li class="active">
                             <a href="?page=@page">@page</a>
-                        </li>
                         @if (page < totalPages)
                         {
-                            <li><a href="?page=@(page+1)">❯</a></li>
+                            <a href="?page=@(page+1)">❯</a>
                         }
-                    </ul>
                 </div>
             </div>
         </div>
