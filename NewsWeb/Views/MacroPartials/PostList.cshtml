@@ -4,25 +4,28 @@
     int.TryParse(Model.MacroParameters["pageSize"].ToString(), out pageSize);
     var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
     var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
-    var latestNews = arrayNews[0];
-    var commonNews = arrayNews.Where(item => item != latestNews).ToArray();
 
-
-    var page = 1;
-    int.TryParse(Request.QueryString["page"], out page);
-    var totalPages = (int)Math.Ceiling((double)commonNews.Count() / (double)pageSize);
-
-    if (page > totalPages)
+    if (arrayNews != null && arrayNews.Any())
     {
-        page = totalPages;
-    }
-    else if (page < 1)
-    {
-        page = 1;
-    }
+        var latestNews = arrayNews[0];
+        var commonNews = arrayNews.Where(item => item != latestNews).ToArray();
 
-    if (category.Level == 4)
-    {
+
+        var page = 1;
+        int.TryParse(Request.QueryString["page"], out page);
+        var totalPages = (int)Math.Ceiling((double)commonNews.Count() / (double)pageSize);
+
+        if (page > totalPages)
+        {
+            page = totalPages;
+        }
+        else if (page < 1)
+        {
+            page = 1;
+        }
+
+        if (category.Level == 4)
+        {
         <div class="product-news">
             <article class="news-item d-flex">
                 <div class="col-img mr-3">
@@ -46,9 +49,9 @@
                 </div>
             </article>
         </div>
-    }
-    foreach (var item in commonNews.Skip((page - 1) * pageSize).Take(pageSize))
-    {
+        }
+        foreach (var item in commonNews.Skip((page - 1) * pageSize).Take(pageSize))
+        {
         <div class="post-list">
             <article class="post-item d-flex">
                 <div class="col-desc mr-5 col-md-8">
@@ -70,9 +73,9 @@
             </article>
         </div>
         <div class="bt-solid mt-3 mb-3"></div>
-    }
-    if (totalPages > 1)
-    {
+        }
+        if (totalPages > 1)
+        {
         <div class="category-footer">
             <form class="view-date">
                 <i class="far fa-calendar-alt"></i>
@@ -87,18 +90,19 @@
                     <ul class="pagination">
                         @if (page > 1)
                         {
-                            <li><a href="?page=@(page-1)">❮</a></li>
+                            <li><a href="?page=@(page - 1)">❮</a></li>
                         }
                         <li class="active">
                             <a href="?page=@page">@page</a>
                         </li>
                         @if (page < totalPages)
                         {
-                            <li><a href="?page=@(page+1)">❯</a></li>
+                            <li><a href="?page=@(page + 1)">❯</a></li>
                         }
                     </ul>
                 </div>
             </div>
         </div>
+            }
+        }
     }
-}
