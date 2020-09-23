@@ -19,6 +19,15 @@
     INewsService service = new NewsService();
 
     var relatedNews = service.GetNewsModel(Model);
+
+    if(String.IsNullOrWhiteSpace(Html.StripHtml(Model.Value<IHtmlString>("fullDescription")).ToString()))
+    {
+        Response.Clear();
+        Response.StatusCode = 301;
+        Response.StatusDescription = "Found";
+        Response.RedirectLocation = Model.Value("sourceUrl").ToString();
+        Response.End();
+    }
 }
 
 <div class="container white-bg">
