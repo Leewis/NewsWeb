@@ -2,8 +2,14 @@
 @using Umbraco.Web;
 @using Aio.Umbraco.Services;
 @using Aio.Umbraco.Services.Interfaces;
+@using Newtonsoft.Json;
+@using Umbraco.Core.PropertyEditors.ValueConverters
 @{
+    var setting = Model.Root().Children.FirstOrDefault(x => x.Id == 1118);
+    var image = setting.Value<IPublishedContent>("siteLogoUrl");
+    var imgUrl = image.Url;
     var category = Model.Parent;
+    var numOfNews = 3;
     var arrayCategories = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news" && x.Name != Model.Name).OrderByDescending(item => item.Value("postedDateTime"));
     INewsService service = new NewsService();
     var categoryData = service.GetTopicNews(arrayCategories);
@@ -26,11 +32,20 @@
             </a>
         </h6>
         <a href="@categoryData[0].Url" class="d-inline-block img-thumb">
-            <img src="@categoryData[0].Picture" class="img-fluid">
+            @if (categoryData[0].Picture.Length != 0)
+            {
+                ImageCropperValue img = JsonConvert.DeserializeObject<ImageCropperValue>(categoryData[0].Picture);
+                imgUrl = img.Src;
+            }
+            @if (imgUrl != image.Url)
+            {
+                <img src="@imgUrl" class="img-fluid">
+            }
         </a>
         <div class="orthers-news-small">
-            @for (int i = 0; i < 3 && i < categoryData.Count(); i++)
+            @for (int i = 0; i < categoryData.Count(); i++)
             {
+                if (i > numOfNews - 1) { break; }
                 <h6 class="merri-title item-news">
                     <a href="@categoryData[i].Url">
                         @categoryData[i].Title

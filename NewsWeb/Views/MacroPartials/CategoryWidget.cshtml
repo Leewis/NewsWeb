@@ -1,36 +1,47 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @{
-    var numOfCategories = 5;
-    int.TryParse(Model.MacroParameters["numOfCategories"].ToString(), out numOfCategories);
-
-    var currentPage = Model.Content;
-
-    //var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var numOfCategories = 4;
+    var numOfNews = 3;
+    var numOfCategoriesHasItem = 0;
     var category = Model.Content;
-    var arrayCategories = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category" && x.Name != currentPage.Name).ToArray();
-    for (int index = 0; index < numOfCategories && index < arrayCategories.Count(); index++)
+    int.TryParse(Model.MacroParameters["numOfCategories"].ToString(), out numOfCategories);
+    var arrayCategories = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "category" && x.Name != category.Name).ToArray();
+}
+@if (arrayCategories.Count() > 0)
+{
+    for (int index = 0; index < arrayCategories.Count(); index++)
     {
+        if (numOfCategoriesHasItem == numOfCategories)
+        {
+            break;
+        }
         var arrayNews = arrayCategories[index].Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(i => i.Value("postedDateTime")).ToArray();
-        <div class="widget-news-small">
-            @*@if (@arrayCategories != null && @arrayCategories.Any())
-            {
+        if (arrayNews.Count() > 0)
+        {
+            numOfCategoriesHasItem++;
+            <div class="widget-news-small">
                 <h6 class="merri-title">
                     <a href="@arrayCategories[index].Url()">
                         @arrayCategories[index].GetProperty("Title").Value()
                     </a>
                 </h6>
-            <a href="#" class="d-inline-block img-thumb"><img src="@arrayNews[0].GetProperty("Picture").Value()"  class="img-fluid"></a>
-            }*@
-            <div class="orthers-news-small">
-                @for (int i = 0; i < 3 && i < arrayNews.Count(); i++)
-                {
-                    <h6 class="merri-title item-news">
-                        <a href="@arrayNews[i].Url()">
-                            @arrayNews[i].GetProperty("Title").Value()
-                        </a>
-                    </h6>
-                }
+                <a href="@arrayNews[0].Url()" class="d-inline-block img-thumb"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid"></a>
+                <div class="orthers-news-small">
+                    @for (int i = 0; i < arrayNews.Count(); i++)
+                    {
+                        if (i > numOfNews - 1)
+                        {
+                            break;
+                        }
+                        <h6 class="merri-title item-news">
+                            <a href="@arrayNews[i].Url()">
+                                @arrayNews[i].GetProperty("Title").Value()
+                            </a>
+                        </h6>
+                    }
+                </div>
             </div>
-        </div>
+        }
     }
 }
+
