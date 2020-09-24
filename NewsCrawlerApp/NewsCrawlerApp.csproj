@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Aio.Umbraco.Services\Aio.Umbraco.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CrawlerTools\" />
+  </ItemGroup>
+
 </Project>

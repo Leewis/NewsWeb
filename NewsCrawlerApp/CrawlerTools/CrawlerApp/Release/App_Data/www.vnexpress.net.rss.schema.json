@@ -1,0 +1,175 @@
+﻿{
+  "Name": "vnexpress",
+  "WebsiteUrl": "https://vnexpress.net/",
+  "JsonGeneratePath": "D:\\r\\FileWatcher\\",
+  "ApiUrl": "http://localhost:8066/umbraco/api/NewsApi/InsertNews",
+  "PageLevelConfigs": [
+    {
+      "Url": "rss",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".wrap-list-rss ul li a",
+          "Converter": "CarModelRSSNameConverter"
+        }
+      ],
+      "NextLevelUrlSelector": {
+        "HtmlSelector": ".wrap-list-rss ul li a",
+        "AdditionalData": "Xe"
+      },
+      "ProcessorTypeName": "VNERssCategoryProcessor",
+      "Level": 0,
+      "AdditionalData": "",
+      "ParentCategory": "Thời sự",
+      "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "the-gioi.rss"
+      //  ,
+      //"ParentCategory": "thời sự",
+      //"ChildrenCategories": "Mekong",
+      //"ChildrenCategoriesUrl": "mekong"
+    },
+    {
+      "Url": "",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".wrap-list-rss ul li a",
+          "Converter": "CarModelRSSNameConverter"
+        },
+        {
+          "PropertyName": "FullDescription",
+          "HtmlSelector": ".fck_detail",
+          "Converter": "MultiHtmlTagsConverter",
+          //"AdditionalData": "figure div img",
+          "AdditionalData": "",
+          "IsHtml": true
+          //".content-news-detail"
+        },
+        {
+          "PropertyName": "Category",
+          "HtmlSelector": ".header-content ul li a:eq(0)",
+          "AdditionalData": ".header-content ul li a:eq(1);.header-content ul li a:eq(2)"
+        },
+        {
+          "PropertyName": "Author",
+          "HtmlSelector": ".author_mail",
+          "AdditionalData": ".Normal"
+        },
+        {
+          "PropertyName": "Date",
+          "HtmlSelector": ".top-detail .sidebar-1 .date, .detail-photo .container .date",
+          "AdditionalData": ".detail-photo .container .date",
+          "Converter": "VNExpressDateTimeConverter"
+        },
+        {
+          "PropertyName": "Time",
+          "HtmlSelector": ".top-detail .sidebar-1 .date, .detail-photo .container .date",
+          "Converter": "VNExpressTimeConverter",
+          "AdditionalData": ".detail-photo .container .date:"
+        },
+        {
+          "PropertyName": "Day",
+          "HtmlSelector": ".top-detail .sidebar-1 .date, .detail-photo .container .date",
+          "Converter": "VNExpressDayConverter",
+          "AdditionalData": ".detail-photo .container .date"
+        },
+        {
+          "PropertyName": "MetaDescription",
+          "HtmlSelector": "head meta:eq(0)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "MetaKeywords",
+          "HtmlSelector": "head meta:eq(2)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        }
+      ],
+      "NextLevelUrlSelector": {
+        "HtmlSelector": ".wrap-list-rss ul li a"
+      },
+      "ProcessorTypeName": "VNERSSSimpleNewsModelProcessor",
+      "Level": 1,
+      "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "the-gioi.rss"
+      //"AdditionalData": "channel item link"
+      //  ,
+      //"ParentCategory": "thời sự",
+      //"ChildrenCategories": "Mekong",
+      //"ChildrenCategoriesUrl": "mekong"
+    },
+    {
+      "Url": "",
+      "HtmlSelectors": [
+        //Div 0 - paragraph03BoxLine:
+        {
+          "PropertyName": "CarId",
+          "HtmlSelector": ".title-detail"
+        },
+        {
+          "PropertyName": "CarName",
+          "HtmlSelector": ".title-detail"
+        },
+        {
+          "PropertyName": "AdditionalData",
+          "HtmlSelector": ".description",
+          "AdditionalData": "(NLĐO) -"
+        },
+        {
+          "PropertyName": "Result",
+          "HtmlSelector": ".fck_detail",
+          "Converter": "MultiHtmlTagsConverter",
+          //"AdditionalData": "figure div img",
+          "AdditionalData": "",
+          "IsHtml": true
+          //".content-news-detail"
+        },
+        {
+          "PropertyName": "Images",
+          "HtmlSelector": ".top-detail div .sidebar-1 .fck_detail .fig-picture picture img",
+          "IsList": true,
+          "AdditionalData": "data-src",
+          "Converter": "SimpleImageListConverter"
+        },
+        {
+          "PropertyName": "Time",
+          "HtmlSelector": ".top-detail .sidebar-1 .date, .detail-photo .container .date",
+          "AdditionalData": ".detail-photo .container .date",
+          "Converter": "VNExpressDateTimeConverter"
+        },
+        {
+          "PropertyName": "ExteriorScore",
+          "HtmlSelector": ".top-detail .sidebar-1 .date, .detail-photo .container .date",
+          "Converter": "VNExpressTimeConverter",
+          "AdditionalData": ".detail-photo .container .date:"
+        },
+        {
+          "PropertyName": "ChassisNo",
+          "HtmlSelector": ".top-detail .sidebar-1 .date, .detail-photo .container .date",
+          "Converter": "VNExpressDayConverter",
+          "AdditionalData": ".detail-photo .container .date"
+        },
+        {
+          "PropertyName": "MetaDescription",
+          "HtmlSelector": "head meta:eq(0)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "MetaKeywords",
+          "HtmlSelector": "head meta:eq(2)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "Model",
+          "HtmlSelector": ".header-content ul li a:eq(0)",
+          "AdditionalData": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Số hóa;Xe;Ý kiến;Tâm sự;Cười;Trang chủ,Tin mới nhất,Tin nổi bật,Tin xem nhiều"
+        }
+      ],
+      "ProcessorTypeName": "VNERSSNewsProcessor",
+      "Level": 2
+    }
+  ]
+}

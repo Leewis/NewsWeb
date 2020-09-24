@@ -47,149 +47,15 @@ namespace NewsWeb.Controllers
             return rootNode.FirstOrDefault().Id;
         }
 
-        public bool InsertNews(NewsModel news)
+        public HttpResponseMessage InsertNews(NewsModel news)
         {
-            //Check if this News has existed or not
-            var existedNews = GetNews(news.Title);
-
-            if (existedNews < 0)
-            {
-                //imageId = UploadImage(1115, filePath, news.PictureTitle, news.PictureName);
-
-                var category = _iCategoryService.GetCategory(news.Category);
-                //IMedia media = Services.MediaService.GetById(imageId);               
-                IContent createdNews = null;
-                if (category != null)
-                {
-                    createdNews = Services.ContentService.Create(news.Name, category.Id, "news");
-                }
-                else
-                {
-                    createdNews = Services.ContentService.Create(news.Name, news.ParentId, "news");
-                }
-
-                if (createdNews != null)
-                {
-                    //TODO
-                    //IList<string> categoryName = new List<string>();
-                    //categoryName.Add(category.Name);
-                    //createdNews.AssignTags("category", categoryName.ToArray());
-
-                    //var categoryUdi = Udi.Create(Constants.UdiEntityType.Document, category.Key);
-                    //var searchCategoryPage = Umbraco.PublishedContent(categoryUdi);
-                    //createdNews.SetValue("category", searchCategoryPage);                   
-
-                    //IList <Link> links = new List<Link>();
-                    //links.Add(new Link()
-                    //{
-                    //    Name = "Test 1",
-                    //    Type = LinkType.Content,
-                    //    Udi = locaUdi,
-                    //    Url = "/home/thoi-su/giao-thong/xe-qua-tai-giam-manh-tren-quoc-lo-5/"
-                    //});
-
-                    //TODO: this field will be set data later
-                    //createdNews.SetValue("relatedNews", links);
-
-                    //TODO: this field will be set data later
-                    bool imageSaved = false;
-                    if (!string.IsNullOrEmpty(news.PictureUrl))
-                    {
-                        using (Stream stream = System.IO.File.OpenRead(news.PictureUrl))
-                        {
-                            createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, stream);
-                            imageSaved = true;
-                        }
-                    }
-                    else if (!string.IsNullOrEmpty(news.PictureExternalUrl))
-                    {
-                        try
-                        {
-                            //TODO
-                            ImportFirstImageAsync(createdNews, news.PictureExternalUrl, news.PictureName);
-                            //createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
-                        }
-                        catch (Exception exception)
-                        {
-                            return false;
-                        }
-                    }
-
-
-                    if (imageSaved)
-                    {
-                        //this is a work around for the SetValue method to save a file, since it doesn't currently take into account the image cropper
-                        //which we are using so we need to fix that.
-                        var propType = createdNews.Properties["picture"].PropertyType;
-                        var cropperValue = CreateImageCropperValue(propType, createdNews.GetValue("picture"), _dataTypeService);
-                        createdNews.SetValue("picture", cropperValue);
-                    }
-
-                    //TOD
-                    //createdNews.SetValue("thumbnailImage", imageId); //media.Path = -1,newsId,mediaId;
-
-                    PopulateContentFields(createdNews, news);
-
-                    var newsResult = Services.ContentService.Save(createdNews);
-
-                    if (newsResult.Success)
-                        return true;
-                }
-            }
-            else
-            {
-                var content = Services.ContentService.GetById(existedNews);
-                //Update News
-                PopulateContentFields(content, news);
-
-                var newsResult = Services.ContentService.Save(content);
-
-                if (newsResult.Success)
-                    return true;
-            }
-
-            return false;
-        }
-
-        public async Task<HttpResponseMessage> DeteleNews(NewsModel news)
-        {
-            IContent existedNews = Services.ContentService.GetById(news.Id);
             HttpResponseMessage response = new HttpResponseMessage();
-            if (existedNews == null)
-            {
-                response.StatusCode = System.Net.HttpStatusCode.NotFound;
-            }
-            else
-            {
-                Services.ContentService.Unpublish(existedNews);
-                Services.ContentService.Delete(existedNews);
-                response.StatusCode = System.Net.HttpStatusCode.OK;
 
-            }
-            return response;
-        }
-
-        public int GetNews(string title)
-        {
-            NewsSearchModel newsSearch = new NewsSearchModel();
-            newsSearch.CurrentPage = 1;
-            newsSearch.ItemsPerPage = 1;
-            newsSearch.Keywords = title;
-            var news = _searchHelper.Search(newsSearch);
-
-            return news != null && news.News != null && news.News.Any() ? news.News.FirstOrDefault().Id : -1;
-        }
-
-        public string[] InsertListNews(IEnumerable<NewsModel> listNews)
-        {
-            List<string> results = new List<string>();
-            List<IContent> newsContents = new List<IContent>();
-            foreach (var news in listNews)
+            try
             {
                 //Check if this News has existed or not
-                var existedNews = _iNewsService.GetNewsByCategoryAndName(news.Category, news.Name);
-
-                if (existedNews == null)
+                var existedNews = GetNews(news.Title);
+                if (existedNews < 0)
                 {
                     //imageId = UploadImage(1115, filePath, news.PictureTitle, news.PictureName);
 
@@ -243,12 +109,15 @@ namespace NewsWeb.Controllers
                             try
                             {
                                 //TODO
+                                // Image is Empty when run with await' upload image
+                                //ImportFirstImageAsync(createdNews, news.PictureExternalUrl, news.PictureName);
+
                                 DownloadImage(news.PictureExternalUrl, news.PictureName, createdNews);
                                 //createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
                             }
                             catch (Exception exception)
                             {
-                                //return false;
+                                response.StatusCode = System.Net.HttpStatusCode.InternalServerError;
                             }
                         }
 
@@ -267,27 +136,231 @@ namespace NewsWeb.Controllers
 
                         PopulateContentFields(createdNews, news);
 
-                        newsContents.Add(createdNews);
-                        //var newsResult = Services.ContentService.Save(createdNews);
+                        var newsResult = Services.ContentService.SaveAndPublish(createdNews);
 
-                        //if (newsResult.Success)
-                        //{
-                        //    results.Add(createdNews.Name + " status: " + true);
-                        //}
-                        //else
-                        //{
-                        //    results.Add(createdNews.Name + " status: " + false);
-                        //}
-                        //return true;
+                        if (newsResult.Success)
+                        {
+                            response.StatusCode = System.Net.HttpStatusCode.OK;
+                            return response;
+                        }
+                        else
+                        {
+                            response.StatusCode = System.Net.HttpStatusCode.InternalServerError;
+                        }
                     }
                 }
                 else
                 {
-                    var content = Services.ContentService.GetById(existedNews.Id);
+                    var content = Services.ContentService.GetById(existedNews);
+
+                    bool imageSaved = false;
+                    if (!string.IsNullOrEmpty(news.PictureUrl))
+                    {
+                        using (Stream stream = System.IO.File.OpenRead(news.PictureUrl))
+                        {
+                            content.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, stream);
+                            imageSaved = true;
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(news.PictureExternalUrl))
+                    {
+                        try
+                        {
+                            //TODO
+                            // Image is Empty when run with await' upload image
+                            //ImportFirstImageAsync(createdNews, news.PictureExternalUrl, news.PictureName);
+
+                            DownloadImage(news.PictureExternalUrl, news.PictureName, content);
+                            //createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
+                        }
+                        catch (Exception exception)
+                        {
+                            response.StatusCode = System.Net.HttpStatusCode.InternalServerError;
+                        }
+                    }
+
+                    if (imageSaved)
+                    {
+                        //this is a work around for the SetValue method to save a file, since it doesn't currently take into account the image cropper
+                        //which we are using so we need to fix that.
+                        var propType = content.Properties["picture"].PropertyType;
+                        var cropperValue = CreateImageCropperValue(propType, content.GetValue("picture"), _dataTypeService);
+                        content.SetValue("picture", cropperValue);
+                    }
+
                     //Update News
                     PopulateContentFields(content, news);
 
-                    newsContents.Add(content);
+                    var newsResult = Services.ContentService.SaveAndPublish(content);
+
+                    if (newsResult.Success)
+                    {
+                        response.StatusCode = System.Net.HttpStatusCode.OK;
+                        return response;
+                    }
+                    else
+                    {
+                        response.StatusCode = System.Net.HttpStatusCode.InternalServerError;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = System.Net.HttpStatusCode.RequestTimeout;
+            }
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> DeteleNews(NewsModel news)
+        {
+            IContent existedNews = Services.ContentService.GetById(news.Id);
+            HttpResponseMessage response = new HttpResponseMessage();
+            if (existedNews == null)
+            {
+                response.StatusCode = System.Net.HttpStatusCode.NotFound;
+            }
+            else
+            {
+                Services.ContentService.Unpublish(existedNews);
+                Services.ContentService.Delete(existedNews);
+                response.StatusCode = System.Net.HttpStatusCode.OK;
+
+            }
+            return response;
+        }
+
+        public int GetNews(string title)
+        {
+            NewsSearchModel newsSearch = new NewsSearchModel();
+            newsSearch.CurrentPage = 1;
+            newsSearch.ItemsPerPage = 1;
+            newsSearch.Keywords = title;
+            var news = _searchHelper.Search(newsSearch);
+
+            return news != null && news.News != null && news.News.Any() ? news.News.FirstOrDefault().Id : -1;
+        }
+
+        public string[] InsertListNews(IEnumerable<NewsModel> listNews)
+        {
+            List<string> results = new List<string>();
+            List<IContent> newsContents = new List<IContent>();
+            foreach (var news in listNews)
+            {
+                //Check if this News has existed or not
+                var existedNews = _iNewsService.GetNewsByCategoryAndName(news.Category, news.Name);
+
+                if (existedNews == null)
+                {
+                    //imageId = UploadImage(1115, filePath, news.PictureTitle, news.PictureName);
+
+                    var category = _iCategoryService.GetCategory(news.Category);
+
+                    try
+                    {
+                        //IMedia media = Services.MediaService.GetById(imageId);               
+                        IContent createdNews = null;
+                        if (category != null)
+                        {
+                            createdNews = Services.ContentService.Create(news.Name, category.Id, "news");
+                        }
+                        else
+                        {
+                            createdNews = Services.ContentService.Create(news.Name, news.ParentId, "news");
+                        }
+
+                        if (createdNews != null)
+                        {
+                            //TODO
+                            //IList<string> categoryName = new List<string>();
+                            //categoryName.Add(category.Name);
+                            //createdNews.AssignTags("category", categoryName.ToArray());
+
+                            //var categoryUdi = Udi.Create(Constants.UdiEntityType.Document, category.Key);
+                            //var searchCategoryPage = Umbraco.PublishedContent(categoryUdi);
+                            //createdNews.SetValue("category", searchCategoryPage);                   
+
+                            //IList <Link> links = new List<Link>();
+                            //links.Add(new Link()
+                            //{
+                            //    Name = "Test 1",
+                            //    Type = LinkType.Content,
+                            //    Udi = locaUdi,
+                            //    Url = "/home/thoi-su/giao-thong/xe-qua-tai-giam-manh-tren-quoc-lo-5/"
+                            //});
+
+                            //TODO: this field will be set data later
+                            //createdNews.SetValue("relatedNews", links);
+
+                            //TODO: this field will be set data later
+                            bool imageSaved = false;
+                            if (!string.IsNullOrEmpty(news.PictureUrl))
+                            {
+                                using (Stream stream = System.IO.File.OpenRead(news.PictureUrl))
+                                {
+                                    createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, stream);
+                                    imageSaved = true;
+                                }
+                            }
+                            else if (!string.IsNullOrEmpty(news.PictureExternalUrl))
+                            {
+                                try
+                                {
+                                    //TODO
+                                    DownloadImage(news.PictureExternalUrl, news.PictureName, createdNews);
+                                    //createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
+                                }
+                                catch (Exception exception)
+                                {
+                                    //return false;
+                                }
+                            }
+
+
+                            if (imageSaved)
+                            {
+                                //this is a work around for the SetValue method to save a file, since it doesn't currently take into account the image cropper
+                                //which we are using so we need to fix that.
+                                var propType = createdNews.Properties["picture"].PropertyType;
+                                var cropperValue = CreateImageCropperValue(propType, createdNews.GetValue("picture"), _dataTypeService);
+                                createdNews.SetValue("picture", cropperValue);
+                            }
+
+                            //TOD
+                            //createdNews.SetValue("thumbnailImage", imageId); //media.Path = -1,newsId,mediaId;
+
+                            PopulateContentFields(createdNews, news);
+
+                            newsContents.Add(createdNews);
+                            var newsResult = Services.ContentService.SaveAndPublish(createdNews);
+
+                            if (newsResult.Success)
+                            {
+                                results.Add(createdNews.Name + " status: " + true);
+                            }
+                            else
+                            {
+                                results.Add(createdNews.Name + " status: " + false);
+                            }
+                            //return true;
+
+                            System.Threading.Thread.Sleep(20000); // wait to create file and save it to umbraco
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Error when create and save news
+                    }
+                }
+                else
+                {
+                    //Update News
+                    //Ignore update news to check the database lock issue - TODO
+                    //var content = Services.ContentService.GetById(existedNews.Id);
+                   
+                    //PopulateContentFields(content, news);
+
+                    //newsContents.Add(content);
 
                     //var newsResult = Services.ContentService.SaveAndPublish(content);
 
@@ -302,26 +375,27 @@ namespace NewsWeb.Controllers
                     //return true;
                 }
             }
-            if (newsContents.Any())
-            {
-                var savedResults = Services.ContentService.Save(newsContents);
+            //if (newsContents.Any())
+            //{
+            //    var savedResults = Services.ContentService.Save(newsContents);
 
-                if (savedResults.Success)
-                {
-                    results.Add("Saved sucessfully - status = " + true);
-                }
-                else
-                {
-                    results.Add("Saved unsucessfully - status =" + false);
+            //    if (savedResults.Success)
+            //    {
+            //        results.Add("Saved sucessfully - status = " + true);
+            //    }
+            //    else
+            //    {
+            //        results.Add("Saved unsucessfully - status =" + false);
 
-                }
-            }
+            //    }
+            //}
 
             return results.ToArray(); ;
         }
 
-        public bool DeleteNews(string title)
+        public HttpResponseMessage DeleteNews(string title)
         {
+            HttpResponseMessage response = new HttpResponseMessage();
             //Check if this News has existed or not
             var existedNewsId = GetNews(title);
 
@@ -332,10 +406,21 @@ namespace NewsWeb.Controllers
                 var newsResult = Services.ContentService.Delete(content);
 
                 if (newsResult.Success)
-                    return true;
+                {
+                    response.StatusCode = System.Net.HttpStatusCode.OK;
+                    return response;
+                }
+                else
+                {
+                    response.StatusCode = System.Net.HttpStatusCode.InternalServerError;
+                }
+            }
+            else
+            {
+                response.StatusCode = System.Net.HttpStatusCode.NotFound;
             }
 
-            return false;
+            return response;
         }
         public string[] DeleteNewsByCategory(int id)
         {

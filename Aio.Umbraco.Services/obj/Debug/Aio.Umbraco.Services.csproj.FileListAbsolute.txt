@@ -148,6 +148,7 @@ C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Services\obj\Debug
 C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.csproj.CopyComplete
 C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.dll
 C:\Users\knguyen220\Desktop\UmbracoSource\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.pdb
+E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\System.Threading.Tasks.Dataflow.dll
 D:\r\NewsWeb\Aio.Umbraco.Services\bin\Debug\Aio.Umbraco.Services.dll.config
 D:\r\NewsWeb\Aio.Umbraco.Services\bin\Debug\Aio.Umbraco.Services.dll
 D:\r\NewsWeb\Aio.Umbraco.Services\bin\Debug\Aio.Umbraco.Services.pdb
@@ -166,9 +167,8 @@ D:\r\NewsWeb\Aio.Umbraco.Services\bin\Debug\Examine.pdb
 D:\r\NewsWeb\Aio.Umbraco.Services\bin\Debug\System.Web.Mvc.xml
 D:\r\NewsWeb\Aio.Umbraco.Services\bin\Debug\Umbraco.Web.pdb
 D:\r\NewsWeb\Aio.Umbraco.Services\bin\Debug\Umbraco.Web.xml
+D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.csprojAssemblyReference.cache
 D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.csproj.CoreCompileInputs.cache
 D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.csproj.CopyComplete
 D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.dll
 D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.pdb
-D:\r\NewsWeb\Aio.Umbraco.Services\obj\Debug\Aio.Umbraco.Services.csprojAssemblyReference.cache
-E:\Project\Umbraco\AioNews\NewsWeb\Aio.Umbraco.Services\bin\Debug\System.Threading.Tasks.Dataflow.dll
