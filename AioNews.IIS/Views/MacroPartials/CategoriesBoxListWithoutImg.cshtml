@@ -1,0 +1,90 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
+@{
+    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+    var subCategory = category.Children.Where(x => x.IsVisible()).ToArray();
+    var latestNews = arrayNews.Count() != 0 ? arrayNews[0] : null;
+
+    INewsService service = new NewsService();
+}
+<div class="categories-box-list">
+    <div class="other-cate-news-list">
+        <div class="cate-options d-flex">
+            <h5 class="cate-title merri-title">
+                <a href="@category.Url">@category.GetProperty("title").Value()</a>
+            </h5>
+            <ul>
+                @foreach (var item in subCategory)
+                {
+                    var typeContent = item.ContentType.Alias;
+                    if (typeContent != "news" && item.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
+                    {
+                        <li><a href="@item.Url">@item.GetProperty("Title").Value()</a></li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="other-cate-news-item d-flex">
+            <div class="category-box-item full-box">
+                <div class="cate-content-box d-flex">
+                    <article class="thumb-cate mr-3">
+                        <div class="cate-thumb-desc mt-3">
+                            <h5 class="merri-title">
+                                <a href="@latestNews.Url">
+                                    @latestNews.GetProperty("title").Value()
+                                </a>
+                            </h5>
+                            <p class="child-news-desc">
+                                <a href="@latestNews.Url">
+                                    <span>
+                                        @latestNews.GetProperty("shortDescription").Value()
+                                    </span>
+                                </a>
+                                <div class="update-time">
+                                    <span>
+                                        @service.CalculatePostedDateTime(latestNews.GetProperty("postedDateTime").Value().ToString())
+                                    </span>
+                                </div>
+
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="two-items">
+                @for (int i = 1; i < 2 && i < arrayNews.Count(); i++)
+                {
+                    <div class="category-box-item">
+                        <div class="cate-content-box d-flex">
+                            <article class="thumb-cate mr-3">
+                                <div class="cate-thumb-desc mt-3">
+                                    <h5 class="merri-title">
+                                        <a href="@arrayNews[i].Url">
+                                            @arrayNews[i].GetProperty("title").Value()
+                                        </a>
+                                    </h5>
+                                    <div class="child-news-desc">
+                                        <a href="#">
+                                            <span>
+                                                @arrayNews[i].GetProperty("shortDescription").Value()
+                                            </span>
+                                        </a>
+                                        <div class="update-time">
+                                            <span>
+                                                @service.CalculatePostedDateTime(arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="bt-solid mt-3 mb-3"></div>

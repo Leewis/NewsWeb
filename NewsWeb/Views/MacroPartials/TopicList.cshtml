@@ -5,7 +5,7 @@
 @using Newtonsoft.Json;
 @using Umbraco.Core.PropertyEditors.ValueConverters
 @{
-    var setting = Model.Content.Root().Children.FirstOrDefault(x => x.Id == 1118);
+    var setting = Model.Content.Root().Children.FirstOrDefault(x => x.Name == "Settings" && x.IsVisible());
     var image = setting.Value<IPublishedContent>("siteLogoUrl");
     var imgUrl = image.Url;
 

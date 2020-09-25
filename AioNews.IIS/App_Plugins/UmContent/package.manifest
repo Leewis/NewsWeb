@@ -1,0 +1,20 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/UmContent/js/ImportExport.Controller.js",
+    "~/App_Plugins/UmContent/js/ImportExport.Resources.js"
+  ],
+
+  "css": [
+    "~/App_Plugins/UmContent/css/input.css",
+    "~/App_Plugins/UmContent/css/popup.css"
+  ],
+
+  "dashboards": [
+    {
+      "alias": "UmContent",
+      "view": "/App_Plugins/UmContent/html/UmContent.html",
+      "sections": [ "settings", "content" ],
+      "weight": 60
+    }
+  ]
+}

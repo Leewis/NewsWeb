@@ -1,0 +1,121 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using ContentModels = Umbraco.Web.PublishedModels;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
+
+@{
+    var pageSize = 5;
+    var category = Model;
+    var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime"));
+    INewsService service = new NewsService();
+    var categoryData = service.GetTopicNews(arrayNews);
+
+    var latestNews = categoryData.Take(1).ToArray();
+    var commonNews = categoryData.Skip(1).ToArray();
+    var page = 1;
+    int.TryParse(Request.QueryString["page"], out page);
+    var totalPages = (int)Math.Ceiling((double)commonNews.Count() / (double)pageSize);
+
+    if (page > totalPages)
+    {
+        page = totalPages;
+    }
+    else if (page < 1)
+    {
+        page = 1;
+    }
+}
+@if (categoryData.Count() > 0)
+{
+    {
+        <div class="product-news">
+            <article class="news-item d-flex">
+                <div class="col-img mr-3">
+                    <a href="@categoryData[0].Url"><img src="@categoryData[0].Picture" alt="" class="img-fluid"></a>
+                </div>
+                <div class="col-desc">
+                    <h5 class="heading-title-news merri-title">
+                        <a href="@categoryData[0].Url">@categoryData[0].Title</a>
+                    </h5>
+                    <p>
+                        <a href="@categoryData[0].Url">
+                            @if (categoryData[0].Location != "")
+                            {
+                                <span class="location-name">@categoryData[0].Location</span>
+                            }
+                            @categoryData[0].ShortDescription
+                        </a>
+                        <br>
+                        <span class="comments-count">
+                            <i class="far fa-comment"></i>
+                            <a href="#">32</a>
+                        </span>
+                    </p>
+                </div>
+            </article>
+        </div>
+    }
+    foreach (var item in commonNews.Skip((page - 1) * pageSize).Take(pageSize))
+    {
+        <div class="post-list">
+            <article class="post-item d-flex">
+                <div class="col-desc mr-5 col-md-8">
+                    <h5 class="merri-title">
+                        <a href="@item.Url">@item.Title</a>
+                    </h5>
+                    <p>
+                        <a href="@item.Url">
+                            @if (item.Location != "")
+                            {
+                                <span class="location-name">@item.Location</span>
+                            }
+                            @item.ShortDescription
+                        </a>
+                    </p>
+                </div>
+                @if (item.Picture != "")
+                {
+                    <div class="col-img mr-3 col-md-4">
+                        <a href="#" class="mr-3 img-thumb"><img src="@item.Picture" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
+                    </div>
+                }
+            </article>
+        </div>
+        <div class="bt-solid mt-3 mb-3"></div>
+    }
+    if (totalPages > 1)
+    {
+        <div class="category-footer">
+            <form class="view-date">
+                <i class="far fa-calendar-alt"></i>
+                <a class="input-button" title="toggle" data-toggle="">
+                    <i class="far fa-calendar-alt"></i>
+                </a>
+                <input type="text" class="calendar flatpickr-input" placeholder="Xem theo ngày" data-input="" readonly="readonly">
+            </form>
+            <div class="pagination-center">
+                <div class="category-pagination row">
+                    <span>Trang</span>&nbsp;&nbsp;
+                    <ul class="pagination">
+                        @if (page > 1)
+                        {
+                            <li><a href="?page=@(page-1)">❮</a></li>
+                        }
+                        <li class="active">
+                            <a href="?page=@page">@page</a>
+                        </li>
+                        @if (page < totalPages)
+                        {
+                            <li><a href="?page=@(page+1)">❯</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+}
+
+

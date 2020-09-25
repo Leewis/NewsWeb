@@ -1,0 +1,114 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+    var subCategory = category.Children.Where(x => x.IsVisible()).ToArray();
+    var latestNews = arrayNews[0];
+    <div class="row categories-box-list">
+        <div class="col-lg-12">
+            <div class="cate-options d-flex">
+                <h5 class="cate-title merri-title"><a href="@category.Url">@category.GetProperty("title").Value()</a></h5>
+                <ul>
+                    @foreach (var item in subCategory)
+                    {
+                        var typeContent = item.ContentType.Alias;
+                        if (typeContent != "news" && item.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
+                        {
+                            <li><a href="@item.Url">@item.GetProperty("Title").Value()</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="cate-box-left">
+                <div class="category-box-item">
+                    <div class="cate-content-box d-flex">
+                        <article class="thumb-cate">
+                            <a href="@latestNews.Url" class="d-inline-block img-thumb"><img src="@latestNews.GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt=""></a>
+                            <div class="cate-thumb-desc mt-3">
+                                <h4 class="merri-title">
+                                    <a href="@latestNews.Url">
+                                        @latestNews.GetProperty("title").Value()
+                                    </a>
+                                </h4>
+                                <div class="child-news-desc">
+                                    <a href="#">
+                                        <span>
+                                            @latestNews.GetProperty("shortDescription").Value()
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="cate-box-right d-flex">
+                <div class="first-cate-box">
+                    @for (int i = 1; i < 2 && i < arrayNews.Count(); i++)
+                    {
+                        <div class="category-box-item">
+                            <div class="cate-content-box d-flex">
+                                <article class="thumb-cate">
+                                    <a href="@arrayNews[i].Url" class="d-inline-block img-thumb">
+                                        <img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt="">
+                                    </a>
+                                    <div class="cate-thumb-desc mt-3">
+                                        <h6 class="merri-title">
+                                            <a href="@arrayNews[i].Url">
+                                                @arrayNews[i].GetProperty("title").Value()
+                                            </a>
+                                        </h6>
+
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="second-cate-box">
+                    @for (int i = 3; i < 8 && i < arrayNews.Count(); i++)
+                    {
+                        if (arrayNews[i].GetProperty("Picture").HasValue())
+                        {
+                            <article class="article-item">
+                                <div class="d-flex">
+                                    <div class="article-desc">
+                                        <h6 class="merri-title">
+                                            <a href="@arrayNews[i].Url">
+                                                @arrayNews[i].GetProperty("title").Value()
+                                            </a>
+                                        </h6>
+                                    </div>
+                                    <a href="@arrayNews[i].Url" class="mr-3 img-thumb"><img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt=""></a>
+                                </div>
+                            </article>
+                        }
+                        else
+                        {
+                            <article class="article-item has-no-image">
+                                <div class="article-desc">
+                                    <h6 class="merri-title">
+                                        <a href="@arrayNews[i].Url">
+                                            @arrayNews[i].GetProperty("title").Value()
+                                        </a>
+                                    </h6>
+                                    <div class="article-desc">
+                                        <span>@arrayNews[i].GetProperty("shortDescription").Value() </span>
+                                    </div>
+                                </div>
+
+                            </article>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="bt-solid mt-3 mb-3"></div>
+}

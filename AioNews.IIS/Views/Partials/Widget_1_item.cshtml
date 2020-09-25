@@ -1,0 +1,58 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
+@using Newtonsoft.Json;
+@using Umbraco.Core.PropertyEditors.ValueConverters
+@{
+    var setting = Model.Root().Children.FirstOrDefault(x => x.Name == "Settings");
+    var image = setting.Value<IPublishedContent>("siteLogoUrl");
+    var imgUrl = image.Url;
+    var category = Model.Parent;
+    var numOfNews = 3;
+    var arrayCategories = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news" && x.Name != Model.Name).OrderByDescending(item => item.Value("postedDateTime"));
+    INewsService service = new NewsService();
+    var categoryData = service.GetTopicNews(arrayCategories);
+}
+<div class="widget-news-small widget-bg">
+    @if (categoryData.Count == 0)
+    {
+        <h6 class="merri-title">
+            <a href="@Model.Parent.Url">
+                @Model.Parent.GetProperty("title").GetValue()
+            </a>
+        </h6>
+        <p>@Model.Parent.GetProperty("title").GetValue() chỉ có 1 bài báo</p>
+    }
+    else
+    {
+        <h6 class="merri-title">
+            <a href="@Model.Parent.Url">
+                @categoryData[0].Category
+            </a>
+        </h6>
+        <a href="@categoryData[0].Url" class="d-inline-block img-thumb">
+            @if (categoryData[0].Picture.Length != 0)
+            {
+                ImageCropperValue img = JsonConvert.DeserializeObject<ImageCropperValue>(categoryData[0].Picture);
+                imgUrl = img.Src;
+            }
+            @if (imgUrl != image.Url)
+            {
+                <img src="@imgUrl" class="img-fluid">
+            }
+        </a>
+        <div class="orthers-news-small">
+            @for (int i = 0; i < categoryData.Count(); i++)
+            {
+                if (i > numOfNews - 1) { break; }
+                <h6 class="merri-title item-news">
+                    <a href="@categoryData[i].Url">
+                        @categoryData[i].Title
+                    </a>
+                </h6>
+            }
+        </div>
+    }
+</div>
+

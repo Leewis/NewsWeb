@@ -1,0 +1,84 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
+@{
+    var numOfNews = 0;
+    if (Model.MacroParameters.Any() && Model.MacroParameters.Keys.Contains("numOfNews")) {        
+        int.TryParse(Model.MacroParameters["numOfNews"].ToString(), out numOfNews);
+    }
+    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+    var subCategory = category.Children.Where(x => x.IsVisible() && x.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any()).OrderBy(item => item.Name).ToArray();
+    var latestNews = arrayNews[0];
+
+    INewsService service = new NewsService();
+
+    <div class="vertical-cate-item">
+        <div class="category-box-item">
+            <div class="cate-options d-flex">
+                <h5 class="cate-title merri-title"><a href="@category.Url">@category.GetProperty("Title").Value()</a></h5>
+                <ul>
+                    @for (int i = 0; i < 3 && i < subCategory.Count(); i++)
+                    {
+                        var typeContent = subCategory[i].ContentType.Alias;
+                        if (typeContent != "news")
+                        {
+                            <li><a href="@subCategory[i].Url">@subCategory[i].GetProperty("Title").Value()</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="cate-content-box">
+                <article class="thumb-cate">
+                    <a href="@latestNews.Url" class="d-inline-block img-thumb">
+                        <img src="@latestNews.GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt="" />
+                    </a>
+                    <div class="cate-thumb-desc mt-3">
+                        <h6 class="merri-title">
+                            <a href="@latestNews.Url">
+                                @latestNews.GetProperty("title").Value()
+                            </a>
+                        </h6>
+                        <div class="child-news-desc">
+                            <a href="@latestNews.Url">
+                                <span class="location-name"></span>
+                                <span>
+                                    @latestNews.GetProperty("shortDescription").Value()
+                                </span>
+                            </a>
+                            <div class="update-time">
+                                <span>@latestNews.Parent.GetProperty("title").Value().ToString() - </span>
+                                <span class="comments-count">
+                                    @service.CalculatePostedDateTime(latestNews.GetProperty("postedDateTime").Value().ToString())
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                @for (int i = 1; i < arrayNews.Count() && i < numOfNews + 1; i++)
+                {
+                    <div class="others-news-cate">
+                        <article class="cate-item">
+                            <h6 class="merri-title"><a href="@arrayNews[i].Url">@arrayNews[i].GetProperty("title").Value()</a></h6>
+                            <div class="article-desc">
+                                <a href="@arrayNews[i].Url">
+                                    @arrayNews[i].GetProperty("shortDescription").Value()
+                                </a>
+                                <div class="update-time">
+                                    <span class="comments-count">
+                                        @arrayNews[i].GetProperty("source").Value() - 
+
+                                    </span>
+                                    <span class="comments-count">
+                                        @service.CalculatePostedDateTime(arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                                    </span>
+                                </div>
+                            </div>
+
+                        </article>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

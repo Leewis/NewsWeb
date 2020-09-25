@@ -1,0 +1,36 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var root = Model.Content.Root();
+    var mostViews = root.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news" && (bool)x.GetProperty("mostView").Value() == true)
+                                      .OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+}
+    <div>
+        <h1 class="width_common title-top-24h">
+            <span class="width_common name-page-t">Xem nhiều</span>
+        </h1>
+        <div class="bt-solid mt-3 mb-3"></div>
+        @foreach (var item in mostViews)
+        {
+            <div class="post-list">
+                <article class="post-item d-flex">
+                    <div class="col-desc mr-5 col-md-8">
+                        <h5 class="merri-title">
+                            <a href="@item.Url">@item.GetProperty("title").Value()</a>
+                        </h5>
+                        <p>
+                            <a href="@item.Url">
+                                @item.GetProperty("shortDescription").Value()
+                            </a>
+                        </p>
+                    </div>
+                    @if (item.GetProperty("Picture").HasValue())
+                    {
+                        <div class="col-img mr-3 col-md-4">
+                            <a href="@item.Url" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture").Value()" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
+                        </div>
+                    }
+                </article>
+            </div>
+            <div class="bt-solid mt-3 mb-3"></div>
+        }
+    </div>

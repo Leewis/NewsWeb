@@ -2,7 +2,7 @@
 @using Umbraco.Web;
 @{
     var root = Model.Root();
-    var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
+    var setting = root.Children.FirstOrDefault(x => x.Name == "Settings" && x.IsVisible());
     var logoSetting = setting.Value<IPublishedContent>("siteLogoUrl");
     var contentLeft = setting.Value<HtmlString>("ContentLeft");
     var contentCenter = setting.Value<HtmlString>("ContentCenter");

@@ -1,0 +1,168 @@
+﻿<div ng-controller="ImportExportController as vm">
+    <div id="umcontent-body" ng-show="isValid">
+        <div class="umb-pane">
+            <div class="control-group span12">
+                <div class="pull-right" aria-hidden="false">
+                    <a href="https://reinder.eu/software/umbraco-json-content-import-export-package" target="_blank" class="btn btn-toolbar">Get Help</a>
+                </div>
+                <div class="controls span12">
+                    <div class="span6">
+                        <div ng-controller="Umbraco.PrevalueEditors.TreeSourceController" ng-init="Multiple()" class="umb-editor umb-contentpicker span10" style="position:unset">
+                            <h4>Choose content which you want export from Umbraco CMS</h4>
+                            <div ng-repeat="item in nodes">
+                                <ul class="unstyled list-icons" style="margin-top: 30px; background-color:#e9e9eb; padding: 10px;">
+                                    <li>
+                                        <a href="" class="hover-show pull-right" ng-click="removeItem(item)">
+                                            <i class="icon icon-delete red"></i>
+                                        </a>
+                                        <i class="icon {{item.icon}} hover-hide"></i>
+
+                                        <a href prevent-default ng-click="openMultipleContentPicker()">{{item.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div ng-if="!nodes.length && model.value.type !== 'member'" style="margin-top: 30px">
+                                <div ng-hide="showSearch || model.value.query">
+                                    <ul class="unstyled list-icons" style=" background-color:#e9e9eb; padding: 10px;">
+                                        <li>
+                                            <i class="icon icon-add blue"></i>
+                                            <a href ng-click="openMultipleContentPicker()" prevent-default>
+                                                Choose nodes for export...
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <umb-overlay ng-if="treePickerOverlay.show"
+                                         model="treePickerOverlay"
+                                         position="right"
+                                         view="treePickerOverlay.view">
+                            </umb-overlay>
+
+                            <div class="input-prepend span4">
+                                <button class="btn-lg btn-light span12" ng-click="exportContent(nodes)" ng-disabled="isLoading || nodes.length < 1">Export</button>
+                            </div>
+                            <div id="downloadContainer" style="margin-left: 20px"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="span6">
+                        <div ng-controller="Umbraco.PrevalueEditors.TreeSourceController" class="umb-editor umb-contentpicker span10" style="position:unset">
+                            <h4>Choose content which you want to import to Umbraco CMS</h4>
+                            <ul class="unstyled list-icons" ng-if="node && !insertInToRoot" style="margin-top: 30px;  background-color:#e9e9eb; padding: 10px;">
+                                <li>
+                                    <a href="" class="hover-show pull-right" ng-click="clear()">
+                                        <i class="icon icon-delete red"></i>
+                                    </a>
+                                    <i class="icon {{node.icon}} hover-hide"></i>
+
+                                    <a href prevent-default ng-click="openContentPicker()">{{node.name}}</a>
+                                </li>
+                            </ul>
+
+                            <div ng-if="!node && model.value.type !== 'member' && !insertInToRoot" style="margin-top: 30px">
+                                <div ng-hide="showSearch || model.value.query">
+                                    <ul class="unstyled list-icons" style=" background-color:#e9e9eb; padding: 10px;">
+                                        <li>
+                                            <i class="icon icon-add blue"></i>
+                                            <a href ng-click="openContentPicker()" prevent-default>
+                                                Choose a root node...
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <umb-overlay ng-if="treePickerOverlay.show"
+                                         model="treePickerOverlay"
+                                         position="right"
+                                         view="treePickerOverlay.view">
+                            </umb-overlay>
+
+
+                            <label>Insert as Root Node: <input type="checkbox" ng-model="insertInToRoot" no-dirty-check></label>
+
+                            <div class="controls span12" label="File" description="File to upload">
+                                <input id="fileInput" type="file" ngf-select accept="application/json" ng-model="vm.files" ng-multiple="false" ng-change="fileSelected(vm.files)" class="inputfile inputfile-1" style="display:none" no-dirty-check />
+                                <label for="fileInput">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                                        <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+                                    </svg>
+                                    <span>{{(vm.files.name) ? vm.files.name : 'Choose a file'}}</span>
+                                </label>
+                            </div>                            
+                            <div class="input-prepend span4">
+                                <button class="btn-lg span12 btn-light" ng-click="beforeImport(file, node)" ng-disabled="isLoading || !file || (!node && !insertInToRoot)">Import</button>
+                            </div>
+                            <!-- Update modal -->
+                            <div class="modale opened" aria-hidden="true" ng-show="showModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-header">
+                                        <h3>Choose nodes which you want to override</h3>
+                                        <a class="btn-close closemodale" aria-hidden="true" ng-click="closeModal()">&times;</a>
+                                    </div>
+                                    <div class="modal-body" style="max-height: 300px">
+
+                                        <div ng-show="!existingNodes.length">
+                                            There are no nodes in the system which can be updated (it usually happens for the same nodes that have different parents or node does not exists on the target system at all).
+                                            New nodes will be created.
+                                        </div>
+
+                                        <div ng-repeat="item in existingNodes" style="margin-top: 3px; background-color:#e9e9eb; ">
+                                            <ul class="unstyled list-icons">
+                                                <label class="" style="display: flex; padding:10px; margin-left: calc( {{item.Level}} * 10px)">
+                                                    <input type="checkbox" ng-model="item.OverrideExisting" style="max-width:15px;">
+                                                    {{item.Id}}. {{item.Name}}
+                                                </label>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button class="btn" ng-click="checkBoxSelectAll()" ng-show="existingNodes.length">Select All</button>
+                                        <button class="btn" ng-click="checkBoxUnSelectAll()" ng-show="existingNodes.length">Unselect All</button>
+                                        <button class="btn" ng-click="importContent(file, node, insertInToRoot)">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Modal -->
+                            <!--Log Modal -->
+                            <div class="modale opened" aria-hidden="true" ng-show="showLogModal">
+                                <div class="modal-dialog modal-dialog-logs">
+                                    <div class="modal-header">
+                                        <h3>Import report</h3>
+                                        <a class="btn-close closemodale" aria-hidden="true" ng-click="closeModal()">&times;</a>
+                                    </div>
+                                    <div class="modal-body" style="max-height: 300px;">
+
+                                        <umb-table ng-if="importingLogs.items"
+                                                   items="importingLogs.items"
+                                                   item-properties="importingLogs.options">
+                                        </umb-table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Log /Modal -->
+                            <div class="input-prepend span4" style="margin-left: 10px;" ng-show="importingLogs.items">
+                                <!--ng-show="importingLogs">-->
+                                <button class="btn span12 btn-primary" ng-click="openLogModal()">Show Log</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="well span4" ng-show="isLoading">
+                {{DataMessage}}
+                <div class="progress progress-info" style="height:5px;margin-top:20px;">
+                    <div class="bar" ng-style="Progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

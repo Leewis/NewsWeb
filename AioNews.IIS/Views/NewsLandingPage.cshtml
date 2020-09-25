@@ -1,0 +1,13 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.NewsLandingPage>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "master.cshtml";
+}
+<div class="container white-bg pt-2 pb-2">
+    <div class="category-page">
+        <!-- product-news -->
+        <div class="product-news">
+            @Html.GetGridHtml(Model, "mainLayout")
+        </div>
+    </div>
+</div>

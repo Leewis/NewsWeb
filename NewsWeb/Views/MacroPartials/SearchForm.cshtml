@@ -5,7 +5,7 @@
     var serchTerm = string.IsNullOrWhiteSpace(Request["q"]) ? string.Empty : Request["q"];
     var category = string.IsNullOrWhiteSpace(Request["cat"]) ? string.Empty : Request["cat"];
     var root = Model.Content.Root();
-    var homepage = root.Children.FirstOrDefault(x => x.Id == 1089);
+    var homepage = root.Children.FirstOrDefault(x => x.Name == "Home" && x.IsVisible());
     var categories = homepage.Children().Where(x => x.ContentType.Alias == "category" && (bool)x.GetProperty("topMenu").Value() != false);
 }
 

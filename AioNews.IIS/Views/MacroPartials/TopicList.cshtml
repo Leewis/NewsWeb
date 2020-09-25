@@ -1,0 +1,53 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Umbraco.Core.Mapping;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
+@using Newtonsoft.Json;
+@using Umbraco.Core.PropertyEditors.ValueConverters
+@{
+    var setting = Model.Content.Root().Children.FirstOrDefault(x => x.Name == "Settings");
+    var image = setting.Value<IPublishedContent>("siteLogoUrl");
+    var imgUrl = image.Url;
+
+    var currentPage = Model.Content;
+    var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
+    var maxItem = 5;
+    //int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out maxItem);
+
+    var newsIsShowedInTopicList = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news" && (bool)(x.GetProperty("showInTopicList").Value()) == true).OrderByDescending(item => item.Value("postedDateTime")).Take(maxItem);
+    INewsService service = new NewsService();
+    var categoryData = service.GetTopicNews(newsIsShowedInTopicList);
+}
+
+<div class="topic-list">
+    <div class="row">
+        @for (int i = 0; i < categoryData.Count(); i++)
+        {
+            if (i == maxItem) { break; }
+            if (categoryData[i].Picture.Length != 0)
+            {
+                ImageCropperValue img = JsonConvert.DeserializeObject<ImageCropperValue>(categoryData[i].Picture);
+                imgUrl = img.Src;
+            }
+            <div class="col-lg col-md-4 topic-item">
+                <a href="@categoryData[i].Url" class="d-inline-block img-thumb"><img src="@imgUrl" alt="news-kinh-doanh-1" class="img-fluid"></a>
+                <h6 class="merri-title">
+                    <a href="@categoryData[i].Url">
+                        @categoryData[i].Title
+                    </a>
+                </h6>
+                <p>
+                    <span class="update-time">
+                        <a href="@categoryData[i].CategoryUrl">@categoryData[i].Category</a>
+                    </span>
+                    @*<span class="comments-count">
+                            <i class="far fa-comment"></i>
+                            <a href="#">32</a>
+                        </span>*@
+                </p>
+            </div>
+
+        }
+    </div>
+</div>
+<div class="bt-solid mt-3 mb-3"></div>

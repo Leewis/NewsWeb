@@ -1,0 +1,66 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var pageSize = 1;
+    int.TryParse(Model.MacroParameters["pageSize"].ToString(), out pageSize);
+    var serchTerm = string.IsNullOrWhiteSpace(Request["q"]) ? string.Empty : Request["q"];
+    var category = string.IsNullOrWhiteSpace(Request["cat"]) ? string.Empty : Request["cat"];
+    var root = Model.Content.Root();
+    var homepage = root.Children.FirstOrDefault(x => x.Name == "Home");
+    var categories = homepage.Children().Where(x => x.ContentType.Alias == "category" && (bool)x.GetProperty("topMenu").Value() != false);
+}
+
+<div>
+    <h1>Tìm kiếm</h1>
+    <form class="form-group" action="/tim-kiem">
+        <div class="row">
+            <div class="col-8">
+                <input class="form-control" type="search" value="@serchTerm" aria-label="Search" id="query" name="q">
+            </div>
+            <div class="col-4">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        <div class="row">
+            <label for="date" class="input-form">
+                <span>Thời gian</span>
+                <select class="form-control" id="thoigian" data-type="date_format">
+                    <option value="all" selected="">Tất cả</option>
+                    <option value="day">1 ngày qua</option>
+                    <option value="week">1 tuần qua</option>
+                    <option value="month">1 tháng qua</option>
+                    <option value="year">1 năm qua</option>
+                </select>
+            </label>
+            <label for="category" class="input-form">
+                <span class="title-input">Chuyên mục</span>
+                <select class="form-control" id="category" data-type="cat" name="cat">
+                    <option value="" @(category != string.Empty ? null : "selected")>Tất cả</option>
+                    @foreach (var cate in categories)
+                    {
+                        <option value="@cate.Name" @(cate.Name == category ? "selected" : null)>@cate.GetProperty("title").Value()</option>
+                    }
+                </select>
+            </label>
+            <label for="dangbai" class="input-form">
+                <span class="title-input">Dạng bài</span>
+                <select class="form-control" id="dangbai" data-type="media_type">
+                    <option value="all" selected="">Tất cả</option>
+                    <option value="text">Bài viết</option>
+                    <option value="image">Ảnh</option>
+                    <option value="video">Video</option>
+                    <option value="topic">Chủ đề</option>
+                    <option value="infographic">Infographic</option>
+                </select>
+            </label>
+        </div>
+    </form>
+</div>
+<div class="bt-solid mt-3 mb-3"></div>
+@if (serchTerm != string.Empty)
+{
+    @Html.Action("Index", "Search", new { pageSize = pageSize })
+}
+else
+{
+    <p>Enter search term</p>
+}

@@ -1,0 +1,157 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Umbraco.Core.Services;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
+@{
+    var numsofNews = 0;
+    if (Model.MacroParameters.Any() && Model.MacroParameters.Keys.Contains("numbersNews"))
+    {
+        int.TryParse(Model.MacroParameters["numbersNews"].ToString(), out numsofNews);
+    }
+    var content = Umbraco.Content(Udi.Parse(Model.MacroParameters["content"].ToString()));
+    var arrayNews = content.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
+
+    INewsService service = new NewsService();
+}
+
+<!-- product-news -->
+<div class="product-news">
+    @if (arrayNews.Count() > 0)
+    {
+        <div class="row">
+            <div class="col-lg-9">
+                <article class="news-item d-flex">
+                    <div class="col-img mr-3">
+                        <a href="@arrayNews[0].Url()"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid" alt="" /></a>
+                    </div>
+                    <div class="col-desc">
+                        <h5 class="heading-title-news merri-title"><a href="@arrayNews[0].Url()"> @arrayNews[0].GetProperty("title").Value()</a></h5>
+                        <span>@arrayNews[0].GetProperty("shortDescription").Value()</span>
+                        <div class="update-time">
+                            <span class="comments-count">
+                                @arrayNews[0].GetProperty("source").Value() -
+                            </span>
+                            <span class="comments-count">
+                                @service.CalculatePostedDateTime(@arrayNews[0].GetProperty("postedDateTime").Value().ToString())
+                            </span>
+                        </div>
+                    </div>
+                </article>
+                <div class="child-news horizontal">
+                    <ul class="d-flex">
+                        @for (int i = 1; i < 4 && i < arrayNews.Count(); i++)
+                        {
+                            <li>
+                                <h6 class="merri-title">
+                                    <a href="@arrayNews[i].Url()">
+                                        @arrayNews[i].GetProperty("title").Value()
+                                    </a>
+                                </h6>
+                                <div class="child-news-desc">
+                                    <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
+                                </div>
+                                <div class="update-time">
+                                    <span class="comments-count">
+                                        @*<i class="far fa-comment"></i>*@
+                                        @arrayNews[i].GetProperty("source").Value() -
+
+                                    </span>
+                                    <span class="comments-count">
+                                        @service.CalculatePostedDateTime(@arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                                    </span>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="child-news vertical">
+                    <ul class="d-flex flex-column">
+                        @for (int i = 4; i < numsofNews && i < arrayNews.Count(); i++)
+                        {
+                            <li>
+                                <h6 class="merri-title">
+                                    <a href="@arrayNews[i].Url()">
+                                        @arrayNews[i].GetProperty("title").Value()
+                                    </a>
+                                </h6>
+                                <div class="child-news-desc">
+                                    <a href="@arrayNews[i].Url()">
+                                        <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
+                                    </a>
+                                </div>
+                                <div class="update-time">
+                                    <span class="comments-count">
+                                        @arrayNews[i].GetProperty("source").Value() -
+                                    </span>
+                                    <span class="comments-count">
+                                        @service.CalculatePostedDateTime(@arrayNews[i].GetProperty("postedDateTime").Value().ToString())
+                                    </span>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="bt-solid mt-3 mb-3"></div>
+        @*if (content.Level == 3)
+        {
+            <div class="box-slide-topic d-flex">
+                <div class="col-box-topic-1">
+                    <div><strong>Chủ đề</strong></div>
+                </div>
+                <div class="col-box-topic-2">
+                    <div class="box-shop-sell-vertical d-flex">
+                        <div class="sell-top-box">
+                            <div class=" btn-control-carousel">
+                                <a class="carousel-control-prev" href="#carouselExampleInterval1" role="button" data-slide="prev">
+                                    ❮
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleInterval1" role="button" data-slide="next">
+                                    ❯
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="carouselExampleInterval1" class="slide pointer-event" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item carousel-item-next carousel-item-left">
+                                    <div class="article-list-sell d-flex">
+                                        <article class="article-item">
+                                            <div>Kinh tế sau đại dịch</div>
+                                        </article>
+                                        <article class="article-item">
+                                            <div>Mâu thuẫn cổ đông Coteccons</div>
+                                        </article>
+                                        <article class="article-item">
+                                            <div>Làn sóng dịch chuyển đầu tư</div>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="carousel-item active carousel-item-left">
+                                    <div class="article-list-sell d-flex">
+                                        <article class="article-item">
+                                            <div>Kinh tế sau đại dịch 2</div>
+                                        </article>
+                                        <article class="article-item">
+                                            <div>Mâu thuẫn cổ đông Coteccons 2</div>
+                                        </article>
+                                        <article class="article-item">
+                                            <div>Làn sóng dịch chuyển đầu tư 2</div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="bt-solid mt-3 mb-3"></div>
+        }*@
+    }
+</div>

@@ -1,0 +1,65 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Aio.Umbraco.Services.Interfaces;
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Common.ContentModels
+@{
+    var currentPage = Model.Content.Root();
+
+    IAdvertisementsService service = new AdvertisementsService();
+    var advertisings = service.GetByType("AioShop");
+    var showItem = advertisings.Take(3).ToArray();
+    var iterations = 0;
+}
+
+
+<div class="box-shop-sell-vertical p-3">
+    <div class="clearfix sell-top-box">
+        <h5 class="merri-title heading-line float-left"><a href="#">AioShop</a></h5>
+        <div class="float-right btn-control-carousel">
+            <a class="carousel-control-prev" href="#AioShopCarousel" role="button" data-slide="prev">
+                &#10094;
+            </a>
+            <a class="carousel-control-next" href="#AioShopCarousel" role="button" data-slide="next">
+                &#10095;
+            </a>
+        </div>
+    </div>
+
+    <div id="AioShopCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @while (showItem.Count() > 0)
+            {
+                <div class="carousel-item @(iterations == 0 ? "active" : "")" data-target="#AioShopCarousel" data-slide-to="@iterations">
+                    <div class="article-list-sell">
+                        @for (int y = 0; y < showItem.Count(); y++)
+                        {
+                            if (showItem[y].Iframe == "")
+                            {
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        <a target="_blank" href="@showItem[y].Link" class="mr-3 img-thumb"><img src="@Url.Content(showItem[y].IconUrl)" alt="" class="img-fluid d-block"></a>
+                                        <div class="article-desc">
+                                            <a target="_blank" href="@showItem[y].Link" class="fsell-title"><span>@showItem[y].Title</span></a>
+                                            <p class="fsell-price">@showItem[y].Price</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            }
+                            else
+                            {
+                                <article class="article-item">
+                                    <div class="d-flex">
+                                        @Html.Raw(showItem[y].Iframe)
+                                    </div>
+                                </article>
+                            }
+                        }
+                    </div>
+                </div>
+                iterations++;
+                showItem = advertisings.Skip(3 * iterations).Take(3).ToArray();
+            }
+        </div>
+    </div>
+</div>
+

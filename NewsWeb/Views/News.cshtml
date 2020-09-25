@@ -9,8 +9,8 @@
 @{
     Layout = "master.cshtml";
     var root = Model.Root();
-    var homepage = root.Children.FirstOrDefault(x => x.Id == 1089);
-    var setting = root.Children.FirstOrDefault(x => x.Id == 1118);
+    var homepage = root.Children.FirstOrDefault(x => x.Name == "Home" && x.IsVisible());
+    var setting = root.Children.FirstOrDefault(x => x.Name == "Settings" && x.IsVisible());
     var facebook = setting.GetProperty("facebookUrl").GetValue();
     var twitter = setting.GetProperty("twitterUrl").GetValue();
     var parent = Model.Parent;

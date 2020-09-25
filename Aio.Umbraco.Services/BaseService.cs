@@ -22,7 +22,7 @@ namespace Aio.Umbraco.Services
         {
             get
             {
-                var currentNode = DependencyResolver.Current.GetService<IUmbracoContextFactory>().EnsureUmbracoContext().UmbracoContext.Content.GetById(1088); //Root Content Node
+                var currentNode = DependencyResolver.Current.GetService<IUmbracoContextFactory>().EnsureUmbracoContext().UmbracoContext.Content.GetAtRoot().FirstOrDefault(x => x.ContentType.Alias == "contentRoot"); //Root Content Node
 
                 return currentNode;
             }

@@ -1,0 +1,75 @@
+﻿@inherits UmbracoViewPage<Aio.Umbraco.Common.ContentModels.NewsSearchModel>
+@using Aio.Umbraco.Common.ContentModels
+@using Newtonsoft.Json;
+@using Umbraco.Core.PropertyEditors.ValueConverters
+@{
+    if (Model.News != null)
+    {
+        var url = Request.Url.AbsoluteUri;
+        <p>We found <strong>@Model.TotalItems</strong> result@(Model.TotalItems != 1 ? "s" : "") when searching for <strong>@Model.Keywords</strong></p>
+        @RenderResults(Model.News)
+        if (Model.TotalPages > 1)
+        {
+            var sCurrentValue = 1;
+            if (string.IsNullOrWhiteSpace(Request["page"]))
+            {
+                url = url + "&page=" + sCurrentValue;
+            }
+            else
+            {
+                int.TryParse(Request.QueryString["page"], out sCurrentValue);
+            }
+
+            <div class="category-footer">
+                <div class="pagination-center">
+                    <div class="category-pagination">
+                        <span>Trang</span>&nbsp;&nbsp;
+                            @if (Model.CurrentPage > 1)
+                            {
+                                <a href="@url.Replace("page=" + sCurrentValue, "page=" + (Model.CurrentPage -1))">❮</a>
+                            }
+                                <a href="@url">@sCurrentValue</a>
+                            @if (Model.CurrentPage < Model.TotalPages)
+                            {
+                                <a href="@url.Replace("page=" + sCurrentValue, "page=" + (Model.CurrentPage + 1))">❯</a>
+                            }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p> No results found for query <strong> @Model.Keywords </strong></p>
+    }
+}
+
+@helper RenderResults(List<NewsModel> news)
+{
+    foreach (NewsModel newSearch in news)
+    {
+        <div class="post-list">
+            <article class="post-item d-flex">
+                <div class="col-desc mr-5 col-md-8">
+                    <h5 class="merri-title">
+                        <a href="@newSearch.Url">@newSearch.Title</a>
+                    </h5>
+                    <p>
+                        <a href="@newSearch.Url">
+                            @newSearch.ShortDescription
+                        </a>
+                    </p>
+                </div>
+                @if (newSearch.Picture.Length != 0)
+                {
+                    ImageCropperValue image = JsonConvert.DeserializeObject<ImageCropperValue>(newSearch.Picture);
+                    var imgUrl = image.Src;
+                    <div class="col-img mr-3 col-md-4">
+                        <a href="@newSearch.Url" class="mr-3 img-thumb"><img src="@imgUrl" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
+                    </div>
+                }
+            </article>
+        </div>
+        <div class="bt-solid mt-3 mb-3"></div>
+    }
+}

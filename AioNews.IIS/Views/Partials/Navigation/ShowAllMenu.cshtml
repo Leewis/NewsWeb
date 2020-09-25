@@ -1,0 +1,61 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web;
+@{
+    var site = Model.AncestorOrSelf(2);
+    var selection = site.Children.Where(x => x.IsVisible() && x.ContentType.Alias == "category");
+}
+<div class="container">
+    <div class="header-menu">
+        <span class="name-header">Tất cả chuyên mục</span>
+        <a href="javascript:void(0);" class="close-menu" title="Đóng">Đóng &#10005;</a>
+    </div>
+    <div class="content-left">
+        @foreach (var item in selection)
+        {
+            if ((bool)item.GetProperty("topMenu").Value() && item.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
+            {
+                <ul class="cate-menu">
+                    <li>
+                        <a href="">@item.GetProperty("Title").Value()</a>
+                    </li>
+                    @foreach (var child in item.Children().Where(c => c.IsVisible()))
+                    {
+                        if (child.HasProperty("parentCategoryId") && child.Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
+                        {
+                            <li>
+                                <a href="@child.Url">@child.GetProperty("Title").Value()</a>
+                            </li>
+                        }
+                    }
+                    <li class="btn-view-more"><a href="javascript:void(0);">Xem thêm</a></li>
+                </ul>
+            }
+        }
+    </div>
+    <div class="content-right">
+        @*<ul class="news-type">
+            <li><a href="">Ảnh</a></li>
+            <li><a href="">Infographics</a></li>
+        </ul>*@
+
+        <ul class="news-type">
+            <li><a href="/">Mới nhất</a></li>
+            <li><a href="/tin-xem-nhieu">Xem nhiều</a></li>
+            <li><a href="/thoi-su">Tin nóng</a></li>
+        </ul>
+
+        @*<ul class="ad-types">
+            <li><a href="">FSell</a></li>
+            <li><a href="">Shop</a></li>
+            <li><a href="">Quà tặng</a></li>
+            <li><a href="">Kid-lab</a></li>
+        </ul>*@
+
+        @*<ul class="ad-types pb-3">
+            <li><a href="">Liên hệ</a></li>
+            <li><a href="">Tòa soạn</a></li>
+            <li><a href="">Quảng cáo</a></li>
+        </ul>*@
+    </div>
+</div>
+

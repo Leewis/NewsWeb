@@ -1,0 +1,16 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Category>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "master.cshtml";
+}
+
+<div class="container white-bg pt-2 pb-2">
+    <div class="category-page">
+        @Html.Partial("Navigation/CategoryHeader")
+        @Html.Partial("Navigation/CategoryMenu")
+        <!-- product-news -->
+        <div class="product-news">
+            @Html.GetGridHtml(Model, "mainLayout", "bootstrap3-fluid")
+        </div>
+    </div>
+</div>
