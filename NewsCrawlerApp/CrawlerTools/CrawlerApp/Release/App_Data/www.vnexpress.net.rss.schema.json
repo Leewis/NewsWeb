@@ -1,8 +1,9 @@
 ﻿{
   "Name": "vnexpress",
   "WebsiteUrl": "https://vnexpress.net/",
-  "JsonGeneratePath": "D:\\r\\FileWatcher\\",
-  "ApiUrl": "http://localhost:8066/umbraco/api/NewsApi/InsertNews",
+  "JsonGeneratePath": "D:\\FileWatcher\\",
+  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertNews",
+  "AuthenticationType": 1,
   "PageLevelConfigs": [
     {
       "Url": "rss",
@@ -38,11 +39,11 @@
         },
         {
           "PropertyName": "FullDescription",
-          "HtmlSelector": ".fck_detail",
+          "HtmlSelector": ".fck_detail,picture,.footer-content,.list-news",
           "Converter": "MultiHtmlTagsConverter",
-          //"AdditionalData": "figure div img",
-          "AdditionalData": "",
-          "IsHtml": true
+          "AdditionalData": ".footer-content width_common;.list-news gaBoxLinkDisplay;list-news hidden", //Remove the content of these tags
+          "IsHtml": true,
+          "IsList": true
           //".content-news-detail"
         },
         {

@@ -19,14 +19,28 @@
     INewsService service = new NewsService();
 
     var relatedNews = service.GetNewsModel(Model);
+    bool hasAuthor = false;
 
-    if(String.IsNullOrWhiteSpace(Html.StripHtml(Model.Value<IHtmlString>("fullDescription")).ToString()))
+    if (String.IsNullOrWhiteSpace(Html.StripHtml(Model.Value<IHtmlString>("fullDescription")).ToString()))
     {
         Response.Clear();
         Response.StatusCode = 301;
         Response.StatusDescription = "Found";
         Response.RedirectLocation = Model.Value("sourceUrl").ToString();
         Response.End();
+    }
+    else
+    {
+        if (Model.HasValue("author") && Html.StripHtml(Model.Value<IHtmlString>("fullDescription")).ToString().Contains(Model.Value("author").ToString().Trim("\r").Trim()))
+        {
+            hasAuthor = true;
+        }
+    }
+
+    var postedDateTime = "";
+    if (Model.HasValue("postedDateTime"))
+    {
+        postedDateTime = Convert.ToDateTime(Model.Value("postedDateTime")).ToString("dddd, dd/MM/yyyy HH:mm", new System.Globalization.CultureInfo("vi-VN")) + " (GMT+7)";
     }
 }
 
@@ -53,7 +67,10 @@
                             </ul>
                         }
                     }
-                    <span class="date-detail">@Model.Value("postedDateTime")</span>
+                    @if (!string.IsNullOrEmpty(postedDateTime))
+                    {
+                        <span class="date-detail">@postedDateTime</span>
+                    }
                 </div>
                 <h2 class="title-detail">@Model.Value("title")</h2>
                 <div class="description">
@@ -74,7 +91,10 @@
                             </li>
                         </ul>
                     </div>*@
-                <p class="author"><strong>@Model.Value("author")</strong></p>
+                @if (!hasAuthor)
+                {                    
+                    <p class="author"><strong>@Model.Value("author")</strong></p>
+                }
                 @*<div class="footer-content">
                         <a class="btn btn-back" href="@parent.Url()">
                             <span>Trở về trang @parent.GetProperty("title").Value()</span>

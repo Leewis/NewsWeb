@@ -32,7 +32,7 @@
             </a>
         </h6>
         <a href="@categoryData[0].Url" class="d-inline-block img-thumb">
-            @if (categoryData[0].Picture.Length != 0)
+            @if (categoryData[0].Picture != null && categoryData[0].Picture.Length != 0)
             {
                 ImageCropperValue img = JsonConvert.DeserializeObject<ImageCropperValue>(categoryData[0].Picture);
                 imgUrl = img.Src;

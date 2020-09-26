@@ -1,9 +1,9 @@
 ﻿{
   "Name": "NLD",
   "WebsiteUrl": "https://nld.com.vn/",
-  "JsonGeneratePath": "D:\\r\\FileWatcher\\",
+  "JsonGeneratePath": "D:\\FileWatcher\\",
   //"ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
-  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertNews",
+  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
   "PageLevelConfigs": [
     {
       "Url": "rss.htm",
@@ -42,7 +42,7 @@
           "PropertyName": "FullDescription",
           "HtmlSelector": ".contentbody",
           "Converter": "MultiHtmlTagsConverter",
-          "AdditionalData": ".VCSortableInPreviewMode div img",
+          "AdditionalData": ".footer-content;.list-news; .Normal", //Remove the content of these tags
           "IsHtml": true
         }
       ],
