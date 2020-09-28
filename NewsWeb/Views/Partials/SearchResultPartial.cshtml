@@ -60,7 +60,7 @@
                         </a>
                     </p>
                 </div>
-                @if (newSearch.Picture.Length != 0)
+                @if (newSearch.Picture != null && newSearch.Picture.Length != 0)
                 {
                     ImageCropperValue image = JsonConvert.DeserializeObject<ImageCropperValue>(newSearch.Picture);
                     var imgUrl = image.Src;
