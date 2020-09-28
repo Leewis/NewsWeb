@@ -1,0 +1,59 @@
+﻿{
+  "Name": "NLD",
+  "WebsiteUrl": "https://nld.com.vn/",
+  "JsonGeneratePath": "D:\\r\\FileWatcher\\",
+  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+  "PageLevelConfigs": [
+    {
+      "Url": "rss.htm",
+      "HtmlSelectors": [],
+      "NextLevelUrlSelector": {
+        "HtmlSelector": ".shadow1 table tr td .linkrss a",
+        "AdditionalData": "Thời sự"
+      },
+      "ProcessorTypeName": "BaseSimpleRssCategoryProcessor",
+      "Level": 0,
+      "AdditionalData": "thoi-su.htm",
+      "ParentCategory": "Thời sự",
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "thoi-su.rss"
+    },
+    {
+      "Url": "",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".title-content"
+        },
+        {
+          "PropertyName": "ShortDescription",
+          "HtmlSelector": ".sapo-detail"
+        },
+        {
+          "PropertyName": "Category",
+          "HtmlSelector": ".dateandcat a"
+        },
+        {
+          "PropertyName": "Author",
+          "HtmlSelector": ".author"
+        },
+        {
+          "PropertyName": "FullDescription",
+          "HtmlSelector": ".contentbody",
+          "Converter": "MultiHtmlTagsConverter",
+          "AdditionalData": ".VCSortableInPreviewMode div img",
+          "IsHtml": true
+        }
+      ],
+      "NextLevelUrlSelector": {
+        "HtmlSelector": ".shadow1 table tr td .linkrss a",
+        "AdditionalData": "channel title:eq(0)"
+      },
+      "ProcessorTypeName": "BaseSimpleNewsModelProcessor",
+      "Level": 1,
+      "AdditionalData": "channel item link",
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "thoi-su.htm"
+    }
+  ]
+}

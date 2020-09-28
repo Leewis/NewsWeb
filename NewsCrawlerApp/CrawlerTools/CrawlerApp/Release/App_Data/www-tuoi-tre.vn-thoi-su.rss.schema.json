@@ -1,0 +1,86 @@
+﻿{
+  "Name": "tuoitre",
+  "WebsiteUrl": "https://tuoitre.vn/",
+  "JsonGeneratePath": "D:\\r\\FileWatcher\\",
+  //"ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+  "PageLevelConfigs": [
+    {
+      "Url": "rss.htm",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".highlight ul li a"
+        }
+      ],
+      "NextLevelUrlSelector": {
+        "HtmlSelector": ".highlight ul li a"
+      },
+      "ProcessorTypeName": "BaseSimpleRssCategoryProcessor",
+      "Level": 0,
+      "AdditionalData": "",
+      "ParentCategory": "Thời sự",
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "the-gioi.rss"
+    },
+    {
+      "Url": "",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".article-title"
+        },
+        {
+          "PropertyName": "ShortDescription",
+          "HtmlSelector": ".sapo",
+          "AdditionalData": "</a>"
+        },
+        {
+          "PropertyName": "Category",
+          "HtmlSelector": ".bread-crumbs ul li a:eq(0)"
+        },
+        {
+          "PropertyName": "Author",
+          "HtmlSelector": ".author",
+          "AdditionalData": ".authordetail"
+        },
+        {
+          "PropertyName": "FullDescription",
+          "HtmlSelector": "#main-detail-body",
+          "AdditionalData": "div .RelatedOneNews",
+          "IsHtml": true,
+          "Converter": "NLDMultiHtmlTagsConverter"
+        },
+        {
+          "PropertyName": "DateTime",
+          "HtmlSelector": ".date-time",
+          //"Converter": "TuoiTreDateTimeConverter",
+          "AdditionalData": " GMT+7"
+
+        },
+        //{
+        //  "PropertyName": "ChassisNo",
+        //  "HtmlSelector": ".top-detail .sidebar-1 .date, .detail-photo .container .date",
+        //  "Converter": "VNExpressDayConverter",
+        //  "AdditionalData": ".detail-photo .container .date"
+        //},
+        {
+          "PropertyName": "MetaDescription",
+          "HtmlSelector": "head meta:eq(0)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "MetaKeywords",
+          "HtmlSelector": "head meta:eq(1)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        }
+      ],
+      "ProcessorTypeName": "BaseSimpleNewsModelProcessor",
+      "Level": 1,
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "the-gioi.rss"
+    }
+  ]
+}
