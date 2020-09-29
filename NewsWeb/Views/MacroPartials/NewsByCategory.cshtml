@@ -43,7 +43,7 @@
                             <a href="@latestNews.Url">
                                 <span class="location-name"></span>
                                 <span>
-                                    @latestNews.GetProperty("shortDescription").Value()
+                                    @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("shortDescription").Value().ToString())
                                 </span>
                             </a>
                             <div class="update-time">
@@ -62,7 +62,7 @@
                             <h6 class="merri-title"><a href="@arrayNews[i].Url">@arrayNews[i].GetProperty("title").Value()</a></h6>
                             <div class="article-desc">
                                 <a href="@arrayNews[i].Url">
-                                    @arrayNews[i].GetProperty("shortDescription").Value()
+                                    @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("shortDescription").Value().ToString())
                                 </a>
                                 <div class="update-time">
                                     <span class="comments-count">

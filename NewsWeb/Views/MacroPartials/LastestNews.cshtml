@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-desc">
                         <h5 class="heading-title-news merri-title"><a href="@arrayNews[0].Url()"> @arrayNews[0].GetProperty("title").Value()</a></h5>
-                        <span>@arrayNews[0].GetProperty("shortDescription").Value()</span>
+                        <span>@System.Net.WebUtility.HtmlDecode(arrayNews[0].GetProperty("shortDescription").Value().ToString())</span>
                         <div class="update-time">
                             <span class="comments-count">
                                 @arrayNews[0].GetProperty("source").Value() -
@@ -48,7 +48,7 @@
                                     </a>
                                 </h6>
                                 <div class="child-news-desc">
-                                    <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
+                                    <span>@System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("shortDescription").Value().ToString())</span>
                                 </div>
                                 <div class="update-time">
                                     <span class="comments-count">
@@ -79,7 +79,7 @@
                                 </h6>
                                 <div class="child-news-desc">
                                     <a href="@arrayNews[i].Url()">
-                                        <span>@arrayNews[i].GetProperty("shortDescription").Value()</span>
+                                        <span>@System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("shortDescription").Value().ToString())</span>
                                     </a>
                                 </div>
                                 <div class="update-time">

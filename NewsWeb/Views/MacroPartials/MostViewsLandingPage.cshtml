@@ -19,7 +19,7 @@
                         </h5>
                         <p>
                             <a href="@item.Url">
-                                @item.GetProperty("shortDescription").Value()
+                                @System.Net.WebUtility.HtmlDecode(item.GetProperty("shortDescription").Value().ToString())
                             </a>
                         </p>
                     </div>

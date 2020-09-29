@@ -39,7 +39,7 @@
                             <p class="child-news-desc">
                                 <a href="@latestNews.Url">
                                     <span>
-                                        @latestNews.GetProperty("shortDescription").Value()
+                                        @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("shortDescription").Value().ToString())
                                     </span>
                                 </a>
                                 <div class="update-time">

@@ -49,6 +49,7 @@ namespace Aio.Umbraco.Services
                 Aio.Umbraco.Common.ContentModels.NewsModel mappedNewsModel = new Aio.Umbraco.Common.ContentModels.NewsModel();
                 mappedNewsModel = newsDetail.To<NewsModel>();
                 mappedNewsModel.PostedTime = CalculatePostedDateTime(mappedNewsModel.PostedDateTime);
+                mappedNewsModel.ShortDescription = String.IsNullOrEmpty(mappedNewsModel.ShortDescription) ? String.Empty : System.Net.WebUtility.HtmlDecode(mappedNewsModel.ShortDescription);
 
                 var news = newsDetail.Value<IEnumerable<Link>>("relatedNews");
 

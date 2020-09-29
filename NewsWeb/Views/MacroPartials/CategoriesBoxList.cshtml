@@ -1,5 +1,10 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Aio.Umbraco.Services;
+@using Aio.Umbraco.Services.Interfaces;
 @{
+    INewsService newsService = new NewsService();
+    ICategoryService categoryService = new CategoryService();
+
     var category = Umbraco.Content(Udi.Parse(Model.MacroParameters["category"].ToString()));
     var arrayNews = category.Descendants().Where(x => x.IsVisible() && x.ContentType.Alias == "news").OrderByDescending(item => item.Value("postedDateTime")).ToArray();
     var subCategory = category.Children.Where(x => x.IsVisible()).ToArray();
@@ -35,7 +40,7 @@
                                 <div class="child-news-desc">
                                     <a href="#">
                                         <span>
-                                            @latestNews.GetProperty("shortDescription").Value()
+                                            @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("shortDescription").Value().ToString())
                                         </span>
                                     </a>
                                 </div>
@@ -108,7 +113,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <div class="bt-solid mt-3 mb-3"></div>
 }

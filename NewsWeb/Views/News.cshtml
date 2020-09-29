@@ -72,9 +72,9 @@
                         <span class="date-detail">@postedDateTime</span>
                     }
                 </div>
-                <h2 class="title-detail">@Model.Value("title")</h2>
+                <h2 class="title-detail">@relatedNews.Title</h2>
                 <div class="description">
-                    @Model.Value("fullDescription")
+                    @Html.Raw(relatedNews.FullDescription)
                 </div>
                 @*<div class="articles-link-display">
                         <ul>

@@ -22,7 +22,7 @@
                 <a href="#" class="mr-3 img-thumb"><img src="@arrayNews[i].GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt="" /></a>
                 <p class="article-desc">
                     <a href="#">
-                        @arrayNews[i].GetProperty("shortDescription").Value()
+                        @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("shortDescription").Value().ToString())
                     </a>
                     <span class="update-time">
                         @service.CalculatePostedDateTime(@arrayNews[i].GetProperty("postedDateTime").Value().ToString())
