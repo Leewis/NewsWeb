@@ -129,7 +129,7 @@ namespace Aio.Umbraco.Services
         {
             IList<CategoryModel> categories = new List<CategoryModel>();
 
-            var homeNode = DependencyResolver.Current.GetService<IUmbracoContextFactory>().EnsureUmbracoContext().UmbracoContext.Content.GetById(1089);
+            var homeNode = DependencyResolver.Current.GetService<IUmbracoContextFactory>().EnsureUmbracoContext().UmbracoContext.Content.GetAtRoot().FirstOrDefault(x =>x.Name == "Home");
             if (homeNode != null && homeNode.Children.Any())
             {
                 foreach (var cat in homeNode.Children)
@@ -140,7 +140,15 @@ namespace Aio.Umbraco.Services
 
             return categories;
         }
-
+        public List<CategoryModel> GetCategories(IEnumerable<IPublishedContent> cates)
+        {
+            List<CategoryModel> listItem = new List<CategoryModel>();
+            foreach (var i in cates)
+            {
+                listItem.Add(GetCategoryModel(i));
+            }
+            return listItem;
+        }
         public IPublishedContent GetCategory(string categoryName)
         {
             if (!string.IsNullOrEmpty(categoryName))

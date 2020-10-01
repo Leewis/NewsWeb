@@ -52,10 +52,10 @@
             <article class="post-item d-flex">
                 <div class="col-desc mr-5 col-md-8">
                     <h5 class="merri-title">
-                        <a href="@newSearch.Url">@newSearch.Title</a>
+                        <a href="@newSearch.Url" target="_blank">@System.Net.WebUtility.HtmlDecode(newSearch.Title)</a>
                     </h5>
                     <p>
-                        <a href="@newSearch.Url">
+                        <a href="@newSearch.Url" target="_blank">
                             @newSearch.ShortDescription
                         </a>
                     </p>
@@ -65,7 +65,7 @@
                     ImageCropperValue image = JsonConvert.DeserializeObject<ImageCropperValue>(newSearch.Picture);
                     var imgUrl = image.Src;
                     <div class="col-img mr-3 col-md-4">
-                        <a href="@newSearch.Url" class="mr-3 img-thumb"><img src="@imgUrl" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
+                        <a href="@newSearch.Url" target="_blank" class="mr-3 img-thumb"><img src="@imgUrl" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
                     </div>
                 }
             </article>

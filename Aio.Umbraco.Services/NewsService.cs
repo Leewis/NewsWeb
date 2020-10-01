@@ -12,6 +12,7 @@ using Aio.Umbraco.Services.Interfaces;
 using Aio.Umbraco.Common.Extensions;
 using Umbraco.Web.Models;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Aio.Umbraco.Services
 {
@@ -50,6 +51,8 @@ namespace Aio.Umbraco.Services
                 mappedNewsModel = newsDetail.To<NewsModel>();
                 mappedNewsModel.PostedTime = CalculatePostedDateTime(mappedNewsModel.PostedDateTime);
                 mappedNewsModel.ShortDescription = String.IsNullOrEmpty(mappedNewsModel.ShortDescription) ? String.Empty : System.Net.WebUtility.HtmlDecode(mappedNewsModel.ShortDescription);
+                mappedNewsModel.Title = String.IsNullOrEmpty(mappedNewsModel.Title) ? String.Empty : System.Net.WebUtility.HtmlDecode(mappedNewsModel.Title);
+                mappedNewsModel.Url = String.IsNullOrWhiteSpace(Regex.Replace(mappedNewsModel.FullDescription, "<.*?>", String.Empty)) ? mappedNewsModel.SourceUrl: mappedNewsModel.Url;
 
                 var news = newsDetail.Value<IEnumerable<Link>>("relatedNews");
 

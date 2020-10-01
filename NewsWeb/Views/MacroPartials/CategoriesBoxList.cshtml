@@ -30,19 +30,17 @@
                 <div class="category-box-item">
                     <div class="cate-content-box d-flex">
                         <article class="thumb-cate">
-                            <a href="@latestNews.Url" class="d-inline-block img-thumb"><img src="@latestNews.GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt=""></a>
+                            <a href="@latestNews.Url" target="_blank" class="d-inline-block img-thumb"><img src="@latestNews.GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt=""></a>
                             <div class="cate-thumb-desc mt-3">
                                 <h4 class="merri-title">
-                                    <a href="@latestNews.Url">
-                                        @latestNews.GetProperty("title").Value()
+                                    <a href="@latestNews.Url" target="_blank">
+                                        @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("title").Value().ToString())
                                     </a>
                                 </h4>
                                 <div class="child-news-desc">
-                                    <a href="#">
-                                        <span>
-                                            @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("shortDescription").Value().ToString())
-                                        </span>
-                                    </a>
+                                    <span>
+                                        @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("shortDescription").Value().ToString())
+                                    </span>
                                 </div>
                             </div>
                         </article>
@@ -58,13 +56,13 @@
                         <div class="category-box-item">
                             <div class="cate-content-box d-flex">
                                 <article class="thumb-cate">
-                                    <a href="@arrayNews[i].Url" class="d-inline-block img-thumb">
+                                    <a href="@arrayNews[i].Url" target="_blank" class="d-inline-block img-thumb">
                                         <img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt="">
                                     </a>
                                     <div class="cate-thumb-desc mt-3">
                                         <h6 class="merri-title">
-                                            <a href="@arrayNews[i].Url">
-                                                @arrayNews[i].GetProperty("title").Value()
+                                            <a href="@arrayNews[i].Url" target="_blank">
+                                                @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                             </a>
                                         </h6>
 
@@ -85,11 +83,11 @@
                                     <div class="article-desc">
                                         <h6 class="merri-title">
                                             <a href="@arrayNews[i].Url">
-                                                @arrayNews[i].GetProperty("title").Value()
+                                                @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                             </a>
                                         </h6>
                                     </div>
-                                    <a href="@arrayNews[i].Url" class="mr-3 img-thumb"><img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt=""></a>
+                                    <a href="@arrayNews[i].Url" target="_blank" class="mr-3 img-thumb"><img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt=""></a>
                                 </div>
                             </article>
                         }
@@ -98,12 +96,12 @@
                             <article class="article-item has-no-image">
                                 <div class="article-desc">
                                     <h6 class="merri-title">
-                                        <a href="@arrayNews[i].Url">
-                                            @arrayNews[i].GetProperty("title").Value()
+                                        <a href="@arrayNews[i].Url" target="_blank">
+                                            @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                         </a>
                                     </h6>
                                     <div class="article-desc">
-                                        <span>@arrayNews[i].GetProperty("shortDescription").Value() </span>
+                                        <span>@System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("shortDescription").Value().ToString()) </span>
                                     </div>
                                 </div>
 

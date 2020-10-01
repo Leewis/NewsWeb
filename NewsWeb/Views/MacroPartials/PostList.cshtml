@@ -29,21 +29,20 @@
         <div class="product-news">
             <article class="news-item d-flex">
                 <div class="col-img mr-3">
-                    <a href="@latestNews.Url()"><img src="@latestNews.GetProperty("Picture").Value()" alt="" class="img-fluid"></a>
+                    <a href="@latestNews.Url()" target="_blank"><img src="@latestNews.GetProperty("Picture").Value()" alt="" class="img-fluid"></a>
                 </div>
                 <div class="col-desc">
                     <h5 class="heading-title-news merri-title">
-                        <a href="@latestNews.Url()">@latestNews.GetProperty("Title").Value()</a>
+                        <a href="@latestNews.Url()" target="_blank">@System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("title").Value().ToString())</a>
                     </h5>
                     <p>
                         <span class="location-name">TPHCM -</span>
-                        <a href="@latestNews.Url()">
+                        <a href="@latestNews.Url()" target="_blank">
                             @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("shortDescription").Value().ToString())
                         </a>
                         <br>
                         <span class="comments-count">
                             <i class="far fa-comment"></i>
-                            <a href="#">32</a>
                         </span>
                     </p>
                 </div>
@@ -56,10 +55,10 @@
             <article class="post-item d-flex">
                 <div class="col-desc mr-5 col-md-8">
                     <h5 class="merri-title">
-                        <a href="@item.Url()">@item.GetProperty("title").Value()</a>
+                        <a href="@item.Url()" target="_blank">@System.Net.WebUtility.HtmlDecode(item.GetProperty("title").Value().ToString())</a>
                     </h5>
                     <p>
-                        <a href="@item.Url()">
+                        <a href="@item.Url()" target="_blank">
                             @System.Net.WebUtility.HtmlDecode(item.GetProperty("shortDescription").Value().ToString())
                         </a>
                     </p>
@@ -67,7 +66,7 @@
                 @if (item.GetProperty("Picture").HasValue())
                 {
                     <div class="col-img mr-3 col-md-4">
-                        <a href="#" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture").Value()" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
+                        <a href="@item.Url()" target="_blank" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture").Value()" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
                     </div>
                 }
             </article>

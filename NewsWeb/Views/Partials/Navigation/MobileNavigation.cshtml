@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web;
+@{
+    var site = Model.AncestorOrSelf(2);
+    var selection = site.Children.Where(x => x.IsVisible() && x.ContentType.Alias == "category").ToArray();
+}
+
+<div class="row">
+    <div class="col">
+        <ul class="mb-menu-list">
+            @for (int i = 0; i < Decimal.Round(selection.Count() / 2); i++)
+            {
+                if ((bool)selection[i].GetProperty("topMenu").Value() && selection[i].Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
+                {
+                    <li><a href="@selection[i].Url">@selection[i].GetProperty("title").Value()</a></li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="col">
+        <ul class="mb-menu-list">
+            @for (int i = (int)Decimal.Round(selection.Count() / 2) + 1; i < selection.Count(); i++)
+            {
+                if ((bool)selection[i].GetProperty("topMenu").Value() && selection[i].Descendants().Where(c => c.IsVisible() && c.ContentType.Alias == "news").Any())
+                {
+                    <li><a href="@selection[i].Url">@selection[i].GetProperty("title").Value()</a></li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div class="bt-solid mt-3 mb-3"></div>

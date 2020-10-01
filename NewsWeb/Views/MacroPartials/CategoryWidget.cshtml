@@ -25,7 +25,7 @@
                         @arrayCategories[index].GetProperty("Title").Value()
                     </a>
                 </h6>
-                <a href="@arrayNews[0].Url()" class="d-inline-block img-thumb"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid"></a>
+                <a href="@arrayNews[0].Url()" target="_blank" class="d-inline-block img-thumb"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid"></a>
                 <div class="orthers-news-small">
                     @for (int i = 0; i < arrayNews.Count(); i++)
                     {
@@ -34,8 +34,8 @@
                             break;
                         }
                         <h6 class="merri-title item-news">
-                            <a href="@arrayNews[i].Url()">
-                                @arrayNews[i].GetProperty("Title").Value()
+                            <a href="@arrayNews[i].Url()" target="_blank">
+                                @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString()))
                             </a>
                         </h6>
                     }

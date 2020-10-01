@@ -24,7 +24,7 @@
     if (String.IsNullOrWhiteSpace(Html.StripHtml(Model.Value<IHtmlString>("fullDescription")).ToString()))
     {
         Response.Clear();
-        Response.StatusCode = 301;
+        Response.StatusCode = 302;
         Response.StatusDescription = "Found";
         Response.RedirectLocation = Model.Value("sourceUrl").ToString();
         Response.End();

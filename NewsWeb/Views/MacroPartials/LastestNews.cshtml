@@ -22,10 +22,10 @@
             <div class="col-lg-9">
                 <article class="news-item d-flex">
                     <div class="col-img mr-3">
-                        <a href="@arrayNews[0].Url()"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid" alt="" /></a>
+                        <a href="@arrayNews[0].Url()"  target="_blank"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid" alt="" /></a>
                     </div>
                     <div class="col-desc">
-                        <h5 class="heading-title-news merri-title"><a href="@arrayNews[0].Url()"> @arrayNews[0].GetProperty("title").Value()</a></h5>
+                        <h5 class="heading-title-news merri-title"><a href="@arrayNews[0].Url()"  target="_blank"> @System.Net.WebUtility.HtmlDecode(arrayNews[0].GetProperty("title").Value().ToString())</a></h5>
                         <span>@System.Net.WebUtility.HtmlDecode(arrayNews[0].GetProperty("shortDescription").Value().ToString())</span>
                         <div class="update-time">
                             <span class="comments-count">
@@ -43,8 +43,8 @@
                         {
                             <li>
                                 <h6 class="merri-title">
-                                    <a href="@arrayNews[i].Url()">
-                                        @arrayNews[i].GetProperty("title").Value()
+                                    <a href="@arrayNews[i].Url()" target="_blank">
+                                        @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                     </a>
                                 </h6>
                                 <div class="child-news-desc">
@@ -73,12 +73,12 @@
                         {
                             <li>
                                 <h6 class="merri-title">
-                                    <a href="@arrayNews[i].Url()">
-                                        @arrayNews[i].GetProperty("title").Value()
+                                    <a href="@arrayNews[i].Url()" target="_blank">
+                                        @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                     </a>
                                 </h6>
                                 <div class="child-news-desc">
-                                    <a href="@arrayNews[i].Url()">
+                                    <a href="@arrayNews[i].Url()" target="_blank">
                                         <span>@System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("shortDescription").Value().ToString())</span>
                                     </a>
                                 </div>

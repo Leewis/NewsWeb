@@ -32,12 +32,12 @@
                     <article class="thumb-cate mr-3">
                         <div class="cate-thumb-desc mt-3">
                             <h5 class="merri-title">
-                                <a href="@latestNews.Url">
-                                    @latestNews.GetProperty("title").Value()
+                                <a href="@latestNews.Url" target="_blank">
+                                    @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("title").Value().ToString())
                                 </a>
                             </h5>
                             <p class="child-news-desc">
-                                <a href="@latestNews.Url">
+                                <a href="@latestNews.Url" target="_blank">
                                     <span>
                                         @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("shortDescription").Value().ToString())
                                     </span>
@@ -61,14 +61,14 @@
                             <article class="thumb-cate mr-3">
                                 <div class="cate-thumb-desc mt-3">
                                     <h5 class="merri-title">
-                                        <a href="@arrayNews[i].Url">
-                                            @arrayNews[i].GetProperty("title").Value()
+                                        <a href="@arrayNews[i].Url" target="_blank">
+                                            @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                         </a>
                                     </h5>
                                     <div class="child-news-desc">
-                                        <a href="#">
+                                        <a href="@arrayNews[i].Url" target="_blank">
                                             <span>
-                                                @arrayNews[i].GetProperty("shortDescription").Value()
+                                                @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("shortDescription").Value().ToString())
                                             </span>
                                         </a>
                                         <div class="update-time">

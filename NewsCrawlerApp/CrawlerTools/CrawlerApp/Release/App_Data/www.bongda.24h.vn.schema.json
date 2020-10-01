@@ -1,0 +1,87 @@
+﻿{
+  "Name": "24h",
+  "WebsiteUrl": "https://www.24h.com.vn/",
+  "JsonGeneratePath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\CrawlerTools\\FileWatcher\\",
+  //"ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+  "PageLevelConfigs": [
+    {
+      "Url": "guest/RSS/",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".rssTbl table tr td a"
+        }
+      ],
+      "NextLevelUrlSelector": {
+        "HtmlSelector": ".rssTbl tr td a",
+        "AdditionalData": ".rssTbl tr td:eq(0)"
+      },
+      "ProcessorTypeName": "Tin24hComVnBaseSimpleRssCategoryProcessor",
+      "Level": 0,
+      "AdditionalData": "bongda.rss",
+      "ParentCategory": "Thể thao",
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "bongda.rss"
+    },
+    {
+      "Url": "",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".atclTit h1"
+        },
+        {
+          "PropertyName": "ShortDescription",
+          "HtmlSelector": "#article_sapo",
+          "AdditionalData": "</a>"
+        },
+        {
+          "PropertyName": "Category",
+          "HtmlSelector": ".brmCm2 .cateBdm:eq(1) ul li a span"
+        },
+        {
+          "PropertyName": "Author",
+          "HtmlSelector": ".nguontin",
+          "AdditionalData": ".authordetail"
+        },
+        {
+          "PropertyName": "FullDescription",
+          "HtmlSelector": ".enter-24h-cate-article,.atclTit,.updTm,.sbNws,.bmTpSeoBlk,.bv-lq",
+          "AdditionalData": "atclTit atclTitD mrT10;updTm updTmD mrT5;sbNws;bv-lq",
+          "IsHtml": true,
+          "Converter": "Tin24hComVnMultiHtmlTagsConverter"
+        },
+        {
+          "PropertyName": "DateTime",
+          "HtmlSelector": ".date-time",
+          //"Converter": "TuoiTreDateTimeConverter",
+          "AdditionalData": "+0700"
+
+        },
+        //{
+        //  "PropertyName": "ChassisNo",
+        //  "HtmlSelector": ".top-detail .sidebar-1 .date, .detail-photo .container .date",
+        //  "Converter": "VNExpressDayConverter",
+        //  "AdditionalData": ".detail-photo .container .date"
+        //},
+        {
+          "PropertyName": "MetaDescription",
+          "HtmlSelector": "head meta:eq(2)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "MetaKeywords",
+          "HtmlSelector": "head meta:eq(3)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        }
+      ],
+      "ProcessorTypeName": "Tin24hComVnBaseSimpleNewsModelProcessor",
+      "Level": 1,
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "bongda.rss"
+    }
+  ]
+}

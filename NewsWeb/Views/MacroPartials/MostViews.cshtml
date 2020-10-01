@@ -17,7 +17,7 @@
                 <h1 class="merri-title number-top-view">@(i+1)</h1>
                 <div class="view-desc">
                     <p>
-                        <a href="@mostViews[i].Url">@mostViews[i].GetProperty("title").Value()</a>
+                        <a href="@mostViews[i].Url" target="_blank">@System.Net.WebUtility.HtmlDecode(mostViews[i].GetProperty("title").Value().ToString())</a>
                     </p>
                 </div>
             </article>

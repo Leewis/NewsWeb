@@ -15,10 +15,10 @@
                 <article class="post-item d-flex">
                     <div class="col-desc mr-5 col-md-8">
                         <h5 class="merri-title">
-                            <a href="@item.Url">@item.GetProperty("title").Value()</a>
+                            <a href="@item.Url" target="_blank">@System.Net.WebUtility.HtmlDecode(item.GetProperty("title").Value().ToString())</a>
                         </h5>
                         <p>
-                            <a href="@item.Url">
+                            <a href="@item.Url" target="_blank">
                                 @System.Net.WebUtility.HtmlDecode(item.GetProperty("shortDescription").Value().ToString())
                             </a>
                         </p>
@@ -26,7 +26,7 @@
                     @if (item.GetProperty("Picture").HasValue())
                     {
                         <div class="col-img mr-3 col-md-4">
-                            <a href="@item.Url" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture").Value()" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
+                            <a href="@item.Url" target="_blank" class="mr-3 img-thumb"><img src="@item.GetProperty("Picture").Value()" alt="" class="img-fluid" style='max-height: 100%; max-width: 90%; object-fit: contain'></a>
                         </div>
                     }
                 </article>

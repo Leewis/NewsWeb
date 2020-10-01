@@ -50,79 +50,12 @@
                 </div>
                 <div class="bt-solid mt-3 mb-3"></div>
 
-                <form class="form-inline search-box">
+                <form class="form-inline search-box" action="/tim-kiem">
                     <input class="form-control" type="search" placeholder="Tìm kiếm" aria-label="Search">
                     <button class="" type="submit"><i class="fas fa-search"></i></button>
                 </form>
                 <div class="bt-solid mt-3 mb-3"></div>
-
-                <div class="row">
-                    <div class="col">
-                        <ul class="mb-menu-list">
-                            <li><a href="">Trang nhất</a></li>
-                            <li><a href="/category.html">Thời sự</a></li>
-                            <li><a href="">Thế giới</a></li>
-                            <li><a href="">Kinh doanh</a></li>
-                            <li><a href="">Thể thao</a></li>
-                            <li><a href="">VM 2020</a></li>
-                            <li><a href="">V-Race</a></li>
-                            <li><a href="">F1</a></li>
-                            <li><a href="">Khoa học</a></li>
-                            <li><a href="">Số hóa</a></li>
-                            <li><a href="">Ý kiến</a></li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <ul class="mb-menu-list">
-                            <li><a href="">Góc nhìn</a></li>
-                            <li><a href="">Video</a></li>
-                            <li><a href="">Giải trí</a></li>
-                            <li><a href="">Pháp luật</a></li>
-                            <li><a href="">Giáo dục</a></li>
-                            <li><a href="">Sức khỏe</a></li>
-                            <li><a href="">Đời sống</a></li>
-                            <li><a href="">Du lịch</a></li>
-                            <li><a href="">Xe</a></li>
-                            <li><a href="">Tâm sự</a></li>
-                            <li><a href="">Cười</a></li>
-                        </ul>
-                    </div>
-                </div>
-                @*<div class="bt-solid mt-3 mb-3"></div>
-                <div class="row">
-                    <div class="col">
-                        <ul class="mb-menu-list">
-                            <li><a href="">Ảnh</a></li>
-                            <li><a href="">Interactives</a></li>
-                            <li><a href="">Mới nhất</a></li>
-                            <li><a href="">Tin nóng</a></li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <ul class="mb-menu-list">
-                            <li><a href="">Infographics</a></li>
-                            <li><a href="">24h qua</a></li>
-                            <li><a href="">Xem nhiều</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="bt-solid mt-3 mb-3"></div>
-                <div class="row">
-                    <div class="col">
-                        <ul class="mb-menu-list">
-                            <li><a href="">Shop</a></li>
-                            <li><a href="">Startup Việt</a></li>
-                            <li><a href="">Mã giảm giá</a></li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <ul class="mb-menu-list">
-                            <li><a href="">Shop</a></li>
-                            <li><a href="">Startup Việt</a></li>
-                            <li><a href="">Mã giảm giá</a></li>
-                        </ul>
-                    </div>
-                </div>*@
+                    @Html.Partial("Navigation/MobileNavigation")
             </div>
         </div>
         <div class="close-side-overlay"></div>
