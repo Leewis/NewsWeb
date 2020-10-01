@@ -1,70 +1,78 @@
-﻿//{
-//  "Name": "BaoGT",
-//  "WebsiteUrl": "https://www.baogiaothong.vn/",
-//  "JsonGeneratePath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\CrawlerTools\\FileWatcher\\",
-//  //"ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
-//  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
-//  "PageLevelConfigs": [
-//    {
-//      "Url": "guest/RSS/?123/",
-//      "HtmlSelectors": [
-//        {
-//          "PropertyName": "Name",
-//          "HtmlSelector": ".table-rss table tr td a"
-//        }
-//      ],
-//      "NextLevelUrlSelector": {
-//        "HtmlSelector": ".table-rss table tr td a",
-//        "AdditionalData": ".table-rss table tr td:eq(0)"
-//      },
-//      "ProcessorTypeName": "BaseSimpleRssCategoryProcessor",
-//      "Level": 0,
-//      "AdditionalData": "",
-//      "ParentCategory": "Thời sự",
-//      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
-//      "StopCrawlPage": "thoi-su-xa-hoi.rss"
-//    },
-//    {
-//      "Url": "",
-//      "HtmlSelectors": [
-//        {
-//          "PropertyName": "Name",
-//          "HtmlSelector": ".colL h1"
-//        },
-//        {
-//          "PropertyName": "ShortDescription",
-//          "HtmlSelector": ".descArt"
-//        },
-//        {
-//          "PropertyName": "Category",
-//          "HtmlSelector": ".cate_breadcrumb .current"
-//        },
-//        {
-//          "PropertyName": "Author",
-//          "HtmlSelector": ".author .name"
-//        },
-//        {
-//          "PropertyName": "FullDescription",
-//          "HtmlSelector": ".bodyArt",
-//          "Converter": "MultiHtmlTagsConverter",
-//          "AdditionalData": "",
-//          "IsHtml": true
-//        },
-//        {
-//          "PropertyName": "MetaDescription",
-//          "HtmlSelector": "head meta:eq(7)",
-//          "Converter": "NameConverter",
-//          "AdditionalData": "content"
-//        },
-//        {
-//          "PropertyName": "MetaKeywords",
-//          "HtmlSelector": "head meta:eq(8)",
-//          "Converter": "NameConverter",
-//          "AdditionalData": "content"
-//        }
-//      ],
-//      "ProcessorTypeName": "BaseSimpleNewsModelProcessor",
-//      "Level": 1
-//    }
-//  ]
-//}
+﻿{
+  "Name": "Baogiaothong",
+  "WebsiteUrl": "https://www.baogiaothong.vn/",
+  "JsonGeneratePath": "D:\\r\\FileWatcher\\",
+  //"ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+  "PageLevelConfigs": [
+    {
+      "Url": "guest/RSS/?123",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".table-rss table tr td a"
+        }
+      ],
+      "NextLevelUrlSelector": {
+        "HtmlSelector": ".table-rss table tr td a",
+        "AdditionalData": ".table-rss table tr td:eq(0)"
+      },
+      "ProcessorTypeName": "BGTVnBaseSimpleRssCategoryProcessor",
+      "Level": 0,
+      "AdditionalData": "",
+      "ParentCategory": "Thời sự",
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Thời sự - Xã hội;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Giao thông phát triển;Infographic;Emagazine;Thông tin doanh nghiệp;Bạn cần biết;Truyền Hình Giao Thông;Đi ++",
+      "StopCrawlPage": "thoi-su-xa-hoi.rss",
+      "ExcludeUrls": "https://www.baogiaothong.vn/suc-khoe-doi-song.rss,https://www.baogiaothong.vn/giai-tri.rss,https://www.baogiaothong.vn/the-thao.rss,https://www.baogiaothong.vn/ban-can-biet.rss"
+    },
+    {
+      "Url": "",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".colL h1"
+        },
+        {
+          "PropertyName": "ShortDescription",
+          "HtmlSelector": ".descArt"
+        },
+        {
+          "PropertyName": "Category",
+          "HtmlSelector": ".cate_breadcrumb .current"
+        },
+        {
+          "PropertyName": "Author",
+          "HtmlSelector": ".author .name"
+        },
+        {
+          "PropertyName": "FullDescription",
+          "HtmlSelector": ".bodyArt,.bodyArt .image img",
+          "Converter": "BGTVnMultiHtmlTagsConverter",
+          "AdditionalData": ".image",
+          "IsHtml": true
+        },
+        {
+          "PropertyName": "MetaDescription",
+          "HtmlSelector": "head meta:eq(7)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "MetaKeywords",
+          "HtmlSelector": "head meta:eq(8)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "PictureExternalUrl",
+          "HtmlSelector": ".bodyArt figure img:eq(0)",
+          "Attribute": "data-original"
+        }
+      ],
+      "ProcessorTypeName": "BGTVnBaseSimpleNewsModelProcessor",
+      "Level": 1,
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Thời sự - Xã hội;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Giao thông phát triển;Infographic;Emagazine;Thông tin doanh nghiệp;Bạn cần biết;Truyền Hình Giao Thông;Đi ++",
+      "StopCrawlPage": "thoi-su-xa-hoi.rss"
+    }
+  ]
+}
