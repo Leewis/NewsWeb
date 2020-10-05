@@ -1,0 +1,72 @@
+﻿//{
+//  "Name": "Sport-TN",
+//  "WebsiteUrl": "https://thanhnien.vn/the-thao/",
+//  "JsonGeneratePath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\CrawlerTools\\FileWatcher\\",
+//  //"ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+//  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+//  "PageLevelConfigs": [
+//    {
+//      "Url": "rss.html",
+//      "HtmlSelectors": [
+//        {
+//          "PropertyName": "Name",
+//          "HtmlSelector": "#rsscontent .di_list ul li a"
+//        }
+//      ],
+//      "NextLevelUrlSelector": {
+//        "HtmlSelector": "#rsscontent .di_list ul li a",
+//        "AdditionalData": ""
+//      },
+//      "ProcessorTypeName": "Tin24hComVnBaseSimpleRssCategoryProcessor",
+//      "Level": 0,
+//      "AdditionalData": "",
+//      "ParentCategory": "Thể thao",
+//      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Bóng đá Việt Nam;Trang chủ",
+//      "StopCrawlPage": "home.rss"
+//    },
+//    {
+//      "Url": "",
+//      "HtmlSelectors": [
+//        {
+//          "PropertyName": "Name",
+//          "HtmlSelector": ".details__headline"
+//        },
+//        {
+//          "PropertyName": "ShortDescription",
+//          "HtmlSelector": ".sapo"
+//        },
+//        {
+//          "PropertyName": "Category",
+//          "HtmlSelector": ".breadcrumbs span:eq(1) a"
+//        },
+//        {
+//          "PropertyName": "Author",
+//          "HtmlSelector": ".left h4 a"
+//        },
+//        {
+//          "PropertyName": "FullDescription",
+//          "HtmlSelector": ".pswp-content, .sapo, .details__morenews",
+//          "Converter": "MultiHtmlTagsConverter",
+//          "AdditionalData": ".sapo, .details__morenews",
+//          "IsHtml": true
+//        },
+//        {
+//          "PropertyName": "MetaDescription",
+//          "HtmlSelector": "head meta:eq(2)",
+//          "Converter": "NameConverter",
+//          "AdditionalData": "content"
+//        },
+//        {
+//          "PropertyName": "MetaKeywords",
+//          "HtmlSelector": "head meta:eq(1)",
+//          "Converter": "NameConverter",
+//          "AdditionalData": "content"
+//        }
+//      ],
+//      "ProcessorTypeName": "Tin24hComVnBaseSimpleRssCategoryProcessor",
+//      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Bóng đá Việt Nam;Trang chủ",
+//      "Level": 1,
+//      "StopCrawlPage": "home.rss"
+//    }
+//  ]
+//}

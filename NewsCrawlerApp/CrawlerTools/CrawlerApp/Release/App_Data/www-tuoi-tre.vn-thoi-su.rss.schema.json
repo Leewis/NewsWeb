@@ -20,8 +20,11 @@
       "Level": 0,
       "AdditionalData": "",
       "ParentCategory": "Thời sự",
-      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
-      "StopCrawlPage": "the-gioi.rss"
+      "ChildrenCategories": "Trang chủ;Thế giới;Kinh doanh;Xe,Văn hóa;Thể thao;Khoa học;Giả thật;Bạn đọc;Thời sự;TPháp luật;Công nghệ;Nhịp sống trẻ;Giải trí;Giáo dục;Sức khỏe;Du lịch",
+      "StopCrawlPage": "tin-moi-nhat.rss",
+      "IsHotGroupNews": true,
+      "HotGroupNewsUrl": "tin-moi-nhat.rss",
+      "GroupsMapping": "Thời sự trong nước,Thời sự;"
     },
     {
       "Url": "",
@@ -33,7 +36,9 @@
         {
           "PropertyName": "ShortDescription",
           "HtmlSelector": ".sapo",
-          "AdditionalData": "</a>"
+          "AdditionalData": "</a>",
+          "ReplaceTags": "</a>",
+          "IndexReplaceTags": 5
         },
         {
           "PropertyName": "Category",
@@ -46,10 +51,12 @@
         },
         {
           "PropertyName": "FullDescription",
-          "HtmlSelector": "#main-detail-body",
-          "AdditionalData": "div .RelatedOneNews",
+          "HtmlSelector": "#main-detail-body,.VCSortableInPreviewMode",
+          "AdditionalData": ".RelatedOneNews;VCSortableInPreviewMode active;VCSortableInPreviewMode",
           "IsHtml": true,
-          "Converter": "NLDMultiHtmlTagsConverter"
+          "Converter": "TuoiTreMultiHtmlTagsConverter",
+          "Attribute": "type",
+          "ReplaceTags": "RelatedOneNews"
         },
         {
           "PropertyName": "DateTime",
@@ -75,12 +82,20 @@
           "HtmlSelector": "head meta:eq(1)",
           "Converter": "NameConverter",
           "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "Picture",
+          "HtmlSelector": ".VCSortableInPreviewMode",
+          "AdditionalData": "Photo",
+          "IsHtml": true,
+          "Converter": "TuoiTreMultiHtmlTagsImageConverter",
+          "Attribute": "type"
         }
       ],
-      "ProcessorTypeName": "BaseSimpleNewsModelProcessor",
+      "ProcessorTypeName": "TuoiTreSimpleNewsModelProcessor",
       "Level": 1,
-      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
-      "StopCrawlPage": "the-gioi.rss"
+      "ChildrenCategories": "Trang chủ;Thế giới;Kinh doanh;Xe,Văn hóa;Thể thao;Khoa học;Giả thật;Bạn đọc;Thời sự;TPháp luật;Công nghệ;Nhịp sống trẻ;Giải trí;Giáo dục;Sức khỏe;Du lịch",
+      "StopCrawlPage": "tin-moi-nhat.rss"
     }
   ]
 }

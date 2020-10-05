@@ -18,9 +18,9 @@
       "ProcessorTypeName": "BaseSimpleRssCategoryProcessor",
       "Level": 0,
       "AdditionalData": "",
-      "ParentCategory": "Thời sự",
-      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Infographics;Chủ nhật đỏ;Megastory;Quizz;Số Đặc Biệt;Xã hội;Chính trị;Tin tức;Chuyện hôm nay;Phóng sự",
-      "StopCrawlPage": "infographics-287.rss"
+      "ParentCategory": "Xe",
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "xe-113.rss"
     },
     {
       "Url": "",
@@ -43,10 +43,10 @@
         },
         {
           "PropertyName": "FullDescription",
-          "HtmlSelector": ".article-col-b,.description .related-inline-story",
-          "AdditionalData": "related-inline-story;related-inline-story clearfix cms-relate",
+          "HtmlSelector": ".article-body",
+          "AdditionalData": "related-inline-story",
           "IsHtml": true,
-          "Converter": "TienPhongMultiHtmlTagsConverter"
+          "Converter": "NLDMultiHtmlTagsConverter"
         },
         {
           "PropertyName": "DateTime",
@@ -64,20 +64,12 @@
           "HtmlSelector": "head meta:eq(3)",
           "Converter": "NameConverter",
           "AdditionalData": "content"
-        },
-        {
-          "PropertyName": "Picture",
-          "HtmlSelector": ".article-photo,.article-avatar",
-          "AdditionalData": "Photo",
-          "IsHtml": true,
-          "Converter": "TuoiTreMultiHtmlTagsImageConverter",
-          "Attribute": "type"
         }
       ],
-      "ProcessorTypeName": "TienPhongSimpleNewsModelProcessor",
+      "ProcessorTypeName": "BaseSimpleNewsModelProcessor",
       "Level": 1,
-      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Infographics;Chủ nhật đỏ;Megastory;Quizz;Số Đặc Biệt;Xã hội;Chính trị;Tin tức;Chuyện hôm nay;Phóng sự",
-      "StopCrawlPage": "infographics-287.rss"
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "xe-113.rss"
     }
   ]
 }

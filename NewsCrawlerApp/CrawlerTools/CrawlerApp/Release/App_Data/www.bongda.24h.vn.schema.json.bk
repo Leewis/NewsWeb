@@ -10,7 +10,7 @@
       "HtmlSelectors": [
         {
           "PropertyName": "Name",
-          "HtmlSelector": ".rssTbl tr td a"
+          "HtmlSelector": ".rssTbl table tr td a"
         }
       ],
       "NextLevelUrlSelector": {
@@ -20,9 +20,9 @@
       "ProcessorTypeName": "Tin24hComVnBaseSimpleRssCategoryProcessor",
       "Level": 0,
       "AdditionalData": "",
-      "ParentCategory": "Thời sự",
-      "ChildrenCategories": "Trang chủ;Tin tức trong ngày;Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Thời trang;Thời trang Hi-tech;Tài chính – Bất động sản;Ẩm thực;Làm đẹp;Phim;Giáo dục - du học;Bạn trẻ - Cuộc sống;Ca nhạc - MTV;Phi thường - kỳ quặc;Công nghệ thông tin;Ô tô;Thị trường - Tiêu dùng;Sức khỏe đời sống;Cười 24h",
-      "StopCrawlPage": "trangchu24h.rss"
+      "ParentCategory": "Thể thao",
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "bongda.rss"
     },
     {
       "Url": "",
@@ -80,8 +80,8 @@
       ],
       "ProcessorTypeName": "Tin24hComVnBaseSimpleNewsModelProcessor",
       "Level": 1,
-      "ChildrenCategories": "Trang chủ;Tin tức trong ngày;Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Thời trang;Thời trang Hi-tech;Tài chính – Bất động sản;Ẩm thực;Làm đẹp;Phim;Giáo dục - du học;Bạn trẻ - Cuộc sống;Ca nhạc - MTV;Phi thường - kỳ quặc;Công nghệ thông tin;Ô tô;Thị trường - Tiêu dùng;Sức khỏe đời sống;Cười 24h",
-      "StopCrawlPage": "trangchu24h.rss"
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "bongda.rss"
     }
   ]
 }

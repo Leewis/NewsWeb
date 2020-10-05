@@ -16,8 +16,8 @@
       "Level": 0,
       "AdditionalData": "",
       "ParentCategory": "Thời sự",
-      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
-      "StopCrawlPage": "thoi-su.rss"
+      "ChildrenCategories": "Tin mới nhất;Thế giới;Thời sự quốc tế;Thời sự;Thời sự trong nước;Công đoàn;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "tin-moi-nhat.rss"
     },
     {
       "Url": "",
@@ -55,7 +55,7 @@
       "Level": 1,
       "AdditionalData": "channel item link",
       "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
-      "StopCrawlPage": "thoi-su.htm"
+      "StopCrawlPage": "tin-moi-nhat.htm"
     }
   ]
 }

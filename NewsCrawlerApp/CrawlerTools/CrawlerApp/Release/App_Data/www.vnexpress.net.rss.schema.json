@@ -23,7 +23,9 @@
       "AdditionalData": "",
       "ParentCategory": "Thời sự",
       "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
-      "StopCrawlPage": "the-gioi.rss"
+      "StopCrawlPage": "tin-moi-nhat.rss",
+      "IsHotGroupNews": true,
+      "HotGroupNewsUrl": "tin-moi-nhat.rss"
       //  ,
       //"ParentCategory": "thời sự",
       //"ChildrenCategories": "Mekong",
@@ -93,7 +95,7 @@
       "ProcessorTypeName": "VNERSSSimpleNewsModelProcessor",
       "Level": 1,
       "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
-      "StopCrawlPage": "the-gioi.rss"
+      "StopCrawlPage": "tin-moi-nhat.rss"
       //"AdditionalData": "channel item link"
       //  ,
       //"ParentCategory": "thời sự",
