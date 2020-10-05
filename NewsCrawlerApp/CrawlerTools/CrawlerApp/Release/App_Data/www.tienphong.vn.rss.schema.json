@@ -31,7 +31,10 @@
         },
         {
           "PropertyName": "ShortDescription",
-          "HtmlSelector": ".cms-desc"
+          "HtmlSelector": ".cms-desc",
+          "AdditionalData": "</a>",
+          "ReplaceTags": "</a>",
+          "IndexReplaceTags": 5
         },
         {
           "PropertyName": "Category",
