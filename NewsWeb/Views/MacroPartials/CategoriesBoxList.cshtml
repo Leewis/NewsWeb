@@ -30,10 +30,11 @@
                 <div class="category-box-item">
                     <div class="cate-content-box d-flex">
                         <article class="thumb-cate">
-                            <a href="@latestNews.Url" target="_blank" class="d-inline-block img-thumb"><img src="@latestNews.GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt=""></a>
+                            <a href="@latestNews.Url" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(latestNews.Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)" class="d-inline-block img-thumb">
+                            <img src="@latestNews.GetProperty("Picture").Value()" style='max-height: 100%; max-width: 100%; object-fit: contain' class="img-fluid" alt=""></a>
                             <div class="cate-thumb-desc mt-3">
                                 <h4 class="merri-title">
-                                    <a href="@latestNews.Url" target="_blank">
+                                    <a href="@latestNews.Url" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(latestNews.Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
                                         @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("title").Value().ToString())
                                     </a>
                                 </h4>
@@ -56,12 +57,12 @@
                         <div class="category-box-item">
                             <div class="cate-content-box d-flex">
                                 <article class="thumb-cate">
-                                    <a href="@arrayNews[i].Url" target="_blank" class="d-inline-block img-thumb">
+                                    <a href="@arrayNews[i].Url" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[i].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)" class="d-inline-block img-thumb">
                                         <img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt="">
                                     </a>
                                     <div class="cate-thumb-desc mt-3">
                                         <h6 class="merri-title">
-                                            <a href="@arrayNews[i].Url" target="_blank">
+                                            <a href="@arrayNews[i].Url" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[i].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
                                                 @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                             </a>
                                         </h6>
@@ -82,12 +83,14 @@
                                 <div class="d-flex">
                                     <div class="article-desc">
                                         <h6 class="merri-title">
-                                            <a href="@arrayNews[i].Url">
+                                            <a href="@arrayNews[i].Url" @(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[i].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)>
                                                 @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                             </a>
                                         </h6>
                                     </div>
-                                    <a href="@arrayNews[i].Url" target="_blank" class="mr-3 img-thumb"><img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt=""></a>
+                                    <a href="@arrayNews[i].Url" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[i].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)" class="mr-3 img-thumb">
+                                        <img src="@arrayNews[i].GetProperty("Picture").Value()" class="img-fluid" alt="">
+                                    </a>
                                 </div>
                             </article>
                         }
@@ -96,7 +99,7 @@
                             <article class="article-item has-no-image">
                                 <div class="article-desc">
                                     <h6 class="merri-title">
-                                        <a href="@arrayNews[i].Url" target="_blank">
+                                        <a href="@arrayNews[i].Url" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[i].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
                                             @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                         </a>
                                     </h6>

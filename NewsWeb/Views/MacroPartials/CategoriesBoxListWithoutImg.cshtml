@@ -32,12 +32,12 @@
                     <article class="thumb-cate mr-3">
                         <div class="cate-thumb-desc mt-3">
                             <h5 class="merri-title">
-                                <a href="@latestNews.Url" target="_blank">
+                                <a href="@latestNews.Url" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(latestNews.Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
                                     @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("title").Value().ToString())
                                 </a>
                             </h5>
                             <p class="child-news-desc">
-                                <a href="@latestNews.Url" target="_blank">
+                                <a href="@latestNews.Url" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(latestNews.Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
                                     <span>
                                         @System.Net.WebUtility.HtmlDecode(latestNews.GetProperty("shortDescription").Value().ToString())
                                     </span>

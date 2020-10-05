@@ -1,0 +1,70 @@
+﻿//{
+//  "Name": "24h",
+//  "WebsiteUrl": "https://soha.vn/",
+//  "JsonGeneratePath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\CrawlerTools\\FileWatcher\\",
+//  //"ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+//  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+//  "PageLevelConfigs": [
+//    {
+//      "Url": "rss.htm",
+//      "HtmlSelectors": [
+//      ],
+//      "NextLevelUrlSelector": {
+//        "HtmlSelector": "#listrss ul li a",
+//        "AdditionalData": "#listrss ul li a"
+//      },
+//      "ProcessorTypeName": "BaseSimpleRssCategoryProcessor",
+//      "Level": 0,
+//      "AdditionalData": "",
+//      "ParentCategory": "Thời sự",
+//      "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Công nghệ;Infographic;Quốc tế;Quân sự",
+//      "StopCrawlPage": "giai-tri.rss"
+//    },
+//    {
+//      "Url": "",
+//      "HtmlSelectors": [
+//        {
+//          "PropertyName": "Name",
+//          "HtmlSelector": ".news-detail .news-title"
+//        },
+//        {
+//          "PropertyName": "ShortDescription",
+//          "HtmlSelector": "",
+//          "AdditionalData": ""
+//        },
+//        {
+//          "PropertyName": "Category",
+//          "HtmlSelector": ".sub-menu .active"
+//        },
+//        {
+//          "PropertyName": "Author",
+//          "HtmlSelector": ".link-source-text-name",
+//          "AdditionalData": ""
+//        },
+//        {
+//          "PropertyName": "FullDescription",
+//          "HtmlSelector": "article,.news-title,.relationnews,.link-content-footer,.link-source-wrapper,.boxdocthemngang,.bottom-contact,.tags",
+//          "AdditionalData": ".news-title;.relationnews;.link-content-footer;.link-source-wrapper;.boxdocthemngang;.bottom-contact;.tags",
+//          "IsHtml": true,
+//          "Converter": "Tin24hComVnMultiHtmlTagsConverter"
+//        },        
+//        {
+//          "PropertyName": "MetaDescription",
+//          "HtmlSelector": "head meta:eq(2)",
+//          "Converter": "NameConverter",
+//          "AdditionalData": "content"
+//        },
+//        {
+//          "PropertyName": "MetaKeywords",
+//          "HtmlSelector": "head meta:eq(3)",
+//          "Converter": "NameConverter",
+//          "AdditionalData": "content"
+//        }
+//      ],
+//      "ProcessorTypeName": "Tin24hComVnBaseSimpleNewsModelProcessor",
+//      "Level": 1,
+//      "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Công nghệ;Infographic;Quốc tế;Quân sự",
+//      "StopCrawlPage": "giai-tri.rss"
+//    }
+//  ]
+//}

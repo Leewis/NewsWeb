@@ -1,0 +1,80 @@
+﻿{
+  "Name": "24h",
+  "WebsiteUrl": "https://vietnamnet.vn/",
+  "JsonGeneratePath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\CrawlerTools\\FileWatcher\\",
+  //"ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+  "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
+  "PageLevelConfigs": [
+    {
+      "Url": "vn/rss/",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".top-cate-head table tr td a"
+        }
+      ],
+      "NextLevelUrlSelector": {
+          "HtmlSelector": ".top-cate-head table tr td a",
+          "AdditionalData": ".top-cate-head table tr td:eq(2) a"
+      },
+      "ProcessorTypeName": "BGTVnBaseSimpleRssCategoryProcessor",
+      "Level": 0,
+      "AdditionalData": "",
+      "ParentCategory": "Thời sự",
+      "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Xe;Công nghệ;Bất động sản;Bạn đọc;Tuần Việt Nam;Tin mới nhất",
+      "StopCrawlPage": "thoi-su-chinh-tri.rss"
+    },
+    {
+      "Url": "",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".ArticleDetail h1"
+        },
+        {
+          "PropertyName": "ShortDescription",
+          "HtmlSelector": ".ArticleLead p",
+          "AdditionalData": "</a>"
+        },
+        {
+          "PropertyName": "Category",
+          "HtmlSelector": ".top-cate-head-title"
+        },
+        {
+          "PropertyName": "Author",
+          "HtmlSelector": ".ArticleContent .t-j p:eq(4) strong",
+          "AdditionalData": ".authordetail"
+        },
+        {
+          "PropertyName": "FullDescription",
+          "HtmlSelector": ".ArticleContent,.ArticleLead,.article-relate,.inner-article",
+          "AdditionalData": ".ArticleLead;.article-relate;.inner-article",
+          "IsHtml": true,
+          "Converter": "Tin24hComVnMultiHtmlTagsConverter"
+        },
+        {
+          "PropertyName": "DateTime",
+          "HtmlSelector": ".ArticleDate",
+          "AdditionalData": "+0700"
+
+        },
+        {
+          "PropertyName": "MetaDescription",
+          "HtmlSelector": "head meta:eq(2)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "MetaKeywords",
+          "HtmlSelector": "head meta:eq(3)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        }
+      ],
+      "ProcessorTypeName": "BGTVnBaseSimpleRssCategoryProcessor",
+      "Level": 1,
+      "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Xe;Công nghệ;Bất động sản;Bạn đọc;Tuần Việt Nam;Tin mới nhất",
+      "StopCrawlPage": "thoi-su-chinh-tri.rss"
+    }
+  ]
+}

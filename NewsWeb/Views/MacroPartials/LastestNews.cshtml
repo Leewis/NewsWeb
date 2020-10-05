@@ -22,10 +22,14 @@
             <div class="col-lg-9">
                 <article class="news-item d-flex">
                     <div class="col-img mr-3">
-                        <a href="@arrayNews[0].Url()"  target="_blank"><img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid" alt="" /></a>
+                        <a href="@arrayNews[0].Url()"  target="@(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[0].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
+                            <img src="@arrayNews[0].GetProperty("Picture").Value()" class="img-fluid" alt="" />
+                        </a>
                     </div>
                     <div class="col-desc">
-                        <h5 class="heading-title-news merri-title"><a href="@arrayNews[0].Url()"  target="_blank"> @System.Net.WebUtility.HtmlDecode(arrayNews[0].GetProperty("title").Value().ToString())</a></h5>
+                        <h5 class="heading-title-news merri-title"><a href="@arrayNews[0].Url()"  target="@(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[0].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
+                            @System.Net.WebUtility.HtmlDecode(arrayNews[0].GetProperty("title").Value().ToString())</a>
+                        </h5>
                         <span>@System.Net.WebUtility.HtmlDecode(arrayNews[0].GetProperty("shortDescription").Value().ToString())</span>
                         <div class="update-time">
                             <span class="comments-count">
@@ -43,7 +47,7 @@
                         {
                             <li>
                                 <h6 class="merri-title">
-                                    <a href="@arrayNews[i].Url()" target="_blank">
+                                    <a href="@arrayNews[i].Url()" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[i].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
                                         @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                     </a>
                                 </h6>
@@ -73,12 +77,12 @@
                         {
                             <li>
                                 <h6 class="merri-title">
-                                    <a href="@arrayNews[i].Url()" target="_blank">
+                                    <a href="@arrayNews[i].Url()" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[i].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
                                         @System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("title").Value().ToString())
                                     </a>
                                 </h6>
                                 <div class="child-news-desc">
-                                    <a href="@arrayNews[i].Url()" target="_blank">
+                                    <a href="@arrayNews[i].Url()" target="@(String.IsNullOrWhiteSpace(Html.StripHtml(arrayNews[i].Value<IHtmlString>("fullDescription")).ToString()) ? "-blank": String.Empty)">
                                         <span>@System.Net.WebUtility.HtmlDecode(arrayNews[i].GetProperty("shortDescription").Value().ToString())</span>
                                     </a>
                                 </div>
