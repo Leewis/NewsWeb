@@ -1,0 +1,75 @@
+﻿{
+  "Name": "24h",
+  "WebsiteUrl": "https://www.tienphong.vn/",
+  "JsonGeneratePath": "C:\\r\\FileWatcher\\",
+  "ApiUrl": "http://localhost:8099/umbraco/api/NewsApi/InsertListNews",
+  "PageLevelConfigs": [
+    {
+      "Url": "rss.tpo",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".rss-page ul li a"
+        }
+      ],
+      "NextLevelUrlSelector": {
+        "HtmlSelector": ".rss-page ul li a"
+      },
+      "ProcessorTypeName": "BaseSimpleRssCategoryProcessor",
+      "Level": 0,
+      "AdditionalData": "",
+      "ParentCategory": "Xe",
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "xe-113.rss"
+    },
+    {
+      "Url": "",
+      "HtmlSelectors": [
+        {
+          "PropertyName": "Name",
+          "HtmlSelector": ".cms-title"
+        },
+        {
+          "PropertyName": "ShortDescription",
+          "HtmlSelector": ".cms-desc"
+        },
+        {
+          "PropertyName": "Category",
+          "HtmlSelector": ".breadcrumb p a:eq(0)"
+        },
+        {
+          "PropertyName": "Author",
+          "HtmlSelector": ".cms-author"
+        },
+        {
+          "PropertyName": "FullDescription",
+          "HtmlSelector": ".article-body",
+          "AdditionalData": "related-inline-story",
+          "IsHtml": true,
+          "Converter": "NLDMultiHtmlTagsConverter"
+        },
+        {
+          "PropertyName": "DateTime",
+          "HtmlSelector": ".byline-dateline time",
+          "AdditionalData": " GMT+7"
+        },
+        {
+          "PropertyName": "MetaDescription",
+          "HtmlSelector": "head meta:eq(2)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "MetaKeywords",
+          "HtmlSelector": "head meta:eq(3)",
+          "Converter": "NameConverter",
+          "AdditionalData": "content"
+        }
+      ],
+      "ProcessorTypeName": "BaseSimpleNewsModelProcessor",
+      "Level": 1,
+      "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa",
+      "StopCrawlPage": "xe-113.rss"
+    }
+  ]
+}
