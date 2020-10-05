@@ -357,7 +357,7 @@ namespace NewsWeb.Controllers
                     //Update News
                     //Ignore update news to check the database lock issue - TODO
                     //var content = Services.ContentService.GetById(existedNews.Id);
-                   
+
                     //PopulateContentFields(content, news);
 
                     //newsContents.Add(content);
@@ -532,6 +532,16 @@ namespace NewsWeb.Controllers
             content.SetValue("metaKeywords", model.MetaKeywords);
             content.SetValue("metaPageTitle", model.MetaPageTitle);
             content.SetValue("metaDescription", model.MetaDescription);
+
+            if (model.IsHotGroupNews)
+            {
+                content.SetValue("IsHotGroupNews", model.IsHotGroupNews);
+            }
+
+            if (!string.IsNullOrEmpty(model.Picture))
+            {
+                content.SetValue("PictureExternalUrl", model.Picture);
+            }
 
             content.CreateDate = Convert.ToDateTime(model.PostedDateTime);
         }

@@ -12,6 +12,7 @@ namespace Aio.Umbraco.Common.ContentModels
         public string Category { get; set; }
         public string CategoryUrl { get; set; }
         public IPublishedContent CategoryPublishedContent { get; set; }
+        public string SubCategory { get; set; }
 
         #endregion
 
@@ -50,6 +51,15 @@ namespace Aio.Umbraco.Common.ContentModels
         public string PictureUrl { get; set; }
         public string PictureName { get; set; }
         public string PictureExternalUrl { get; set; }
+        public bool MostView { get; set; }
+
+        public bool IsHotGroupNews { get; set; }
+
+        #endregion
+
+        #region Hash file
+
+        public string HashContent { get; set; }
 
         #endregion
     }

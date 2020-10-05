@@ -17,8 +17,8 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.ModelsBuilder.Embedded;
 
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "1126fa4075c8692")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "6a5d005778746606")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.4")]
 
 namespace Umbraco.Web.PublishedModels
 {
@@ -551,6 +551,13 @@ namespace Umbraco.Web.PublishedModels
 		public global::System.Web.IHtmlString FullDescription => this.Value<global::System.Web.IHtmlString>("fullDescription");
 
 		///<summary>
+		/// Is Hot Group News
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("isHotGroupNews")]
+		public bool IsHotGroupNews => this.Value<bool>("isHotGroupNews");
+
+		///<summary>
 		/// Location
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
@@ -572,6 +579,13 @@ namespace Umbraco.Web.PublishedModels
 		public global::Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue Picture => this.Value<global::Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue>("picture");
 
 		///<summary>
+		/// Picture External Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("pictureExternalUrl")]
+		public string PictureExternalUrl => this.Value<string>("pictureExternalUrl");
+
+		///<summary>
 		/// PostedDateTime
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
@@ -591,6 +605,13 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
 		[ImplementPropertyType("relatedNews")]
 		public global::System.Collections.Generic.IEnumerable<global::Umbraco.Web.Models.Link> RelatedNews => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Web.Models.Link>>("relatedNews");
+
+		///<summary>
+		/// Related News Tags
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.6.3")]
+		[ImplementPropertyType("relatedNewsTags")]
+		public global::System.Collections.Generic.IEnumerable<string> RelatedNewsTags => this.Value<global::System.Collections.Generic.IEnumerable<string>>("relatedNewsTags");
 
 		///<summary>
 		/// Short Description
