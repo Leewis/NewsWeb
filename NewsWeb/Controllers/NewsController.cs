@@ -120,6 +120,22 @@ namespace NewsWeb.Controllers
                                 response.StatusCode = System.Net.HttpStatusCode.InternalServerError;
                             }
                         }
+                        else if (!string.IsNullOrEmpty(news.Picture))
+                        {
+                            try
+                            {
+                                //TODO
+                                // Image is Empty when run with await' upload image
+                                //ImportFirstImageAsync(createdNews, news.PictureExternalUrl, news.PictureName);
+
+                                DownloadImage(news.Picture, news.PictureName, createdNews);
+                                //createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
+                            }
+                            catch (Exception exception)
+                            {
+                                response.StatusCode = System.Net.HttpStatusCode.InternalServerError;
+                            }
+                        }
 
 
                         if (imageSaved)
@@ -171,6 +187,22 @@ namespace NewsWeb.Controllers
                             //ImportFirstImageAsync(createdNews, news.PictureExternalUrl, news.PictureName);
 
                             DownloadImage(news.PictureExternalUrl, news.PictureName, content);
+                            //createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
+                        }
+                        catch (Exception exception)
+                        {
+                            response.StatusCode = System.Net.HttpStatusCode.InternalServerError;
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(news.Picture))
+                    {
+                        try
+                        {
+                            //TODO
+                            // Image is Empty when run with await' upload image
+                            //ImportFirstImageAsync(createdNews, news.PictureExternalUrl, news.PictureName);
+
+                            DownloadImage(news.Picture, news.PictureName, content);
                             //createdNews.SetValue(_contentTypeBaseServiceProvider, "picture", news.PictureName, GetImage(news.PictureExternalUrl).Result);
                         }
                         catch (Exception exception)

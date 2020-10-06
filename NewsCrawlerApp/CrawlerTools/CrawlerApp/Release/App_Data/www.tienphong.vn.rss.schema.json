@@ -17,10 +17,10 @@
       },
       "ProcessorTypeName": "BaseSimpleRssCategoryProcessor",
       "Level": 0,
-      "AdditionalData": "",
+      "AdditionalData": "Kinh tế",
       "ParentCategory": "Thời sự",
       "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Infographics;Chủ nhật đỏ;Megastory;Quizz;Số Đặc Biệt;Xã hội;Chính trị;Tin tức;Chuyện hôm nay;Phóng sự",
-      "StopCrawlPage": "infographics-287.rss"
+      "StopCrawlPage": "kinh-te-3.rss"
     },
     {
       "Url": "",
@@ -42,7 +42,8 @@
         },
         {
           "PropertyName": "Author",
-          "HtmlSelector": ".cms-author"
+          "HtmlSelector": ".article-author",
+          "AdditionalData": "article-author cms-author"
         },
         {
           "PropertyName": "FullDescription",
@@ -71,16 +72,16 @@
         {
           "PropertyName": "Picture",
           "HtmlSelector": ".article-photo,.article-avatar",
-          "AdditionalData": "Photo",
+          "AdditionalData": "photo",
           "IsHtml": true,
-          "Converter": "TuoiTreMultiHtmlTagsImageConverter",
-          "Attribute": "type"
+          "Converter": "TienPhongMultiHtmlTagsImageConverter",
+          "Attribute": "img"
         }
       ],
       "ProcessorTypeName": "TienPhongSimpleNewsModelProcessor",
       "Level": 1,
       "ChildrenCategories": "Thế giới;Thời sự;Thời sự trong nước;Kinh doanh;Giải trí;Thể thao;Bóng đá;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Du lịch;Khoa học;Xe;Số hóa;Infographics;Chủ nhật đỏ;Megastory;Quizz;Số Đặc Biệt;Xã hội;Chính trị;Tin tức;Chuyện hôm nay;Phóng sự",
-      "StopCrawlPage": "infographics-287.rss"
+      "StopCrawlPage": "kinh-te-3.rss"
     }
   ]
 }

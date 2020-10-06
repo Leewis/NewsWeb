@@ -1,7 +1,7 @@
 ﻿{
-  "Name": "24h",
+  "Name": "vietnamnet",
   "WebsiteUrl": "https://vietnamnet.vn/",
-  "JsonGeneratePath": "E:\\Project\\Umbraco\\AioNews\\NewsWeb\\NewsCrawlerApp\\CrawlerTools\\FileWatcher\\",
+  "JsonGeneratePath": "D:\\r\\FileWatcher\\",
   //"ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
   "ApiUrl": "http://localhost:26268/umbraco/api/NewsApi/InsertListNews",
   "PageLevelConfigs": [
@@ -14,15 +14,16 @@
         }
       ],
       "NextLevelUrlSelector": {
-          "HtmlSelector": ".top-cate-head table tr td a",
-          "AdditionalData": ".top-cate-head table tr td:eq(2) a"
+        "HtmlSelector": ".top-cate-head table tr",
+        "AdditionalData": "1,2"
       },
-      "ProcessorTypeName": "BGTVnBaseSimpleRssCategoryProcessor",
+      "ProcessorTypeName": "VNNetSimpleRssCategoryProcessor",
       "Level": 0,
       "AdditionalData": "",
       "ParentCategory": "Thời sự",
       "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Xe;Công nghệ;Bất động sản;Bạn đọc;Tuần Việt Nam;Tin mới nhất",
-      "StopCrawlPage": "thoi-su-chinh-tri.rss"
+      "StopCrawlPage": "thoi-su-chinh-tri.rss",
+      "ExcludeUrls": "https://vietnamnet.vn/rss/tin-moi-nhat.rss"
     },
     {
       "Url": "",
@@ -33,12 +34,12 @@
         },
         {
           "PropertyName": "ShortDescription",
-          "HtmlSelector": ".ArticleLead p",
+          "HtmlSelector": ".bold p",
           "AdditionalData": "</a>"
         },
         {
           "PropertyName": "Category",
-          "HtmlSelector": ".top-cate-head-title"
+          "HtmlSelector": ".top-cate-head .top-cate-head-title a,.top-cate-head .top-cate-head-subcate a"
         },
         {
           "PropertyName": "Author",
@@ -69,9 +70,17 @@
           "HtmlSelector": "head meta:eq(3)",
           "Converter": "NameConverter",
           "AdditionalData": "content"
+        },
+        {
+          "PropertyName": "Picture",
+          "HtmlSelector": "meta",
+          "AdditionalData": "content",
+          "IsHtml": true,
+          "Converter": "VNNetMultiHtmlTagsImageConverter",
+          "Attribute": "og:image"
         }
       ],
-      "ProcessorTypeName": "BGTVnBaseSimpleRssCategoryProcessor",
+      "ProcessorTypeName": "VNNetBaseSimpleNewsModelProcessor",
       "Level": 1,
       "ChildrenCategories": "Thế giới;Thời sự;Kinh doanh;Giải trí;Thể thao;Pháp luật;Giáo dục;Sức khỏe;Đời sống;Xe;Công nghệ;Bất động sản;Bạn đọc;Tuần Việt Nam;Tin mới nhất",
       "StopCrawlPage": "thoi-su-chinh-tri.rss"
